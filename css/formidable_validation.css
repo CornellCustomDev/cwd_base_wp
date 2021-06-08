@@ -1,0 +1,64 @@
+.message-link,  .message-list, .message {
+  display: none;
+}
+.frm_error_style {
+	display: none;
+}
+.frm_forms form .frm_form_fields fieldset {
+    padding: 0;
+}
+.frm_forms form .frm_form_fields fieldset #message-box {
+    padding: 2%;
+    background-color: #F2DEDE;
+    border: 1px solid #EBCCD1;
+    border-radius: 4px;
+    color: #B94A48;
+    font-size: 14px;
+    margin: 0 auto 20px auto;
+    width: 96%;
+}
+.frm_forms form .frm_form_fields fieldset #message-box p a {
+    display: block;
+}
+.ui-datepicker th {
+    color: #fff;
+}
+#message-link {
+    font-size: 18px;
+}
+#message-list ul {
+    border-left: none;
+}
+#message-list ul li {
+    font-size: 15px;
+    margin: 15px 0 0 0;
+}
+.frm_form_fields fieldset {
+    padding: 0 !important;
+}
+#message-link {
+    font-size: 17px;
+	display: block;
+    margin-bottom: 10px;
+}
+#message-list ul {
+    margin-left: 5px;
+}
+#message-list ul li {
+    font-size: 14px;
+    margin-bottom: 0;
+	background: url(images/bullet_disc.svg) 2px 0.75em no-repeat;
+}
+.frm_error_style {
+    font-size: 16px !important;
+    padding-left: 20px !important;
+}
+#wrap form input[type="submit"] {
+	background: #b31b1b !important;
+}
+.frm_login_form .login_lost_pw.frm_half {
+    text-align: left;
+}
+#field_7bsqb_country {
+    width: 50%;
+}
