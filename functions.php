@@ -156,8 +156,8 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 			
 				// Scripts
-			wp_enqueue_script('cornell-script-cwd', get_template_directory_uri() . '/js/cwd.js' );
-			wp_enqueue_script('cornell-script-cwd', get_template_directory_uri() . '/js/cwd_wp.js' );
+			wp_enqueue_script('cwd-script', get_template_directory_uri() . '/js/cwd.js' );
+			wp_enqueue_script('cwd-wp-script', get_template_directory_uri() . '/js/cwd_wp.js' );
 			wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js' );		
 			wp_enqueue_script('formidable-validation-js', get_template_directory_uri() . '/js/formidable_validation.js' );		
 			wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js' );		
