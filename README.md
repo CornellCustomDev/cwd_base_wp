@@ -134,5 +134,18 @@ The default WordPress image gallery has been adapted to use the markup and class
 
 Pagination options can be found in the main menu under Appearance-&gt;Pagination.<br><br>
 
-&nbsp;
-
+<h2>To Do (6/9/21)</h2>
+<ul>
+<li>Convert this document for customer use</li>
+<li>Add editor styles</li>
+<li>Fix active state for utility navigation menu</li>
+<li>Upload images from news and events feeds to media library</li>
+<li>Create advanced theme for Pantheon</li>
+<li>Prepare demo site for testing</li>
+<li>Fix default theme settings and test theme activation and switching</li>
+<li>Add featured news and event (like people)</li>
+<li>Force activate plugins</li>
+<li>Convert in-page tag options to category meta boxes</li>
+<li>Work on date formatting and ordering with Phil</li>
+<li>QA/WA/functionality testing and fixes</li>
+</ul>
