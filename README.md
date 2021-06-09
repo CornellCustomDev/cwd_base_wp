@@ -146,6 +146,7 @@ Pagination options can be found in the main menu under Appearance-&gt;Pagination
 <li>Add featured news and event (like people)</li>
 <li>Force activate plugins</li>
 <li>Convert in-page tag options to category meta boxes</li>
+<li>Add admin columns for custom fields and custom taxonomies</li>
 <li>Work on date formatting and ordering with Phil</li>
 <li>QA/WA/functionality testing and fixes</li>
 </ul>
