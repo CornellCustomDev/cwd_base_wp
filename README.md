@@ -144,6 +144,7 @@ Pagination options can be found in the main menu under Appearance-&gt;Pagination
 <li>Prepare demo site for testing</li>
 <li>Fix default theme settings and test theme activation and switching</li>
 <li>Add featured news and event (like people)</li>
+<li>Discuss and remediate date formatting with Phil</li>
 <li>Styling for news, events, and people custom fields.</li>
 <li>Force activate plugins</li>
 <li>Convert in-page tag options to category meta boxes</li>
