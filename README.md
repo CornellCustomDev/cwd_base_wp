@@ -139,6 +139,7 @@ Pagination options can be found in the main menu under Appearance-&gt;Pagination
 <li>Convert this document for customer use</li>
 <li>Add editor styles</li>
 <li>Fix active state for utility navigation menu</li>
+<li>Add some default header images to options.</li>
 <li>Upload images from news and events feeds to media library</li>
 <li>Create advanced theme for Pantheon. Need to figure out what that means.</li>
 <li>Prepare demo site for testing</li>
