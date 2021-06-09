@@ -2,6 +2,9 @@
 
 get_header(); 
 
+$page_object = get_post(get_the_ID());
+$page_name = $page_object->post_name;
+
 ?>
 
 <div id="main-content" class="band">
@@ -20,9 +23,10 @@ get_header();
 				
 					get_template_part('templates/page/content', 'title');
 				
-					if (have_posts()): while (have_posts()) : the_post(); // The loop
+					if (have_posts()): while (have_posts()) : the_post();
 				
-						get_template_part('templates/page/content', 'page');
+						// Generic page template. To customize by page, create /templates/page/content-page-$page_name.php
+						get_template_part('templates/page/content-page', $page_name);
 				
 						if ( comments_open() || get_comments_number() ) {
 							comments_template('/templates/comments.php');

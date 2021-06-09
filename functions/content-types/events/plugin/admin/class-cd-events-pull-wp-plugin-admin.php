@@ -64,13 +64,13 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script(
-			$this->plugin_name,
-			plugin_dir_url( __FILE__ ) . 'js/cd-events-pull-wp-plugin-admin.js',
-			[ 'jquery' ],
-			$this->version,
-			true
-		);
+		// wp_enqueue_script(
+		// 	$this->plugin_name,
+		// 	__DIR__ . '/js/cd-events-pull-wp-plugin-admin.js',
+		// 	[ 'jquery' ],
+		// 	$this->version,
+		// 	true
+		// );
 
 	}
 
@@ -142,6 +142,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 
 		// reset the clock to force rerun
 		if( isset( $_POST['cd_events_reset_hidden_field'] ) ) {
+			// Used for local dev requires set wp_event
 			$transient_key = Cd_Events_Pull_Wp_Plugin_Utils_Processor::$transient_timer_key;
 			set_transient($transient_key, false);
 		}
@@ -220,65 +221,28 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 		);
 
 		// Title Field
-		// $this->cd_events_pull_add_settings_field(
-		// 	'Title Field of Custom Post',
-		// 	[
-		// 		'id' => 'cd_events_pull_title',
-		// 		'section' => 'cd_events_pull_fields_section',
-		// 	],
-		// );
-
-		// Start Date Field
 		$this->cd_events_pull_add_settings_field(
-			'Start Date Field of Custom Post',
+			'Title Field of Custom Post',
+			[
+				'id' => 'cd_events_pull_title',
+				'section' => 'cd_events_pull_fields_section',
+			],
+		);
+
+		// Date Field
+		$this->cd_events_pull_add_settings_field(
+			'Date Field of Custom Post',
 			[
 				'id' => 'cd_events_pull_date',
 				'section' => 'cd_events_pull_fields_section',
 			],
 		);
 
-		// Start Time Field
-		$this->cd_events_pull_add_settings_field(
-			'Start Time Field of Custom Post ',
-			[
-				'id' => 'cd_events_pull_start_time',
-				'section' => 'cd_events_pull_fields_section',
-			],
-		);
-
-		// End Date Field
-		$this->cd_events_pull_add_settings_field(
-			'End Date Field of Custom Post',
-			[
-				'id' => 'cd_events_pull_end_date',
-				'section' => 'cd_events_pull_fields_section',
-			],
-		);
-
-		// End Time Field
-		$this->cd_events_pull_add_settings_field(
-			'End Time Field of Custom Post ',
-			[
-				'id' => 'cd_events_pull_end_time',
-				'section' => 'cd_events_pull_fields_section',
-			],
-		);
-
-
-		// Location Field
+		// Date Field
 		$this->cd_events_pull_add_settings_field(
 			'Location Field of Custom Post ',
 			[
 				'id' => 'cd_events_pull_location',
-				'section' => 'cd_events_pull_fields_section',
-			],
-		);
-
-		// Room Field
-		$this->cd_events_pull_add_settings_field(
-			'Room Field of Custom Post ',
-			[
-				'id' => 'cd_events_pull_room',
 				'section' => 'cd_events_pull_fields_section',
 			],
 		);
@@ -302,6 +266,15 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			],
 		);
 
+		// Image Field
+		$this->cd_events_pull_add_settings_field(
+			'Start Time Field of Custom Post ',
+			[
+				'id' => 'cd_events_pull_start_time',
+				'section' => 'cd_events_pull_fields_section',
+			],
+		);
+
 		// Publish Field
 		$this->cd_events_pull_add_settings_field(
 			'All Day Event Field of Custom Post ',
@@ -311,38 +284,11 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			],
 		);
 
-		// Localist Url Field
+		// Publish Field
 		$this->cd_events_pull_add_settings_field(
 			'Cornell Events(localist) URL Field of Custom Post ',
 			[
 				'id' => 'cd_events_pull_localist_url',
-				'section' => 'cd_events_pull_fields_section',
-			],
-		);
-
-		// Url Field
-		$this->cd_events_pull_add_settings_field(
-			'URL Field of Custom Post ',
-			[
-				'id' => 'cd_events_pull_event_url',
-				'section' => 'cd_events_pull_fields_section',
-			],
-		);
-
-		// Zoom Field
-		// $this->cd_events_pull_add_settings_field(
-		// 	'Zoom link of Custom Post ',
-		// 	[
-		// 		'id' => 'cd_events_pull_zoom_link',
-		// 		'section' => 'cd_events_pull_fields_section',
-		// 	],
-		// );
-
-		// Contact / Email Field
-		$this->cd_events_pull_add_settings_field(
-			'Email Contact of Custom Post ',
-			[
-				'id' => 'cd_events_pull_email',
 				'section' => 'cd_events_pull_fields_section',
 			],
 		);
@@ -356,7 +302,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			],
 		);
 
-		// Publishing Options
+		// Publising Options
 		add_settings_section(
 			'cd_events_pull_publishing_section',
 			'Publishing Options Section (Load):',
@@ -409,21 +355,14 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_department_ids');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_keyword');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_post_type');
-		// register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_title');
+		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_title');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_date');
-		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_start_time');
-		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_end_date');
-		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_end_time');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_location');
-		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_room');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_localist_url');
-		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_event_url');
-		// register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_zoom_link');
-		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_email');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_description');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_image');
 
-
+		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_start_time');
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_is_all_day');
 
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_event_id');

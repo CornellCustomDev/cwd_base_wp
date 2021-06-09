@@ -24,6 +24,7 @@ $post_type = get_queried_object()->post_type;
 				
 					if (have_posts()): while (have_posts()) : the_post(); // The loop
 				
+						// Generic single post template. To customize by post type, create /templates/post/content-single-$post_type.php
 						get_template_part('templates/page/content-single', $post_type);
 				
 						if ( comments_open() || get_comments_number() ) {

@@ -7,8 +7,8 @@ jQuery(document).ready(function($) {
 	$('#cd_events_expand').on('click', function () {
 		$('.cd-events-show').toggle();
 	});
-	$("#cd_news_expand").on("click", function () {
-		$(".cd-news-show").toggle();
+	$('#cd_news_expand').on('click', function () {
+		$('.cd-news-show').toggle();
 	});
 	
 });

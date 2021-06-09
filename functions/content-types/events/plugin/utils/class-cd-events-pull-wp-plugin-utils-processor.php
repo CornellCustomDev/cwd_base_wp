@@ -150,7 +150,7 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 			$type_string = '';
 		}
 		$keyword = get_option( 'cd_events_pull_keyword' );
-		$distinct = 'false'; // get all reoccurring events.
+		$distinct = 'true';
 		$page = '1';
 		$direction = 'asc';
 		$days = 365;
@@ -166,7 +166,7 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 		if ( ! empty( $keyword ) ) {
 			$data['keyword'] = $keyword;
 		}
-		$query = http_build_query( $data, '', '&', PHP_QUERY_RFC3986 );
+		$query = http_build_query( $data, null, '&', PHP_QUERY_RFC3986 );
 		$uri = "$url?$query$type_string";
 		$this->write_log( "Info: url endpoint: $uri" );
 		$response = wp_safe_remote_get( $uri );
@@ -184,7 +184,7 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 	/**
 	 * Restructure events data.
 	 *
-	 * @param object $events_response The events fetched from cornell calendar.
+	 * @param array $events_response The events fetched from cornell calendar.
 	 */
 	private function cd_transform_events( $events_response ) {
 		$post_type = get_option( 'cd_events_pull_post_type' );
@@ -192,20 +192,14 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 			$this->write_log( 'Warning: custom post type is required' );
 		}
 		$event_id    = get_option( 'cd_events_pull_event_id' ) ?: 'event_id';
-		// $title       = get_option( 'cd_events_pull_title' );
+		$title       = get_option( 'cd_events_pull_title' );
 		$date        = get_option( 'cd_events_pull_date' );
 		$location    = get_option( 'cd_events_pull_location' );
 		$description = get_option( 'cd_events_pull_description' );
 		$image_url   = get_option( 'cd_events_pull_image' );
-		$localist_url = get_option( 'cd_events_pull_localist_url' );
+		$localist_url   = get_option( 'cd_events_pull_localist_url' );
 		$is_all_day  = get_option( 'cd_events_pull_is_all_day' );
 		$start_time  = get_option( 'cd_events_pull_start_time' );
-		$end_time = get_option( 'cd_events_pull_end_time' );
-		$end_day = get_option( 'cd_events_pull_end_day' );
-		$room = get_option( 'cd_events_pull_room' );
-		$event_url = get_option( 'cd_events_pull_event_url' );
-		// $zoom_link = get_option( 'cd_events_pull_zoom_link' );
-		$email = get_option( 'cd_events_pull_email' );
 		$events      = $events_response->events;
 		$first       = $events_response->date->first;
 		$last        = $events_response->date->last;
@@ -218,11 +212,6 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 			if ( $e->event_instances[0]->event_instance->start ) {
 				$event_stsrt_time = get_date_from_gmt( $e->event_instances[0]->event_instance->start );
 			}
-			$event_end_time = '';
-			if ( $e->event_instances[0]->event_instance->end ) {
-				$event_end_time = get_date_from_gmt( $e->event_instances[0]->event_instance->end );
-			}
-			$unique_event_id = $event->event_instances[0]->event_instance->id ?? $e->id;
 			$t = (object) [
 				// The post_title and post_content are required.
 				'post_content' => $e->description,
@@ -230,8 +219,8 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 				'post_type' => $post_type,
 				'post_author' => 1,
 				'meta_input' => [
-					$event_id => $unique_event_id,
-					// $title => $e->title,
+					$event_id => $e->id,
+					$title => $e->title,
 					$date => $e->first_date,
 					$location => $e->location_name,
 					$description => $e->description,
@@ -239,14 +228,6 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 					$start_time => $event_stsrt_time,
 					$is_all_day => $e->event_instances[0]->event_instance->all_day,
 					$localist_url => $e->localist_url,
-					$end_time => $event_end_time,
-					$end_day => $e->last_date,
-					$room => $e->room_number,
-					$event_url => $e->url,
-					'zoom_link' => $e->stream_info,
-					'event_taxonomies' => $e->keywords,
-					'event_type' => $e->tags,
-					$email => $e->custom_fields->contact_email ?? '',
 				],
 			];
 			array_push( $t_events, $t );
@@ -276,24 +257,13 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 			if ( ! $event_query->have_posts() ) {
 				$t_event->post_status = $publish;
 				$post_id = wp_insert_post( $t_event );
-				// If it has event_taxonomies add to post.
-				$terms = $t_event->meta_input['event_taxonomies'];
-				wp_set_post_terms( $post_id, $terms, 'event_taxonomies' );
-				$tags = $t_event->meta_input['event_type'];
-				wp_set_post_terms( $post_id, $tags, 'event_type' );
-
-				$this->write_log( 'Notice: Created New Event: ' . $t_event->post_title . ' ID:' . $post_id . ' event_id:' . $t_event->meta_input[ $event_id ] );
+				$this->write_log( 'Notice: Created New Event: ' . $t_event->post_title . ' ID:' . $post_id );
 			} else {
 				if ( $update ) {
 					$post_id = $event_query->posts[0]->ID;
 					$t_event->ID = $post_id;
 					wp_update_post( $t_event );
-					// If it has event_taxonomies add to post.
-					$terms = $t_event->meta_input['event_taxonomies'];
-					wp_set_post_terms( $post_id, $terms, 'event_taxonomies' );
-					$tags = $t_event->meta_input['event_type'];
-					wp_set_post_terms( $post_id, $tags, 'event_type' );
-					$this->write_log( 'Notice: Updated Event:  ' . $t_event->post_title . ' ID:' . $post_id . ' event_id:' . $t_event->meta_input[ $event_id ] );
+					$this->write_log( 'Notice: Updated Event:  ' . $t_event->post_title . ' ID:' . $post_id );
 				}
 			}
 		}

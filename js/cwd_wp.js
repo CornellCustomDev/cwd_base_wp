@@ -1,14 +1,5 @@
 jQuery(document).ready(function($) {
 	
-	// CD News/Events toggle status logs
-	$('#cd_events_expand').on('click', function () {
-		$('.cd-events-show').toggle();
-	});
-
-	$('#cd_news_expand').on('click', function () {
-		$('.cd-news-show').toggle();
-	});
-
 	// Mobile breadcrumbs
 	$('#main-article .breadcrumb').addClass('no-mobile');
 	$('#sidebar-top .breadcrumb').addClass('mobile-only').attr('aria-label', 'Mobile Breadcrumb');

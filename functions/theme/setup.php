@@ -353,4 +353,3 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 	add_action( 'after_setup_theme', 'cwd_base_setup' );
 
 }
-

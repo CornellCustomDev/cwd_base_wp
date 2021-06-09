@@ -63,16 +63,17 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 			'before_title'  => '<h3 class="widget-title">',
 			'after_title'   => '</h3>',
 		) );
-
-		register_sidebar( array(
-			'name'          => __( 'Footer Widget Area', 'cwd_base' ),
-			'id'            => 'sidebar-8',
-			'description'   => __( 'Appears in the footer on all posts and pages (above the footer text area).', 'cwd_base' ),
-			'before_widget' => '<div class="col-item">',
-			'after_widget'  => '</div>',
-			'before_title'  => '<h3 class="widget-title">',
-			'after_title'   => '</h3>',
-		) );
+		
+					// NOT CURRENTLY IN USE
+		//register_sidebar( array(        
+			//'name'          => __( 'Footer Widget Area', 'cwd_base' ),
+			//'id'            => 'sidebar-8',
+			//'description'   => __( 'Appears in the footer on all posts and pages (above the footer text area).', 'cwd_base' ),
+			//'before_widget' => '<div class="col-item">',
+			//'after_widget'  => '</div>',
+			//'before_title'  => '<h3 class="widget-title">',
+			//'after_title'   => '</h3>',
+		//) );								
 
 	}
 	add_action( 'widgets_init', 'register_my_sidebars' );
