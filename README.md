@@ -1,4 +1,4 @@
-<h1>Cornell Branded Theme 2021</h1>
+<h1>Cornell Branded Theme 2021 for Campus Press</h1>
 A WordPress theme based on <a href="https://github.com/CU-CommunityApps/cwd_framework">cwd_framework</a> primarily for use on Campus Press. It is not intended to be used as a parent theme, to minimize the effect of future updates. Themes based on this theme should be standalone, custom themes that can be updated individually.<br><br>
 
 <strong>Tags:</strong> accessibility-ready, blog, custom-background, custom-colors, custom-<span class="glossary-item-container tippy-active" tabindex="0" aria-describedby="tippy-11">header, </span>custom-menu, editor-style, featured-image-header, featured-images, footer-widgets, full-width-template, grid-layout, left-sidebar, one-column, right-sidebar, sticky-post, theme-options, threaded-comments, two-columns, wide-blocks
@@ -140,7 +140,7 @@ Pagination options can be found in the main menu under Appearance-&gt;Pagination
 <li>Add editor styles</li>
 <li>Fix active state for utility navigation menu</li>
 <li>Upload images from news and events feeds to media library</li>
-<li>Create advanced theme for Pantheon</li>
+<li>Create advanced theme for Pantheon. Need to figure out what that means.</li>
 <li>Prepare demo site for testing</li>
 <li>Fix default theme settings and test theme activation and switching</li>
 <li>Add featured news and event (like people)</li>
