@@ -88,41 +88,132 @@ if ( ! function_exists ( 'cwd_base_editor_styles' ) ) {
 }
 add_action( 'admin_init', 'cwd_base_editor_styles' );
 
-/*--------- Custom WYSIWYG Classes ------------------------*/
+// Display kitchen sink by default in the editor
+if ( ! function_exists ( 'cwd_base_format_TinyMCE' ) ) {
+	function cwd_base_format_TinyMCE( $in ) {
+		$in['wordpress_adv_hidden'] = FALSE;
+		return $in;
+	}
+	add_filter( 'tiny_mce_before_init', 'cwd_base_format_TinyMCE' );
+}
+
+// Custom WYSIWYG Classes
 if ( ! function_exists ( 'add_style_select_buttons' ) ) {
 	function add_style_select_buttons( $buttons ) {
 		array_unshift( $buttons, 'styleselect' );
 		return $buttons;
 	}
-	add_filter( 'mce_buttons_2', 'add_style_select_buttons' );
+	add_filter( 'mce_buttons', 'add_style_select_buttons' );
 }
 
 // Add custom styles to the WordPress editor
-if ( ! function_exists ( 'cwd_custom_styles' ) ) {
-	function cwd_custom_styles( $init_array ) {  
+if ( ! function_exists ( 'cwd_base_custom_styles' ) ) {
+	
+	function cwd_base_custom_styles( $init_array ) {  
 
 		$style_formats = array(  
-			// These are the custom styles
 			array(  
 				'title' => 'Intro Text',  
-				'inline' => 'span',  
+				'block' => 'span',  
 				'classes' => 'intro',
+				'wrapper' => true,
 			),
 			array(  
 				'title' => 'Link Button',  
 				'selector' => 'a',  
 				'classes' => 'link-button',
-			)
+			),
+			array(  
+				'title' => 'Text Highlights',				
+				'items' => array(
+					array(  
+						'title' => 'Red',  
+						'inline' => 'mark',  
+						'classes' => 'text-highlight-red',
+					),
+					array(  
+						'title' => 'Green',  
+						'inline' => 'mark',  
+						'classes' => 'text-highlight-green',
+					),
+					array(  
+						'title' => 'Gold',  
+						'inline' => 'mark',  
+						'classes' => 'text-highlight-yellow',
+					),
+					array(  
+						'title' => 'Yellow',  
+						'inline' => 'mark',  
+					),
+					array(  
+						'title' => 'Blue',  
+						'inline' => 'mark',  
+						'classes' => 'text-highlight-blue',
+					),
+					array(  
+						'title' => 'Purple',  
+						'inline' => 'mark',  
+						'classes' => 'text-highlight-purple',
+					),
+				),
+			),
+			array(  
+				'title' => 'Block Quotes',				
+				'items' => array(
+					array(  
+						'title' => 'Block Quote (offset)',  
+						'block' => 'blockquote',  
+						'classes' => 'offset',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Block Quote (impact)',  
+						'block' => 'blockquote',  
+						'classes' => 'impact',
+						'wrapper' => true,
+					),
+				),
+			),
+			array(  
+				'title' => 'Asides',				
+				'items' => array(
+					array(  
+						'title' => 'Aside',  
+						'block' => 'aside',  
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Aside Right',  
+						'block' => 'aside',  
+						'classes' => 'sidebar',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Aside Column',  
+						'block' => 'aside',  
+						'classes' => 'column',
+						'wrapper' => true,
+					),
+				),
+			),
 		);  
-		// Insert the array, JSON ENCODED, into 'style_formats'
 		$init_array['style_formats'] = json_encode( $style_formats );  
 
 		return $init_array;  
 
 	} 
-	// Attach callback to 'tiny_mce_before_init' 
-	add_filter( 'tiny_mce_before_init', 'cwd_custom_styles' );
+	add_filter( 'tiny_mce_before_init', 'cwd_base_custom_styles' );
 }
+
+
+
+
+
+
+
+
+
+
 
 
 // Search template redirect
@@ -191,6 +282,7 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		//wp_enqueue_style('cornell-font-service-logos', get_template_directory_uri() . '/fonts/service-logos.css');
 		//wp_enqueue_style('cornell-font-custom', get_template_directory_uri() . '/fonts/cornell-custom.css');
 		//wp_enqueue_style('cornell-font-totally-cornered', get_template_directory_uri() . '/fonts/totally-cornered.css');
+		wp_enqueue_script('jquery-effects-core');
 		
 	}
 	add_action('wp_enqueue_scripts', 'cwd_base_scripts_and_styles');
@@ -202,7 +294,7 @@ if ( ! function_exists ( 'add_random_version_number' ) ) {
 	function add_random_version_number ( $src, $handle ) {                                                           
 		return add_query_arg( 'r', rand(), $src );                                                                 
 	}
-	add_filter( 'script_loader_src', 'add_random_version_number', 10, 2 );                                          
+	add_filter( 'script_loader_src', 'add_random_version_number', 10, 2 );                                       
 	add_filter( 'style_loader_src', 'add_random_version_number', 10, 2 );                                           
 }
 
@@ -676,15 +768,19 @@ if ( ! function_exists ( 'cwd_remove_postclass' ) ) {
 	add_filter('post_class', 'cwd_remove_postclass', 10, 3);
 }
 
+
 // Include all post types in all archives
-//if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
-	//function cwd_base_cpt_archives( $query ) {
-		//if ( $query->is_archive() && $query->is_main_query() && !is_admin() ) {
-			//$query->set( 'post_type', 'any' );
-		//}
-	//}
-	//add_action( 'pre_get_posts', 'cwd_base_cpt_archives' );
-//}
+if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
+	function cwd_base_cpt_archives( $query ) {
+		if ( $query->is_tag() || is_category() && $query->is_main_query() && !is_admin() ) {
+			$query->set( 'post_type', array('post', 'page', 'news', 'events', 'people') );
+		}
+	}
+	add_action( 'pre_get_posts', 'cwd_base_cpt_archives' );
+}
+
+
+
 
 // Filter the permalink for custom URLs (Page links to...)
 if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
