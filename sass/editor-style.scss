@@ -5,7 +5,42 @@
 /* Editor styles
    ************************************ */
 #tinymce {
-    max-width: 980px;
+    max-width: 808.39px;
     margin: 15px auto;
 }
 
+#tinymce aside {
+	overflow: hidden;
+	background: rgb(239, 247, 250);
+	padding: 20px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(223, 239, 245);
+	border-image: initial;
+	display: block;
+}
+#tinymce aside.column {
+	background: transparent;
+}
+@media (min-width: 992px) {
+	#tinymce aside.sidebar,
+	#tinymce aside.column {
+		width: 30%;
+		float: right;
+		margin: 0px 0px 15px 40px;
+	}
+	#tinymce aside.column {
+		padding-left: 18px;
+		border-top-style: initial;
+		border-right-style: initial;
+		border-bottom-style: initial;
+		border-top-color: initial;
+		border-right-color: initial;
+		border-bottom-color: initial;
+		margin-bottom: 10px;
+		padding: 5px 0px 5px 28px;
+		border-width: 0px 0px 0px 1px;
+		border-image: initial;
+		border-left: 1px solid rgb(235, 235, 235);
+	}
+}

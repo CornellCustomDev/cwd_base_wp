@@ -66,6 +66,28 @@ if ( ! function_exists ( 'cwd_base_adjust_content_width' ) ) {
 	add_action( 'template_redirect', 'cwd_base_adjust_content_width' );
 }
 
+// Force Activate ACF Pro, CPT UI, Classic Editor plugins:
+function run_activate_plugin( $plugin ) {
+	$current = get_option( 'active_plugins' );
+	$plugin = plugin_basename( trim( $plugin ) );
+ 
+	if ( !in_array( $plugin, $current ) ) {
+		$current[] = $plugin;
+		sort( $current );
+		do_action( 'activate_plugin', trim( $plugin ) );
+		update_option( 'active_plugins', $current );
+		do_action( 'activate_' . trim( $plugin ) );
+		do_action( 'activated_plugin', trim( $plugin) );
+	}
+ 
+	return null;
+}
+run_activate_plugin( 'advanced-custom-fields-pro/acf.php' ); 
+//run_activate_plugin( 'advanced-custom-fields/acf.php' );
+run_activate_plugin( 'custom-post-type-ui/custom-post-type-ui.php' );
+run_activate_plugin( 'classic-editor/classic-editor.php' );
+
+
 // Enable the use of shortcodes in text widgets.
 add_filter( 'widget_text', 'do_shortcode' );
 
