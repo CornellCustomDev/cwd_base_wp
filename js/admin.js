@@ -10,5 +10,5 @@ jQuery(document).ready(function($) {
 	$('#cd_news_expand').on('click', function () {
 		$('.cd-news-show').toggle();
 	});
-	
+		
 });

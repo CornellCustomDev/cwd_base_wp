@@ -2,9 +2,7 @@
 
 <section id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	
-	<div class="cwd-component page">
-		<?php the_content(); ?>
-	</div>
+	<?php the_content(); ?>
 	
 	<?php // For paginated pages using the <!--next--> quicktag
 		wp_link_pages(array(

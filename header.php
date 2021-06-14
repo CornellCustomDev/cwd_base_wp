@@ -17,7 +17,7 @@
 	<link rel="profile" href="//gmpg.org/xfn/11">
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+	
 	<!-- Enhanced comments -->
 	<?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?>
 	

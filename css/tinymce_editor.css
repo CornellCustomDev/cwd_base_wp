@@ -1,0 +1,5 @@
+/* Override TinyMCE skin */
+.mce-menu-item.mce-menu-item-preview.mce-active .mce-text,
+.mce-menu-item.mce-menu-item-preview.mce-active .mce-ico { 
+	color: white;
+}

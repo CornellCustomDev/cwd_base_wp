@@ -1,5 +1,6 @@
 // Import CWD Cornell Framework variables
 @import 'cwd-variables';
+@import 'basic';
 
 /* Header image and slider
 -------------------------------------------*/
@@ -465,6 +466,7 @@ body:not(.mobile) {
 .aligncenter {
     max-width: 100%;
 	margin: 1em auto;
+	display: block;
 }
 .alignleft,
 .alignright {

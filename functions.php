@@ -31,6 +31,7 @@ $cwd_includes = array(
 	'/functions/customizer/customize-register.php',
 	'/functions/theme/custom-fields/image_id.php',
 	'/functions/theme/custom-fields/page_links_to.php',
+	'/functions/tinymce/editor.php',
 	
 	// Content Types: uncomment to activate 
 	'/functions/content-types/news/post-type.php', 
@@ -102,141 +103,14 @@ if ( ! function_exists ( 'call_slider_function' ) ) {
 }
 add_action( 'wp', 'call_slider_function' );
 
-// Add editor styles
-if ( ! function_exists ( 'cwd_base_editor_styles' ) ) {
-	function cwd_base_editor_styles() {
-		add_editor_style( 'css/editor-style.css');
+// Enqueue admin assets
+if ( ! function_exists ( 'cwd_base_admin_assets' ) ) {
+	function cwd_base_admin_assets() {
+		wp_enqueue_style( 'admin-styles', get_stylesheet_directory_uri() . '/css/admin.css' );
+		wp_enqueue_script( 'admin-scripts', get_stylesheet_directory_uri() . '/js/admin.js');
 	}
+	add_action( 'admin_enqueue_scripts', 'cwd_base_admin_assets');
 }
-add_action( 'admin_init', 'cwd_base_editor_styles' );
-
-// Display kitchen sink by default in the editor
-if ( ! function_exists ( 'cwd_base_format_TinyMCE' ) ) {
-	function cwd_base_format_TinyMCE( $in ) {
-		$in['wordpress_adv_hidden'] = FALSE;
-		return $in;
-	}
-	add_filter( 'tiny_mce_before_init', 'cwd_base_format_TinyMCE' );
-}
-
-// Custom WYSIWYG Classes
-if ( ! function_exists ( 'add_style_select_buttons' ) ) {
-	function add_style_select_buttons( $buttons ) {
-		array_unshift( $buttons, 'styleselect' );
-		return $buttons;
-	}
-	add_filter( 'mce_buttons', 'add_style_select_buttons' );
-}
-
-// Add custom styles to the WordPress editor
-if ( ! function_exists ( 'cwd_base_custom_styles' ) ) {
-	
-	function cwd_base_custom_styles( $init_array ) {  
-
-		$style_formats = array(  
-			array(  
-				'title' => 'Intro Text',  
-				'block' => 'span',  
-				'classes' => 'intro',
-				'wrapper' => true,
-			),
-			array(  
-				'title' => 'Link Button',  
-				'selector' => 'a',  
-				'classes' => 'link-button',
-			),
-			array(  
-				'title' => 'Text Highlights',				
-				'items' => array(
-					array(  
-						'title' => 'Red',  
-						'inline' => 'mark',  
-						'classes' => 'text-highlight-red',
-					),
-					array(  
-						'title' => 'Green',  
-						'inline' => 'mark',  
-						'classes' => 'text-highlight-green',
-					),
-					array(  
-						'title' => 'Gold',  
-						'inline' => 'mark',  
-						'classes' => 'text-highlight-yellow',
-					),
-					array(  
-						'title' => 'Yellow',  
-						'inline' => 'mark',  
-					),
-					array(  
-						'title' => 'Blue',  
-						'inline' => 'mark',  
-						'classes' => 'text-highlight-blue',
-					),
-					array(  
-						'title' => 'Purple',  
-						'inline' => 'mark',  
-						'classes' => 'text-highlight-purple',
-					),
-				),
-			),
-			array(  
-				'title' => 'Block Quotes',				
-				'items' => array(
-					array(  
-						'title' => 'Block Quote (offset)',  
-						'block' => 'blockquote',  
-						'classes' => 'offset',
-						'wrapper' => true,
-					),
-					array(  
-						'title' => 'Block Quote (impact)',  
-						'block' => 'blockquote',  
-						'classes' => 'impact',
-						'wrapper' => true,
-					),
-				),
-			),
-			array(  
-				'title' => 'Asides',				
-				'items' => array(
-					array(  
-						'title' => 'Aside',  
-						'block' => 'aside',  
-						'wrapper' => true,
-					),
-					array(  
-						'title' => 'Aside Right',  
-						'block' => 'aside',  
-						'classes' => 'sidebar',
-						'wrapper' => true,
-					),
-					array(  
-						'title' => 'Aside Column',  
-						'block' => 'aside',  
-						'classes' => 'column',
-						'wrapper' => true,
-					),
-				),
-			),
-		);  
-		$init_array['style_formats'] = json_encode( $style_formats );  
-
-		return $init_array;  
-
-	} 
-	add_filter( 'tiny_mce_before_init', 'cwd_base_custom_styles' );
-}
-
-
-
-
-
-
-
-
-
-
-
 
 // Search template redirect
 if ( ! function_exists ( 'search_template_redirect' ) ) {
@@ -282,17 +156,17 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 			wp_enqueue_script('contrib-js-pep', get_template_directory_uri() . '/js/contrib/pep.js' );
 			wp_enqueue_script('contrib-js-fitvids', get_template_directory_uri() . '/js/contrib/jquery.fitvids.js' );
 			wp_enqueue_script('siteimprove-js', get_template_directory_uri() . '/js/siteimprove.js' );		
-			//wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js' );		
+			wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
 						
 			// jQuery UI effects
-			//wp_enqueue_script('jquery-effects-core'); 
+			wp_enqueue_script('jquery-effects-core'); 
 			
 		}
 		
 			// Styles
 		wp_enqueue_style('base-css', get_template_directory_uri() . '/css/base.css');
 		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell.css');
-		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell_basic.css');
+		//wp_enqueue_style('cornell-basic-css', get_template_directory_uri() . '/css/cornell_basic.css');
 		wp_enqueue_style('cwd-card-slider-css', get_template_directory_uri() . '/css/cwd_card_slider.css');
 		wp_enqueue_style('cwd-gallery-css', get_template_directory_uri() . '/css/cwd_gallery.css');
 		wp_enqueue_style('pagination-css', get_template_directory_uri() . '/css/cwd_slider.css');
