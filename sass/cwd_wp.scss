@@ -1,6 +1,8 @@
 // Import CWD Cornell Framework variables
 @import 'cwd-variables';
+@import 'utility';
 @import 'basic';
+@import 'type-freight';
 
 /* Header image and slider
 -------------------------------------------*/
@@ -43,7 +45,7 @@
 
 				position: relative;
 
-				@media (max-width: $screen-sm-min) {
+				@media (max-width: 767px) {
 					padding-left: 0;
 					padding-right: 0;
 				}
@@ -68,7 +70,8 @@
 				}
 
 				h2 {
-
+					line-height: 1.25;
+					
 					@media (min-width: $screen-xs-min) {
 						font-size: 22px;
 					}
@@ -79,21 +82,45 @@
 						font-size: 28px;
 					}
 					@media (min-width: $screen-md-min) {
-						font-size: 32px;
+						font-size: 30px;
 					}
 					@media (min-width: $screen-ml-min) {
-						font-size: 35px;
+						font-size: 32px;
 					}
 
 				}
 
-				.caption-inner,
-				.campaign-nav {
-
-					left: 15px;
+				.caption-inner {
+					top: auto !important;
+					bottom: 68px;
+					bottom: calc(4% + 60px);
+					left: 4%;
+					right: 4%;
 
 					@media (min-width: $screen-sm-min) {
 						left: 0;
+						right: auto;
+						bottom: calc(4% + 80px);
+						max-width: 600px;
+					}
+					@media (min-width: $screen-md-min) {
+						max-width: 700px;
+					}
+					
+					h2 {
+						font-weight: 400;
+					}
+				}
+				.campaign-nav {
+					top: auto !important;
+					bottom: 18px;
+					bottom: calc(4% + 10px);
+					left: 4%;
+					right: 4%;
+
+					@media (min-width: $screen-sm-min) {
+						left: 0;
+						right: auto;
 					}
 
 				}
@@ -212,6 +239,78 @@
 		font-style: italic;
 		font-size: 13px;
 	}
+	
+	@media (min-width: 992px) {
+		background: #333;
+		
+		.has_header_image & {
+			background: rgba(#000,0.55) !important;
+		}
+		.has_header_image & li ul {
+			background: rgba(#222,0.9) !important;
+		}
+		
+		li ul {
+			background: #333;
+		}
+		
+		.cu-red & {
+			background: #333;
+		}
+		.cu-black & {
+			background: #444;
+			
+			li ul {
+				background: #444;
+			}
+		}
+		.cu-gray & {
+			background: #444;
+			
+			li ul {
+				background: #444;
+			}
+		}
+		
+		.cu-red.cu-seal & {
+			background: #961b1b;
+			
+			li ul {
+				background: #343434;
+			}
+		}
+		
+		height: 56px;
+		
+		#mobile-home + ul, 
+		#mobile-close + ul {
+			display: flex;
+		}
+		#mobile-home + ul > li > a, 
+		#mobile-close + ul > li > a {
+			height: 56px;
+			white-space: nowrap;
+		}
+	}
+}
+.has_header_image #site-header {
+	@media (min-width: 992px) {
+		position: relative;
+		z-index: 4;
+		margin-bottom: -56px;
+	}
+}
+.has_header_image #site-header + #image-band, 
+.has_header_image #site-header + .slider {
+	@media (min-width: 992px) {
+		position: relative;
+		//top: -56px;
+	}
+}
+.has_header_image + #main-content #main {
+	@media (min-width: 992px) {
+		padding-top: calc(3.5em - 30px);
+	}
 }
 
 .menu-depth-1 {
@@ -262,17 +361,34 @@ body:not(.mobile) {
 		/*background: #333;*/
 
 		li {
-			&.current-page-ancestor {
-				a {
-					background: #444;
-					background: rgba(0, 0, 0, 0.3);
+			a {
+				padding: 19px 1.5em;
+				
+				@media (min-width: 1080px) {
+					padding: 19px 1.7em;
+				}
+				@media (min-width: 1300px) {
+					padding: 19px 1.8em;
+				}
+				
+				&:hover {
+					background: rgba(255, 255, 255, 0.10);
 				}
 			}
-			a {
-				padding: 16px 1.5em;
-			}
 		}
-
+		li ul, li ul li {
+			border: 0 !important;
+			box-shadow: none !important;
+		}
+		li.top-level-li ul a:hover {
+			background: rgba(255, 255, 255, 0.07);
+		}
+		& > .container-fluid ul > li.current-page-ancestor > a, & > .container-fluid > ul > li.current-menu-item > a {
+			background: #555;
+			background: rgba(255, 255, 255, 0.12);
+			//background: #b31b1b;
+			//box-shadow: 0 0 0 6px #b31b1b;
+		}
 	}
 }
 
@@ -644,7 +760,7 @@ body:not(.mobile) {
 	clear:left;
 }
 
-@media (max-width: $screen-sm-min) {
+@media (max-width: 767px) {
 	
 	.gallery img.alignright, 
 	.gallery div.alignright, 
@@ -725,7 +841,7 @@ body:not(.mobile) {
 
 	}
 	
-	@media (max-width: $screen-sm-min) {
+	@media (max-width: 767px) {
 		
 
 	}
@@ -1018,7 +1134,7 @@ body > {
 			
 			img {
 				
-				@media (max-width: $screen-sm-min) {
+				@media (max-width: 767px) {
 					width: 30px;
 				}
 			}

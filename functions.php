@@ -164,9 +164,9 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		}
 		
 			// Styles
+		wp_enqueue_style('freight', 'https://use.typekit.net/nwp2wku.css'); // Freight Text and Sans
 		wp_enqueue_style('base-css', get_template_directory_uri() . '/css/base.css');
 		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell.css');
-		//wp_enqueue_style('cornell-basic-css', get_template_directory_uri() . '/css/cornell_basic.css');
 		wp_enqueue_style('cwd-card-slider-css', get_template_directory_uri() . '/css/cwd_card_slider.css');
 		wp_enqueue_style('cwd-gallery-css', get_template_directory_uri() . '/css/cwd_gallery.css');
 		wp_enqueue_style('pagination-css', get_template_directory_uri() . '/css/cwd_slider.css');
