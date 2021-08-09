@@ -22,8 +22,10 @@ $post_type = get_queried_object()->name;
 				
 				get_template_part('templates/page/content', 'title');
 				
-				// Interrupt the default query to grab some content from custom post type archive main pages
-				if($post_type == 'news' || $post_type == 'events' || $post_type == 'people') {
+				// Interrupt the default query to grab some content from custom post type archive main 
+				// pages. Need to add more content types as needed. The page name MUST be the same as 
+				// the post type slug for this to work.
+				if($post_type == 'news' || $post_type == 'events' || $post_type == 'people' || $post_type == 'courses' || $post_type == 'testimonials' || $post_type == 'photo_galleries') {
 					
 					$new_query = new WP_Query( 'pagename='.$post_type );
 					if( $new_query->have_posts() ) : $new_query->the_post();
@@ -43,9 +45,72 @@ $post_type = get_queried_object()->name;
 					<div class="cwd-component cwd-basic no-overlay<?php if( $archive_options['appearance'] == 'grid' ) { echo ' tiles'; } ?>">
 
 						<div class="cards<?php if( $archive_options['appearance'] == 'grid' ) { echo ' flex-grid'; } ?>">
+							
+							<?php 
+								if($post_type == 'events') {
+									
+									// Custom events query to manipulate date fields
+									$events_args = array( 
+										'post_type' => 'events',
+										'posts_per_page' => -1,
+									);	
+									
+									$events_query = new WP_Query($events_args);	
+									
+									// Get all events
+									$events_query = $events_query->get_posts();	
+									
+									foreach($events_query as $event) {
+										
+										// Get the dates
+										$date = get_field( 'date', $event->ID );
 
+										// Convert them
+										$new_date = date( 'Ymd', strtotime( $date ) );
+
+										// Update them in the database
+										update_field('date', $new_date, $event->ID);
+
+									}
+									
+									wp_reset_query(); // Nothing to see here. Move along.
+								}
+							?>
+							
+							<?php 
+								if($post_type == 'news') {
+									
+									// Custom news query to manipulate date fields
+									$news_args = array( 
+										'post_type' => 'news',
+										'posts_per_page' => -1,
+									);	
+									
+									$news_query = new WP_Query($news_args);	
+									
+									// Get all news
+									$news_query = $news_query->get_posts();	
+									
+									foreach($news_query as $news) {
+										
+										// Get the dates
+										$date = get_field( 'publication_date', $news->ID );
+
+										// Convert them
+										$new_date = date( 'Ymd', strtotime( $date ) );
+
+										// Update them in the database
+										update_field('publication_date', $new_date, $news->ID);
+
+									}
+									
+									wp_reset_query(); // Nothing to see here. Move along.
+								}
+							?>
+							
 							<?php 
 							
+							// The Loop
 							if (have_posts()): while (have_posts()) : the_post(); // The loop
 								
 								// Generic archives template. To customize by post type, create /templates/post/content-archive-$post_type.php

@@ -11,7 +11,7 @@ add_action( 'admin_init', 'cwd_base_editor_styles' );
 // Override default TinyMCE skin
 if ( ! function_exists ( 'cwd_base_tinymce_editor_css' ) ) {
 	function cwd_base_tinymce_editor_css() {
-		$src = get_template_directory_uri().'/css/tinymce_editor.css';
+		$src = get_template_directory_uri().'/css/tinymce.css';
 		$ver = add_query_arg( 'ver', rand(), $src ); ?>
 		<link rel='stylesheet' href='<?php echo $ver; ?>' type='text/css' />
 		<?php
@@ -38,31 +38,27 @@ if ( ! function_exists ( 'add_style_select_buttons' ) ) {
 }
 
 // Customize the TinyMCE buttons
-if ( ! function_exists ( 'cwd_base_tinymce_buttons' ) ) {
-	function cwd_base_tinymce_buttons( $in ) {
-		$in['remove_linebreaks'] = false;
-		$in['gecko_spellcheck'] = true;
-		$in['keep_styles'] = true;
-		$in['accessibility_focus'] = true;
-		$in['tabfocus_elements'] = 'major-publishing-actions';
-		$in['media_strict'] = false;
-		$in['paste_remove_styles'] = false;
-		$in['paste_remove_spans'] = false;
-		$in['paste_strip_class_attributes'] = 'none';
-		$in['paste_text_use_dialog'] = true;
-		$in['wpeditimage_disable_captions'] = true;
-		$in['plugins'] = 'tabfocus,paste,media,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpdialogs';
-		$in['content_css'] = get_template_directory_uri() . "/css/editor-style.css";
-		$in['wpautop'] = true;
-		$in['apply_source_formatting'] = false;
-		$in['block_formats'] = "Paragraph=p; Heading 3=h3; Heading 4=h4";
-		$in['toolbar1'] = 'bold,italic,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,spellchecker,wp_fullscreen,wp_adv';
-		$in['toolbar2'] = 'a11ycheck,formatselect,styleselect,underline,alignjustify,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help ';
-		$in['toolbar3'] = '';
-		$in['toolbar4'] = '';
-		return $in;
-	}
-	add_filter( 'tiny_mce_before_init', 'cwd_base_tinymce_buttons' );
+if( !function_exists('cwd_base_editor_mce_buttons') ){
+    function cwd_base_editor_mce_buttons($buttons) { // First row
+        return array(
+            'formatselect', 'bold', 'italic', 'strikethrough', 'alignleft', 'aligncenter', 'alignright', 'alignfull', 'outdent', 'indent', 'bullist', 'numlist', 'subscript', 'superscript', 'table', 'charmap', 'removeformat', 'spellchecker', 'undo', 'redo', 'link', 'unlink', 'image', 'cleanup', 'wp_help', 'anchor', 'visualaids', 'separator', 'fullscreen'
+        ); // Not sure why all of these aren't working, and I wish I had a list of all available buttons, but apparently that's highly classified, top secret information.
+    }
+    add_filter('mce_buttons', 'cwd_base_editor_mce_buttons', 0); // Use mce_buttons_2, 3, or 4 to add more rows.
+}
+
+// Add table plugin for tinymce
+function add_the_table_plugin( $plugins ) {
+    $plugins['table'] = get_template_directory_uri() . '/functions/tinymce/plugins/table/plugin.min.js';
+    return $plugins;
+}
+add_filter( 'mce_external_plugins', 'add_the_table_plugin' );
+
+if( !function_exists('cwd_base_editor_mce_buttons_2') ){
+    function cwd_base_editor_mce_buttons_2($buttons) { // Second row, not needed at the moment, but we need to explicitly make it empty or WordPress will add buttons we don't want.
+        return array('');
+    }
+    add_filter('mce_buttons_2', 'cwd_base_editor_mce_buttons_2', 0);
 }
 
 // Add custom styles to Formats menu
@@ -204,7 +200,7 @@ if ( ! function_exists ( 'cwd_base_custom_styles' ) ) {
 						'wrapper' => false,
 					),
 					array(  
-						'title' => 'Invisible',  
+						'title' => 'Invisible (no visible line, spacer only)',  
 						'block' => 'hr',  
 						'classes' => 'invisible',
 						'wrapper' => false,
@@ -262,6 +258,103 @@ if ( ! function_exists ( 'cwd_base_custom_styles' ) ) {
 						'block' => 'hr',  
 						'classes' => 'section-break',
 						'wrapper' => false,
+					),
+				),
+			),
+			array(  
+				'title' => 'Panels',				
+				'items' => array(
+					array(  
+						'title' => 'Default',  
+						'block' => 'div',  
+						'wrapper' => true,
+						'classes' => 'fill panel',
+					),
+					array(  
+						'title' => 'Blue-Green',  
+						'block' => 'div',  
+						'wrapper' => true,
+						'classes' => 'accent-blue-green fill panel',
+					),
+					array(  
+						'title' => 'Blue',  
+						'block' => 'div',  
+						'wrapper' => true,
+						'classes' => 'accent-blue fill panel',
+					),
+					array(  
+						'title' => 'Purple',  
+						'block' => 'div',  
+						'wrapper' => true,
+						'classes' => 'accent-purple fill panel',
+					),
+					array(  
+						'title' => 'Gold',  
+						'block' => 'div',  
+						'wrapper' => true,
+						'classes' => 'accent-gold fill panel',
+					),
+					array(  
+						'title' => 'Green',  
+						'block' => 'div',  
+						'wrapper' => true,
+						'classes' => 'accent-green fill panel',
+					),
+					array(  
+						'title' => 'Red',  
+						'block' => 'div',  
+						'wrapper' => true,
+						'classes' => 'accent-red fill panel',
+					),
+				),
+			),
+			array(  
+				'title' => 'Tables',				
+				'items' => array(
+					array(  
+						'title' => 'Default',  
+						'selector' => 'table',
+						'classes' => 'table'
+					),
+					array(  
+						'title' => 'Bordered',  
+						'selector' => 'table',
+						'classes' => 'table bordered',
+					),
+					array(  
+						'title' => 'Flat',  
+						'selector' => 'table',
+						'classes' => 'table flat',
+					),
+					array(  
+						'title' => 'Striped',  
+						'selector' => 'table',
+						'classes' => 'table striped',
+					),
+					array(  
+						'title' => 'Flat + Striped',  
+						'selector' => 'table',
+						'classes' => 'table flat striped',
+					),
+					array(  
+						'title' => 'Colored',  
+						'selector' => 'table',
+						'classes' => 'table striped colored',
+					),
+					array(  
+						'title' => 'Flat + Colored',  
+						'selector' => 'table',
+						'classes' => 'table flat striped colored',
+					),
+					array(  
+						'title' => 'Rainbow',  
+						'selector' => 'table',
+						'classes' => 'table striped rainbow',
+					),
+					array(  
+						'title' => 'Flat + Rainbow',  
+						'selector' => 'table',
+						'classes' => 'table flat striped rainbow',
 					),
 				),
 			),

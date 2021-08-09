@@ -9,7 +9,7 @@
 			<?php cwd_base_get_image(); ?>
 
 			<div class="overlay">
-				<h3 class="designer">
+				<h3>
 					<span class="deco">
 						<?php the_title(); ?>
 					</span>
@@ -22,7 +22,7 @@
 
 	<div class="group-fields">
 
-		<?php cwd_base_get_the_date(); ?>
+		<?php //cwd_base_get_the_date(); ?>
 
 		<p class="summary">
 									

@@ -12,23 +12,58 @@
 	</div>
 			
 	<?php if(get_field('professional_title') || get_field('department') || get_field('affiliations') || get_field('website_url')) { ?>
-		<div class="fields clear">
+	
+		<div class="custom-fields" class="clear">
+			
 			<?php if(get_field('professional_title')) { ?>
-			<div class="field"><span>Title: </span><?php the_field('professional_title'); ?></div>
+			
+				<div id="professional_title">
+					
+					<span class="label">Title: </span>
+			
+					<span class="field">
+						<?php the_field('professional_title'); ?>
+					</span>
+					
+				</div>
+			
 			<?php } ?>
+			
 			<?php if(get_field('department')) { ?>
-				<div class="field"><span>Department: </span><?php the_field('department'); ?></div>
+			
+				<div id="department">
+					
+					<span class="label">Department: </span>
+
+					<span class="field">
+						<?php the_field('department'); ?>
+					</span>
+			
+				</div>
+			
 			<?php } ?>
-			<?php if(get_field('affiliations')) { ?>
-				<div class="field"><span>Affiliations: </span><?php the_field('affiliations'); ?></div>
-			<?php } ?>
+			
 			<?php if(get_field('website_url')) { ?>
-			<div class="field"><span>Website: </span><a href="<?php the_field('website_url'); ?>"><?php the_field('website_url'); ?></a></div>
+			
+				<div id="website_url">
+					
+					<span class="label">Website: </span>
+
+					<span class="field">
+						<a href="<?php the_field('website_url'); ?>">
+							<?php the_field('website_url'); ?>
+						</a>
+					</span>
+			
+				</div>
+			
 			<?php } ?>
+			
 		</div>
+	
 	<?php } ?>
 	
-	<?php //cwd_base_get_tag_options(); ?>
+	<?php cwd_base_get_tag_options(); ?>
 
 	<?php // For paginated pages using the <!--nextpage--> quicktag
 		wp_link_pages(array(

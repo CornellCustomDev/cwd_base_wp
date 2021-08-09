@@ -9,7 +9,7 @@ if ( ! function_exists ( 'cwd_base_nav' ) ) {
 
 		wp_nav_menu(
 		array(
-			'theme_location'  => 'header-menu',
+			'theme_location'  => 'primary',
 			'menu'            => '',
 			'container'       => false,
 			'container_class' => '',

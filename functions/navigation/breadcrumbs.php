@@ -19,9 +19,9 @@ if ( ! function_exists ( 'cwd_base_breadcrumbs' ) ) {
 		$text['page']     = 'Page %s'; // text 'Page N'
 		$text['cpage']    = 'Comment Page %s'; // text 'Comment Page N'
 
-		$wrap_before    = '<nav class="breadcrumb"><ul class="list-menu">'; 
-		$wrap_after     = '</ul></nav>'; // the closing wrapper tag
-		$before         = '<span class="breadcrumbs__current">'; // tag before the current crumb
+		$wrap_before    = '<nav class="breadcrumb" aria-label="breadcrumbs"><ol class="list-menu">'; 
+		$wrap_after     = '</ol></nav>'; // the closing wrapper tag
+		$before         = '<span class="breadcrumbs__current" aria-current="location">'; // tag before the current crumb
 		$after          = '</span>'; // tag after the current crumb
 		$sep            = '';
 

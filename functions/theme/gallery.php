@@ -52,12 +52,19 @@ function cwd_image_gallery($output, $attr) {
         $thumb = wp_get_attachment_image_src($id, 'medium');
         $alt = get_post_meta($id, '_wp_attachment_image_alt', true);
         $caption = $attachment->post_excerpt;
+        $label = $alt;
+        if (!empty($caption)) {
+        	if (!empty($alt)) {
+        		$label = $label . ', Caption: ';
+        	}
+        	$label = $label . $caption;
+        }
         //$description = $attachment->post_content;
 		//$image_title = $attachment->post_title;
 		$page_title = $post->post_name;
 		
         $output .= "<div class=\"gallery-item col\">\n";
-        $output .= "<a class=\"popup\" role=\"img\" href=\"{$img[0]}\" data-gallery=\"{$page_title}\" data-title=\"{$caption}\" data-alt=\"{$alt}\" aria-label=\"{$alt}\">\n";
+        $output .= "<a class=\"popup\" role=\"img\" href=\"{$img[0]}\" data-gallery=\"{$page_title}\" data-title=\"{$caption}\" data-alt=\"{$alt}\" aria-label=\"{$label}\">\n";
         $output .= "<h3 class=\"sr-only\">{$caption}</h3>\n";
         $output .= "<img src=\"{$thumb[0]}\" alt=\"{$alt}\" />\n";
         $output .= "</a>\n";
@@ -70,5 +77,3 @@ function cwd_image_gallery($output, $attr) {
     return $output;
 }
 add_filter('post_gallery', 'cwd_image_gallery', 10, 2);
-
-

@@ -1,0 +1,31 @@
+<?php // The single testimonial template ?>
+
+<section id="post-<?php the_ID(); ?>" <?php post_class('cwd-component'); ?>>
+			
+	<?php //cwd_base_get_the_date(); ?>
+
+	<div class="group-fields">
+		<div class="summary">
+			<?php the_content(); ?>
+			<?php if(get_field('quotee')) { ?>
+				<div class="quotee">
+					<?php the_field('quotee'); ?>
+				</div>
+			<?php } ?>
+		</div>
+			
+		<?php cwd_base_get_tag_options(); ?>
+
+	</div>
+	
+	<?php // For paginated pages using the <!--nextpage--> quicktag
+		wp_link_pages(array(
+			'before' => '<nav class="navigation"><ol class="cwd-pagination wp_link_pages">' . __('<span class="title">Pages:</span>'),
+			'after' => '</ol></nav>',
+			'next_or_number' => 'next_and_number',
+			'nextpagelink' => __('&raquo;', 'cwd_base'),
+			'previouspagelink' => __('&laquo;', 'cwd_base'),
+			'pagelink' => '%'
+		));
+	?>
+</section>

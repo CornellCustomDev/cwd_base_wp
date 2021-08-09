@@ -12,6 +12,31 @@
     padding: 15px 0 12px 18px;
     float: left;
 }
+.post-type-testimonials #titlediv:after {
+	content: 'Quotation';
+	font-size: 23px;
+    font-weight: 400;
+	white-space: pre-wrap;
+    margin: 12px 0 6px;
+    display: block;
+    padding: 9px 0 4px 0;
+    line-height: 1.3;
+    color: #1d2327;
+}
+.post-type-testimonials #post-body-content #acf_after_title-sortables {
+    margin: 0;
+}
+.post-type-testimonials #acf_after_title-sortables:before {
+	content: 'Additional blockquote styles are available in the Formats dropdown menu.';
+    font-size: 13px;
+    font-weight: 400;
+    white-space: pre-wrap;
+    margin: -15px 0 0 3px;
+    display: block;
+    padding: 9px 0 4px 0;
+    line-height: 14px;
+    color: #646970;
+}
 
 .toplevel_page_theme-options {
 	
@@ -72,7 +97,25 @@
 }
 
 // Hide toggles
+div[data-name=metadata] > .acf-input > .acf-fields > .acf-field:not([data-name="regular_posts"]),
 .toplevel_page_theme-options #poststuff h2,
 .toplevel_page_theme-options .postbox-header {
 	display: none;
 }
+.post-type-courses #post-body-content #acf_after_title-sortables {
+    margin: -4px 0 -20px 10px;
+}
+
+// Widget context
+#widget-context-pro,
+#widget-context-pro + tr,
+.widget-context .widget-context-header .widget-context-settings-link {
+	display: none;
+}
+
+/*p.select.help {
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 19px;
+    padding: 0 2px;
+}*/

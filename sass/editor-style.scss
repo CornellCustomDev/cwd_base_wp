@@ -2,12 +2,16 @@
 @import "cwd-variables";
 @import "base";
 @import "cwd_wp.scss";
+@import "type-freight.scss";
 @import "../fonts/material-design-iconic-font.min.css";
 @import "../fonts/font-awesome.min.css";
 
 #tinymce {
     max-width: 808.39px;
-    margin: 15px auto;
+    margin: 0 auto 0 0;
+    padding: 15px !important;
+    background: #fff;
+    background: linear-gradient(to right, #ffffff 0%,#ffffff 823px,#eeeeee 823px,#f7f7f7 824px,#f7f7f7 100%);
 }
 
 h2, .h2 {
@@ -86,4 +90,47 @@ aside.column {
 		width: auto;
 		max-width: 40%;
 	}
+}
+
+// Tables
+#tinymce table td, 
+#tinymce table th {
+    font-size: 14px;
+}
+
+#tinymce.content.post-type-testimonials div.testimonial {
+    width: 100%;
+    position: relative;
+    border-right: none;
+    margin-left: 0;
+    margin-bottom: 29px;
+    quotes: "“" "”" "‘" "’";
+	font-size: 21px;
+    float: left;
+    border-top-style: initial;
+    border-bottom-style: initial;
+    border-left-style: initial;
+    border-top-color: initial;
+    border-bottom-color: initial;
+    border-left-color: initial;
+    clear: none;
+    background: none;
+    padding: 0px 30px;
+    border-width: 0px 3px 0px 0px;
+    border-image: initial;
+    line-height: 1.55;
+    margin: 30px;
+	font-family: "Iowan Old Style", Georgia, Athelas, Baskerville, "Sitka Display", Constansia, serif;
+    color: #444444;
+}
+#tinymce.content.post-type-testimonials div.testimonial:before {
+    content: open-quote;
+    font-size: 60px;
+    color: #b31b1b;
+    float: left;
+    top: -36px;
+    padding-right: 20px;
+    font-weight: 300;
+    position: absolute;
+    left: -9px;
 }

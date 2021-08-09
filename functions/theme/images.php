@@ -4,39 +4,54 @@
 if ( ! function_exists( 'cwd_base_get_image' ) ) {
 	
 	function cwd_base_get_image() {
-				
+		
+		global $post;
+		
 		$image_size = 'thumbnail'; 
 		$image_width = 150; 
 		$image_height = 150; 
 		
-		$image   = get_field('image');
-		$photo_url   = get_field('photo_url');
-		$image_id   = get_field('image_id');
+		$image   = get_field('image'); // News
+		$photo_url   = get_field('photo_url'); // Events
+		$image_id   = get_field('image_id'); // Everything else
 		$post_id = $post->ID;
 		
 		$image_size = 'medium'; 
 		$image_width = 480; 
 		$image_height = 480; 
 		
-		if(get_field('image')) { // NEED TO GET THIS WORKING SOMEDAY
+		if(get_field('image')) { 
 			
 			/* Here we will upload images from the news feed and resize them to square.
 			 * News feed images normally are 850x478, so we upload them to the media 
-			 * library in order to crop them down to 478x478. Because of the URLs and 
-			 * extensions we have to work with, we can't generate all sizes. Just one. */
+			 * library in order to crop them down to 480x480 (slight upsizing, just two 
+			 * pixels). */
 			
-			// Remove extra characters and make string lowercase
-			$temp_url = strtolower(sanitize_file_name($image)); 
+			// Grab everything before the question mark
+			$new_image = substr($image, 0, strpos($image, '?'));
+			//echo '<strong style="margin-top: 100px; display: block;">Image: </strong>'.$new_image.'<br>';
 			
+			// Grab the base name and sanitize
+			$temp_url = basename($new_image);
+			$temp_url = strtolower(sanitize_file_name($temp_url)); 
+			//echo '<strong>Temp image name: </strong>'.$temp_url.'<br>';
+
 			// Get the upload directory and create a filepath
 			$dir = wp_upload_dir();
+			//echo '<strong>Directory parts: </strong><br>';
+			//foreach($dir as $d) {
+				//echo $d.'<br><br>';
+			//}
+			
 			$path_to_file = $dir['path'].'/'.$temp_url; 
+			//echo '<strong>Path to file: </strong>'.$path_to_file.'<br>';
 			
 			// Hey, it's a new image and it doesn't exist yet!
 			if(!file_exists($path_to_file)) { 
 				
 				// Download to a temporary file, then upload it
-				//$image_url = cwd_base_upload_image($image, $post_id); 
+				$image_url = cwd_base_upload_image($image, $post_id); 
+				//echo '<strong>Image URL: </strong>'.$image_url.'<br>';
 				
 				// Now create an image id
 				$image_id = attachment_url_to_postid($image_url); 
@@ -67,7 +82,15 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 				$new_image_part = implode('.', $new_image_part); 
 				
 				// Name your newly resized image
-				$new_image_url = $new_image_part.'-478x478.jpg'; 
+				if( strpos($temp_url, '.jpeg') ) {
+					$new_image_url = $new_image_part.'-480x480.jpeg';
+				}
+				elseif( strpos($temp_url, '.png') ) {
+					$new_image_url = $new_image_part.'-480x480.png';
+				}
+				else {
+					$new_image_url = $new_image_part.'-480x480.jpg';
+				}
 
 			}
 			else {
@@ -76,40 +99,60 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 				$new_image_part = explode('.', $temp_url); 
 				unset($new_image_part[count($new_image_part) - 1]);
 				$new_image_part = implode('.', $new_image_part);
-				$new_image_url = $new_image_part.'-478x478.jpg';
+
+				if( strpos($temp_url, '.jpeg') ) {
+					$new_image_url = $new_image_part.'-480x480.jpeg';
+				}
+				elseif( strpos($temp_url, '.png') ) {
+					$new_image_url = $new_image_part.'-480x480.png';
+				}
+				else {
+					$new_image_url = $new_image_part.'-480x480.jpg';
+				}
 			}
 			
 			// Et voila. We can do the same thing for events feed images
-			//echo '<img src="' . $dir['url'] . '/' . $new_image_url . '" alt= "" />'; 
-			echo '<img src="' . $image . '" alt= "" />'; 
+			echo '<img src="' . $dir['url'] . '/' . $new_image_url . '" alt= "" />'; 
+			//echo '<img src="' . $image . '" alt= "" />'; 
 			
 		}
 		elseif(get_field('photo_url')) {
-			
+						
 			/* Here we will upload images from the events feed and resize them to square.
 			 * Events feed images are various sizes, but we upload them to the media 
 			 * library and crop them down to 480x480. All image sizes will be
 			 * created. */
 			
-			// Remove extra characters and make string lowercase
-			$temp_url = strtolower(sanitize_file_name($photo_url)); 
-			
+			// Grab the base name and sanitize
+			$temp_url = basename($photo_url);
+			$temp_url = strtolower(sanitize_file_name($temp_url)); 
+			//echo '<strong>Temp image name: </strong>'.$temp_url.'<br>';
+
 			// Get the upload directory and create a filepath
 			$dir = wp_upload_dir();
+			//echo '<strong>Directory parts: </strong><br>';
+			//foreach($dir as $d) {
+				//echo $d.'<br><br>';
+			//}
+			
 			$path_to_file = $dir['path'].'/'.$temp_url; 
+			//echo '<strong>Path to file: </strong>'.$path_to_file.'<br>';
 			
 			// Hey, it's a new image and it doesn't exist yet!
 			if(!file_exists($path_to_file)) { 
 				
 				// Download to a temporary file, then upload it
-				//$image_url = cwd_base_upload_image($photo_url, $post_id); 
-				
+				$image_url = cwd_base_upload_image($photo_url, $post_id); 
+				//echo '<strong>Image URL: </strong>'.$image_url.'<br>';
+
 				// Now create an image id
 				$image_id = attachment_url_to_postid($image_url); 
-				
+				//echo '<strong>Image ID: </strong>'.$image_id.'<br>';
+
 				// Now with an id you can get the file
 				$filename = strtolower(basename(get_attached_file($image_id))); 
-				
+				//echo '<strong>Filename: </strong>'.$filename.'<br>';
+
 				// New name, new path
 				$dir = wp_upload_dir();
 				$path_to_file = $dir['path'].'/'.$filename; 
@@ -145,18 +188,22 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 			}
 			
 			// Et voila. 
-			//echo '<img src="' . $dir['url'] . '/' . $new_image_url . '" alt= "" />'; 
-			echo '<img src="' . $photo_url . '" alt= "" />'; 
+			echo '<img src="' . $dir['url'] . '/' . $new_image_url . '" alt= "" />'; 
+			//echo '<img src="' . $photo_url . '" alt= "" />'; 
 			
 		}
 		elseif (get_field('image_id')) {
 			echo wp_get_attachment_image($image_id, $image_size); // ACF image field
+			echo 'Hello, world!';
+				
 		} 
 		elseif ( has_post_thumbnail() ) {     
 			the_post_thumbnail($image_size); // Featured image
 		}
 		else {
-			cwd_base_get_fallback_image(); // Fallback image
+			//if(!is_single()) {
+				cwd_base_get_fallback_image(); // Fallback image
+			//}
 		}
 	}
 	
@@ -164,35 +211,54 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 
 // Upload an image from a URL 
 if ( ! function_exists( 'cwd_base_upload_image') ) {
+	
 	function cwd_base_upload_image($url, $post_id) {
 		
-		include_once( ABSPATH . 'wp-admin/includes/admin.php' );
-		define('ALLOW_UNFILTERED_UPLOADS', true);
-				
-		$image = '';
-		if($url != '') {
+		if( !is_admin() ) {
+			
+			//echo '<strong>URL: </strong>'.$url.'<br>';
+			//echo '<strong>Post ID: </strong>'.$post_id.'<br>';
+		
+			include_once( ABSPATH . 'wp-admin/includes/admin.php' );
+			//define('ALLOW_UNFILTERED_UPLOADS', true);
 
-			$file = array();
-			$file['name'] = strtolower($url);
-			$file['tmp_name'] = download_url($url); // Download to temporary file
+			$image = '';
+			if($url != '') {
 
-			if (is_wp_error($file['tmp_name'])) {
-				@unlink($file['tmp_name']);
-				var_dump( $file['tmp_name']->get_error_messages( ) );
-			} 
-			else {
-				$attachmentId = media_handle_sideload($file, $post_id); // Sideloading it (as opposed to uploading)
+				$file = array();
+				$file['name'] = basename(strtolower($url));
+				if(strpos($file['name'], '?')) {
+					$file['name'] = substr($file['name'], 0, strpos($file['name'], '?'));
+				}
+				$file['tmp_name'] = download_url($url); // Download to temporary file
 				
-				if ( is_wp_error($attachmentId) ) {
+				//foreach($file as $k=>$v) {
+					//echo '<strong>'.$k.'</strong> => '.$v.'<br>';
+				//}
+				
+				//echo '<strong>Basename: </strong>'.basename($file['tmp_name']).'<br>';
+
+				if (is_wp_error($file['tmp_name'])) {
 					@unlink($file['tmp_name']);
-					var_dump( $attachmentId->get_error_messages( ) );
+					var_dump( $file['tmp_name']->get_error_messages( ) );
 				} 
-				else {                
-					$image = strtolower(wp_get_attachment_url($attachmentId)); // Gimme it (the url)
+				else {
+					$attachmentId = media_handle_sideload($file, $post_id); // Sideloading it (as opposed to uploading it)
+					
+					//echo '<strong>Attachment ID: </strong>'.$attachmentId.'<br>';
+
+					if ( is_wp_error($attachmentId) ) {
+						@unlink($file['tmp_name']);
+						var_dump( $attachmentId->get_error_messages( ) );
+					} 
+					else {                
+						$image = strtolower(wp_get_attachment_url($attachmentId)); // Gimme it (the url)
+						//echo '<strong>Attachment URL: </strong>'.$image.'<br>';
+					}
 				}
 			}
+			return $image; // Return it
 		}
-		return $image; // Return it
 	}
 }
 

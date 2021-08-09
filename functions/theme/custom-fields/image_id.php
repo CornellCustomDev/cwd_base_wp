@@ -12,7 +12,7 @@ acf_add_local_field_group(array(
 			'label' => 'Image',
 			'name' => 'image_id',
 			'type' => 'image',
-			'instructions' => '',
+			'instructions' => 'If there is no featured (header) image chosen for this post, you can add an image here which will be used for the thumbnail image in all archive listings and search results. If left blank, the default Cornell insignia will be used instead.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
@@ -62,6 +62,11 @@ acf_add_local_field_group(array(
 				'value' => 'galleries',
 			),
 			array(
+				'param' => 'post_type',
+				'operator' => '!=',
+				'value' => 'testimonials',
+			),
+			array(
 				'param' => 'page_type',
 				'operator' => '!=',
 				'value' => 'front_page',
@@ -71,7 +76,7 @@ acf_add_local_field_group(array(
 	'menu_order' => 0,
 	'position' => 'normal',
 	'style' => 'default',
-	'label_placement' => 'left',
+	'label_placement' => 'top',
 	'instruction_placement' => 'label',
 	'hide_on_screen' => '',
 	'active' => true,

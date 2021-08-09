@@ -38,6 +38,14 @@ get_header();
 				
 				?>
 				
+					
+				<?php 
+					if( is_active_sidebar('widget-area-4') ) { 
+						dynamic_sidebar('widget-area-4');
+					}
+				?>
+					
+					
 			</article>
 
 			<?php get_sidebar('bottom'); ?>

@@ -9,7 +9,7 @@
 			<?php cwd_base_get_image(); ?>
 
 			<div class="overlay">
-				<h3 class="designer">
+				<h3>
 					<span class="deco">
 						<?php the_title(); ?>
 					</span>

@@ -107,6 +107,10 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 			$classes[] = 'has-utility-nav';
 		}
 		
+		if(is_page('Styleguide')) {
+			$classes[] = 'styleguide';
+		}
+		
 		return $classes;
 	}
 	add_filter( 'body_class', 'custom_body_classes' );

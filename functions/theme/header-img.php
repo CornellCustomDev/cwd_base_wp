@@ -17,10 +17,10 @@ if ( ! function_exists ( 'get_header_img_url' ) ) {
 			foreach ($ancestor_ids as $ancestor_id) { 
 
 				// This will take the featured image url from the topmost parent
-				$parent_featured_image = wp_get_attachment_url( get_post_thumbnail_id($ancestor_id), 'header-image' ); 
+				$parent_featured_image = wp_get_attachment_image_src( get_post_thumbnail_id($ancestor_id), 'header-image' ); 
 
 				if ( $parent_featured_image ) {
-					$header_img_url = $parent_featured_image; // If there is one, use it
+					$header_img_url = $parent_featured_image[0]; // If there is one, use it
 				}
 				else {
 					continue; // If not, do nothing

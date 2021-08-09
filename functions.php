@@ -18,10 +18,13 @@ $cwd_includes = array(
 	'/functions/theme/pagination.php',
 	'/functions/theme/widgets.php',
 	'/functions/theme/gallery.php',
-	'/functions/theme/options.php',
+	'/functions/theme/metadata.php',
 	'/functions/theme/dates.php',
 	'/functions/theme/images.php',
 	'/functions/theme/header-img.php',
+	'/functions/theme/options.php',
+	'/functions/plugins/og-tags/og-tags.php',
+	'/functions/plugins/widget-context/widget-context.php',
 	'/functions/navigation/menus.php',
 	'/functions/navigation/breadcrumbs.php',
 	'/functions/navigation/menu-classes.php',
@@ -29,18 +32,14 @@ $cwd_includes = array(
 	'/functions/navigation/section-nav/cpt-section-nav.php',
 	'/functions/customizer/device-previews.php',
 	'/functions/customizer/customize-register.php',
+	'/functions/theme/custom-fields/featured.php',
 	'/functions/theme/custom-fields/image_id.php',
 	'/functions/theme/custom-fields/page_links_to.php',
 	'/functions/tinymce/editor.php',
-	
-	// Content Types: uncomment to activate 
-	'/functions/content-types/news/post-type.php', 
-	'/functions/content-types/events/post-type.php', 
-	'/functions/content-types/people/post-type.php', 
-	'/functions/content-types/slider/slider.php'
+	'/functions/post-types/slider/slider.php',
 );
 
-// Check if file exists
+// Check if include file exists
 foreach($cwd_includes as $file){
 	
 	if(!$filepath = locate_template($file)) {
@@ -67,27 +66,13 @@ if ( ! function_exists ( 'cwd_base_adjust_content_width' ) ) {
 	add_action( 'template_redirect', 'cwd_base_adjust_content_width' );
 }
 
-// Force Activate ACF Pro, CPT UI, Classic Editor plugins:
-function run_activate_plugin( $plugin ) {
-	$current = get_option( 'active_plugins' );
-	$plugin = plugin_basename( trim( $plugin ) );
- 
-	if ( !in_array( $plugin, $current ) ) {
-		$current[] = $plugin;
-		sort( $current );
-		do_action( 'activate_plugin', trim( $plugin ) );
-		update_option( 'active_plugins', $current );
-		do_action( 'activate_' . trim( $plugin ) );
-		do_action( 'activated_plugin', trim( $plugin) );
+// Use this to inject code directly after the opening body tag
+if ( ! function_exists ( 'cwd_base_after_body_tag' ) ) {
+	function cwd_base_after_body_tag() {
+		 // Do stuff
 	}
- 
-	return null;
+	add_action( 'wp_body_open', 'cwd_base_after_body_tag' );
 }
-run_activate_plugin( 'advanced-custom-fields-pro/acf.php' ); 
-//run_activate_plugin( 'advanced-custom-fields/acf.php' );
-run_activate_plugin( 'custom-post-type-ui/custom-post-type-ui.php' );
-run_activate_plugin( 'classic-editor/classic-editor.php' );
-
 
 // Enable the use of shortcodes in text widgets.
 add_filter( 'widget_text', 'do_shortcode' );
@@ -97,7 +82,7 @@ if ( ! function_exists ( 'call_slider_function' ) ) {
 	function call_slider_function() {
 		$add_slider = get_post_meta( get_the_ID(), 'add_slider', true );
 		if(is_front_page() && $add_slider == 'Yes') {
-			require_once get_theme_file_path('/functions/content-types/slider/slider.php');
+			require_once get_theme_file_path('/functions/post-types/slider/slider.php');
 		}
 	}
 }
@@ -110,6 +95,7 @@ if ( ! function_exists ( 'cwd_base_admin_assets' ) ) {
 		wp_enqueue_script( 'admin-scripts', get_stylesheet_directory_uri() . '/js/admin.js');
 	}
 	add_action( 'admin_enqueue_scripts', 'cwd_base_admin_assets');
+	add_action( 'acf/input/admin_enqueue_scripts', 'cwd_base_admin_assets');
 }
 
 // Search template redirect
@@ -145,18 +131,18 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 				// Scripts
 			wp_enqueue_script('cwd-script', get_template_directory_uri() . '/js/cwd.js' );
 			wp_enqueue_script('cwd-wp-script', get_template_directory_uri() . '/js/cwd_wp.js' );
-			wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js' );		
-			wp_enqueue_script('formidable-validation-js', get_template_directory_uri() . '/js/formidable_validation.js' );		
-			wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js' );		
-			wp_enqueue_script('cwd-popups-js', get_template_directory_uri() . '/js/cwd_popups.js' );		
-			wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js' );		
-			wp_enqueue_script('cwd-utilities-js', get_template_directory_uri() . '/js/cwd_utilities.js' );		
+			wp_enqueue_script('cwd-card-slider', get_template_directory_uri() . '/js/cwd_card_slider.js' );		
+			wp_enqueue_script('formidable-validation', get_template_directory_uri() . '/js/formidable_validation.js' );		
+			wp_enqueue_script('cwd-gallery', get_template_directory_uri() . '/js/cwd_gallery.js' );		
+			wp_enqueue_script('cwd-popups', get_template_directory_uri() . '/js/cwd_popups.js' );		
+			wp_enqueue_script('cwd-slider', get_template_directory_uri() . '/js/cwd_slider.js' );		
+			wp_enqueue_script('cwd-utilities', get_template_directory_uri() . '/js/cwd_utilities.js' );		
 			wp_enqueue_script('contrib-js-swipe', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js' );		
 			wp_enqueue_script('contrib-js-debounce', get_template_directory_uri() . '/js/contrib/modernizr.js' );		
 			wp_enqueue_script('contrib-js-pep', get_template_directory_uri() . '/js/contrib/pep.js' );
 			wp_enqueue_script('contrib-js-fitvids', get_template_directory_uri() . '/js/contrib/jquery.fitvids.js' );
-			wp_enqueue_script('siteimprove-js', get_template_directory_uri() . '/js/siteimprove.js' );		
-			wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
+			wp_enqueue_script('siteimprove', get_template_directory_uri() . '/js/siteimprove.js' );		
+			wp_enqueue_script('cwd-experimental', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
 						
 			// jQuery UI effects
 			wp_enqueue_script('jquery-effects-core'); 
@@ -164,15 +150,17 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		}
 		
 			// Styles
-		wp_enqueue_style('freight', 'https://use.typekit.net/nwp2wku.css'); // Freight Text and Sans
-		wp_enqueue_style('base-css', get_template_directory_uri() . '/css/base.css');
-		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell.css');
-		wp_enqueue_style('cwd-card-slider-css', get_template_directory_uri() . '/css/cwd_card_slider.css');
-		wp_enqueue_style('cwd-gallery-css', get_template_directory_uri() . '/css/cwd_gallery.css');
-		wp_enqueue_style('pagination-css', get_template_directory_uri() . '/css/cwd_slider.css');
-		wp_enqueue_style('cwd-utilities-css', get_template_directory_uri() . '/css/cwd_utilities.css');
+		if(get_theme_mod('freight') == true) {
+			wp_enqueue_style('freight', 'https://use.typekit.net/nwp2wku.css'); // Freight Text and Sans
+		}
+		wp_enqueue_style('base', get_template_directory_uri() . '/css/base.css');
+		wp_enqueue_style('cornell', get_template_directory_uri() . '/css/cornell.css');
+		wp_enqueue_style('cwd-card-slider', get_template_directory_uri() . '/css/cwd_card_slider.css');
+		wp_enqueue_style('cwd-gallery', get_template_directory_uri() . '/css/cwd_gallery.css');
+		wp_enqueue_style('pagination', get_template_directory_uri() . '/css/cwd_slider.css');
+		wp_enqueue_style('cwd-utilities', get_template_directory_uri() . '/css/cwd_utilities.css');
 		wp_enqueue_style('cwd-wp-css', get_template_directory_uri() . '/css/cwd_wp.css');
-		wp_enqueue_style('formidable-validation-css', get_template_directory_uri() . '/css/formidable_validation.css');
+		wp_enqueue_style('formidable-validation', get_template_directory_uri() . '/css/formidable_validation.css');
 		wp_enqueue_style('cornell-font-fa', get_template_directory_uri() . '/fonts/font-awesome.min.css');
 		wp_enqueue_style('cornell-font-zmdi', get_template_directory_uri() . '/fonts/material-design-iconic-font.min.css');
 		//wp_enqueue_style('cornell-font-service-logos', get_template_directory_uri() . '/fonts/service-logos.css');
@@ -236,6 +224,10 @@ if ( ! function_exists( 'custom_excerpt' ) ) {
 		
 		$excerpt = get_the_content();
 		
+		if($characters == '') {
+			$characters = 0;
+		}
+		
 		if( has_excerpt(get_the_ID()) ) {
 			$excerpt = the_excerpt();
 		}
@@ -252,236 +244,16 @@ if ( ! function_exists( 'custom_excerpt' ) ) {
 		$excerpt = substr($excerpt, 0, $characters);
 		$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
 		$excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
-		$excerpt = $excerpt.'...';
+		if($excerpt) {
+			$excerpt = $excerpt . '...';
+		}
+		else {
+			$excerpt = $excerpt;
+		}
 		return $excerpt;
 	}
 }
 
-if ( ! function_exists( 'cwd_base_get_tags' ) ) {
-	
-	function cwd_base_get_tags() { // WP Core
-		
-		$tags_icon = '<span class="sr-only">Tags</span><span class="fa fa-tags"></span>';
-		$tags = wp_get_post_tags( get_the_ID() );
-		$before = '<div class="metadata-set">';
-		$after = '</div>';
-		
-		$archive_options = get_field('archive_options', 'options');
-		$metadata_options = $archive_options['metadata'];
-		
-		if($tags) {
-			echo $before;
-		}
-		
-		if($metadata_options 
-		   && $tags
-		   && in_array('labels', $metadata_options)) {
-			   
-				//echo $tags_icon;
-				echo '<div class="field label">Tags: </div>';  // Choose icon or text label
-		}
-		
-		if ($tags) {
-			foreach($tags as $tag) {
-				$tag_link = get_tag_link( $tag->term_id );
-				echo '<div class="field"><a href="'.$tag_link.'"><span class="deco">'.ucwords($tag->name).'</span></a></div>';
-			}
-		}
-
-		if($tags) {
-			echo $after;
-		}
-		
-	}
-}
-
-if ( ! function_exists( 'cwd_base_get_categories' ) ) {
-	
-	function cwd_base_get_categories() { // WP Core
-
-		$categories_icon = '<span class="sr-only">Categories</span><span class="fa fa-folder-open-o"></span>';
-		$categories = wp_get_post_categories( get_the_ID() );
-		$before = '<div class="metadata-set">';
-		$after = '</div>';
-		
-		$archive_options = get_field('archive_options', 'options');
-		$metadata_options = $archive_options['metadata'];
-		
-		if($categories) {
-			echo $before;
-		}
-		
-		if($metadata_options 
-		   && $categories
-		   && in_array('labels', $metadata_options)) {
-			   
-				//echo $categories_icon; 
-				echo '<div class="field label">Categories: </div>'; // Choose icon or text label
-		}
-		
-		if ($categories) {
-			foreach($categories as $category_ID) {
-				$category      = get_term( $category_ID );
-        		$category_name = $category->name;
-				$category_link = get_category_link( $category_ID );
-				if ( strtolower( $category_name ) != 'uncategorized' ) {
-					echo '<div class="field"><a href="'.$category_link.'"><span class="deco">'.ucwords($category_name).'</span></a></div>';
-				}
-			}
-		}
-
-		if($categories) {
-			echo $after;
-		}
-		
-	}
-}
-
-if ( ! function_exists( 'cwd_base_get_event_tags' ) ) {
-	
-	function cwd_base_get_event_tags() { // Event tags
-
-		$event_tags_icon = '<span class="sr-only">Event tags</span><span class="fa fa-tags"></span>';
-		$event_tags = wp_get_post_terms( get_the_ID(), 'event_tags' );
-		$before = '<div id="event-tags">';
-		$after = '</div>';
-		
-		$archive_options = get_field('archive_options', 'options');
-		$metadata_options = $archive_options['metadata'];
-		
-		if($event_tags) {
-			echo $before;
-		}
-		
-		if($metadata_options 
-		   && $event_tags
-		   && in_array('labels', $metadata_options)) {
-			   
-				//echo $event_tags_icon; 
-				echo '<span class="label">Event Tags: </span>'; // Choose icon or text label
-		}
-		
-		if ($event_tags) {
-			
-			$count = count($event_tags);
-			$i = 1;
-			
-			foreach($event_tags as $event_tag_ID) {
-				$event_tag      = get_term( $event_tag_ID );
-        		$event_tag_name = $event_tag->name;
-				$event_tag_link = get_category_link( $event_tag_ID );
-				if ( strtolower( $event_tag_name ) != 'uncategorized' ) {
-					echo '<span class="field event-tag"><a href="'.$event_tag_link.'">'.ucwords($event_tag_name).'</a></span>';
-				}
-				
-				if($i < $count) { 
-					echo ', ';
-				} 
-
-				$i++;				
-			}
-		}
-
-		if($event_tags) {
-			echo $after;
-		}
-		
-	}
-}
-
-if ( ! function_exists( 'cwd_base_get_event_types' ) ) {
-	
-	function cwd_base_get_event_types() { // Event types
-
-		$event_types_icon = '<span class="sr-only">Event types</span><span class="fa fa-folder-open-o"></span>';
-		$event_types = wp_get_post_terms( get_the_ID(), 'event_types' );
-		$before = '<div id="event-types">';
-		$after = '</div>';
-		
-		$archive_options = get_field('archive_options', 'options');
-		$metadata_options = $archive_options['metadata'];
-		
-		if($event_types) {
-			echo $before;
-		}
-		
-		if($metadata_options 
-		   && $event_types
-		   && in_array('labels', $metadata_options)) {
-			   
-				//echo $event_types_icon; 
-				echo '<span class="label">Event Type: </span>'; // Choose icon or text label (not sure what icon to use here)
-		}
-		
-		if ($event_types) {
-			foreach($event_types as $event_type_ID) {
-				$event_type      = get_term( $event_type_ID );
-        		$event_type_name = $event_type->name;
-				$event_type_link = get_category_link( $event_type_ID );
-				if ( strtolower( $event_type_name ) != 'uncategorized' ) {
-					echo '<span class="field"><a href="'.$event_type_link.'">'.ucwords($event_type_name).'</a></span>';
-				}
-			}
-		}
-
-		if($event_types) {
-			echo $after;
-		}
-		
-	}
-}
-
-if ( ! function_exists( 'cwd_base_get_event_groups' ) ) {
-	
-	function cwd_base_get_event_groups() { // Event groups
-
-		$event_groups_icon = '<span class="sr-only">Event groups</span><span class="fa fa-folder-open-o"></span>';
-		$event_groups = wp_get_post_terms( get_the_ID(), 'event_groups' );
-		$before = '<div id="event-groups">';
-		$after = '</div>';
-		
-		$archive_options = get_field('archive_options', 'options');
-		$metadata_options = $archive_options['metadata'];
-		
-		if($event_groups) {
-			echo $before;
-		}
-		
-		if($metadata_options 
-		   && $event_groups
-		   && in_array('labels', $metadata_options)) {
-			   
-				//echo $event_groups_icon;
-				echo '<span class="label">Event Group: </span>'; // Choose icon or text label (not sure what icon to use here)
-		}
-		
-		if ($event_groups) {
-			
-			$count = count($event_groups);
-			$i = 1;
-			
-			foreach($event_groups as $event_group_ID) {
-				$event_group      = get_term( $event_group_ID );
-        		$event_group_name = $event_group->name;
-				$event_group_link = get_category_link( $event_group_ID );
-				if ( strtolower( $event_group_name ) != 'uncategorized' ) {
-					echo '<span class="field"><a href="'.$event_group_link.'">'.ucwords($event_group_name).'</a></span>';
-				}
-				
-				if($i < $count) { 
-					echo ', ';
-				} 
-
-				$i++;				
-			}
-		}
-
-		if($event_groups) {
-			echo $after;
-		}
-		
-	}
-}
 
 // Target parent pages and their children
 if ( ! function_exists ( 'is_tree' ) ) {
@@ -664,19 +436,15 @@ if ( ! function_exists ( 'cwd_remove_postclass' ) ) {
 	add_filter('post_class', 'cwd_remove_postclass', 10, 3);
 }
 
-
 // Include all post types in all archives
 if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
 	function cwd_base_cpt_archives( $query ) {
 		if ( $query->is_tag() || is_category() && $query->is_main_query() && !is_admin() ) {
-			$query->set( 'post_type', array('post', 'page', 'news', 'events', 'people') );
+			$query->set( 'post_type', array('post', 'page', 'news', 'events', 'people', 'courses', 'testimonials', 'galleries') );
 		}
 	}
 	add_action( 'pre_get_posts', 'cwd_base_cpt_archives' );
 }
-
-
-
 
 // Filter the permalink for custom URLs (Page links to...)
 if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
@@ -707,64 +475,254 @@ if ( ! function_exists ( 'cwd_base_featured_image_html' ) ) {
 }
 	
 // Make tags interface look like category checkboxes (next three functions)
-if ( ! function_exists ( 'cwd_base_post_tags_meta_box_remove' ) ) {
-	function cwd_base_post_tags_meta_box_remove() {
-		$id = 'tagsdiv-post_tag';
-		$post_type = array('post', 'page', 'news', 'events', 'people');
-		$position = 'side';
-		remove_meta_box( $id, $post_type, $position );
-	}
-	add_action( 'admin_menu', 'cwd_base_post_tags_meta_box_remove');
-}
+//if ( ! function_exists ( 'cwd_base_post_tags_meta_box_remove' ) ) {
+	//function cwd_base_post_tags_meta_box_remove() {
+		//$id = 'tagsdiv-post_tag';
+		//$post_type = array('post', 'page', 'news', 'people');
+		//$position = 'side';
+		//remove_meta_box( $id, $post_type, $position );
+	//}
+	//add_action( 'admin_menu', 'cwd_base_post_tags_meta_box_remove');
+//}
 
 		// Add meta box
-if ( ! function_exists ( 'cwd_base_add_new_tags_metabox' ) ) {
-	function cwd_base_add_new_tags_metabox(){
-		$id = 'cwd_base_tagsdiv-post_tag'; // it should be unique
-		$heading = 'Tags'; // meta box heading
-		$callback = 'cwd_base_metabox_content'; // the name of the callback function
-		$post_type = array('post', 'page', 'news', 'events', 'people');
-		$position = 'side';
-		$pri = 'default'; // priority, 'default' is good for us
-		add_meta_box( $id, $heading, $callback, $post_type, $position, $pri );
-	}
-	add_action( 'admin_menu', 'cwd_base_add_new_tags_metabox');
-}
+//if ( ! function_exists ( 'cwd_base_add_new_tags_metabox' ) ) {
+	//function cwd_base_add_new_tags_metabox(){
+		//$id = 'cwd_base_tagsdiv-post_tag'; // it should be unique
+		//$heading = 'Tags'; // meta box heading
+		//$callback = 'cwd_base_metabox_content'; // the name of the callback function
+		//$post_type = array('post', 'page', 'news', 'people');
+		//$position = 'side';
+		//$pri = 'default'; // priority, 'default' is good for us
+		//add_meta_box( $id, $heading, $callback, $post_type, $position, $pri );
+	//}
+	//add_action( 'admin_menu', 'cwd_base_add_new_tags_metabox');
+//}
 
 		// Fill
-if ( ! function_exists ( 'cwd_base_metabox_content' ) ) {
-	function cwd_base_metabox_content($post) {  
+//if ( ! function_exists ( 'cwd_base_metabox_content' ) ) {
+	//function cwd_base_metabox_content($post) {  
 
 		// get all blog post tags as an array of objects
-		$all_tags = get_terms( array('taxonomy' => 'post_tag', 'hide_empty' => 0) ); 
+		//$all_tags = get_terms( array('taxonomy' => 'post_tag', 'hide_empty' => 0) ); 
 
 		// get all tags assigned to a post
-		$all_tags_of_post = get_the_terms( $post->ID, 'post_tag' );  
+		//$all_tags_of_post = get_the_terms( $post->ID, 'post_tag' );  
 
 		// create an array of post tags ids
-		$ids = array();
-		if ( $all_tags_of_post ) {
-			foreach ($all_tags_of_post as $tag ) {
-				$ids[] = $tag->term_id;
-			}
-		}
+		//$ids = array();
+		//if ( $all_tags_of_post ) {
+			//foreach ($all_tags_of_post as $tag ) {
+				//$ids[] = $tag->term_id;
+			//}
+		//}
 
 		// HTML
-		echo '<div id="taxonomy-post_tag" class="categorydiv">';
-		echo '<input type="hidden" name="tax_input[post_tag][]" value="0" />';
-		echo '<ul>';
-		foreach( $all_tags as $tag ){
+		//echo '<div id="taxonomy-post_tag" class="categorydiv">';
+		//echo '<input type="hidden" name="tax_input[post_tag][]" value="0" />';
+		//echo '<ul>';
+		//foreach( $all_tags as $tag ){
 			// unchecked by default
-			$checked = "";
+			//$checked = "";
 			// if an ID of a tag in the loop is in the array of assigned post tags - then check the checkbox
-			if ( in_array( $tag->term_id, $ids ) ) {
-				$checked = " checked='checked'";
-			}
-			$id = 'post_tag-' . $tag->term_id;
-			echo "<li id='{$id}'>";
-			echo "<label><input type='checkbox' name='tax_input[post_tag][]' id='in-$id'". $checked ." value='$tag->slug' /> $tag->name</label><br />";
-			echo "</li>";
+			//if ( in_array( $tag->term_id, $ids ) ) {
+				//$checked = " checked='checked'";
+			//}
+			//$id = 'post_tag-' . $tag->term_id;
+			//echo "<li id='{$id}'>";
+			//echo "<label><input type='checkbox' name='tax_input[post_tag][]' id='in-$id'". $checked ." value='$tag->slug' /> $tag->name</label><br />";
+			//echo "</li>";
+		//}
+		//echo '</ul></div>'; // end HTML
+	//}
+//}
+
+// Remove title field from news 
+add_action( 'init', function() {
+    remove_post_type_support( 'news', 'title' );
+}, 99);
+
+// Modify news sort order
+function cwd_base_news_query( $query ) {
+ 
+	$post_type = get_query_var('post_type');   
+
+    if( $query->is_main_query() && $post_type == 'news' ) {
+        $query->set( 'meta_key', 'publication_date' );
+        $query->set( 'orderby', 'meta_value' );
+        $query->set( 'order', 'DESC' );
+    }
+}
+add_action( 'pre_get_posts', 'cwd_base_news_query' );
+
+// Modify events sort order
+function cwd_base_events_query( $query ) {
+ 
+	$post_type = get_query_var('post_type');   
+
+    if( $query->is_main_query() && $post_type == 'events' ) { // && ! is_admin() 
+        $query->set( 'meta_key', 'date' );
+        $query->set( 'orderby', 'meta_value' );
+        $query->set( 'order', 'DESC' );
+    }
+}
+add_action( 'pre_get_posts', 'cwd_base_events_query' );
+
+// Change admin menu sort order
+function cwd_base_custom_menu_order() {
+    return array( 'index.php', 'upload.php', 'edit.php', 'edit.php?post_type=page', 'edit.php?post_type=news', 'edit.php?post_type=events', 'edit.php?post_type=people', 'edit.php?post_type=testimonials', 'edit.php?post_type=courses', 'edit.php?post_type=galleries', 'themes.php', 'admin.php?page=theme-options', 'users.php', 'edit-comments.php', 'plugins.php', 'tools.php', 'options-general.php' );
+}
+add_filter( 'custom_menu_order', '__return_true' );
+add_filter( 'menu_order', 'cwd_base_custom_menu_order' );
+
+// Testimonial template for the WYSIWYG
+function cwd_base_default_content( $content, $post ) {
+ 
+    switch( $post->post_type ) {
+        case 'testimonials':
+            $content = '<div class="testimonial">This is the default testimonial style. Simply replace this text with your own. To remove this styling, highlight the text and click on the <em>Clear formatting</em> button in the toolbar. Click undo to go back.</div>';
+        break;
+        default:
+            $content = '';
+        break;
+    }
+    return $content;
+}
+add_filter( 'default_content', 'cwd_base_default_content', 10, 2 );
+
+
+
+
+
+if (isset($_GET['debugsidebar'])) {
+	add_action('init', 'debug_sidebar');
+}  
+
+function debug_sidebar() {
+
+    $id = $_GET['debugsidebar'];
+    $sidebarswidgets = get_option('sidebars_widgets');
+
+    if (is_active_sidebar($id)) {
+		$status = " Active";
+	} 
+	else {
+		$status = "Inactive";
+	}
+	
+    echo "Sidebar ID: ".$id." (".$status.")<br>";
+	
+    if (array_key_exists($id, $sidebarswidgets)) {
+		
+        $found = "Sidebar Found";
+		
+        if (is_array($sidebarswidgets[$id])) {
+            $widgets = count($sidebarswidgets[$id])." Widgets Found";
+        } 
+		else {
+			$widgets = "Widget Array not Found!";
 		}
-		echo '</ul></div>'; // end HTML
+		
+        echo $found."<br".$widgets."<br>";
+		
+	}
+	else {
+		echo "Sidebar Not Found<br>";
+	}
+
+    echo "<br>All Sidebars Widgets: ".print_r($sidebarswidgets,true)."<br>"; 
+		
+    exit;
+}
+
+// Process dates for news and events
+function cwd_base_date_processing() {
+
+	$post_type = get_post_type();   
+
+	if($post_type == 'events') {
+
+		// Custom events query to manipulate date fields
+		$events_args = array( 
+			'post_type' => 'events',
+			'posts_per_page' => -1,
+		);	
+
+		$events_query = new WP_Query($events_args);	
+
+		// Get all events
+		$events_query = $events_query->get_posts();	
+
+		foreach($events_query as $event) {
+
+			// Get the dates
+			$date = get_field( 'date', $event->ID );
+
+			// Convert them
+			$new_date = date( 'Ymd', strtotime( $date ) );
+
+			// Update them in the database
+			update_field('date', $new_date, $event->ID);
+
+		}
+
+		wp_reset_query(); // Nothing to see here. Move along.
+	}
+	
+	if($post_type == 'news') {
+
+		// Custom news query to manipulate date fields
+		$news_args = array( 
+			'post_type' => 'news',
+			'posts_per_page' => -1,
+		);	
+
+		$news_query = new WP_Query($news_args);	
+
+		// Get all news
+		$news_query = $news_query->get_posts();	
+
+		foreach($news_query as $news) {
+
+			// Get the dates
+			$date = get_field( 'publication_date', $news->ID );
+
+			// Convert them
+			$new_date = date( 'Ymd', strtotime( $date ) );
+
+			// Update them in the database
+			update_field('publication_date', $new_date, $news->ID);
+
+		}
+
+		wp_reset_query(); // Nothing to see here. Move along.
 	}
 }
+//add_action( 'pre_get_posts', 'cwd_base_date_processing' );
+
+// Initialize post type options, set defaults AFTER acf loads
+function cwd_base_acf_init() {
+	
+	require_once get_theme_file_path() . '/functions/post-types/init.php';
+	
+	// Default acf field options
+	$fields = array (
+		'field_604df04657f0e' => '<h2 class="h3">College of Ursine Studies</h2>
+							Address
+							Cornell University
+							Ithaca, NY 14853
+
+							<a class="link-block" href="#">Contact Us</a>',
+		'field_604df0f057f0f' => 'Heading',
+		'field_604df45cbd107' => 'Footer note curabitur blandit tempus porttitor.',
+	); 
+
+	foreach ($fields as $key=>$value) { 
+		update_field($key, $value, 'options');
+	} 
+			
+	
+	
+	
+}
+add_action('acf/init', 'cwd_base_acf_init');
