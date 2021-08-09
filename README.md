@@ -138,16 +138,15 @@ Pagination options can be found in the main menu under Appearance-&gt;Pagination
 <ul>
 <li>Convert this document for customer use</li>
 <li>Add editor styles</li>
+<li>Left align editor content</li>
 <li>Fix active state for utility navigation menu</li>
 <li>Add some default header images to options.</li>
 <li>Upload images from news and events feeds to media library</li>
 <li>Create advanced theme for Pantheon. Need to figure out what that means.</li>
 <li>Prepare demo site for testing</li>
 <li>Fix default theme settings and test theme activation and switching</li>
-<li>Add featured news and event (like people)</li>
 <li>Discuss and remediate date formatting with Phil</li>
 <li>Styling for news, events, and people custom fields.</li>
-<li>Force activate plugins</li>
 <li>Convert in-page tag options to category meta boxes</li>
 <li>Add admin columns for custom fields and custom taxonomies</li>
 <li>Work on date formatting and ordering with Phil</li>
