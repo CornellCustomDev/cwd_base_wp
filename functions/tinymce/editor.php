@@ -140,6 +140,12 @@ if ( ! function_exists ( 'cwd_base_custom_styles' ) ) {
 				),
 			),
 			array(  
+				'title' => 'Testimonials',  
+				'block' => 'div',  
+				'classes' => 'testimonial',
+				'wrapper' => true,
+			),
+			array(  
 				'title' => 'Asides',				
 				'items' => array(
 					array(  

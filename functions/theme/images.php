@@ -66,10 +66,10 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 				// Send it to the image editor
 				$editor = wp_get_image_editor($path_to_file); 
 				
-				// Resize it
+				// Resize it - not needed, apparently
 				//$editor->resize( 478, 478, true ); 
 				
-				// Save it
+				// Save it - not needed, apparently
 				//$editor->save($editor->generate_filename()); 
 				
 				// Explode it on the dots
@@ -160,10 +160,10 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 				// Send it to the image editor
 				$editor = wp_get_image_editor($path_to_file); 
 				
-				// Resize it
+				// Resize it - not needed, apparently
 				//$editor->resize( 480, 480, true ); 
 				
-				// Save it
+				// Save it - not needed, apparently
 				//$editor->save($editor->generate_filename()); 
 				
 				// Explode it on the dots
@@ -194,7 +194,7 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 		}
 		elseif (get_field('image_id')) {
 			echo wp_get_attachment_image($image_id, $image_size); // ACF image field
-			echo 'Hello, world!';
+			//echo 'Hello, world!';
 				
 		} 
 		elseif ( has_post_thumbnail() ) {     
@@ -367,3 +367,28 @@ class ThumbnailUpscaler {
 	}
 }
 add_filter('image_resize_dimensions', array('ThumbnailUpscaler', 'image_resize_dimensions'), 10, 6);
+
+// Add default site icon
+function upload_site_icon() {
+	
+	include_once( ABSPATH . 'wp-admin/includes/admin.php' );
+	
+	$url = site_url('/') . 'wp-content/themes/cwd_base/images/wp/square-old-seal.png';
+    $image = '';
+	
+    if($url != '') {
+        $file = array();
+        $file['name'] = $url;
+        $file['tmp_name'] = download_url($url);
+ 
+        if (is_wp_error($file['tmp_name'])) {
+            @unlink($file['tmp_name']);
+            var_dump( $file['tmp_name']->get_error_messages() );
+        } 
+		else {
+            $src = media_sideload_image($url, '', '', 'src');
+            $attachment_id = attachment_url_to_postid($src);
+        }
+    }
+    return $attachment_id;
+}

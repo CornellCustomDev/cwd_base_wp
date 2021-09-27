@@ -125,6 +125,27 @@ acf_add_local_field_group(array(
 				'value' => 'people',
 			),
 		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'testimonials',
+			),
+		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'courses',
+			),
+		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'galleries',
+			),
+		),
 	),
 	'menu_order' => 99,
 	'position' => 'normal',

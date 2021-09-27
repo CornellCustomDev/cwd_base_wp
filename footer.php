@@ -69,8 +69,20 @@
 		<div class="sub-footer">
 			<div class="container-fluid sidebar-left">
 				<div class="row">
-					<div class="content footer-accessibility vertical-align">
-						<p>If you have a disability and are having trouble accessing information on this website or need materials in an alternate format, contact <a href="mailto:web-accessibility@cornell.edu">web-accessibility@cornell.edu</a> for assistance.</p>
+					<div class="content">
+						<div class="two-col">
+							<div>
+								<ul class="custom inline no-bullet">
+									<li><a href="https://www.cornell.edu">Cornell University</a> &copy;<?php echo date("Y"); ?></li>
+									<li><a href="https://privacy.cornell.edu/">University Privacy</a></li>
+								</ul>
+							</div>
+							<div>
+								<ul class="custom inline no-bullet">
+									<li><a href="https://www.cornell.edu/accessibility-assistance.cfm">Web Accessibility Assistance</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

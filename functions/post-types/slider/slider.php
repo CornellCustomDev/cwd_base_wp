@@ -33,7 +33,8 @@ if ( ! function_exists ( 'slider' ) ) {
 					  echo "['";
 					  echo get_the_post_thumbnail_url($slide->ID, 'slider-image', true);
 					  echo "','";
-					  echo esc_html(get_field('text', $slide->ID));
+					  // Escape double quotes to avoid breaking the slider
+					  echo str_replace('"', '\"', get_field('text', $slide->ID)) . '</span>';
 					  echo "','";
 					  echo '';
 					  echo "','";

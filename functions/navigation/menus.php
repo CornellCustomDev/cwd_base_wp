@@ -4,12 +4,12 @@
 if ( ! function_exists ( 'cwd_base_nav' ) ) {
 	function cwd_base_nav() {
 
-		$menu_options = get_field('main_nav_options', 'options');
-		$menu_depth = $menu_options['menu_depth'];
+		//$menu_options = get_field('main_nav_options', 'options');
+		//$menu_depth = $menu_options['menu_depth'];
 
 		wp_nav_menu(
 		array(
-			'theme_location'  => 'primary',
+			'theme_location'  => 'main-menu',
 			'menu'            => '',
 			'container'       => false,
 			'container_class' => '',
@@ -23,7 +23,7 @@ if ( ! function_exists ( 'cwd_base_nav' ) ) {
 			'link_before'     => '',
 			'link_after'      => '',
 			'items_wrap'      => '<ul class="list-menu links">%3$s</ul>',
-			'depth'           => $menu_depth,
+			'depth'           => 2,
 			'walker'          => ''
 			)
 		);

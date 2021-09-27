@@ -25,11 +25,11 @@ $cwd_includes = array(
 	'/functions/theme/options.php',
 	'/functions/plugins/og-tags/og-tags.php',
 	'/functions/plugins/widget-context/widget-context.php',
+	'/functions/plugins/simple-widget-title-links/simple-widget-title-links.php',
 	'/functions/navigation/menus.php',
 	'/functions/navigation/breadcrumbs.php',
 	'/functions/navigation/menu-classes.php',
 	'/functions/navigation/section-nav/section-nav.php',
-	'/functions/navigation/section-nav/cpt-section-nav.php',
 	'/functions/customizer/device-previews.php',
 	'/functions/customizer/customize-register.php',
 	'/functions/theme/custom-fields/featured.php',
@@ -591,9 +591,6 @@ function cwd_base_default_content( $content, $post ) {
 add_filter( 'default_content', 'cwd_base_default_content', 10, 2 );
 
 
-
-
-
 if (isset($_GET['debugsidebar'])) {
 	add_action('init', 'debug_sidebar');
 }  
@@ -700,29 +697,12 @@ function cwd_base_date_processing() {
 }
 //add_action( 'pre_get_posts', 'cwd_base_date_processing' );
 
-// Initialize post type options, set defaults AFTER acf loads
-function cwd_base_acf_init() {
-	
-	require_once get_theme_file_path() . '/functions/post-types/init.php';
-	
-	// Default acf field options
-	$fields = array (
-		'field_604df04657f0e' => '<h2 class="h3">College of Ursine Studies</h2>
-							Address
-							Cornell University
-							Ithaca, NY 14853
-
-							<a class="link-block" href="#">Contact Us</a>',
-		'field_604df0f057f0f' => 'Heading',
-		'field_604df45cbd107' => 'Footer note curabitur blandit tempus porttitor.',
-	); 
-
-	foreach ($fields as $key=>$value) { 
-		update_field($key, $value, 'options');
-	} 
-			
-	
-	
-	
+// Remove items from the admin menu
+function cwd_base_remove_menu_items(){
+  remove_submenu_page( 'options-general.php', 'options-media.php' ); // Media
 }
-add_action('acf/init', 'cwd_base_acf_init');
+add_action( 'admin_menu', 'cwd_base_remove_menu_items' );
+
+if( class_exists('Acf') ) {
+	require_once get_template_directory() . '/functions/post-types/init.php';
+}

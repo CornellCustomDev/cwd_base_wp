@@ -6,24 +6,6 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 		
 		global $post;
 		
-		// Get menu depth
-		$menu_options = get_field('main_nav_options', 'options');
-		$menu_depth = $menu_options['menu_depth'];
-		
-		switch($menu_depth) {
-			case 1:
-				$classes[] = 'menu-depth-1';
-				break;
-			case 2:
-				$classes[] = 'menu-depth-2';
-				break;
-			case 3:
-				$classes[] = 'menu-depth-3';
-				break;
-			default:
-
-		}
-
 		// Get layout for current page
 		$layout = get_layout();
 

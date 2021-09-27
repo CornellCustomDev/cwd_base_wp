@@ -237,6 +237,7 @@ class Postswidget_Widget extends WP_Widget {
 
 		$heading = $instance['heading_text'];
 		$post_type_select = $instance['posttype_select'];
+		$show_upcoming_only = $instance['upcoming_checkbox'];
 		$entries = $instance['entries_number'];
 		$format  = $instance['format_select'];
 		$show_thumb = $instance['showthumbnail_checkbox'];
@@ -280,18 +281,37 @@ class Postswidget_Widget extends WP_Widget {
 			$today = current_time('Ymd');
 			$query1 = new WP_Query($args1);	  
 			$query1_post_ids = wp_list_pluck( $query1->posts, 'ID' );
-			$args2 = array( 
-				'post_type' => strtolower($post_type_select),
-				'posts_per_page' => $entries,
-				'post__not_in' => $query1_post_ids,
-				'date_query' => array( array(
-					'after' => $today,
-					'inclusive' => true,
-				) ),
-				'meta_key' => 'date',
-				'orderby' => 'meta_value',
-				'order' => 'DESC',
-			);			
+			
+			if($show_upcoming_only == 1) { 
+			
+				$args2 = array( 
+					'post_type' => strtolower($post_type_select),
+					'posts_per_page' => $entries,
+					'post__not_in' => $query1_post_ids,
+					'meta_query' => array(
+						array(
+							'key' => 'date',
+							'value' => $today,
+							'compare' => '>=',
+						),
+					),
+					'orderby' => 'key',
+					'order' => 'DESC'
+				);
+				
+			}
+			else { 
+			
+				$args2 = array( 
+					'post_type' => strtolower($post_type_select),
+					'posts_per_page' => $entries,
+					'post__not_in' => $query1_post_ids,
+					'meta_key' => 'date',
+					'orderby' => 'meta_value',
+					'order' => 'DESC',
+				);			
+				
+			}
 		}
 		else {
 			$args1 = array( 

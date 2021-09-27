@@ -5,6 +5,8 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 	
 	function cwd_base_setup() {
 		
+		global $wpdb;
+		
 		// Force Activate ACF Pro, CPT UI, Classic Editor plugins:
 		function run_activate_plugin( $plugin ) {
 			$current = get_option( 'active_plugins' );
@@ -18,14 +20,14 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 				do_action( 'activate_' . trim( $plugin ) );
 				do_action( 'activated_plugin', trim( $plugin) );
 			}
-
+			
 			return null;
 		}
 		run_activate_plugin( 'advanced-custom-fields-pro/acf.php' ); 
 		run_activate_plugin( 'custom-post-type-ui/custom-post-type-ui.php' );
 		run_activate_plugin( 'classic-editor/classic-editor.php' );
 		run_activate_plugin( 'classic-widgets/classic-widgets.php' );
-				
+										
 		// Add theme support for needed features
 		add_theme_support('post-thumbnails');
 		
@@ -84,7 +86,8 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 				'description'   => __( 'tower', 'Tower Header Image', 'cwd_base' )
 			),
 		) );
-				
+		
+		// Custom backgrounds	
 		//add_theme_support('custom-background', array(
 			//'default-color'          => '',
 			//'default-image'          => '',
@@ -111,12 +114,12 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 		
 		// Register menus
 		register_nav_menus(array(
-			'primary'   => __('Header Menu', 'cwd_base'), // Main Navigation
 			'top-menu'      => __('Top Menu', 'cwd_base'), // Top Navigation
+			'main-menu'   => __('Main Menu', 'cwd_base'), // Main Navigation
 			'footer-menu-1' => __('Footer Menu 1', 'cwd_base'), // Footer Quick Links (left column)
 			'footer-menu-2' => __('Footer Menu 2', 'cwd_base'), // Footer Quick Links (right column)
 		));
-
+		
 		// Check to see if default theme settings have been applied yet
 		$the_theme_status = get_option( 'theme_setup_status' );
 		
@@ -128,15 +131,18 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 
 			// Setup Default WordPress settings
 			$core_settings = array(
-				'default_ping_status'		=> 0,
+				'uploads_use_yearmonth_folders' => 0,
 				'default_pingback_flag'		=> 0,
 				'show_avatars'				=> 0,
 				'require_name_email'		=> 0,
 				'default_comment_status'	=> 1,
 				'page_comments'				=> 1,
 				'posts_per_page'            => 12,
+				'site_icon'				    => upload_site_icon(),
 				'default_comments_page'		=> 'first',
-				'date_format'				=> 'F j, Y'
+				'default_ping_status'		=> 'closed',
+				'date_format'				=> 'F j, Y',
+				'permalink_structure'		=> '/%category%/%postname%/'
 			);
 
 			// Setup Default theme settings
@@ -158,7 +164,6 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 			foreach ( $theme_mods as $key => $value ) {
 					set_theme_mod( $key, $value );
 			}
-			
 		
 			// Create home page
 			$home_page_title = 'Home';
@@ -242,9 +247,25 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 
 			// Styleguide
 			$styleguide_page_title = 'Styleguide';
-			$styleguide_page_content = '<span class="intro">This is the .intro paragraph style to give extra impact to an opening sentence or two. It can serve as a tagline or short prompt for the content that follows.</span>This page was created using the default WordPress editor. As a content contributor, all of the styles below are available directly in the editor. Use the <strong>Paragraph</strong> dropdown menu to style headings. Use the <strong>Formats</strong> dropdown menu to apply styles elsewhere. Some styles will require you to manually add a class using the <strong>Text</strong> tab of the editor.<h2 id="headings" class="toc">Heading Styles</h2>
-<strong class="tutorial note">Note:</strong> Heading levels for a basic page should start at <strong>Heading 2</strong>, since Heading 1 is reserved for the page title. The WordPress editor\'s <strong>Paragraph</strong> menu will also reflect this.<div class="panel padded fill heavy-left"><h2 class="toc">Primary Section Title (Heading 2)</h2>Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.<h3>Secondary Section Title (Heading 3)</h3>Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.<h4>Tertiary Section Title (Heading 4)</h4>Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.<h5>Subsection Title (Heading 5)</h5>Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.<h6>Subsection Title (Heading 6)</h6>
-Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.</div><a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a><h2 id="hrs" class="toc">Horizontal Rules</h2><strong class="tutorial note">Note:</strong> The latest <a href="http://www.w3.org/TR/html-markup/hr.html">W3C HTML5 Specification</a> changes the semantic definition of the <code>&lt;HR&gt;</code> tag, to represent a "thematic break," rather than a traditional stylistic divider. However, we expect that most content contributors will continue to use them in their traditional way, so the following options are provided:
+			$styleguide_page_content = '<span class="intro">This is the .intro paragraph style to give extra impact to an opening sentence or two. It can serve as a tagline or short prompt for the content that follows.</span><p>This page was created using the default WordPress editor. As a content contributor, all of the styles below are available directly in the editor. Use the <strong>Paragraph</strong> dropdown menu to style headings. Use the <strong>Formats</strong> dropdown menu to apply styles elsewhere. <mark>Some styles will require you to manually add a class using the <strong>Text</strong> tab of the editor.</mark></p>
+<h2 id="headings" class="toc">Heading Styles</h2>
+<strong class="tutorial note">Note:</strong> Heading levels for a basic page should start at <strong>Heading 2</strong>, since Heading 1 is reserved for the page title. The WordPress editor\'s <strong>Paragraph</strong> menu will also reflect this.
+<div class="panel padded fill heavy-left">
+<h2 class="toc">Primary Section Title (Heading 2)</h2>
+Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.
+<h3>Secondary Section Title (Heading 3)</h3>
+Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.
+<h4>Tertiary Section Title (Heading 4)</h4>
+Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.
+<h5>Subsection Title (Heading 5)</h5>
+Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.
+<h6>Subsection Title (Heading 6)</h6>
+Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae. Fusce id tellus libero.
+
+</div>
+<a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
+<h2 id="hrs" class="toc">Horizontal Rules</h2>
+<strong class="tutorial note">Note:</strong> The latest <a href="http://www.w3.org/TR/html-markup/hr.html">W3C HTML5 Specification</a> changes the semantic definition of the <code>&lt;HR&gt;</code> tag, to represent a "thematic break," rather than a traditional stylistic divider. However, we expect that most content contributors will continue to use them in their traditional way, so the following options are provided:
 <h3 class="h4 toc">Default</h3>
 
 <hr />
@@ -313,238 +334,70 @@ Basic paragraph text for comparison lorem ipsum dolor sit amet, consectetur adip
 <h2 id="images">Images, Figures, Asides</h2>
 Images may be placed within paragraphs of text, or placed in-between paragraphs, centered or floated, with or without a caption.
 
-[caption id="attachment_1029" align="aligncenter" width="1200"]<img class="wp-image-1029 size-full" src="wp-content/uploads/2013/03/image-alignment-1200x4002-1.jpg" alt="Image Alignment 1200x4002" width="1200" height="400" /> <strong class="tutorial note">Note:</strong> An optional caption can be added to any image using the media dialog caption field. Large images will be scaled to fit the content container.[/caption]
+[caption id="attachment_1029" align="aligncenter" width="1200"]<img class="wp-image-1029 size-full" src="/wp-content/themes/cwd_base/images/wp/image-alignment-1200x400.jpg" alt="Image Alignment 1200x400" width="1200" height="400" /> <strong class="tutorial note">Note:</strong> An optional caption can be added to any image using the media dialog caption field. Large images will be scaled to fit the content container.[/caption]
 <h3>Alignment Options</h3>
-Use the <strong>Add Media</strong> button to place images within the content of the page. When choosing an image from the media library (or uploading a new image), you will have the option to float them to the left or right of surrounding text.
-
-Floated images will be sized fluidly, at <strong>up to 40%</strong> of content width. However, <strong>images will only be scaled down, not up</strong>. Small images will not be scaled up if their natural width is less than 40% of the container. This allows for the use of different images sizes, without blurry upscaling or unnecessary waste of space.
+Use the <strong>Add Media</strong> button to place images within the content of the page. When choosing an image from the media library (or uploading a new image), you will have the option to float them to the left or right of surrounding text. Floated images will be sized fluidly, at <strong>up to 40%</strong> of content width. However, <strong>images will only be scaled down, not up</strong>. Small images will not be scaled up if their natural width is less than 40% of the container. This allows for the use of different images sizes, without blurry upscaling or unnecessary waste of space.
 
 <aside><strong class="tutorial note">Note:</strong> On phones, below <strong>480px</strong> wide, images will try to fill the width of their container, regardless of alignment. For this reason, it is recommended that all content images have a native size that is no smaller than 480px wide.</aside>
 <h3>Align Left</h3>
-Floated images <strong>larger than 40%</strong> of the content area can be scaled down <strong>or</strong> cropped. When inserting an image, you can choose from four set image sizes or choose a custom size. The following left-aligned image is <strong>full size</strong> <strong>(scaled down)</strong>. Any image size you choose other than full size will require cropping.
-
-<img class="alignleft wp-image-1029 size-full" src="wp-content/uploads/2013/03/image-alignment-1200x4002-1.jpg" alt="Image Alignment 1200x4002" width="1200" height="400" />Ut id nisl quis enim dignissim sagittis. Phasellus nec sem in justo pellentesque facilisis. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Vivamus quis mi. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
-
-Nam commodo suscipit quam. Praesent ut ligula non mi varius sagittis. Praesent adipiscing. Etiam rhoncus. Phasellus nec sem in justo pellentesque facilisis.
-
-Aenean ut eros et nisl sagittis vestibulum. Praesent turpis. Morbi nec metus. Morbi ac felis. Suspendisse eu ligula.
-
-Phasellus tempus. Curabitur blandit mollis lacus. Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Nullam sagittis.
+Floated images <strong>larger than 40%</strong> of the content area can be scaled down <strong>or</strong> cropped. When inserting an image, you can choose from four set image sizes or choose a custom size. The following left-aligned image is <strong>full size</strong> <strong>(scaled down)</strong>. Any image size you choose other than full size will require cropping. <img class="alignleft wp-image-1029 size-full" src="/wp-content/themes/cwd_base/images/wp/image-alignment-1200x400.jpg" alt="Image Alignment 1200x400" width="1200" height="400" />Ut id nisl quis enim dignissim sagittis. Phasellus nec sem in justo pellentesque facilisis. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Vivamus quis mi. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nam commodo suscipit quam. Praesent ut ligula non mi varius sagittis. Praesent adipiscing. Etiam rhoncus. Phasellus nec sem in justo pellentesque facilisis. Aenean ut eros et nisl sagittis vestibulum. Praesent turpis. Morbi nec metus. Morbi ac felis. Suspendisse eu ligula. Phasellus tempus. Curabitur blandit mollis lacus. Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Nullam sagittis.
 <h3>Align Right</h3>
-The following right-aligned image is not full size. Instead, it uses one of the preset image sizes: <strong>large (cropped)</strong>.
-
-Morbi nec metus. Aliquam erat volutpat. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Phasellus nec sem in justo pellentesque facilisis.
-
-<img class="alignright wp-image-1029 size-large" src="wp-content/uploads/2013/03/image-alignment-1200x4002-1-800x400.jpg" alt="Image Alignment 1200x4002" width="800" height="400" />Morbi ac felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Sed fringilla mauris sit amet nibh. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui.
-
-Fusce fermentum odio nec arcu. Mauris sollicitudin fermentum libero. Praesent ac sem eget est egestas volutpat. Phasellus magna. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
-
-Fusce risus nisl, viverra et, tempor et, pretium in, sapien. Pellentesque auctor neque nec urna. In auctor lobortis lacus. Quisque rutrum. Duis lobortis massa imperdiet quam.
+The following right-aligned image is not full size. Instead, it uses one of the preset image sizes: <strong>large (cropped)</strong>. Morbi nec metus. Aliquam erat volutpat. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Phasellus nec sem in justo pellentesque facilisis. <img class="alignright wp-image-1029 size-large" src="/wp-content/themes/cwd_base/images/wp/image-alignment-1200x400-800x800.jpg" alt="Image Alignment 1200x400" width="800" height="400" />Morbi ac felis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti. Sed fringilla mauris sit amet nibh. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Fusce fermentum odio nec arcu. Mauris sollicitudin fermentum libero. Praesent ac sem eget est egestas volutpat. Phasellus magna. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Fusce risus nisl, viverra et, tempor et, pretium in, sapien. Pellentesque auctor neque nec urna. In auctor lobortis lacus. Quisque rutrum. Duis lobortis massa imperdiet quam.
 <h3>Align Center</h3>
-Donec vitae orci sed dolor rutrum auctor. Cras non dolor. Nullam accumsan lorem in dui. Cras risus ipsum, faucibus ut, ullamcorper id, varius ac, leo. Phasellus magna.
-
-<img class="alignnone wp-image-967 size-full" style="display: block;" src="wp-content/uploads/2013/03/image-alignment-580x300-1.jpg" alt="Image Alignment 580x300" width="580" height="300" />Praesent blandit laoreet nibh. Praesent adipiscing. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Maecenas nec odio et ante tincidunt tempus.
-
-Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Pellentesque ut neque. Nunc nec neque. Duis leo. In ut quam vitae odio lacinia tincidunt.
-
-<img class="alignleft wp-image-968 size-full" src="wp-content/uploads/2013/03/image-alignment-150x150-1.jpg" alt="Image Alignment 150x150" width="150" height="150" />
-
-Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Suspendisse feugiat. Nullam accumsan lorem in dui. Aliquam erat volutpat. Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus.
-
-Nam pretium turpis et arcu. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Nulla consequat massa quis enim. Fusce risus nisl, viverra et, tempor et, pretium in, sapien.
+Donec vitae orci sed dolor rutrum auctor. Cras non dolor. Nullam accumsan lorem in dui. Cras risus ipsum, faucibus ut, ullamcorper id, varius ac, leo. Phasellus magna. <img class="alignnone wp-image-967 size-full" style="display: block;" src="/wp-content/themes/cwd_base/images/wp/image-alignment-580x300.jpg" alt="Image Alignment 580x300" width="580" height="300" />Praesent blandit laoreet nibh. Praesent adipiscing. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Maecenas nec odio et ante tincidunt tempus. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. Pellentesque ut neque. Nunc nec neque. Duis leo. In ut quam vitae odio lacinia tincidunt. <img class="alignleft wp-image-968 size-full" src="/wp-content/themes/cwd_base/images/wp/image-alignment-150x150.jpg" alt="Image Alignment 150x150" width="150" height="150" /> Proin sapien ipsum, porta a, auctor quis, euismod ut, mi. Suspendisse feugiat. Nullam accumsan lorem in dui. Aliquam erat volutpat. Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Nam pretium turpis et arcu. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Nulla consequat massa quis enim. Fusce risus nisl, viverra et, tempor et, pretium in, sapien.
 <h3>Aside</h3>
 Ut id nisl quis enim dignissim sagittis. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
 
-<aside>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Suspendisse feugiat. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nam adipiscing. Etiam ut purus mattis mauris sodales aliquam.</aside>Vestibulum dapibus nunc ac augue. Phasellus accumsan cursus velit. In auctor lobortis lacus. Sed a libero. Suspendisse feugiat.
-
-Proin faucibus arcu quis ante. Cras sagittis. Fusce fermentum odio nec arcu. Fusce convallis metus id felis luctus adipiscing. Quisque id odio.
+<aside>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Suspendisse feugiat. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nam adipiscing. Etiam ut purus mattis mauris sodales aliquam.</aside>Vestibulum dapibus nunc ac augue. Phasellus accumsan cursus velit. In auctor lobortis lacus. Sed a libero. Suspendisse feugiat. Proin faucibus arcu quis ante. Cras sagittis. Fusce fermentum odio nec arcu. Fusce convallis metus id felis luctus adipiscing. Quisque id odio.
 <h3>Aside right</h3>
-<aside class="sidebar">Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</aside>In ac dui quis mi consectetuer lacinia. Nunc sed turpis. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor.
-
-Curabitur at lacus ac velit ornare lobortis. Curabitur at lacus ac velit ornare lobortis. Mauris sollicitudin fermentum libero. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Etiam iaculis nunc ac metus.
-
-Nam eget dui. Nulla porta dolor. In ac felis quis tortor malesuada pretium. Vivamus consectetuer hendrerit lacus. Praesent vestibulum dapibus nibh.
-
-Phasellus ullamcorper ipsum rutrum nunc. Ut leo. Vestibulum eu odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc nec neque.
+<aside class="sidebar">Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</aside>In ac dui quis mi consectetuer lacinia. Nunc sed turpis. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Curabitur at lacus ac velit ornare lobortis. Curabitur at lacus ac velit ornare lobortis. Mauris sollicitudin fermentum libero. Quisque libero metus, condimentum nec, tempor a, commodo mollis, magna. Etiam iaculis nunc ac metus. Nam eget dui. Nulla porta dolor. In ac felis quis tortor malesuada pretium. Vivamus consectetuer hendrerit lacus. Praesent vestibulum dapibus nibh. Phasellus ullamcorper ipsum rutrum nunc. Ut leo. Vestibulum eu odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc nec neque.
 <h3>Aside column</h3>
-<aside class="column">Duis vel nibh at velit scelerisque suscipit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Pellentesque ut neque. Aenean massa. Nam commodo suscipit quam.</aside>Donec posuere vulputate arcu. Vivamus elementum semper nisi. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam tincidunt adipiscing enim.
-
-Ut a nisl id ante tempus hendrerit. Praesent ac massa at ligula laoreet iaculis. Fusce pharetra convallis urna. In hac habitasse platea dictumst. Donec vitae sapien ut libero venenatis faucibus.
-
-Fusce vel dui. Maecenas vestibulum mollis diam. Vivamus quis mi. Vivamus laoreet. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum.
-
-Sed libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Praesent egestas neque eu enim. Maecenas malesuada. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero.
-<a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
+<aside class="column">Duis vel nibh at velit scelerisque suscipit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Pellentesque ut neque. Aenean massa. Nam commodo suscipit quam.</aside>Donec posuere vulputate arcu. Vivamus elementum semper nisi. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam tincidunt adipiscing enim. Ut a nisl id ante tempus hendrerit. Praesent ac massa at ligula laoreet iaculis. Fusce pharetra convallis urna. In hac habitasse platea dictumst. Donec vitae sapien ut libero venenatis faucibus. Fusce vel dui. Maecenas vestibulum mollis diam. Vivamus quis mi. Vivamus laoreet. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum. Sed libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Praesent egestas neque eu enim. Maecenas malesuada. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. <a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
 <h2 id="inline">Inline Styles</h2>
 Sed libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Praesent egestas neque eu enim. Maecenas malesuada. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero.
 <h3>Text Highlights</h3>
-<mark class="text-highlight-blue">Vestibulum purus quam</mark>, scelerisque ut, mollis sed, nonummy id, metus. Suspendisse feugiat. Etiam ultricies nisi vel augue. Praesent nonummy mi in odio. Quisque id odio.
-
-<mark>Phasellus nec sem in justo</mark> pellentesque facilisis. Suspendisse feugiat. Pellentesque commodo eros a enim. Aenean vulputate eleifend tellus. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.
-
-<mark class="text-highlight-green">Donec vitae orci</mark> sed dolor rutrum auctor. Praesent blandit laoreet nibh. Phasellus blandit leo ut odio. Fusce commodo aliquam arcu. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam.
-
-<mark class="text-highlight-yellow">Nullam vel sem</mark>. Quisque ut nisi. Vestibulum eu odio. Fusce egestas elit eget lorem. Fusce vel dui.
-
-<mark class="text-highlight-red">Fusce convallis</mark> metus id felis luctus adipiscing. Vivamus laoreet. Aenean vulputate eleifend tellus. Phasellus consectetuer vestibulum elit. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est.
-
-<mark class="text-highlight-purple">Vestibulum ante ipsum</mark> primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Sed hendrerit. Sed a libero. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Suspendisse eu ligula.
-<a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
+<mark class="text-highlight-blue">Vestibulum purus quam</mark>, scelerisque ut, mollis sed, nonummy id, metus. Suspendisse feugiat. Etiam ultricies nisi vel augue. Praesent nonummy mi in odio. Quisque id odio. <mark>Phasellus nec sem in justo</mark> pellentesque facilisis. Suspendisse feugiat. Pellentesque commodo eros a enim. Aenean vulputate eleifend tellus. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. <mark class="text-highlight-green">Donec vitae orci</mark> sed dolor rutrum auctor. Praesent blandit laoreet nibh. Phasellus blandit leo ut odio. Fusce commodo aliquam arcu. Suspendisse nisl elit, rhoncus eget, elementum ac, condimentum eget, diam. <mark class="text-highlight-yellow">Nullam vel sem</mark>. Quisque ut nisi. Vestibulum eu odio. Fusce egestas elit eget lorem. Fusce vel dui. <mark class="text-highlight-red">Fusce convallis</mark> metus id felis luctus adipiscing. Vivamus laoreet. Aenean vulputate eleifend tellus. Phasellus consectetuer vestibulum elit. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. <mark class="text-highlight-purple">Vestibulum ante ipsum</mark> primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Sed hendrerit. Sed a libero. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Suspendisse eu ligula. <a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
 <h2 id="blockquotes">Blockquotes</h2>
-Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Suspendisse feugiat. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nam adipiscing. Etiam ut purus mattis mauris sodales aliquam.
-
-Vestibulum dapibus nunc ac augue. Phasellus accumsan cursus velit. In auctor lobortis lacus. Sed a libero. Suspendisse feugiat.
+Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Suspendisse feugiat. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nam adipiscing. Etiam ut purus mattis mauris sodales aliquam. Vestibulum dapibus nunc ac augue. Phasellus accumsan cursus velit. In auctor lobortis lacus. Sed a libero. Suspendisse feugiat.
 <h3>Impact</h3>
 Morbi vestibulum volutpat enim. Praesent venenatis metus at tortor pulvinar varius. Praesent venenatis metus at tortor pulvinar varius. Praesent ut ligula non mi varius sagittis.
 <blockquote class="impact">Some have called Cornell the “first American university.</blockquote>
-Morbi vestibulum volutpat enim. Praesent venenatis metus at tortor pulvinar varius. Praesent venenatis metus at tortor pulvinar varius. Praesent ut ligula non mi varius sagittis. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-
-Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Vivamus consectetuer hendrerit lacus. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Ut id nisl quis enim dignissim sagittis. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
-
-Vestibulum dapibus nunc ac augue. Phasellus accumsan cursus velit. In auctor lobortis lacus. Sed a libero. Suspendisse feugiat.
+Morbi vestibulum volutpat enim. Praesent venenatis metus at tortor pulvinar varius. Praesent venenatis metus at tortor pulvinar varius. Praesent ut ligula non mi varius sagittis. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Vivamus consectetuer hendrerit lacus. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Ut id nisl quis enim dignissim sagittis. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Vestibulum dapibus nunc ac augue. Phasellus accumsan cursus velit. In auctor lobortis lacus. Sed a libero. Suspendisse feugiat.
 <h3>Offset</h3>
 Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Aliquam lobortis. Quisque rutrum. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Sed in libero ut nibh placerat accumsan.
 <blockquote class="offset">Some have called Cornell the “first American university."</blockquote>
-Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Morbi nec metus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Cras dapibus. Fusce fermentum odio nec arcu.
-
-Cras dapibus. Aenean vulputate eleifend tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur a felis in nunc fringilla tristique. Praesent ac sem eget est egestas volutpat.
-
-Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Vivamus consectetuer hendrerit lacus. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Ut id nisl quis enim dignissim sagittis. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
-
-Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Suspendisse feugiat. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nam adipiscing. Etiam ut purus mattis mauris sodales aliquam.
-
-<a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
+Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Morbi nec metus. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Cras dapibus. Fusce fermentum odio nec arcu. Cras dapibus. Aenean vulputate eleifend tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur a felis in nunc fringilla tristique. Praesent ac sem eget est egestas volutpat. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Vivamus consectetuer hendrerit lacus. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem. Ut id nisl quis enim dignissim sagittis. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Suspendisse feugiat. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nam adipiscing. Etiam ut purus mattis mauris sodales aliquam. <a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
 <h2 id="panels">Panels and Accent Options</h2>
 <h3>Panels</h3>
-<div class="panel">
-
-Default (<code>class="panel"</code>)
-
-</div>
-<div class="accent-blue-green panel">
-
-Blue-Green (<code>class="panel accent-blue-green"</code>)
-
-</div>
-<div class="accent-blue panel">
-
-Blue (<code>class="panel accent-blue"</code>)
-
-</div>
-<div class="accent-purple panel">
-
-Purple (<code>class="panel accent-purple"</code>)
-
-</div>
-<div class="accent-gold panel">
-
-Gold (<code>class="panel accent-gold"</code>)
-
-</div>
-<div class="accent-green panel">
-
-Green (<code>class="panel accent-green"</code>)
-
-</div>
-<div class="accent-red panel">
-
-Red (<code>class="panel accent-red"</code>)
-
-</div>
+<div class="panel">Default (<code>class="panel"</code>)</div>
+<div class="accent-blue-green panel">Blue-Green (<code>class="panel accent-blue-green"</code>)</div>
+<div class="accent-blue panel">Blue (<code>class="panel accent-blue"</code>)</div>
+<div class="accent-purple panel">Purple (<code>class="panel accent-purple"</code>)</div>
+<div class="accent-gold panel">Gold (<code>class="panel accent-gold"</code>)</div>
+<div class="accent-green panel">Green (<code>class="panel accent-green"</code>)</div>
+<div class="accent-red panel">Red (<code>class="panel accent-red"</code>)</div>
 <h3>Fill Background</h3>
 <strong class="tip tutorial">Hint:</strong> Use the <code>.no-border</code> class to omit the default 1px border.
-<div class="fill panel">
-
-Default (<code>class="panel fill"</code>)
-
-</div>
-<div class="accent-blue-green fill panel">
-
-Blue-Green (<code>class="panel accent-blue-green fill"</code>)
-
-</div>
-<div class="accent-blue fill panel">
-
-Blue (<code>class="panel accent-blue fill"</code>)
-
-</div>
-<div class="accent-purple fill panel">
-
-Purple (<code>class="panel accent-purple fill"</code>)
-
-</div>
-<div class="accent-gold fill panel">
-
-Gold (<code>class="panel accent-gold fill"</code>)
-
-</div>
-<div class="accent-green fill panel">
-
-Green (<code>class="panel accent-green fill"</code>)
-
-</div>
-<div class="accent-red fill panel">
-
-Red (<code>class="panel accent-red fill"</code>)
-
-</div>
+<div class="fill panel">Default (<code>class="panel fill"</code>)</div>
+<div class="accent-blue-green fill panel">Blue-Green (<code>class="panel accent-blue-green fill"</code>)</div>
+<div class="accent-blue fill panel">Blue (<code>class="panel accent-blue fill"</code>)</div>
+<div class="accent-purple fill panel">Purple (<code>class="panel accent-purple fill"</code>)</div>
+<div class="accent-gold fill panel">Gold (<code>class="panel accent-gold fill"</code>)</div>
+<div class="accent-green fill panel">Green (<code>class="panel accent-green fill"</code>)</div>
+<div class="accent-red fill panel">Red (<code>class="panel accent-red fill"</code>)</div>
 <h3>Heavy Border (left or top, with or without fills)</h3>
-<div class="fill heavy-left panel">
-
-Default (<code>class="panel fill heavy-left"</code>)
-
-</div>
-<div class="accent-blue-green heavy-left panel">
-
-Blue-Green (<code>class="panel accent-blue-green heavy-left"</code>)
-
-</div>
-<div class="accent-blue fill heavy-left panel">
-
-Blue (<code>class="panel accent-blue fill heavy-left"</code>)
-
-</div>
-<div class="accent-purple heavy-top panel">
-
-Purple (<code>class="panel accent-purple heavy-top"</code>)
-
-</div>
-<div class="accent-gold fill heavy-top panel">
-
-Gold (<code>class="panel accent-gold fill heavy-top"</code>)
-
-</div>
-<div class="accent-green heavy-top panel">
-
-Green (<code>class="panel accent-green heavy-top"</code>)
-
-</div>
-<div class="accent-red fill heavy-top panel">
-
-Red (<code>class="panel accent-red fill heavy-top"</code>)
-
-</div>
+<div class="fill heavy-left panel">Default (<code>class="panel fill heavy-left"</code>)</div>
+<div class="accent-blue-green heavy-left panel">Blue-Green (<code>class="panel accent-blue-green heavy-left"</code>)</div>
+<div class="accent-blue fill heavy-left panel">Blue (<code>class="panel accent-blue fill heavy-left"</code>)</div>
+<div class="accent-purple heavy-top panel">Purple (<code>class="panel accent-purple heavy-top"</code>)</div>
+<div class="accent-gold fill heavy-top panel">Gold (<code>class="panel accent-gold fill heavy-top"</code>)</div>
+<div class="accent-green heavy-top panel">Green (<code>class="panel accent-green heavy-top"</code>)</div>
+<div class="accent-red fill heavy-top panel">Red (<code>class="panel accent-red fill heavy-top"</code>)</div>
 <h3>Indenting</h3>
-<div class="indent1 panel">
-
-Indent 1 Step (<code>class="panel indent1"</code>)
-
-</div>
-<div class="indent2 panel">
-
-Indent 2 Steps (<code>class="panel indent2"</code>)
-
-</div>
-<div class="indent3 panel">
-
-Indent 3 Steps (<code>class="panel indent3"</code>)
-
-</div>
-<div class="indent4 panel">
-
-Indent 4 Steps (<code>class="panel indent4"</code>)
-
-</div>
+<div class="indent1 panel">Indent 1 Step (<code>class="panel indent1"</code>)</div>
+<div class="indent2 panel">Indent 2 Steps (<code>class="panel indent2"</code>)</div>
+<div class="indent3 panel">Indent 3 Steps (<code>class="panel indent3"</code>)</div>
+<div class="indent4 panel">Indent 4 Steps (<code>class="panel indent4"</code>)</div>
 <a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
 <h2 id="lists">Lists</h2>
 <h3>Unordered List</h3>
@@ -774,7 +627,9 @@ Prominent numbered bullets can be used to communicate an emphasized sense of seq
 </ol>
 <a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
 <h2 id="lists-as-menus">Lists as Menus</h2>
-The <code>.list-menu</code> system quickly removes bullets and adjusts the layout of list items to fit many common use-cases.<!--  This system is also used as the foundation for the <strong>section navigation</strong> appearing in the <strong class="tutorial">Priority Sidebar</strong> above. -->
+The <code>.list-menu</code> system quickly removes bullets and adjusts the layout of list items to fit many common use-cases.
+
+<!--  This system is also used as the foundation for the <strong>section navigation</strong> appearing in the <strong class="tutorial">Priority Sidebar</strong> above. -->
 <h3>Basic</h3>
 <h4>List Menu (<code>ul.list-menu</code>)</h4>
 <ul class="list-menu">
@@ -1293,11 +1148,11 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <h2 id="columns">Columns and Grid System</h2>
 You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-col</code> class to most containers, to distribute their direct child nodes evenly in two, three, or four simple columns. This is the easiest way to render columns without the need for special HTML markup. Rows are maintained even when nodes are different heights (as seen in the Four Column example below).
 <h3>Two Even Columns</h3>
-<div class="two-col margined"><img class="alignnone size-medium wp-image-6544" src="wp-content/uploads/0414_rachel_bezner_kerr_tanzania-480x480.jpg" alt="" width="300" height="300" /><img class="alignnone wp-image-6529 size-medium" src="wp-content/uploads/0511_sarah_evanega-480x480.jpg" alt="" width="300" height="300" /></div>
+<div class="two-col margined"><img class="alignnone size-medium wp-image-6544" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="" width="300" height="300" /><img class="alignnone wp-image-6529 size-medium" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="" width="300" height="300" /></div>
 <h3>Three Even Columns</h3>
-<div class="three-col margined"><img class="alignnone size-medium wp-image-6497" src="wp-content/uploads/salt_marsh_at_full_tide-480x480.jpg" alt="" width="300" height="300" /><img class="alignnone size-medium wp-image-6499" src="wp-content/uploads/070820_campussce_tnd-480x480.jpg" alt="" width="300" height="300" /><img class="alignnone size-medium wp-image-6495" src="wp-content/uploads/2021-avf-bezner_kerr-provided-malawi_2-480x480.jpg" alt="" width="300" height="300" /></div>
+<div class="three-col margined"><img class="alignnone size-medium wp-image-6497" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="" width="300" height="300" /><img class="alignnone size-medium wp-image-6499" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="" width="300" height="300" /><img class="alignnone size-medium wp-image-6495" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="" width="300" height="300" /></div>
 <h3>Four Even Columns</h3>
-<div class="four-col margined"><img class="alignnone wp-image-770 size-medium" src="wp-content/uploads/2011/07/img_0767-480x480.jpg" alt="Huatulco Coastline" width="300" height="300" /><img class="alignnone wp-image-766 size-medium" src="wp-content/uploads/2011/07/michelle_049-480x480.jpg" alt="Big Sur" width="300" height="300" /><img class="alignnone size-medium wp-image-769" src="wp-content/uploads/2011/07/img_0747-480x480.jpg" alt="Brazil Beach" width="300" height="300" /><img class="alignnone wp-image-765 size-medium" src="wp-content/uploads/2011/07/dscn3316-480x480.jpg" alt="Sea and Rocks" width="300" height="300" /></div>
+<div class="four-col margined"><img class="alignnone wp-image-770 size-medium" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="Huatulco Coastline" width="300" height="300" /><img class="alignnone wp-image-766 size-medium" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="Big Sur" width="300" height="300" /><img class="alignnone size-medium wp-image-769" src="/wp-content/themes/cwd_base/images/photos/plantations_square.jpg" alt="Brazil Beach" width="300" height="300" /><img class="alignnone wp-image-765 size-medium" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="Sea and Rocks" width="300" height="300" /><img class="alignnone wp-image-770 size-medium" src="/wp-content/themes/cwd_base/images/photos/plantations_square.jpg" alt="Huatulco Coastline" width="300" height="300" /><img class="alignnone wp-image-766 size-medium" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="Big Sur" width="300" height="300" /><img class="alignnone size-medium wp-image-769" src="/wp-content/themes/cwd_base/images/photos/plantations_square.jpg" alt="Brazil Beach" width="300" height="300" /><img class="alignnone wp-image-765 size-medium" src="/wp-content/themes/cwd_base/images/photos/plantations.jpg" alt="Sea and Rocks" width="300" height="300" /></div>
 <h3>Two Columns (Padded)</h3>
 <div class="two-col padded">
 <div>Lorem ipsum dolor sit amet, amet eu hic, arcu at eros, odio sed vel ante morbi at aenean, eget leo donec turpis ligula. Felis vehicula, lacinia sed mauris, fusce accumsan adipiscing in id proin ullamcorper, enim ac arcu sed amet.</div>
@@ -1322,32 +1177,32 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			}
 
 			//////////////////////////////////// MAIN MENU //////////////////////////////////////////
-			$header_menu_name = 'Header Menu';
+			$main_menu_name = 'Main Menu';
 
 			// Check if it exists
-			$menu_exists = wp_get_nav_menu_object( $header_menu_name );
+			$main_menu_exists = wp_get_nav_menu_object( $main_menu_name );
 
-			if(!$menu_exists) {
+			if(!$main_menu_exists) {
 
 				// Create it, if it doesn't exist
-				$header_menu_id = wp_create_nav_menu($header_menu_name);
+				$main_menu_id = wp_create_nav_menu($main_menu_name);
 
 				// Add pages
-				$homePage = wp_update_nav_menu_item($header_menu_id, 0, array(
+				$homePage = wp_update_nav_menu_item($main_menu_id, 0, array(
 					'menu-item-object-id' => get_page_by_path('home')->ID,
 					'menu-item-object' => 'page',
 					'menu-item-type' => 'post_type',
 					'menu-item-title' => $home_page_title,
 					'menu-item-status' => 'publish',
 				));
-				$samplePage = wp_update_nav_menu_item($header_menu_id, 0, array(
+				$samplePage = wp_update_nav_menu_item($main_menu_id, 0, array(
 					'menu-item-object-id' => get_page_by_path('sample-page-1')->ID,
 					'menu-item-object' => 'page',
 					'menu-item-type' => 'post_type',
 					'menu-item-title' => $sample_page_1_title,
 					'menu-item-status' => 'publish',
 				));
-				$styleguidePage = wp_update_nav_menu_item($header_menu_id, 0, array(
+				$styleguidePage = wp_update_nav_menu_item($main_menu_id, 0, array(
 					'menu-item-object-id' => get_page_by_path('styleguide')->ID,
 					'menu-item-object' => 'page',
 					'menu-item-type' => 'post_type',
@@ -1358,9 +1213,9 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			}
 
 			// Set main menu location
-			$location = get_theme_mod('nav_menu_locations');
-			$location['primary'] = $header_menu_id;
-			set_theme_mod( 'nav_menu_locations', $location );
+			$main_menu_location = get_theme_mod('nav_menu_locations');
+			$main_menu_location['main-menu'] = $main_menu_id;
+			set_theme_mod( 'nav_menu_locations', $main_menu_location );
 
 
 			//////////////////////////////////// TOP MENU //////////////////////////////////////////
@@ -1400,9 +1255,9 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			}
 
 			// Set top menu location
-			$location = get_theme_mod('nav_menu_locations');
-			$location['top-menu'] = $top_menu_id;
-			set_theme_mod( 'nav_menu_locations', $location );
+			$top_menu_location = get_theme_mod('nav_menu_locations');
+			$top_menu_location['top-menu'] = $top_menu_id;
+			set_theme_mod( 'nav_menu_locations', $top_menu_location );
 			
 
 			//////////////////////////////////// FOOTER MENU 1 //////////////////////////////////////////
@@ -1442,9 +1297,9 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			}
 
 			// Set footer menu 1 location
-			$location = get_theme_mod('nav_menu_locations');
-			$location['footer-menu-1'] = $footer_menu_1_id;
-			set_theme_mod( 'nav_menu_locations', $location );
+			$footer_menu_1_location = get_theme_mod('nav_menu_locations');
+			$footer_menu_1_location['footer-menu-1'] = $footer_menu_1_id;
+			set_theme_mod( 'nav_menu_locations', $footer_menu_1_location );
 			
 
 			//////////////////////////////////// FOOTER MENU 2 //////////////////////////////////////////
@@ -1484,9 +1339,9 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			}
 
 			// Set footer menu 2 location
-			$location = get_theme_mod('nav_menu_locations');
-			$location['footer-menu-2'] = $footer_menu_2_id;
-			set_theme_mod( 'nav_menu_locations', $location );
+			$footer_menu_2_location = get_theme_mod('nav_menu_locations');
+			$footer_menu_2_location['footer-menu-2'] = $footer_menu_2_id;
+			set_theme_mod( 'nav_menu_locations', $footer_menu_2_location );
 
 			// Use Home page as front page
 			$home = get_page_by_title( 'Home' );
@@ -1495,13 +1350,52 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			
 			// Stop WordPress automatically assigning privacy policy page
 			update_option( 'wp_page_for_privacy_policy', '');
+			
+			// Initialize post type options, set defaults
+			
+				// Home page options
+			add_option('options_home_page_options_replace_title', 'Home');
+			add_option('_options_home_page_options_replace_title', 'field_60897d918d84b');
+			add_option('options_home_page_options_remove_breadcrumbs', '1');
+			add_option('_options_home_page_options_remove_breadcrumbs', 'field_608989540fa5a');
+			add_option('options_home_page_options', '');
+			add_option('_options_home_page_options', 'field_60897d918c475');
+
+				// Blog page options
+			add_option('options_blog_page_options_replace_title', 'Latest Posts');
+			add_option('_options_blog_page_options_replace_title', 'field_60898f4dc0df5');
+			add_option('options_blog_page_options_add_introductory_text', '');
+			add_option('_options_blog_page_options_add_introductory_text', 'field_60899328fe635');
+			add_option('options_blog_page_options', '');
+			add_option('_options_blog_page_options', 'field_60898f4dbe6d3');
+			
+				// Archive options
+			add_option('options_archive_options_layout', 'right_sidebar');
+			add_option('_options_archive_options_layout', 'field_604de7333ffc7');
+			add_option('options_archive_options_appearance', 'list');
+			add_option('_options_archive_options_appearance', 'field_604de7853ffc8');
+			add_option('options_archive_options_excerpt_length', '180');
+			add_option('_options_archive_options_excerpt_length', 'field_6069bdb31c366');
+			add_option('options_archive_options', '');
+			add_option('_options_archive_options', 'field_604de6ee3ffc6');
+			
+				// Footer options
+			add_option('options_footer_options_address_block', '<h2 class="h5">College of Ursine Studies</h2>Address<br>Cornell University<br>Ithaca, NY 14853<br><a class="link-block" href="#">Contact Us</a>');
+			add_option('options_footer_options_intro_text', 'Footer note curabitur blandit tempus porttitor.');
+			add_option('options_footer_options_heading', 'Heading');
+			add_option('_options_footer_options_address_block', 'field_604df04657f0e');
+			add_option('_options_footer_options_intro_text', 'field_604df45cbd107');
+			add_option('_options_footer_options_heading', 'field_604df0f057f0f');
+			add_option('options_footer_options', '');
+			add_option('_options_footer_options', 'field_604df02d57f0d');
 
 			// When finished, we update our status to make sure we don't duplicate everytime we activate.
 			update_option( 'theme_setup_status', '1' );
 			
 		} 
-		
+				
 	}
+	
 	add_action( 'after_setup_theme', 'cwd_base_setup', 11 );
 
 }

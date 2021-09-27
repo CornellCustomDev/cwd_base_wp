@@ -22,9 +22,7 @@
 
 	<div class="group-fields">
 
-		<?php if(get_field('custom_date')) { ?>
-			<h4 class="subheading sans"><?php the_field('custom_date'); ?></h4>
-		<?php } ?>
+		<?php cwd_base_get_the_date(); ?>
 
 		<p class="summary">
 									

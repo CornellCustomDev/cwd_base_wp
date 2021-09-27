@@ -6,10 +6,12 @@ jQuery(document).ready(function($) {
 		
 	// Remove top sidebar if...
 	if( $('#sidebar-top .content-block').length < 1 && $('#sidebar-top .secondary-navigation').length < 1 ) {
+		$('#sidebar-top').addClass('no-sidebar-top');
 		$('#sidebar-top').remove();
 	}
 	// Remove bottom sidebar if...
 	if( $('#sidebar-bottom .content-block').length < 1 ) {
+		$('#sidebar-top').addClass('no-sidebar-bottom');
 		$('#sidebar-bottom').remove();
 	}
 	// Remove both sidebars if...
@@ -20,7 +22,7 @@ jQuery(document).ready(function($) {
 	if ( $('body').hasClass('no-sidebar') ) {
 		$('#sidebar-top #sidebar-bottom').remove();
 	}
-	
+		
 	// Fitvids on content containers
 	$('iframe').parent().fitVids();
 		
@@ -42,8 +44,13 @@ jQuery(document).ready(function($) {
 		}
 
 	});
-			
-    // Mobile menu a11y helper (close menu when tabbing out)
+	
+	// Navigation menu widgets
+	$('#sidebar-top .widget_nav_menu h2').addClass('menu-block-title');
+	$('#sidebar-top .widget_nav_menu h2 + div[class^="menu"] > ul.menu').unwrap();
+	$('#sidebar-top .widget_nav_menu > ul.menu').wrap('<nav class="secondary-navigation mobile-expander" aria-label="Section Navigation">');
+
+	// Mobile menu a11y helper (close menu when tabbing out)
 	(function ($) { $(function () { 'use strict';
 		
 		$('#main-navigation').keydown(function(e) {
