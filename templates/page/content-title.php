@@ -26,6 +26,11 @@ if( is_tag() ) $tag = single_tag_title('', false);
 		// Regular pages and single posts
 		elseif( !is_front_page() && (is_page() || is_single()) ) { 
 			echo get_the_title();
+			if('courses' == get_post_type()) {
+				if(get_field('additional_text')) {
+					echo ' - <span>' . get_field("additional_text") . '</span>';
+				}
+			}
 		}
 	
 		// People

@@ -699,7 +699,11 @@ function cwd_base_date_processing() {
 
 // Remove items from the admin menu
 function cwd_base_remove_menu_items(){
-  remove_submenu_page( 'options-general.php', 'options-media.php' ); // Media
+	remove_submenu_page( 'options-general.php', 'options-media.php' ); // Media
+	remove_submenu_page( 'options-general.php', 'og-tags-options' ); // OG tags
+	remove_submenu_page( 'themes.php', 'widget_context_settings' ); // Widget context settings
+	remove_submenu_page( 'themes.php', 'pagination.php' ); // Pagination settings
+	remove_action('admin_menu', '_add_themes_utility_last', 101); // Disallow file edit
 }
 add_action( 'admin_menu', 'cwd_base_remove_menu_items' );
 

@@ -511,6 +511,26 @@ body:not(.mobile) {
 
 /* Sidebars
 ----------------------------------------*/
+.sidebar-left {
+	
+	#main {
+		#sidebar-bottom {
+			clear: left;
+		}
+	}
+	
+}
+
+.sidebar-right {
+	
+	#main {
+		#sidebar-bottom {
+			clear: right;
+		}
+	}
+	
+}
+
 #sidebar-top {
 	
 	&:after {
@@ -521,6 +541,9 @@ body:not(.mobile) {
 		color: #707070;
 		font-family: Georgia, serif;
     	font-size: 24px;
+	}
+	.content-block:last-child {
+		margin: 0 0 0 0;
 	}
 
 }

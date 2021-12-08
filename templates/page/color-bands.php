@@ -5,7 +5,7 @@ $center_text = get_theme_mod('center_text');
 
 ?>
 
-<?php if ( is_active_sidebar( 'sidebar-5' ) ) : ?>
+<?php if ( is_active_sidebar( 'sidebar-97' ) ) : ?>
     <div class="band colorband accent4 padded">
         <div class="container-fluid">
 			<div class="row">
@@ -15,14 +15,14 @@ $center_text = get_theme_mod('center_text');
 					</h2>
 				<?php endif; ?>
 				<div class="columns padded<?php if($center_text == 'yes'){echo ' center';} ?>">
-					<?php dynamic_sidebar( 'sidebar-5' ); ?>
+					<?php dynamic_sidebar( 'sidebar-97' ); ?>
 				</div>
 			</div>
         </div>
     </div>
 <?php endif; ?>
 
-<?php if ( is_active_sidebar( 'sidebar-6' ) ) : ?>
+<?php if ( is_active_sidebar( 'sidebar-98' ) ) : ?>
     <div class="band colorband accent2 padded">
         <div class="container-fluid">
 			<div class="row">
@@ -32,14 +32,14 @@ $center_text = get_theme_mod('center_text');
 					</h2>
 				<?php endif; ?>
 				<div class="columns padded<?php if($center_text == 'yes'){echo ' center';} ?>">
-					<?php dynamic_sidebar( 'sidebar-6' ); ?>
+					<?php dynamic_sidebar( 'sidebar-98' ); ?>
 				</div>
 			</div>
         </div>
     </div>
 <?php endif; ?>
 
-<?php if ( is_active_sidebar( 'sidebar-7' ) ) : ?>
+<?php if ( is_active_sidebar( 'sidebar-99' ) ) : ?>
     <div class="band colorband accent1 padded">
         <div class="container-fluid">
 			<div class="row">
@@ -49,7 +49,7 @@ $center_text = get_theme_mod('center_text');
 					</h2>
 				<?php endif; ?>
 				<div class="columns padded<?php if($center_text == 'yes'){echo ' center';} ?>">
-					<?php dynamic_sidebar( 'sidebar-7' ); ?>
+					<?php dynamic_sidebar( 'sidebar-99' ); ?>
 				</div>
 			</div>
         </div>

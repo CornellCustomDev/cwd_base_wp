@@ -1510,10 +1510,21 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 
 /* Sidebars
 ----------------------------------------*/
+.sidebar-left #main #sidebar-bottom {
+  clear: left;
+}
+
+.sidebar-right #main #sidebar-bottom {
+  clear: right;
+}
+
 #sidebar-top.secondary .widget-title {
   color: #707070;
   font-family: Georgia, serif;
   font-size: 24px;
+}
+#sidebar-top .content-block:last-child {
+  margin: 0 0 0 0;
 }
 
 #sidebar-top.no-sidebar-top:after, #sidebar-top.no-sidebar-bottom:after,

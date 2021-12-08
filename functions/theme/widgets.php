@@ -54,7 +54,7 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 		
 		register_sidebar( array(
 			'name'          => __( 'Section One Widgets', 'cwd_base' ),
-			'id'            => 'sidebar-5',
+			'id'            => 'sidebar-97',
 			'description'   => __( 'Appears above the footer. Change the titles of these sections using the Section Titles tab on the Customize page (under the Appearance menu).', 'cwd_base' ),
 			'before_widget' => '<div class="col-item">',
 			'after_widget'  => '</div>',
@@ -64,7 +64,7 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 
 		register_sidebar( array(
 			'name'          => __( 'Section Two Widgets', 'cwd_base' ),
-			'id'            => 'sidebar-6',
+			'id'            => 'sidebar-98',
 			'description'   => __( 'Appears above the footer. Change the titles of these sections using the Section Titles tab on the Customize page (under the Appearance menu).', 'cwd_base' ),
 			'before_widget' => '<div class="col-item">',
 			'after_widget'  => '</div>',
@@ -74,7 +74,7 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 
 		register_sidebar( array(
 			'name'          => __( 'Section Three Widgets', 'cwd_base' ),
-			'id'            => 'sidebar-7',
+			'id'            => 'sidebar-99',
 			'description'   => __( 'Appears above the footer. Change the titles of these sections using the Section Titles tab on the Customize page (under the Appearance menu).', 'cwd_base' ),
 			'before_widget' => '<div class="col-item">',
 			'after_widget'  => '</div>',
@@ -88,16 +88,18 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 
 // Remove widgets from previous theme on activation
 if ( is_admin() && isset($_GET['activated'] ) && $pagenow == 'themes.php' ) {
-    add_action('admin_footer','removed_widgets');
+    add_action('admin_footer','remove_widgets');
 }
-function removed_widgets(){
+function remove_widgets(){
     //get all registered sidebars
     global $wp_registered_sidebars;
     //get saved widgets
     $widgets = get_option('sidebars_widgets');
     //loop over the sidebars and remove all widgets
     foreach ($wp_registered_sidebars as $sidebar => $value) {
-        unset($widgets[$sidebar]);
+        if($sidebar == 'sidebar-97' || $sidebar == 'sidebar-98' || $sidebar == 'sidebar-99') {
+			unset($widgets[$sidebar]);
+		}
     }
     //update with widgets removed
     update_option('sidebars_widgets',$widgets);
@@ -188,6 +190,15 @@ class Postswidget_Widget extends WP_Widget {
 			'type' => 'upcoming_checkbox',
 		),
 		array(
+			'label' => 'Order',                
+			'id' => 'order_select',
+			'type' => 'select',              
+			'options' => array(                   
+				'ASC',
+				'DESC',                
+			),
+		),
+		array(
 			'label' => 'Entries',                
 			'id' => 'entries_number',
 			'type' => 'number',              
@@ -238,6 +249,7 @@ class Postswidget_Widget extends WP_Widget {
 		$heading = $instance['heading_text'];
 		$post_type_select = $instance['posttype_select'];
 		$show_upcoming_only = $instance['upcoming_checkbox'];
+		$order_select = $instance['order_select'];
 		$entries = $instance['entries_number'];
 		$format  = $instance['format_select'];
 		$show_thumb = $instance['showthumbnail_checkbox'];
@@ -246,7 +258,7 @@ class Postswidget_Widget extends WP_Widget {
 		$excerpt_length = $instance['excerptlength(characters)_number'];
 		$view_all_link = $instance['view_all_link'];
 		$view_all_link_text = $instance['view_all_link_text'];
-		
+				
 		// To sort by date field...
 		if( $post_type_select == 'News' ) {
 			$args1 = array( 
@@ -265,7 +277,7 @@ class Postswidget_Widget extends WP_Widget {
 				'posts_per_page' => $entries,
 				'meta_key' => 'publication_date',
 				'orderby' => 'meta_value',
-				'order' => 'DESC',
+				'order' => $order_select,
 			);			
 		}
 		elseif( $post_type_select == 'Events' ) {
@@ -295,8 +307,8 @@ class Postswidget_Widget extends WP_Widget {
 							'compare' => '>=',
 						),
 					),
-					'orderby' => 'key',
-					'order' => 'DESC'
+					'orderby' => 'date',
+					'order' => $order_select,
 				);
 				
 			}
@@ -308,7 +320,7 @@ class Postswidget_Widget extends WP_Widget {
 					'post__not_in' => $query1_post_ids,
 					'meta_key' => 'date',
 					'orderby' => 'meta_value',
-					'order' => 'DESC',
+					'order' => $order_select,
 				);			
 				
 			}
@@ -329,7 +341,7 @@ class Postswidget_Widget extends WP_Widget {
 				'post_type' => strtolower($post_type_select),
 				'posts_per_page' => $entries,
 				'orderby' => 'post_date',
-				'order' => 'DESC',
+				'order' => $order_select,
 			);			
 		}
 		
@@ -364,6 +376,69 @@ class Postswidget_Widget extends WP_Widget {
 			<?php } ?>
 
 			<div class="cards<?php if( $format == 'Vertical list' ) { echo ' flex-grid'; } ?>">
+				
+				<?php 
+		
+					if($post_type_select == 'Events') {
+
+						// Custom events query to manipulate date fields
+						$events_args = array( 
+							'post_type' => 'events',
+							'posts_per_page' => -1,
+						);	
+
+						$events_query = new WP_Query($events_args);	
+
+						// Get all events
+						$events_query = $events_query->get_posts();	
+
+						foreach($events_query as $event) {
+
+							// Get the dates
+							$date = get_field( 'date', $event->ID );
+
+							// Convert them
+							$new_date = date( 'Ymd', strtotime( $date ) );
+
+							// Update them in the database
+							update_field('date', $new_date, $event->ID);
+
+						}
+
+						wp_reset_query(); // Nothing to see here. Move along.
+					}
+				?>
+
+				<?php 
+					if($post_type_select == 'News') {
+
+						// Custom news query to manipulate date fields
+						$news_args = array( 
+							'post_type' => 'news',
+							'posts_per_page' => -1,
+						);	
+
+						$news_query = new WP_Query($news_args);	
+
+						// Get all news
+						$news_query = $news_query->get_posts();	
+
+						foreach($news_query as $news) {
+
+							// Get the dates
+							$date = get_field( 'publication_date', $news->ID );
+
+							// Convert them
+							$new_date = date( 'Ymd', strtotime( $date ) );
+
+							// Update them in the database
+							update_field('publication_date', $new_date, $news->ID);
+
+						}
+
+						wp_reset_query(); // Nothing to see here. Move along.
+					}
+				?>
 
 				<?php $i = 1; if ($results->have_posts()): while ($results->have_posts() && ($i <= $entries)) : $results->the_post(); // The Loop: we only want $entries posts ?>
 
@@ -475,6 +550,21 @@ class Postswidget_Widget extends WP_Widget {
 				  $output .= '<option value="'.$post_type.'" selected>'.$post_type.'</option>';
 				} elseif ($post_type != 'Slider' && $post_type != 'Attachment') {
 				  $output .= '<option value="'.$post_type.'">'.$post_type.'</option>';
+				}
+			  }
+			  $output .= '</select>';
+			  $output .= '</p>';
+			  break;
+
+			case 'order_select':
+			  $output .= '<p>';
+			  $output .= '<label for="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'">'.esc_attr( $widget_field['label'], 'cwd_base' ).':</label> ';
+			  $output .= '<select id="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'" name="'.esc_attr( $this->get_field_name( $widget_field['id'] ) ).'">';
+			  foreach ($widget_field['options'] as $option) {
+				if ($widget_value == $option) {
+				  $output .= '<option value="'.$option.'" selected>'.$option.'</option>';
+				} else {
+				  $output .= '<option value="'.$option.'">'.$option.'</option>';
 				}
 			  }
 			  $output .= '</select>';

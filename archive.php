@@ -42,7 +42,7 @@ $post_type = get_queried_object()->name;
 
 					<?php $archive_options = get_field('archive_options', 'options'); ?>
 						
-					<div class="cwd-component cwd-basic no-overlay<?php if( $archive_options['appearance'] == 'grid' ) { echo ' tiles'; } ?>">
+					<div class="cwd-component cwd-basic no-overlay<?php if( $archive_options['appearance'] == 'grid' && $post_type != 'testimonials' ) { echo ' tiles'; } ?>">
 
 						<div class="cards<?php if( $archive_options['appearance'] == 'grid' ) { echo ' flex-grid'; } ?>">
 							

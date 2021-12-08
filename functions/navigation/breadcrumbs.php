@@ -37,7 +37,7 @@ if ( ! function_exists ( 'cwd_base_breadcrumbs' ) ) {
 		$parent_id      = ( $post ) ? $post->post_parent : '';
 		$home_link      = sprintf( $link, $home_url, $text['home'], 1 );
 
-		if ( is_home() || is_front_page() ) {
+		if ( is_front_page() ) {
 
 			if ( $show_on_home ) echo $wrap_before . $home_link . $wrap_after;
 

@@ -150,7 +150,10 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 				'facebook'	=> 'facebook.com',                                                  
 				'twitter'	=> 'twitter.com',                                                  
 				'youtube'	=> 'youtube.com',
-				'logo_size'	=> 'small',
+				'color'	=> 'cu-gray',
+				'logo_size'	=> 'large',
+				'logo_position'	=> 'right',
+				'logo_switch_mobile' => 'no',
 				'heading_one'	=> 'Heading One',
 				'heading_two'	=> 'Heading Two',
 				'heading_three'	=> 'Heading Three',
@@ -165,9 +168,55 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 					set_theme_mod( $key, $value );
 			}
 		
-			// Create home page
-			$home_page_title = 'Home';
-			$home_page_content = 'This text is the standard body field for a basic page that has been <a href="' . $baseUrl . 'wp-admin/options-reading.php">designated as the homepage</a>. This content can be edited like any other basic page, though other features on the homepage are typically supplied dynamically by widgets and custom templates. Extra content areas below the main content and above the footer can be added and removed on the <a href="' . $baseUrl . 'wp-admin/widgets.php">widgets page</a>.';
+			// Create front page
+			$home_page_title = 'Welcome';
+			$home_page_content = '<span class="intro">Welcome to the homepage of your new theme. This is the <em>intro</em> paragraph style which can give extra impact to an opening sentence or two. It can serve as a tagline or short prompt for the content that follows.</span>
+
+This is the standard body text for the basic page which has been designated as the homepage. This content can be edited like any other basic page, though other features on the homepage are typically supplied dynamically by widgets and custom templates.
+
+Create your own homepage and set it as the front page of your site by choosing it from the dropdown on the <a href="' . $baseUrl . 'wp-admin/wp-admin/options-reading.php">reading settings</a> page.
+
+<img class="aligncenter wp-image-8234" src="/wp-content/themes/cwd_base/images/wp/reading-settings.png" alt="" width="526" height="200" />
+
+That page will replace this one as the front page of the site, but these instructions will still be available to you until you delete the page.
+
+<span style="color: #b31b1b; font-size: 30px;">Theme Options</span>
+
+The <a href="' . $baseUrl . 'wp-admin/admin.php?page=theme-options">theme options</a> page contains several options for post types, archive pages, sidebars, and footer content.
+
+The <a href="' . $baseUrl . 'wp-admin/customize.php?return=%2Fwp-admin%2Fpost.php%3Fpost%3D2%26action%3Dedit">customizer</a> page contains more options for banner style, header images, fonts, and social media icons.
+<h3>Post Types</h3>
+Available post types are News, Events, People, Courses, Testimonials, and Photo Galleries. Add or remove post types on the <a href="' . $baseUrl . 'wp-admin/admin.php?page=theme-options">theme options</a> page.
+
+The news and events post types include the option to import events from <a href="https://news.cornell.edu">https://news.cornell.edu</a> and <a href="https://events.cornell.edu">https://events.cornell.edu</a>. To import news and events, visit the settings pages here:
+<ul>
+ 	<li><a href="' . $baseUrl . 'wp-admin/admin.php?page=cd-news-pull-wp-plugin-settings">News import settings</a></li>
+ 	<li><a href="' . $baseUrl . 'wp-admin/admin.php?page=cd-events-pull-wp-plugin-settings">Events import settings</a></li>
+</ul>
+Several theme options can be overridden on a page by page basis, so be sure to notice any in-page options that are available to you when creating or editing a page or post.
+<h3>Header images</h3>
+This theme comes with eight default header images for you to choose from (these can also be randomized).
+
+The customizer <a href="' . $baseUrl . 'wp-admin/customize.php?return=%2Fwp-admin%2Fpost.php%3Fpost%3D2%26action%3Dedit">Header Image tab</a> sets the header image for the entire site. This can be overridden for each page using the Featured Image field in the sidebar of the edit screen.
+
+Pages with children will share their header image with all child pages, but a child page may override the parent page\'s featured image with one of their own.
+<h3>Image slider</h3>
+Replace the header image on the homepage by choosing that option from the list of options on the homepage edit screen.
+
+<img class="aligncenter wp-image-8207 size-full" src="/wp-content/themes/cwd_base/images/wp/replace-header-image.png" alt="The option to replace homepage header image with a slider." width="285" height="214" />
+
+Add slides and captions to the image slider by using the custom fields provided and the Featured image field on the edit screen.
+<h2>Widgets</h2>
+There are three widget areas below the main content area and above the footer, a sidebar widget area, and another widget area specifically for the homepage. These can be added and removed on the <a href="' . $baseUrl . 'wp-admin/widgets.php">widgets page</a>.
+<h2>Menus</h2>
+Some navigation menus were automatically created when you activated the theme. Create, edit, or delete menus on the <a href="' . $baseUrl . 'wp-admin/nav-menus.php">menus page</a>.
+<h2>Styles</h2>
+Visit the <a href="' . $baseUrl . 'styleguide">styleguide</a> page to see all of the available styles for this theme. Some styles can be applied directly from the WordPress editor, while some styles will require some manual editing of classes in the Text tab of the editor.
+<h2>Demo</h2>
+Visit our theme demo page to see some examples of the theme options and layouts. For support, email the our theme developers <a href="mailto:iws_support@cornell.edu">iws_support@cornell.edu</a>
+
+<a class="link-button" href="' . $baseUrl . '">View Demo</a>';
+			
 			$home_page_template = '';
 
 			$home_page_check = get_page_by_title($home_page_title);
@@ -1189,7 +1238,7 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 
 				// Add pages
 				$homePage = wp_update_nav_menu_item($main_menu_id, 0, array(
-					'menu-item-object-id' => get_page_by_path('home')->ID,
+					'menu-item-object-id' => get_page_by_path('welcome')->ID,
 					'menu-item-object' => 'page',
 					'menu-item-type' => 'post_type',
 					'menu-item-title' => $home_page_title,
@@ -1343,8 +1392,8 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			$footer_menu_2_location['footer-menu-2'] = $footer_menu_2_id;
 			set_theme_mod( 'nav_menu_locations', $footer_menu_2_location );
 
-			// Use Home page as front page
-			$home = get_page_by_title( 'Home' );
+			// Use Welcome page as front page
+			$home = get_page_by_title( 'Welcome' );
 			update_option( 'page_on_front', $home->ID );
 			update_option( 'show_on_front', 'page' );
 			
@@ -1353,8 +1402,8 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			
 			// Initialize post type options, set defaults
 			
-				// Home page options
-			add_option('options_home_page_options_replace_title', 'Home');
+				// Front page options
+			add_option('options_home_page_options_replace_title', 'Welcome');
 			add_option('_options_home_page_options_replace_title', 'field_60897d918d84b');
 			add_option('options_home_page_options_remove_breadcrumbs', '1');
 			add_option('_options_home_page_options_remove_breadcrumbs', 'field_608989540fa5a');
@@ -1388,7 +1437,80 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			add_option('_options_footer_options_heading', 'field_604df0f057f0f');
 			add_option('options_footer_options', '');
 			add_option('_options_footer_options', 'field_604df02d57f0d');
+			
+			// Add default text widgets
+			function cwd_base_pre_set_widget( $sidebar, $name, $args = array() ) {
+				if ( ! $sidebars = get_option( 'sidebars_widgets' ) )
+					$sidebars = array();
 
+				// Create the sidebar if it doesn't exist.
+				if ( ! isset( $sidebars[ $sidebar ] ) )
+					$sidebars[ $sidebar ] = array();
+
+				// Check for existing saved widgets.
+				if ( $widget_opts = get_option( "widget_$name" ) ) {
+					// Get next insert id.
+					ksort( $widget_opts );
+					end( $widget_opts );
+					$insert_id = key( $widget_opts );
+				} else {
+					// None existing, start fresh.
+					$widget_opts = array( '_multiwidget' => 1 );
+					$insert_id = 0;
+				}
+
+				// Add our settings to the stack.
+				$widget_opts[ ++$insert_id ] = $args;
+				// Add our widget!
+				$sidebars[ $sidebar ][] = "$name-$insert_id";
+				
+				// Remove widgets from section sidebars
+				unset( $sidebars[ 'sidebar-97' ] );
+				unset( $sidebars[ 'sidebar-98' ] );
+				unset( $sidebars[ 'sidebar-99' ] );
+				
+				update_option( 'sidebars_widgets', $sidebars );
+				update_option( "widget_$name", $widget_opts );
+			}		
+			
+			// TOC for styleguide
+			//cwd_base_pre_set_widget( 'widget-area-1', 'text',
+				//array(
+					//'title' => 'Table of Contents',
+					//'text'  => '<ul id="toc-ul">
+									//<li><a href="#headings">Headings</a></li>
+									//<li><a href="#hrs">Horizontal Rules</a></li>
+									//<li><a href="#images">Images, Figures, Asides</a></li>
+									//<li><a href="#inline">Inline Styles</a></li>
+									//<li><a href="#blockquotes">Blockquotes</a></li>
+									//<li><a href="#panels">Panels and Accents</a></li>
+									//<li><a href="#lists">Lists</a></li>
+									//<li><a href="#lists-as-menus">Lists as Menus</a></li>
+									//<li><a href="#tables">Tables</a></li>
+									//<li><a href="#columns">Columns</a></li>
+								//</ul>',
+					//'filter' => false,
+				//)
+			//);
+			
+			// Top sidebar
+			cwd_base_pre_set_widget( 'widget-area-1', 'text',
+				array(
+					'title' => 'Priority Sidebar',
+					'text' => 'This is a text widget. The widgets in this sidebar area will float <em>above</em> the main content area on mobile devices. Visit the <a href="' . $baseUrl . 'wp-admin/widgets.php">Widgets page</a> to add or remove your own widgets.',
+					'filter' => false,
+				)
+			);
+			
+			// Bottom sidebar
+			cwd_base_pre_set_widget( 'widget-area-2', 'text',
+				array(
+					'title' => 'Secondary Sidebar',
+					'text' => 'This is a separate widget area for the sidebar. The widgets in this area will float <em>below</em> the main content area on mobile devices. You may use one or both sidebar areas.',
+					'filter' => false,
+				)
+			);
+			
 			// When finished, we update our status to make sure we don't duplicate everytime we activate.
 			update_option( 'theme_setup_status', '1' );
 			
