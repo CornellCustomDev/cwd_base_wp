@@ -129,20 +129,21 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 			
 				// Scripts
-			wp_enqueue_script('cwd-script', get_template_directory_uri() . '/js/cwd.js' );
-			wp_enqueue_script('cwd-wp-script', get_template_directory_uri() . '/js/cwd_wp.js' );
-			wp_enqueue_script('cwd-card-slider', get_template_directory_uri() . '/js/cwd_card_slider.js' );		
-			wp_enqueue_script('formidable-validation', get_template_directory_uri() . '/js/formidable_validation.js' );		
-			wp_enqueue_script('cwd-gallery', get_template_directory_uri() . '/js/cwd_gallery.js' );		
-			wp_enqueue_script('cwd-popups', get_template_directory_uri() . '/js/cwd_popups.js' );		
-			wp_enqueue_script('cwd-slider', get_template_directory_uri() . '/js/cwd_slider.js' );		
-			wp_enqueue_script('cwd-utilities', get_template_directory_uri() . '/js/cwd_utilities.js' );		
-			wp_enqueue_script('contrib-js-swipe', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js' );		
-			wp_enqueue_script('contrib-js-debounce', get_template_directory_uri() . '/js/contrib/modernizr.js' );		
-			wp_enqueue_script('contrib-js-pep', get_template_directory_uri() . '/js/contrib/pep.js' );
-			wp_enqueue_script('contrib-js-fitvids', get_template_directory_uri() . '/js/contrib/jquery.fitvids.js' );
-			wp_enqueue_script('siteimprove', get_template_directory_uri() . '/js/siteimprove.js' );		
-			wp_enqueue_script('cwd-experimental', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
+			wp_enqueue_script('cwd-script-js', get_template_directory_uri() . '/js/cwd.js' );
+			wp_enqueue_script('cwd-wp-script-js', get_template_directory_uri() . '/js/cwd_wp.js' );
+			wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js' );		
+			wp_enqueue_script('cwd-formidable-validation-js', get_template_directory_uri() . '/js/formidable_validation.js' );		
+			wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js' );		
+			wp_enqueue_script('cwd-popups-js', get_template_directory_uri() . '/js/cwd_popups.js' );		
+			wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js' );		
+			wp_enqueue_script('cwd-utilities-js', get_template_directory_uri() . '/js/cwd_utilities.js' );		
+			wp_enqueue_script('cwd-twitter-widget-js', get_template_directory_uri() . '/js/twitter-widget.js' );		
+			wp_enqueue_script('contrib-js-swipe-js', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js' );		
+			wp_enqueue_script('contrib-js-debounce-js', get_template_directory_uri() . '/js/contrib/modernizr.js' );		
+			wp_enqueue_script('contrib-js-pep-js', get_template_directory_uri() . '/js/contrib/pep.js' );
+			wp_enqueue_script('contrib-js-fitvids-js', get_template_directory_uri() . '/js/contrib/jquery.fitvids.js' );
+			wp_enqueue_script('cwd-siteimprove-js', get_template_directory_uri() . '/js/siteimprove.js' );		
+			wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
 						
 			// jQuery UI effects
 			wp_enqueue_script('jquery-effects-core'); 
@@ -151,18 +152,19 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		
 			// Styles
 		if(get_theme_mod('freight') == true) {
-			wp_enqueue_style('freight', 'https://use.typekit.net/nwp2wku.css'); // Freight Text and Sans
+			wp_enqueue_style('freight-css', 'https://use.typekit.net/nwp2wku.css'); // Freight Text and Sans
 		}
-		wp_enqueue_style('base', get_template_directory_uri() . '/css/base.css');
-		wp_enqueue_style('cornell', get_template_directory_uri() . '/css/cornell.css');
-		wp_enqueue_style('cwd-card-slider', get_template_directory_uri() . '/css/cwd_card_slider.css');
-		wp_enqueue_style('cwd-gallery', get_template_directory_uri() . '/css/cwd_gallery.css');
-		wp_enqueue_style('pagination', get_template_directory_uri() . '/css/cwd_slider.css');
-		wp_enqueue_style('cwd-utilities', get_template_directory_uri() . '/css/cwd_utilities.css');
+		wp_enqueue_style('cwd-base-css', get_template_directory_uri() . '/css/base.css');
+		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell.css');
+		wp_enqueue_style('cwd-card-slider-css', get_template_directory_uri() . '/css/cwd_card_slider.css');
+		wp_enqueue_style('cwd-gallery-css', get_template_directory_uri() . '/css/cwd_gallery.css');
+		wp_enqueue_style('cwd-pagination-css', get_template_directory_uri() . '/css/cwd_slider.css');
+		wp_enqueue_style('cwd-utilities-css', get_template_directory_uri() . '/css/cwd_utilities.css');
 		wp_enqueue_style('cwd-wp-css', get_template_directory_uri() . '/css/cwd_wp.css');
-		wp_enqueue_style('formidable-validation', get_template_directory_uri() . '/css/formidable_validation.css');
-		wp_enqueue_style('cornell-font-fa', get_template_directory_uri() . '/fonts/font-awesome.min.css');
-		wp_enqueue_style('cornell-font-zmdi', get_template_directory_uri() . '/fonts/material-design-iconic-font.min.css');
+		wp_enqueue_style('cwd-twitter-widget-css', get_template_directory_uri() . '/css/twitter-widget.css');
+		wp_enqueue_style('cwd-formidable-validation-css', get_template_directory_uri() . '/css/formidable_validation.css');
+		wp_enqueue_style('cornell-font-fa-css', get_template_directory_uri() . '/fonts/font-awesome.min.css');
+		wp_enqueue_style('cornell-font-zmdi-css', get_template_directory_uri() . '/fonts/material-design-iconic-font.min.css');
 		//wp_enqueue_style('cornell-font-service-logos', get_template_directory_uri() . '/fonts/service-logos.css');
 		//wp_enqueue_style('cornell-font-custom', get_template_directory_uri() . '/fonts/cornell-custom.css');
 		//wp_enqueue_style('cornell-font-totally-cornered', get_template_directory_uri() . '/fonts/totally-cornered.css');
@@ -290,7 +292,7 @@ if ( ! function_exists ( 'remove_this_header_add_meta_box' ) ) {
 	function remove_this_header_add_meta_box() {
 
 		// So, 'any' or 'all' doesn't seem to work. Hmmm...
-		$screens = array( 'post', 'page', 'news', 'events', 'people', 'projects', 'resources', 'galleries', 'testimonials' );
+		$screens = array( 'post', 'page', 'news', 'events', 'people', 'projects', 'courses', 'galleries', 'testimonials' );
 
 		foreach ( $screens as $screen ) {
 
@@ -710,3 +712,15 @@ add_action( 'admin_menu', 'cwd_base_remove_menu_items' );
 if( class_exists('Acf') ) {
 	require_once get_template_directory() . '/functions/post-types/init.php';
 }
+
+// Prevent WP using 'Auto Draft' as the post title (wtf?)
+function filter_the_title($title, $id) {
+	
+	$post_type = get_post_type($id);
+	
+	if($post_type == 'news' && $title == 'Auto Draft') {
+		$title = get_field('title', $id);
+	}
+	return $title;
+}
+add_filter( 'the_title', 'filter_the_title', 10, 2 );

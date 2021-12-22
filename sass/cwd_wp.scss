@@ -63,6 +63,8 @@
 					text-align: center;
 					font-size: 1.5em;
 					padding: 240px 0;
+					z-index: 9;
+    				position: relative;
 					
 					a {
 						text-decoration: underline;
@@ -449,6 +451,12 @@ body:not(.mobile) {
 		}
 		
 	}
+}
+
+/* Mobile section nav
+----------------------------------------*/
+.mobile-expander-heading:not(.open) {
+	margin-bottom: 45px;
 }
 
 /* Don't apply tinting to pages with no-sidebar body class
@@ -1277,11 +1285,54 @@ body > {
 			
 			img {
 				
-				@media (max-width: 767px) {
+				@media (max-width: 768px) {
 					width: 30px;
 				}
 			}
 		}
+		.sub-footer {
+			
+			.two-col {
+				
+				margin-bottom: 0;
+				
+				div {
+					
+					margin-bottom: 0;
+					
+					ul {
+
+						li {
+							margin-bottom: 0;
+						}
+						
+						@media (max-width: 768px) {
+							
+							li {
+								width: 100%;
+								padding: 0;
+								margin-bottom: 0.5em;
+							}
+						}
+					}
+				}
+				
+				div:last-child {
+					
+					ul {
+						
+						@media (max-width: 768px) {
+							li {
+								&:last-child {
+									margin-bottom: 0;
+								}
+							}
+						}
+					}
+
+				}
+			}
+		} /* End sub-footer */ 
 	}
 }
 

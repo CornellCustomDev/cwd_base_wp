@@ -1196,6 +1196,8 @@ a.link-button .fa, a.link-button .zmdi {
   text-align: center;
   font-size: 1.5em;
   padding: 240px 0;
+  z-index: 9;
+  position: relative;
 }
 #super-header.has_header_image .slider-container #slider-caption #no-active-slides a {
   text-decoration: underline;
@@ -1469,6 +1471,12 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 .menu-block-title + .secondary-navigation li.current_page_item > a {
   font-weight: 400;
   color: #b31b1b;
+}
+
+/* Mobile section nav
+----------------------------------------*/
+.mobile-expander-heading:not(.open) {
+  margin-bottom: 45px;
 }
 
 /* Don't apply tinting to pages with no-sidebar body class
@@ -2115,6 +2123,9 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 
 /* Footer
 ----------------------------------------*/
+body > footer {
+  /* End sub-footer */
+}
 body > footer a.link-block {
   font-size: 18px;
   padding: 0.75em 1em 0.6em;
@@ -2122,9 +2133,30 @@ body > footer a.link-block {
 body > footer .footer-links a {
   color: #fff;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   body > footer .social img {
     width: 30px;
+  }
+}
+body > footer .sub-footer .two-col {
+  margin-bottom: 0;
+}
+body > footer .sub-footer .two-col div {
+  margin-bottom: 0;
+}
+body > footer .sub-footer .two-col div ul li {
+  margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  body > footer .sub-footer .two-col div ul li {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0.5em;
+  }
+}
+@media (max-width: 768px) {
+  body > footer .sub-footer .two-col div:last-child ul li:last-child {
+    margin-bottom: 0;
   }
 }
 
