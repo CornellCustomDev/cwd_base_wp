@@ -119,3 +119,58 @@ div[data-name=metadata] > .acf-input > .acf-fields > .acf-field:not([data-name="
     margin-bottom: 19px;
     padding: 0 2px;
 }*/
+
+/* Simple Banner 
+.simple-banner-settings-form #footer-thankyou {
+	display: none;
+}*/
+#preview_banner_outer_container,
+.simple-banner-settings-form {
+	position: relative;
+	z-index: 1;
+}
+#preview_banner_text a {
+	color: #ffffff;
+}
+
+.simple-banner-settings-form p.submit {
+    position: absolute;
+    bottom: 0;
+}
+.simple-banner {
+  width: 100%;
+  text-align: center;
+  z-index: 99999;
+  position: relative;
+  display: block;
+  background: #b31b1b;
+}
+
+.simple-banner .simple-banner-text {
+  font-weight: normal;
+  padding: 10px 55px;font-size: 22px;
+  color: #fff;
+}
+
+.simple-banner .simple-banner-button {
+  border: none;
+  background-color: transparent;
+  padding: 0 5px;
+  margin: 0 10px;
+  text-align: center;
+  text-decoration: none;
+  position: absolute;
+  transform: translate(0%, -50%);
+  right: 0;
+  top: 50%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#acf_after_title-sortables {
+	
+	.acf-field-text[data-name="title"] {
+		
+		display: none;
+	}
+}

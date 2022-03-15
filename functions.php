@@ -25,7 +25,10 @@ $cwd_includes = array(
 	'/functions/theme/options.php',
 	'/functions/plugins/og-tags/og-tags.php',
 	'/functions/plugins/widget-context/widget-context.php',
+	'/functions/plugins/widget-shortcode/init.php',
 	'/functions/plugins/simple-widget-title-links/simple-widget-title-links.php',
+	'/functions/plugins/simple-banner/simple-banner.php',
+	'/functions/plugins/widget-css-classes/widget-css-classes.php',
 	'/functions/navigation/menus.php',
 	'/functions/navigation/breadcrumbs.php',
 	'/functions/navigation/menu-classes.php',
@@ -35,6 +38,7 @@ $cwd_includes = array(
 	'/functions/theme/custom-fields/featured.php',
 	'/functions/theme/custom-fields/image_id.php',
 	'/functions/theme/custom-fields/page_links_to.php',
+	'/functions/theme/custom-fields/acf-search.php',
 	'/functions/tinymce/editor.php',
 	'/functions/post-types/slider/slider.php',
 );
@@ -72,6 +76,27 @@ if ( ! function_exists ( 'cwd_base_after_body_tag' ) ) {
 		 // Do stuff
 	}
 	add_action( 'wp_body_open', 'cwd_base_after_body_tag' );
+}
+
+// Advanced Custom Fields: add Phone Number Field
+if( !class_exists('acf_plugin_phone') ) {
+	class acf_plugin_phone {
+		function __construct() {
+			$path = get_stylesheet_directory_uri().'/';
+			$this->settings = array(
+				'version'	=> '1.0.0',
+				'url'		=> $path,
+				'path'		=> $path
+			);
+			add_action('acf/include_field_types', 	array($this, 'include_field_types')); // v5
+			add_action('acf/register_fields', 		array($this, 'include_field_types')); // v4
+		}
+		function include_field_types( $version = false ) {
+			if( !$version ) $version = 5;
+			include_once('functions/theme/custom-fields/acf-phone-v5.php');
+		}
+	}
+	new acf_plugin_phone();
 }
 
 // Enable the use of shortcodes in text widgets.
@@ -118,8 +143,8 @@ if ( ! function_exists ( 'search_template_redirect' ) ) {
 
 		}
 	}
+	add_action( 'template_redirect', 'search_template_redirect' );
 }
-add_action( 'template_redirect', 'search_template_redirect' );
 
 // Load CSS Framework scripts
 if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
@@ -158,7 +183,7 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell.css');
 		wp_enqueue_style('cwd-card-slider-css', get_template_directory_uri() . '/css/cwd_card_slider.css');
 		wp_enqueue_style('cwd-gallery-css', get_template_directory_uri() . '/css/cwd_gallery.css');
-		wp_enqueue_style('cwd-pagination-css', get_template_directory_uri() . '/css/cwd_slider.css');
+		wp_enqueue_style('cwd-slider-css', get_template_directory_uri() . '/css/cwd_slider.css');
 		wp_enqueue_style('cwd-utilities-css', get_template_directory_uri() . '/css/cwd_utilities.css');
 		wp_enqueue_style('cwd-wp-css', get_template_directory_uri() . '/css/cwd_wp.css');
 		wp_enqueue_style('cwd-twitter-widget-css', get_template_directory_uri() . '/css/twitter-widget.css');
@@ -292,7 +317,7 @@ if ( ! function_exists ( 'remove_this_header_add_meta_box' ) ) {
 	function remove_this_header_add_meta_box() {
 
 		// So, 'any' or 'all' doesn't seem to work. Hmmm...
-		$screens = array( 'post', 'page', 'news', 'events', 'people', 'projects', 'courses', 'galleries', 'testimonials' );
+		$screens = array( 'post', 'page', 'news', 'events', 'people', 'courses', 'alerts', 'announcements', 'projects', 'resources', 'galleries', 'testimonials' );
 
 		foreach ( $screens as $screen ) {
 
@@ -358,7 +383,8 @@ if ( ! function_exists ( 'add_slider_add_meta_box' ) ) {
 
 		if( $post->ID == get_option( 'page_on_front' ) ) {
 
-			$screens = array( 'post', 'page' );
+			// So, 'any' or 'all' doesn't seem to work. Hmmm...
+			$screens = array( 'post', 'page', 'news', 'events', 'people', 'courses', 'alerts', 'announcements', 'projects', 'resources', 'galleries', 'testimonials' );
 
 			foreach ( $screens as $screen ) {
 
@@ -442,13 +468,13 @@ if ( ! function_exists ( 'cwd_remove_postclass' ) ) {
 if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
 	function cwd_base_cpt_archives( $query ) {
 		if ( $query->is_tag() || is_category() && $query->is_main_query() && !is_admin() ) {
-			$query->set( 'post_type', array('post', 'page', 'news', 'events', 'people', 'courses', 'testimonials', 'galleries') );
+			$query->set( 'post_type', array('post', 'page', 'news', 'events', 'people', 'courses', 'alerts', 'announcements', 'projects', 'resources', 'galleries', 'testimonials') );
 		}
 	}
 	add_action( 'pre_get_posts', 'cwd_base_cpt_archives' );
 }
 
-// Filter the permalink for custom URLs (Page links to...)
+// Filter the permalink for post and custom post type URLs (Page links to...)
 if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
 	function cwd_base_filter_permalink( $url, $post ) {
 
@@ -457,7 +483,7 @@ if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
 		if ( $page_links_to['point_this_content_to'] == 'custom' ) {
 
 			$url = $page_links_to['custom_url'];
-
+			
 			return $url;
 
 		}
@@ -465,17 +491,42 @@ if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
 			return $url;
 		}
 	}
-	add_filter( 'post_type_link', 'cwd_base_filter_permalink', 10, 2 );
+	add_filter( 'post_link', 'cwd_base_filter_permalink', 10, 2 ); // Posts
+	add_filter( 'post_type_link', 'cwd_base_filter_permalink', 10, 2 ); // Custom Post Types
 }
 
-// Change Featured image text
-if ( ! function_exists ( 'cwd_base_featured_image_html' ) ) {
-	function cwd_base_featured_image_html( $content ) {
-		return $content = str_replace( __( 'Set featured image' ), __( 'Set the header image' ), $content); 
+// Filter the permalink for page URLs (Page links to...)
+if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
+	function cwd_base_filter_page_permalink( $url, $post ) {
+
+		$page_links_to = get_field( 'page_links_to', $post );
+
+		if ( $page_links_to['point_this_content_to'] == 'custom' ) {
+
+			$url = $page_links_to['custom_url'];
+			
+			return $url;
+
+		}
+		else {
+			return $url;
+		}
 	}
-	add_filter( 'admin_post_thumbnail_html', 'cwd_base_featured_image_html' );
+	add_filter( 'page_link', 'cwd_base_filter_page_permalink', 10, 2 ); // Pages
 }
-	
+
+// Customize and move the Featured Image metabox on all post type edit screens
+function custom_change_featured_image_metabox_title( $post_type, $post ) {
+	remove_meta_box( 'postimagediv', array('post','page','news','events','people','galleries','testimonials','courses','projects','research','announcements'), 'side' );
+	add_meta_box( 'postimagediv', __('Banner image'), 'post_thumbnail_meta_box', array('post','page','news','events','people','galleries','testimonials','courses','projects','research','announcements'), 'normal', 'low' );
+}
+add_action( 'add_meta_boxes', 'custom_change_featured_image_metabox_title', 10, 2 );
+
+function custom_featured_image_text( $content ) {
+    return '<p>' . __('Override the default header image for this page or post.') . '</p>' . $content;
+}
+add_filter( 'admin_post_thumbnail_html', 'custom_featured_image_text' );
+
 // Make tags interface look like category checkboxes (next three functions)
 //if ( ! function_exists ( 'cwd_base_post_tags_meta_box_remove' ) ) {
 	//function cwd_base_post_tags_meta_box_remove() {
@@ -539,10 +590,70 @@ if ( ! function_exists ( 'cwd_base_featured_image_html' ) ) {
 	//}
 //}
 
-// Remove title field from news 
-add_action( 'init', function() {
-    remove_post_type_support( 'news', 'title' );
-}, 99);
+// Process dates for news and events
+function cwd_base_date_processing() {
+
+	$post_type = get_post_type();   
+
+	if($post_type == 'events') {
+
+		// Custom events query to manipulate date fields
+		$events_args = array( 
+			'post_type' => 'events',
+			'posts_per_page' => -1,
+		);	
+
+		$events_query = new WP_Query($events_args);	
+
+		// Get all events
+		$events_query = $events_query->get_posts();	
+
+		foreach($events_query as $event) {
+
+			// Get the dates
+			$date = get_field( 'date', $event->ID );
+
+			// Convert them
+			$new_date = date( 'Ymd', strtotime( $date ) );
+
+			// Update them in the database
+			update_field('date', $new_date, $event->ID);
+
+		}
+
+		wp_reset_query(); // Nothing to see here. Move along.
+	}
+	
+	if($post_type == 'news') {
+
+		// Custom news query to manipulate date fields
+		$news_args = array( 
+			'post_type' => 'news',
+			'posts_per_page' => -1,
+		);	
+
+		$news_query = new WP_Query($news_args);	
+
+		// Get all news
+		$news_query = $news_query->get_posts();	
+
+		foreach($news_query as $news) {
+
+			// Get the dates
+			$date = get_field( 'publication_date', $news->ID );
+
+			// Convert them
+			$new_date = date( 'Ymd', strtotime( $date ) );
+
+			// Update them in the database
+			update_field('publication_date', $new_date, $news->ID);
+
+		}
+
+		wp_reset_query(); // Nothing to see here. Move along.
+	}
+}
+//add_action( 'pre_get_posts', 'cwd_base_date_processing' );
 
 // Modify news sort order
 function cwd_base_news_query( $query ) {
@@ -634,93 +745,37 @@ function debug_sidebar() {
     exit;
 }
 
-// Process dates for news and events
-function cwd_base_date_processing() {
-
-	$post_type = get_post_type();   
-
-	if($post_type == 'events') {
-
-		// Custom events query to manipulate date fields
-		$events_args = array( 
-			'post_type' => 'events',
-			'posts_per_page' => -1,
-		);	
-
-		$events_query = new WP_Query($events_args);	
-
-		// Get all events
-		$events_query = $events_query->get_posts();	
-
-		foreach($events_query as $event) {
-
-			// Get the dates
-			$date = get_field( 'date', $event->ID );
-
-			// Convert them
-			$new_date = date( 'Ymd', strtotime( $date ) );
-
-			// Update them in the database
-			update_field('date', $new_date, $event->ID);
-
-		}
-
-		wp_reset_query(); // Nothing to see here. Move along.
-	}
-	
-	if($post_type == 'news') {
-
-		// Custom news query to manipulate date fields
-		$news_args = array( 
-			'post_type' => 'news',
-			'posts_per_page' => -1,
-		);	
-
-		$news_query = new WP_Query($news_args);	
-
-		// Get all news
-		$news_query = $news_query->get_posts();	
-
-		foreach($news_query as $news) {
-
-			// Get the dates
-			$date = get_field( 'publication_date', $news->ID );
-
-			// Convert them
-			$new_date = date( 'Ymd', strtotime( $date ) );
-
-			// Update them in the database
-			update_field('publication_date', $new_date, $news->ID);
-
-		}
-
-		wp_reset_query(); // Nothing to see here. Move along.
-	}
-}
-//add_action( 'pre_get_posts', 'cwd_base_date_processing' );
-
 // Remove items from the admin menu
 function cwd_base_remove_menu_items(){
 	remove_submenu_page( 'options-general.php', 'options-media.php' ); // Media
+	remove_submenu_page( 'options-general.php', 'widget-css-classes-settings' ); // Widget classes
 	remove_submenu_page( 'options-general.php', 'og-tags-options' ); // OG tags
 	remove_submenu_page( 'themes.php', 'widget_context_settings' ); // Widget context settings
 	remove_submenu_page( 'themes.php', 'pagination.php' ); // Pagination settings
 	remove_action('admin_menu', '_add_themes_utility_last', 101); // Disallow file edit
 }
-add_action( 'admin_menu', 'cwd_base_remove_menu_items' );
+add_action( 'admin_menu', 'cwd_base_remove_menu_items', 999 );
 
 if( class_exists('Acf') ) {
 	require_once get_template_directory() . '/functions/post-types/init.php';
 }
 
-// Prevent WP using 'Auto Draft' as the post title (wtf?)
-function filter_the_title($title, $id) {
-	
-	$post_type = get_post_type($id);
-	
-	if($post_type == 'news' && $title == 'Auto Draft') {
-		$title = get_field('title', $id);
+// Order people by last word in title
+function posts_orderby_lastname ($orderby_statement, $wp_query) {
+	if ( ($wp_query->get('post_type') === 'people') || ( is_tax('roles') || is_tax('units') || is_tax('research_areas') ) ) {
+		return "RIGHT(post_title, LOCATE(' ', REVERSE(post_title)) - 1)";
 	}
-	return $title;
+	return $orderby_statement;
 }
-add_filter( 'the_title', 'filter_the_title', 10, 2 );
+add_filter( 'posts_orderby' , 'posts_orderby_lastname', 10, 2 );
+
+// Always enable close button on simple banner
+update_option('close_button_enabled', 'on');
+
+// Save permalink options
+$cwd_base_build_ver = 1;
+
+if( get_option( 'cwd_base_build_ver' ) < 1 ) {
+	flush_rewrite_rules();
+	update_option( 'cwd_base_build_ver', $cwd_base_build_ver );
+} 

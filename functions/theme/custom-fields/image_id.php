@@ -9,10 +9,10 @@ acf_add_local_field_group(array(
 	'fields' => array(
 		array(
 			'key' => 'field_60af88b5744d7',
-			'label' => 'Image',
+			'label' => 'The Post Image',
 			'name' => 'image_id',
 			'type' => 'image',
-			'instructions' => 'If there is no featured (header) image chosen for this post, you can add an image here which will be used for the thumbnail image in all archive listings and search results. If left blank, the default Cornell insignia will be used instead.',
+			'instructions' => 'Note: For best results, these images should be at least 480x480. If there is no image in the Featured Image field, you can add an image here which will be used for the thumbnail image in all archive listings and search results. If left blank, the default Cornell insignia will be used instead. (The Featured Image field is reserved for the page\'s header or banner image.)',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(

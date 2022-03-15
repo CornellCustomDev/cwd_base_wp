@@ -8,7 +8,8 @@ if ( ! function_exists ( 'custom_layout_add_meta_box' ) ) {
 		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
 		$page_for_posts = get_option( 'page_for_posts' );
 		
-		$screens = array( 'post', 'page', 'news', 'people', 'events', 'projects' );
+		// So, 'any' or 'all' doesn't seem to work. Hmmm...
+		$screens = array( 'post', 'page', 'news', 'events', 'people', 'courses', 'alerts', 'announcements', 'projects', 'resources', 'galleries', 'testimonials' );
 
 		foreach ( $screens as $screen ) {
 			

@@ -227,7 +227,8 @@ class Cd_News_Pull_Wp_Plugin_Utils_Processor {
 		$t_news      = [];
 		$this->write_log( 'Notice: Starting filter by tags.' );
 		foreach ( $news_response as $e ) {
-			$is_loadable = ( empty( $filter_tags ) ) ?: false;
+			$is_loadable = ( empty( $filter_tags ) ||  $filter_tags == [""]) ? true : false;
+						
 			foreach ( $filter_tags as $tag ) {
 				if ( $this->in_arrayi( trim( $tag ), $e->tags ) ) {
 					$is_loadable = true;
@@ -235,6 +236,9 @@ class Cd_News_Pull_Wp_Plugin_Utils_Processor {
 					break;
 				}
 			}
+			
+
+			
 			if ( $is_loadable ) {
 				$t = (object) [
 					'post_content' => $e->content_text,

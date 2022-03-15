@@ -25,7 +25,7 @@ $post_type = get_queried_object()->name;
 				// Interrupt the default query to grab some content from custom post type archive main 
 				// pages. Need to add more content types as needed. The page name MUST be the same as 
 				// the post type slug for this to work.
-				if($post_type == 'news' || $post_type == 'events' || $post_type == 'people' || $post_type == 'courses' || $post_type == 'testimonials' || $post_type == 'photo_galleries') {
+				if($post_type == 'news' || $post_type == 'events' || $post_type == 'people' || $post_type == 'courses' || $post_type == 'alerts' || $post_type == 'projects' || $post_type == 'announcements' || $post_type == 'testimonials' || $post_type == 'photo_galleries') {
 					
 					$new_query = new WP_Query( 'pagename='.$post_type );
 					if( $new_query->have_posts() ) : $new_query->the_post();

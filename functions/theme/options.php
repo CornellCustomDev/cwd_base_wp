@@ -1,5 +1,7 @@
 <?php
 
+ // TO DO: add projects, alerts, announcements, and any other post types we creaate
+
 if( function_exists('acf_add_options_page') ):
 
 acf_add_options_page(array(

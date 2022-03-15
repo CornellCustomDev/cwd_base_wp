@@ -1,5 +1,7 @@
 <?php
 
+/* Any custom taxonomies not addressed here must use WP Core taxonomies: post_tag and category */
+
 // Tags, categories, and custom taxonomies. Called from options.php
 if ( ! function_exists( 'cwd_base_get_tags' ) ) {
 

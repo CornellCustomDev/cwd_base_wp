@@ -33,8 +33,10 @@ if ( ! function_exists ( 'slider' ) ) {
 					  echo "['";
 					  echo get_the_post_thumbnail_url($slide->ID, 'slider-image', true);
 					  echo "','";
-					  // Escape double quotes to avoid breaking the slider
-					  echo str_replace('"', '\"', get_field('text', $slide->ID)) . '</span>';
+					  // Escape single and double quotes to avoid breaking the slider
+					  $caption = str_replace('"', '\"', get_field('text', $slide->ID)) . '</span>';
+					  $caption = str_replace("'", "\'", get_field('text', $slide->ID)) . '</span>';
+					  echo $caption;
 					  echo "','";
 					  echo '';
 					  echo "','";
@@ -61,8 +63,8 @@ if ( ! function_exists ( 'slider' ) ) {
 		} 
 		add_action('wp_footer', 'cwd_slider');
 
-		wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js' );	
-		wp_enqueue_style('pagination-css', get_template_directory_uri() . '/css/cwd_slider.css');
+		wp_enqueue_script('cwd-slider-wp-js', get_template_directory_uri() . '/js/cwd_slider_wp.js' );	
+		wp_enqueue_style('cwd-slider-wp-css', get_template_directory_uri() . '/css/cwd_slider_wp.css');
 
 		?>
 

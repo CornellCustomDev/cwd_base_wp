@@ -33,23 +33,6 @@ if ( ! function_exists ( 'cwd_base_customize_register' ) ) {
 				// Remove header text control
 		$wp_customize->remove_control('display_header_text');
 		
-		// Add section title options
-		$wp_customize->add_section( 'section_titles', array( 'title' => 'Section Titles', 'description' => 'Change (or remove) the headings which appear in the widget areas above the footer. Add widgets to these areas on the Widgets screen under the Appearance menu. ', 'priority' => 950, ) );
-
-				// Section title settings
-		$wp_customize->add_setting( 'heading_one', array( 'default' => 'Heading One', 'sanitize_callback'  => 'esc_attr' ) );
-		$wp_customize->add_setting( 'heading_two', array( 'default' => 'Heading Two', 'sanitize_callback'  => 'esc_attr' ) );
-		$wp_customize->add_setting( 'heading_three', array( 'default' => 'Heading Three', 'sanitize_callback'  => 'esc_attr' ) );
-		$wp_customize->add_setting( 'center_headings', array('default' => 'yes', 'sanitize_callback'  => 'esc_attr') );
-		$wp_customize->add_setting( 'center_text', array('default' => 'yes', 'sanitize_callback'  => 'esc_attr') );
-
-				//section title controls
-		$wp_customize->add_control( 'heading_one', array( 'label' => 'Heading One', 'section' => 'section_titles', 'type' => 'text', ) );
-		$wp_customize->add_control( 'heading_two', array( 'label' => 'Heading Two', 'section' => 'section_titles', 'type' => 'text', ) );
-		$wp_customize->add_control( 'heading_three', array( 'label' => 'Heading Three', 'section' => 'section_titles', 'type' => 'text', ) );
-		$wp_customize->add_control( 'center_headings', array( 'label' => 'Center align the headings?', 'section' => 'section_titles', 'type' => 'radio', 'choices' => array( 'yes' => 'Yes', 'no' => 'No' ), ) );
-		$wp_customize->add_control( 'center_text', array( 'label' => 'Center align the text?', 'section' => 'section_titles', 'type' => 'radio', 'choices' => array( 'yes' => 'Yes', 'no' => 'No' ), ) );
-
 		// Add font section
 		$wp_customize->add_section( 'fonts', array( 'title' => 'Fonts', 'description' => 'The default font for this theme is <a href="https://fonts.adobe.com/fonts/freight-sans" target="_blank">Freight Sans</a>. You can toggle that on or off here. ', 'priority' => 90, ) );
 

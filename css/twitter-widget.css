@@ -36,9 +36,12 @@
     max-width: none !important;
 }
 .timeline-Widget .timeline-Tweet .timeline-Tweet-metadata {
-    margin-top: -24px;
-    width: calc(100% - 64px);
+    margin-top: -20px;
+    float: left;
+    width: 100%;
+    margin-left: 43px;
 }
+
 /*.timeline-Viewport {
 	overflow-y: hidden !important;
 	height: auto !important;

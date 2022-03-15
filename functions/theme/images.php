@@ -3,6 +3,59 @@
 // Get the image. Featured images are also used as page headers
 if ( ! function_exists( 'cwd_base_get_image' ) ) {
 	
+	/**
+	 * @Dave should this just check if get_post_thumbnail_id($post_id)?
+	 * If we keep this should this also check last years folder? 
+	 * I could see issue at the new year where the folder path is not found.
+	 * 
+	 * This function loops through all folders by month and checks if it is found and returns the url.
+	 * 
+	 * @param string $file_name
+	 * @return mixed image url|false
+	 */
+	function get_events_photo_url($file_name) {
+		$possible_image_url = false;
+		$months_to_check = [
+			'01',
+			'02',
+			'03',
+			'04',
+			'05',
+			'06',
+			'07',
+			'08',
+			'09',
+			'10',
+			'11',
+			'12',
+		];
+		$path_to_file_parts = explode('/', wp_upload_dir()['path']);
+		
+		// check and see if it is stored in any folder /YYYY/**/FILE_NAME
+		foreach ($months_to_check as $month) {
+			$path_to_file_parts[5] = $month;
+			$possible_image_url = implode('/', $path_to_file_parts) . '/' . $file_name;
+			if (file_exists($possible_image_url)) {
+				// on pantheon we need to return the url not the file path.
+				return str_replace('code/', '', $possible_image_url);
+			}
+		}
+		return false;
+	}
+	
+	function format_image_url($url, $width=480, $height=480) {
+		if( strpos($url, '.jpeg') ) {
+			$url = str_replace('.jpeg', "-{$width}x{$height}.jpeg", $url);
+		}
+		elseif( strpos($url, '.png') ) {
+			$url = str_replace('.png', "-{$width}x{$height}.png", $url);
+		}
+		elseif( strpos($url, '.jpg') ) {
+			$url = str_replace('.jpg', "-{$width}x{$height}.jpg", $url);
+		}
+		return $url;
+	}
+	
 	function cwd_base_get_image() {
 		
 		global $post;
@@ -20,7 +73,7 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 		$image_width = 480; 
 		$image_height = 480; 
 		
-		if(get_field('image')) { 
+		if($image) { 
 			
 			/* Here we will upload images from the news feed and resize them to square.
 			 * News feed images normally are 850x478, so we upload them to the media 
@@ -35,169 +88,52 @@ if ( ! function_exists( 'cwd_base_get_image' ) ) {
 			$temp_url = basename($new_image);
 			$temp_url = strtolower(sanitize_file_name($temp_url)); 
 			//echo '<strong>Temp image name: </strong>'.$temp_url.'<br>';
-
-			// Get the upload directory and create a filepath
-			$dir = wp_upload_dir();
-			//echo '<strong>Directory parts: </strong><br>';
-			//foreach($dir as $d) {
-				//echo $d.'<br><br>';
-			//}
 			
-			$path_to_file = $dir['path'].'/'.$temp_url; 
-			//echo '<strong>Path to file: </strong>'.$path_to_file.'<br>';
+			$temp_url = format_image_url($temp_url, $image_width, $image_height);
+			$new_image_url = get_events_photo_url($temp_url);
 			
 			// Hey, it's a new image and it doesn't exist yet!
-			if(!file_exists($path_to_file)) { 
-				
+			if(!$new_image_url) { 
 				// Download to a temporary file, then upload it
-				$image_url = cwd_base_upload_image($image, $post_id); 
-				//echo '<strong>Image URL: </strong>'.$image_url.'<br>';
-				
-				// Now create an image id
-				$image_id = attachment_url_to_postid($image_url); 
-				
-				// Now with an id you can get the file
-				$filename = strtolower(basename(get_attached_file($image_id))); 
-				
-				// New name, new path
-				$dir = wp_upload_dir();
-				$path_to_file = $dir['path'].'/'.$filename; 
-				
-				// Send it to the image editor
-				$editor = wp_get_image_editor($path_to_file); 
-				
-				// Resize it - not needed, apparently
-				//$editor->resize( 478, 478, true ); 
-				
-				// Save it - not needed, apparently
-				//$editor->save($editor->generate_filename()); 
-				
-				// Explode it on the dots
-				$new_image_part = explode('.', $temp_url); 
-				
-				// Remove everything after the last dot
-				unset($new_image_part[count($new_image_part) - 1]); 
-				
-				//Put it back together
-				$new_image_part = implode('.', $new_image_part); 
-				
-				// Name your newly resized image
-				if( strpos($temp_url, '.jpeg') ) {
-					$new_image_url = $new_image_part.'-480x480.jpeg';
-				}
-				elseif( strpos($temp_url, '.png') ) {
-					$new_image_url = $new_image_part.'-480x480.png';
-				}
-				else {
-					$new_image_url = $new_image_part.'-480x480.jpg';
-				}
-
+				$image_url = cwd_base_upload_image($image, $post_id);
+				$new_image_url = get_events_photo_url($temp_url);
 			}
-			else {
-				
-				// It (the original image) already esists, but we still need to pass a URL to the image tag
-				$new_image_part = explode('.', $temp_url); 
-				unset($new_image_part[count($new_image_part) - 1]);
-				$new_image_part = implode('.', $new_image_part);
 
-				if( strpos($temp_url, '.jpeg') ) {
-					$new_image_url = $new_image_part.'-480x480.jpeg';
-				}
-				elseif( strpos($temp_url, '.png') ) {
-					$new_image_url = $new_image_part.'-480x480.png';
-				}
-				else {
-					$new_image_url = $new_image_part.'-480x480.jpg';
-				}
-			}
-			
-			// Et voila. We can do the same thing for events feed images
-			echo '<img src="' . $dir['url'] . '/' . $new_image_url . '" alt= "" />'; 
-			//echo '<img src="' . $image . '" alt= "" />'; 
-			
+			echo '<img src="' . $new_image_url . '" alt= "" />';
+
 		}
-		elseif(get_field('photo_url')) {
-						
+		elseif($photo_url) {
+			
 			/* Here we will upload images from the events feed and resize them to square.
 			 * Events feed images are various sizes, but we upload them to the media 
 			 * library and crop them down to 480x480. All image sizes will be
 			 * created. */
 			
 			// Grab the base name and sanitize
-			$temp_url = basename($photo_url);
-			$temp_url = strtolower(sanitize_file_name($temp_url)); 
-			//echo '<strong>Temp image name: </strong>'.$temp_url.'<br>';
-
-			// Get the upload directory and create a filepath
-			$dir = wp_upload_dir();
-			//echo '<strong>Directory parts: </strong><br>';
-			//foreach($dir as $d) {
-				//echo $d.'<br><br>';
-			//}
+			$temp_file_name = basename($photo_url);
+			$temp_file_name = strtolower(sanitize_file_name($temp_file_name));
+			$temp_file_name = format_image_url($temp_file_name, $image_width, $image_height);
+			// echo '<strong>Temp image name: </strong>'.$temp_file_name.'<br>';
 			
-			$path_to_file = $dir['path'].'/'.$temp_url; 
-			//echo '<strong>Path to file: </strong>'.$path_to_file.'<br>';
+			$new_image_url = get_events_photo_url($temp_file_name);
 			
 			// Hey, it's a new image and it doesn't exist yet!
-			if(!file_exists($path_to_file)) { 
-				
+			if(!$new_image_url) {
 				// Download to a temporary file, then upload it
-				$image_url = cwd_base_upload_image($photo_url, $post_id); 
-				//echo '<strong>Image URL: </strong>'.$image_url.'<br>';
-
-				// Now create an image id
-				$image_id = attachment_url_to_postid($image_url); 
-				//echo '<strong>Image ID: </strong>'.$image_id.'<br>';
-
-				// Now with an id you can get the file
-				$filename = strtolower(basename(get_attached_file($image_id))); 
-				//echo '<strong>Filename: </strong>'.$filename.'<br>';
-
-				// New name, new path
-				$dir = wp_upload_dir();
-				$path_to_file = $dir['path'].'/'.$filename; 
-				
-				// Send it to the image editor
-				$editor = wp_get_image_editor($path_to_file); 
-				
-				// Resize it - not needed, apparently
-				//$editor->resize( 480, 480, true ); 
-				
-				// Save it - not needed, apparently
-				//$editor->save($editor->generate_filename()); 
-				
-				// Explode it on the dots
-				$new_image_part = explode('.', $temp_url); 
-				
-				// Remove everything after the last dot
-				unset($new_image_part[count($new_image_part) - 1]); 
-				
-				//Put it back together
-				$new_image_part = implode('.', $new_image_part); 
-				
-				// Name your newly resized image
-				$new_image_url = $new_image_part.'-480x480.jpg'; 
-
-			}
-			else {
-				
-				$new_image_part = explode('.', $temp_url); 
-				unset($new_image_part[count($new_image_part) - 1]);
-				$new_image_part = implode('.', $new_image_part);
-				$new_image_url = $new_image_part.'-480x480.jpg';
+				$image_url = cwd_base_upload_image($photo_url, $post_id);
+				$new_image_url = get_events_photo_url($temp_file_name);
 			}
 			
 			// Et voila. 
-			echo '<img src="' . $dir['url'] . '/' . $new_image_url . '" alt= "" />'; 
-			//echo '<img src="' . $photo_url . '" alt= "" />'; 
-			
+			$new_image_url = $new_image_url ?: get_template_directory_uri() . '/images/wp/cu-seal-large.png';
+			echo '<img src="' . $new_image_url . '" alt= "" />';
 		}
 		elseif (get_field('image_id')) {
 			echo wp_get_attachment_image($image_id, $image_size); // ACF image field
 			//echo 'Hello, world!';
 				
 		} 
-		elseif ( has_post_thumbnail() ) {     
+		elseif ( has_post_thumbnail() ) {
 			the_post_thumbnail($image_size); // Featured image
 		}
 		else {

@@ -9,11 +9,11 @@
 			<?php cwd_base_get_image(); ?>
 
 			<div class="overlay">
-				<h3>
+				<h2 class="h3">
 					<span class="deco">
 						<?php the_title(); ?>
 					</span>
-				</h3>
+				</h2>
 			</div>
 
 		</a>

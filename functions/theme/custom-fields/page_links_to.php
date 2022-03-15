@@ -146,6 +146,20 @@ acf_add_local_field_group(array(
 				'value' => 'galleries',
 			),
 		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'alerts',
+			),
+		),
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'announcements',
+			),
+		),
 	),
 	'menu_order' => 99,
 	'position' => 'normal',

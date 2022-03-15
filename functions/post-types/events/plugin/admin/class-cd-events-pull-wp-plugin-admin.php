@@ -139,7 +139,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 	 * Build the settings form.
 	 */
 	public function register_and_build_fields() {
-
+		
 		// reset the clock to force rerun
 		if( isset( $_POST['cd_events_reset_hidden_field'] ) ) {
 			// Used for local dev requires set wp_event

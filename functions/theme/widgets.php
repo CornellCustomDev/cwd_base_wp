@@ -55,7 +55,7 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 		register_sidebar( array(
 			'name'          => __( 'Section One Widgets', 'cwd_base' ),
 			'id'            => 'sidebar-97',
-			'description'   => __( 'Appears above the footer. Change the titles of these sections using the Section Titles tab on the Customize page (under the Appearance menu).', 'cwd_base' ),
+			'description'   => __( 'A full-width, horizontal widget area. Appears below the content and above the footer.', 'cwd_base' ),
 			'before_widget' => '<div class="col-item">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h3 class="widget-title">',
@@ -65,7 +65,7 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 		register_sidebar( array(
 			'name'          => __( 'Section Two Widgets', 'cwd_base' ),
 			'id'            => 'sidebar-98',
-			'description'   => __( 'Appears above the footer. Change the titles of these sections using the Section Titles tab on the Customize page (under the Appearance menu).', 'cwd_base' ),
+			'description'   => __( 'A full-width, horizontal widget area. Appears above the footer, below section one and above section three.', 'cwd_base' ),
 			'before_widget' => '<div class="col-item">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h3 class="widget-title">',
@@ -75,7 +75,7 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 		register_sidebar( array(
 			'name'          => __( 'Section Three Widgets', 'cwd_base' ),
 			'id'            => 'sidebar-99',
-			'description'   => __( 'Appears above the footer. Change the titles of these sections using the Section Titles tab on the Customize page (under the Appearance menu).', 'cwd_base' ),
+			'description'   => __( 'A full-width, horizontal widget area. Appears directly above the footer, below sections one and two.', 'cwd_base' ),
 			'before_widget' => '<div class="col-item">',
 			'after_widget'  => '</div>',
 			'before_title'  => '<h3 class="widget-title">',
@@ -359,21 +359,29 @@ class Postswidget_Widget extends WP_Widget {
 
 			<?php $the_sidebar = is_active_widget( false, false, $this->id_base, true ); ?> 
 
-			<?php if($view_all_link && $view_all_link_text) { ?>
-				<div class="header-with-button">
+			<div class="header-with-button">
+
+				<?php if($heading) { ?>
 					<h2><?php echo $heading; ?></h2>
-					<div class="buttons">
-					<?php if($the_sidebar == 'widget-area-1' || $the_sidebar == 'widget-area-2') { ?>
-						<a href="<?php echo $view_all_link; ?>">
-					<?php } else { ?>
-						<a href="<?php echo $view_all_link; ?>" class="link-button">
-					<?php } ?>
+				<?php } ?>
+
+				<?php if($view_all_link && $view_all_link_text) { ?>
+
+					<div class="buttons<?php if(!$heading){ echo ' no-widget-heading'; } ?>">
+						<?php if($the_sidebar == 'widget-area-1' || $the_sidebar == 'widget-area-2') { ?>
+						<a class="link-button" href="<?php echo $view_all_link; ?>">
+							<?php } else { ?>
+						<a class="link-button" href="<?php echo $view_all_link; ?>" class="link-button">
+							<?php } ?>
 							<span><?php echo $view_all_link_text; ?></span>
 							<span class="zmdi zmdi-arrow-right"></span>
 						</a>
 					</div>
-				</div>
-			<?php } ?>
+
+				<?php } ?>
+
+			</div>
+					
 
 			<div class="cards<?php if( $format == 'Vertical list' ) { echo ' flex-grid'; } ?>">
 				
@@ -471,7 +479,7 @@ class Postswidget_Widget extends WP_Widget {
 
 						</div>
 
-						<div class="group-fields">
+						<div class="group-fields<?php if($show_thumb != 1) { echo ' no-thumb'; } ?>">
 
 							<?php 
 								if($show_date == 1) {
@@ -546,9 +554,9 @@ class Postswidget_Widget extends WP_Widget {
 			  $all_post_types = get_post_types(array('public' => true), 'names');
 			  foreach ($all_post_types as $post_type) {
 				$post_type = ucwords($post_type);
-				if ($widget_value == $post_type && $post_type != 'Slider' && $post_type != 'Attachment') {
+				if ($widget_value == $post_type && $post_type != 'Slider' && $post_type != 'Attachment' && $post_type != 'Frm_display') {
 				  $output .= '<option value="'.$post_type.'" selected>'.$post_type.'</option>';
-				} elseif ($post_type != 'Slider' && $post_type != 'Attachment') {
+				} elseif ($post_type != 'Slider' && $post_type != 'Attachment' && $post_type != 'Frm_display') {
 				  $output .= '<option value="'.$post_type.'">'.$post_type.'</option>';
 				}
 			  }

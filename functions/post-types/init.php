@@ -22,4 +22,12 @@ if( $post_type_options && in_array('testimonials', $post_type_choices) ) {
 if( $post_type_options && in_array('galleries', $post_type_choices) ) {
 	require_once locate_template('/functions/post-types/galleries/post-type.php');
 }
-
+if( $post_type_options && in_array('alerts', $post_type_choices) ) {
+	require_once locate_template('/functions/post-types/alerts/post-type.php');
+}
+if( $post_type_options && in_array('announcements', $post_type_choices) ) {
+	require_once locate_template('/functions/post-types/announcements/post-type.php');
+}
+if( $post_type_options && in_array('projects', $post_type_choices) ) {
+	require_once locate_template('/functions/post-types/projects/post-type.php');
+}

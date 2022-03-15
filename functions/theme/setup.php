@@ -154,11 +154,6 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 				'logo_size'	=> 'large',
 				'logo_position'	=> 'right',
 				'logo_switch_mobile' => 'no',
-				'heading_one'	=> 'Heading One',
-				'heading_two'	=> 'Heading Two',
-				'heading_three'	=> 'Heading Three',
-				'center_headings'	=> 'yes',
-				'center_text'	=> 'yes'
 			);
 
 			foreach ( $core_settings as $k => $v ) {
@@ -1437,6 +1432,16 @@ You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-c
 			add_option('_options_footer_options_heading', 'field_604df0f057f0f');
 			add_option('options_footer_options', '');
 			add_option('_options_footer_options', 'field_604df02d57f0d');
+			
+				// Simple banner options
+			add_option('hide_simple_banner', 'no');
+			add_option('simple_banner_font_size', '22px');
+			add_option('simple_banner_color', '#b31b1b');
+			add_option('simple_banner_text_color', '#ffffff');
+			add_option('simple_banner_link_color', '#ffffff');
+			add_option('simple_banner_close_color', '#ffffff');
+			add_option('close_button_enabled', 'on');
+			add_option('simple_banner_text', 'Emergency banner for dismissible messages. You can add or remove this text on the Simple Banner admin page.');
 			
 			// Add default text widgets
 			function cwd_base_pre_set_widget( $sidebar, $name, $args = array() ) {

@@ -6,7 +6,7 @@ $center_text = get_theme_mod('center_text');
 ?>
 
 <?php if ( is_active_sidebar( 'sidebar-97' ) ) : ?>
-    <div class="band colorband accent4 padded">
+    <div class="band colorband accent4 padded" role="complementary">
         <div class="container-fluid">
 			<div class="row">
             	<?php if ( get_theme_mod('heading_one') != '' ) : ?>
@@ -23,7 +23,7 @@ $center_text = get_theme_mod('center_text');
 <?php endif; ?>
 
 <?php if ( is_active_sidebar( 'sidebar-98' ) ) : ?>
-    <div class="band colorband accent2 padded">
+    <div class="band colorband accent2 padded" role="complementary">
         <div class="container-fluid">
 			<div class="row">
             	<?php if ( get_theme_mod('heading_two') != '' ) : ?>
@@ -40,7 +40,7 @@ $center_text = get_theme_mod('center_text');
 <?php endif; ?>
 
 <?php if ( is_active_sidebar( 'sidebar-99' ) ) : ?>
-    <div class="band colorband accent1 padded">
+    <div class="band colorband accent1 padded" role="complementary">
         <div class="container-fluid">
 			<div class="row">
             	<?php if ( get_theme_mod('heading_three') != '' ) : ?>

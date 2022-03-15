@@ -70,7 +70,7 @@ function events_column( $column, $post_id ) {
     }
     if ( $column == 'custom_date' ) {
 		
-		$pub_date = get_field( 'date', $news->ID );
+		$pub_date = get_field( 'date', $post_id );
 		$date = date( 'F d, Y', strtotime( $pub_date ) );
 		
         echo $date;

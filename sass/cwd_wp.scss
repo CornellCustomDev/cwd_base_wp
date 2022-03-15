@@ -558,6 +558,26 @@ body:not(.mobile) {
 #sidebar-top,
 #sidebar-bottom {
 	
+	.header-with-button {
+	
+		.buttons {
+			
+			margin-top: 0;
+			
+			a {
+				
+				&.link-button {
+					/*font-size: 16px;
+					padding: 0.25em 1em;*/
+				}
+			}
+		}
+	}
+	
+	> * {
+		margin-bottom: 20px;
+	}
+	
 	&.no-sidebar-top:after,
 	&.no-sidebar-bottom:after {
 		content: none;
@@ -566,6 +586,10 @@ body:not(.mobile) {
 	.cwd-basic {
 		
 		.group-fields {
+			
+			&.no-thumb {
+				width: 100%;
+			}
 
 			.subheading {
 				margin-bottom: 8px;
@@ -575,10 +599,16 @@ body:not(.mobile) {
 		&.tiles {
 			
 			.header-with-button {
+				
 				margin: 0 auto;
 				padding: 0 10px 0 5px;
 				margin-bottom: 12px;
 				width: 100%;
+				
+				.no-widget-heading {
+					text-align: right;
+					width: 100%;
+				}
 			}
 			
 			.card {
@@ -604,6 +634,61 @@ body:not(.mobile) {
 				}
 			}
 			
+		}
+	}
+	
+	.secondary-navigation {
+		
+		ul {
+			
+			&.bsn-list {
+				
+				> li {
+					
+					&.page_item_has_children {
+					
+						> ul {
+							
+							&.children {
+								
+								transition: all 0.8s ease-out;
+						
+						 		li {
+									
+									/*margin-left: 11px;*/
+									
+									&.page_item_has_children {
+										
+										margin-left: -8px;
+										
+										.fa {
+											
+											&:before {
+												
+												margin-right: 8px;
+											}
+										}
+										
+										.children {
+											
+											&.open {
+												
+												transition: all 0.8s ease-out;
+												display: block;
+											}
+											&.closed {
+												
+												transition: all 0.8s ease-out;
+												display: none;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -707,8 +792,70 @@ body:not(.mobile) {
 	
 }
 
-/* Campus Press footer
+/* CWD Recent Posts Widget
 ----------------------------------------*/
+.cwd-component {
+	
+	.header-with-button {
+
+		.buttons {
+
+			&.no-widget-heading {
+				text-align: right;
+				width: 100%;
+			}
+
+		}
+	}
+	.subheading {
+
+		font-size: 16px;
+		display: block;
+		font-weight: 500;
+		line-height: 1.5;
+		color: #707070 !important;
+		margin-bottom: 1em;
+		font-family: "freight-text-pro", serif;
+		-webkit-font-smoothing: subpixel-antialiased;
+		-moz-osx-font-smoothing: auto;
+		margin-top: 0;
+		overflow-wrap: break-word;
+	}
+	.cards {
+		
+		.card {
+			
+			.group-image {
+				
+				&.no-thumb {
+					
+					width: 100%;
+				}
+			}
+			.group-fields {
+				
+				.subheading {
+					
+					font-size: 16px;
+					display: block;
+					font-weight: 500;
+					line-height: 1.5;
+					color: #707070 !important;
+					margin-bottom: 1em;
+					font-family: "freight-text-pro", serif;
+					-webkit-font-smoothing: subpixel-antialiased;
+					-moz-osx-font-smoothing: auto;
+					margin-top: 0;
+					overflow-wrap: break-word;
+				}
+			}
+			
+		}
+	}
+}
+
+/* Campus Press footer
+---------------------------------------*/
 #global-footer-content {
 	display: none;
 }
@@ -1425,6 +1572,7 @@ figure.align-left {
 }
 
 // Custom Widgets
+
 
 // Miscellaneous
 p.no-content {

@@ -351,4 +351,3 @@ function cwd_slider(div,caption,time,speed,auto,random,height,path,bg,heading2) 
 
 
 
-

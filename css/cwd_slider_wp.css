@@ -1,0 +1,124 @@
+/* Photo Credits
+   ************************************ */
+.photo-credits .photocredits-focus {
+	position: relative;
+	color: #ffffff;
+	height: 25px;
+}
+
+.photo-credits .photocredits-focus a {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.photo-credits .photo-credit-icon {
+	position: absolute;
+	right: 5px;
+	bottom: -3px;
+	z-index: 1;
+	font-size: 18px;
+	background: rgba(0, 0, 0, 0.5);
+	width: 28px;
+	line-height: 28px;
+	text-align: center;
+	border-radius: 2px;
+	opacity: 1;
+	-webkit-transition: opacity 0.1s;
+	transition: opacity 0.1s;
+	cursor: help;
+}
+
+.photo-credits .photo-credit-icon:hover,
+.photo-credits .photo-credit-icon:focus,
+.photo-credits .photocredits-focus:focus .photo-credit-icon,
+.photo-credits .photocredits-focus:hover .photo-credit-icon {
+	opacity: 1;
+}
+
+.photo-credits .photo-credit-text,
+.photo-credits .photocredits-focus:focus .photo-credit-text,
+.photo-credits .photocredits-focus:hover .photo-credit-text {
+	opacity: 1;
+	-webkit-transition: opacity 0.1s 0.2s;
+	transition: opacity 0.1s 0.2s;
+	padding-right: 38px;
+}
+
+.photo-credits .photo-credit-text.off {
+	opacity: 0;
+	-webkit-transition: opacity 0.1s 0.4s;
+	transition: opacity 0.1s 0.4s;
+}
+
+.photo-credits .photo-credit-text p {
+	text-transform: none;
+}
+
+.photo-credits .empty .photo-credit-icon {
+	display: none;
+}
+
+.slider-container .photo-credit-text p span {
+	padding: 6px 11px;
+	background: rgba(0, 0, 0, 0.4);
+	font-size: 15px;
+}
+
+.slider-container .photo-credit-text p span {
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.1s 0.4s;
+	transition: all 0.1s 0.4s;
+}
+
+.slider-container .photocredits-focus:hover p span a,
+.slider-container .photocredits-focus:focus p span a {
+	-webkit-transition: all 0.1s 0.4s;
+	transition: all 0.1s 0.4s;
+}
+
+.slider-container .photocredits-focus:hover p span,
+.slider-container .photocredits-focus:focus p span,
+.slider-container .photocredits-focus:hover p span a,
+.slider-container .photocredits-focus:focus p span a,
+.slider-container .photo-credit-text p span a:focus,
+.slider-container .photo-credit-text p span a:hover {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Extra Heading Animation */
+@-webkit-keyframes extra-heading-fade-in {
+	0% {
+		opacity: 0;
+	}
+	75% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes extra-heading-fade-in {
+	0% {
+		opacity: 0;
+	}
+	75% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.extra-heading-animate {
+	-webkit-animation-name: extra-heading-fade-in;
+	        animation-name: extra-heading-fade-in;
+	-webkit-animation-duration: 0.8s;
+	        animation-duration: 0.8s;
+}
+
+.extra-heading-animate.quick {
+	-webkit-animation-duration: 0.32s;
+	        animation-duration: 0.32s;
+}
+/*# sourceMappingURL=cwd_slider_wp.css.map */

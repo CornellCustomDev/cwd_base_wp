@@ -1,39 +1,48 @@
 <?php
 
 // Get the date depending on post type. Add more as needed. 
-// Assumes the ACF date field is named 'custom_date'.
+// Assumes the ACF date field is named 'custom_date' and used for all (or most?) custom post types.
 if ( ! function_exists( 'cwd_base_get_the_date' ) ) {
 	
 	function cwd_base_get_the_date() {
 		
 		if(get_field('publication_date')) { // News ?>
 
-			<h4 class="subheading sans">
+			<span class="subheading sans">
 				<?php the_field('publication_date'); ?>
-			</h4>
+			</span>
 
 		<?php }
 		
 		elseif(get_field('date')) { // Events ?>
 
-			<h4 class="subheading sans">
+			<span class="subheading sans">
 				<?php the_field('date'); ?>
-			</h4>
+			</span>
 
 		<?php }
 
 		elseif(get_field('custom_date')) { // ACF datepicker ?>
-			<h4 class="subheading sans">
+			<span class="subheading sans">
 				<?php the_field('custom_date'); ?>
-			</h4>
+			</span>
 		<?php }
 
 		else { ?>
-			<h4 class="subheading sans">
+			<span class="subheading sans">
 				<?php echo get_the_date('F j, Y'); // Date (WP core) ?>
-			</h4>
+			</span>
 		<?php }
 		
 	}
 	
 }
+
+// Make today's date the default date for all new posts (news, events, and custom image field)
+function cwd_base_default_date($field) {
+	$field['default_value'] = date('Ymd');
+	return $field;
+}
+add_filter('acf/load_field/name=date', 'cwd_base_default_date');
+add_filter('acf/load_field/name=publication_date', 'cwd_base_default_date');
+add_filter('acf/load_field/name=custom_date', 'cwd_base_default_date');
