@@ -140,4 +140,8 @@ div[data-name=metadata] > .acf-input > .acf-fields > .acf-field:not([data-name=r
 #acf_after_title-sortables .acf-field-text[data-name=title] {
 	display: none;
 }
+
+.mce-notification .mce-notification-inner {
+	display: none;
+}
 /*# sourceMappingURL=admin.css.map */

@@ -119,13 +119,13 @@ if ( ! function_exists ( 'get_layout' ) ) {
 	
 	function get_layout() {
 		
-		if( is_archive() || is_search() || is_tag() || is_category() || is_home() ) {
+		if( is_archive() || is_search() || is_tag() || is_tax() || is_category() || is_home() ) {
 			$archive_options = get_field('archive_options', 'options');
 			$layout = $archive_options['layout'];
 		}
 		else {
 			$layout_post_meta = get_post_meta( get_queried_object_id() );
-			$layout = $layout_post_meta['layout_option'][0];
+			$layout = isset($layout_post_meta['layout_option'][0]) ? $layout_post_meta['layout_option'][0] : null;
 		}
 		
 		// Set default layout if...

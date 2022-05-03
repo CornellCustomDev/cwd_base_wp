@@ -1,6 +1,6 @@
 <?php
 
-// Add currentn menu item class to custom post type archives
+// Add current menu item class to custom post type archives
 function nav_parent_class( $classes, $item ) {
 	
 	$current_menu_item_slug = basename($item->url);

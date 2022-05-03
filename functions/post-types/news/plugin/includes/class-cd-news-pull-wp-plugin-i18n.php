@@ -37,7 +37,7 @@ class Cd_News_Pull_Wp_Plugin_i18n {
 		load_plugin_textdomain(
 			'cd-news-pull-wp-plugin',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			'../languages/'
 		);
 
 	}

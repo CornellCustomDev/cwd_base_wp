@@ -11,7 +11,7 @@
  */
 
 // Required for timer name that is reset on form save.
-require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/class-cd-news-pull-wp-plugin-utils-processor.php';
+require_once get_theme_file_path('/functions/post-types/news/plugin/utils/class-cd-news-pull-wp-plugin-utils-processor.php');
 
 /**
  * The admin-specific functionality of the plugin.
@@ -73,7 +73,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 
 		wp_enqueue_script(
 			$this->plugin_name,
-			plugin_dir_url( __FILE__ ) . 'js/cd-news-pull-wp-plugin-admin.js',
+			get_template_directory_uri() . '/functions/post-types/news/plugin/admin/js/cd-news-pull-wp-plugin-admin.js',
 			[ 'jquery' ],
 			$this->version,
 			true
@@ -100,7 +100,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 			'Settings',
 			'administrator',
 			$this->plugin_name . '-settings',
-			[ $this, 'display_plugin_admin_settings' ],
+			[ $this, 'display_plugin_admin_settings' ]
 		);
 	}
 
@@ -209,7 +209,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 				// 'max_value' => 86400,
 				// 'step' => 30,
 				'required' => 'required'
-			],
+			]
 		);
 
 		add_settings_section(
@@ -229,7 +229,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 				'help_text' => 'The Slug name of the Custom Post Type.',
 				'required' => 'required',
 				'section' => 'cd_news_pull_fields_section',
-			],
+			]
 		);
 
 		// ID Field
@@ -238,7 +238,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_news_pull_news_id',
 				'section' => 'cd_news_pull_fields_section',
-			],
+			]
 		);
 
 		// News Url
@@ -257,7 +257,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_news_pull_title',
 				'section' => 'cd_news_pull_fields_section',
-			],
+			]
 		);
 
 		// Content Summary
@@ -277,7 +277,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 				'id' => 'cd_news_pull_image',
 				'help_text' => 'The URL of the image hosted on CU News',
 				'section' => 'cd_news_pull_fields_section',
-			],
+			]
 		);
 
 		// Image alt text
@@ -286,7 +286,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_news_pull_image_alt',
 				'section' => 'cd_news_pull_fields_section',
-			],
+			]
 		);
 
 		// Date Field
@@ -295,7 +295,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_news_pull_date_published',
 				'section' => 'cd_news_pull_fields_section',
-			],
+			]
 		);
 
 		// Publising Options
@@ -315,7 +315,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 				'id' => 'cd_news_pull_is_publish',
 				'subtype' => 'checkbox',
 				'section' => 'cd_news_pull_publishing_section',
-			],
+			]
 		);
 
 		// Default Category
@@ -325,7 +325,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 				'id' => 'cd_news_pull_category',
 				'section' => 'cd_news_pull_publishing_section',
 				'help_text' => 'The default category slug',
-			],
+			]
 		);
 
 		// Default Category
@@ -335,7 +335,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 				'id' => 'cd_news_pull_tag_id',
 				'section' => 'cd_news_pull_publishing_section',
 				'help_text' => 'The default taxonomy to set requires Category',
-			],
+			]
 		);
 
 		register_setting( 'cd_news_pull_general_settings', 'cd_news_pull_url_1');
@@ -369,7 +369,7 @@ class Cd_News_Pull_Wp_Plugin_Admin {
 			[ $this, 'cd_news_pull_render_settings_field' ],
 			'cd_news_pull_general_settings',
 			$section,
-			$args,
+			$args
 		);
 	}
 

@@ -148,13 +148,3 @@ if ( ! function_exists ( 'cwd_base_get_menu_by_location' ) ) {
 		return $menu_obj;
 	}
 }
-
-// Add menu item descriptions (only top-level main menu items)
-function cwd_base_header_menu_desc( $item_output, $item, $depth, $args ) {
-	
-	if( 'header-menu' == $args->theme_location && ! $depth && $item->description )
-		$item_output = str_replace( '</a>', '<span class="description">' . $item->description . '</span></a>', $item_output );
-		
-	return $item_output;
-}
-add_filter( 'walker_nav_menu_start_el', 'cwd_base_header_menu_desc', 10, 4 );

@@ -100,23 +100,23 @@ class Cd_Events_Pull_Wp_Plugin {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cd-events-pull-wp-plugin-loader.php';
+		require_once 'class-cd-events-pull-wp-plugin-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cd-events-pull-wp-plugin-i18n.php';
+		require_once 'class-cd-events-pull-wp-plugin-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cd-events-pull-wp-plugin-admin.php';
+		require_once get_theme_file_path('/functions/post-types/events/plugin/admin/class-cd-events-pull-wp-plugin-admin.php');
 
 		/**
 		 * The class responsible for loading the localist calendar events.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/class-cd-events-pull-wp-plugin-utils-processor.php';
+		require_once get_theme_file_path('/functions/post-types/events/plugin/utils/class-cd-events-pull-wp-plugin-utils-processor.php');
 
 		$this->loader = new Cd_Events_Pull_Wp_Plugin_Loader();
 

@@ -100,23 +100,23 @@ class Cd_News_Pull_Wp_Plugin {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cd-news-pull-wp-plugin-loader.php';
+		require_once 'class-cd-news-pull-wp-plugin-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cd-news-pull-wp-plugin-i18n.php';
+		require_once 'class-cd-news-pull-wp-plugin-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cd-news-pull-wp-plugin-admin.php';
+		require_once get_theme_file_path('/functions/post-types/news/plugin/admin/class-cd-news-pull-wp-plugin-admin.php');
 
 		/**
 		 * The class responsible for loading the CU news.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/class-cd-news-pull-wp-plugin-utils-processor.php';
+		require_once get_theme_file_path('/functions/post-types/news/plugin/utils/class-cd-news-pull-wp-plugin-utils-processor.php');
 
 		$this->loader = new Cd_News_Pull_Wp_Plugin_Loader();
 

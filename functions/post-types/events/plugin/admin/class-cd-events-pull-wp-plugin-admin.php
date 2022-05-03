@@ -10,7 +10,7 @@
  */
 
  // Required for timer name that is reset on form save.
-require_once plugin_dir_path( dirname( __FILE__ ) ) . 'utils/class-cd-events-pull-wp-plugin-utils-processor.php';
+require_once get_theme_file_path('/functions/post-types/events/plugin/utils/class-cd-events-pull-wp-plugin-utils-processor.php');
 
 /**
  * The admin-specific functionality of the plugin.
@@ -64,13 +64,13 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		// wp_enqueue_script(
-		// 	$this->plugin_name,
-		// 	__DIR__ . '/js/cd-events-pull-wp-plugin-admin.js',
-		// 	[ 'jquery' ],
-		// 	$this->version,
-		// 	true
-		// );
+		wp_enqueue_script(
+		 	$this->plugin_name,
+		 	get_stylesheet_directory_uri() . '/functions/post-types/events/plugin/admin/js/cd-events-pull-wp-plugin-admin.js',
+		 	[ 'jquery' ],
+		 	$this->version,
+		 	true
+		 );
 
 	}
 
@@ -217,7 +217,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_post_type',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// Title Field
@@ -226,7 +226,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_title',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// Date Field
@@ -235,7 +235,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_date',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// Date Field
@@ -244,7 +244,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_location',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// Description Field
@@ -253,7 +253,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_description',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// Image Field
@@ -263,7 +263,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 				'id' => 'cd_events_pull_image',
 				'section' => 'cd_events_pull_fields_section',
 				'help_text' => 'The URL of the image hosted on localist',
-			],
+			]
 		);
 
 		// Image Field
@@ -272,7 +272,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_start_time',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// Publish Field
@@ -281,7 +281,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_is_all_day',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// Publish Field
@@ -290,7 +290,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[
 				'id' => 'cd_events_pull_localist_url',
 				'section' => 'cd_events_pull_fields_section',
-			],
+			]
 		);
 
 		// ID Field
@@ -320,7 +320,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 				'subtype' => 'checkbox',
 				'section' => 'cd_events_pull_publishing_section',
 				'help_text' => 'Does not affect publish status',
-			],
+			]
 		);
 
 		// Publish Field
@@ -330,7 +330,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 				'id' => 'cd_events_pull_is_publish',
 				'subtype' => 'checkbox',
 				'section' => 'cd_events_pull_publishing_section',
-			],
+			]
 		);
 
 		// Image Field
@@ -347,7 +347,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 				// 'max_value' => 86400,
 				// 'step' => 30,
 				'required' => 'required'
-			],
+			]
 		);
 
 		register_setting( 'cd_events_pull_general_settings', 'cd_events_pull_url');
@@ -380,7 +380,7 @@ class Cd_Events_Pull_Wp_Plugin_Admin {
 			[ $this, 'cd_events_pull_render_settings_field' ],
 			'cd_events_pull_general_settings',
 			$section,
-			$args,
+			$args
 		);
 	}
 	/**

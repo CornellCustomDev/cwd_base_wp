@@ -7,17 +7,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<script type="text/javascript"> // Avoid flash of unstyled content
-		var elm=document.getElementsByTagName("html")[0];
-		elm.style.display="none";
-		document.addEventListener("DOMContentLoaded",function(event) { elm.style.display="block"; });
-	</script>
 
-	<link rel="profile" href="//gmpg.org/xfn/11">
-	
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	
 	<!-- Enhanced comments -->
 	<?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?>
 	
@@ -77,17 +67,15 @@
 		</header>
 		
 		<header id="site-header" aria-label="Site Header">
+			
 		<?php if($header_img_url) { ?>
 			<div id="image-band" class="band" aria-label="Site Banner" style="background-image: url(<?php echo $header_img_url; ?>)"></div>
 		<?php } ?>
 		
-		<?php if(is_front_page() && $has_slider == 'Yes') { ?>
-			
-			<?php $slide_count = wp_count_posts('slider'); // Are there any published slides? ?>
-			
+		<?php if(is_front_page() && $has_slider == 'Yes') { ?>	
 			<div class="band slider-container">
 				<div class="container-fluid">
-					<div id="slider-caption" class="slider-caption"><?php if($slide_count->publish < 1) echo '<p id="no-active-slides">Add images to activate the slider. You can add images <a href="' . site_url() . '/wp-admin/edit.php?post_type=slider">here</a>.</p>'; ?></div>
+					<div id="slider-caption" class="slider-caption"><?php if( wp_count_posts('slider')->publish < 1 ) { echo '<p id="no-active-slides">Add images to activate the slider. You can add images <a href="' . site_url() . '/wp-admin/edit.php?post_type=slider">here</a>.</p>'; } ?></div>
 				</div>
 			</div>
 		<?php } ?>

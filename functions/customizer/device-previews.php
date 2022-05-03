@@ -1,6 +1,6 @@
 <?php
 
-// Adjust Customizer responsive sizes
+	// Adjust Customizer responsive sizes
     if ( ! defined( 'ABSPATH' ) ) exit;
 
     function cwd_customizer_responsive_sizes() {
@@ -32,5 +32,3 @@
     }
 
     add_action( 'customize_controls_print_styles', 'cwd_customizer_responsive_sizes' );
-
-?>

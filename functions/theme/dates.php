@@ -38,7 +38,7 @@ if ( ! function_exists( 'cwd_base_get_the_date' ) ) {
 	
 }
 
-// Make today's date the default date for all new posts (news, events, and custom image field)
+// Make today's date the default date for all new posts (news, events, and custom date field)
 function cwd_base_default_date($field) {
 	$field['default_value'] = date('Ymd');
 	return $field;

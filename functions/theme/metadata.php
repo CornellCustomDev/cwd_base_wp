@@ -718,7 +718,7 @@ if ( ! function_exists( 'cwd_base_get_gallery_tags' ) ) {
 
 if ( ! function_exists( 'cwd_base_get_gallery_categories' ) ) {
 	
-	// Course categories
+	// Gallery categories
 	function cwd_base_get_gallery_categories() { 
 
 		$gallery_categories = wp_get_post_terms( get_the_ID(), 'gallery_categories' );

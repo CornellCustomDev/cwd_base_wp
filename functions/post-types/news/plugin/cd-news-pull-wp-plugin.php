@@ -41,7 +41,7 @@ define( 'CD_NEWS_PULL_WP_PLUGIN_VERSION', '1.0.0' );
  * This action is documented in includes/class-cd-news-pull-wp-plugin-activator.php
  */
 function activate_cd_news_pull_wp_plugin() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-cd-news-pull-wp-plugin-activator.php';
+	require_once 'includes/class-cd-news-pull-wp-plugin-activator.php';
 	Cd_News_Pull_Wp_Plugin_Activator::activate();
 }
 
@@ -50,7 +50,7 @@ function activate_cd_news_pull_wp_plugin() {
  * This action is documented in includes/class-cd-news-pull-wp-plugin-deactivator.php
  */
 function deactivate_cd_news_pull_wp_plugin() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-cd-news-pull-wp-plugin-deactivator.php';
+	require_once 'includes/class-cd-news-pull-wp-plugin-deactivator.php';
 	Cd_News_Pull_Wp_Plugin_Deactivator::deactivate();
 }
 
@@ -61,7 +61,7 @@ register_deactivation_hook( __FILE__, 'deactivate_cd_news_pull_wp_plugin' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-cd-news-pull-wp-plugin.php';
+require 'includes/class-cd-news-pull-wp-plugin.php';
 
 /**
  * Begins execution of the plugin.

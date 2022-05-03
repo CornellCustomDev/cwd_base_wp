@@ -1,9 +1,5 @@
 <?php
 
-// Register post type and add custom fields
-require_once 'post-type.php';
-require_once 'custom-fields.php';
-
 if ( ! function_exists ( 'slider' ) ) {
 
 	function slider() {
@@ -68,7 +64,7 @@ if ( ! function_exists ( 'slider' ) ) {
 
 		?>
 
-		<script type="text/javascript">
+		<script type="text/javascript" async>
 			jQuery(document).ready(function($) {
 				// Reference: cwd_slider(div,caption,time,speed,auto,random,height,path,bg,heading2)
 				cwd_slider('.<?php echo $sliderContainerId ?>','.<?php echo $sliderCaptionId ?>',4,1,true,false,'','','','<div>');

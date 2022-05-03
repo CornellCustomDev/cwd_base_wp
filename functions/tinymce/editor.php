@@ -8,17 +8,6 @@ if ( ! function_exists ( 'cwd_base_editor_styles' ) ) {
 }
 add_action( 'admin_init', 'cwd_base_editor_styles' );
 
-// Override default TinyMCE skin
-if ( ! function_exists ( 'cwd_base_tinymce_editor_css' ) ) {
-	function cwd_base_tinymce_editor_css() {
-		$src = get_template_directory_uri().'/css/tinymce.css';
-		$ver = add_query_arg( 'ver', rand(), $src ); ?>
-		<link rel='stylesheet' href='<?php echo $ver; ?>' type='text/css' />
-		<?php
-	}
-	add_action( 'admin_footer', 'cwd_base_tinymce_editor_css' );
-}
-
 // Display kitchen sink by default in the editor
 if ( ! function_exists ( 'cwd_base_format_TinyMCE' ) ) {
 	function cwd_base_format_TinyMCE( $in ) {
@@ -46,13 +35,6 @@ if( !function_exists('cwd_base_editor_mce_buttons') ){
     }
     add_filter('mce_buttons', 'cwd_base_editor_mce_buttons', 0); // Use mce_buttons_2, 3, or 4 to add more rows.
 }
-
-// Add table plugin for tinymce
-function add_the_table_plugin( $plugins ) {
-    $plugins['table'] = get_template_directory_uri() . '/functions/tinymce/plugins/table/plugin.min.js';
-    return $plugins;
-}
-add_filter( 'mce_external_plugins', 'add_the_table_plugin' );
 
 if( !function_exists('cwd_base_editor_mce_buttons_2') ){
     function cwd_base_editor_mce_buttons_2($buttons) { // Second row, not needed at the moment, but we need to explicitly make it empty or WordPress will add buttons we don't want.

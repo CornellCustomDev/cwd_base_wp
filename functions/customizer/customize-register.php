@@ -75,7 +75,7 @@ add_action( 'customize_register', 'cwd_base_customize_register' );
 
 // Customize controls script - show/hide options conditionally
 function customize_controls_js() {
-	wp_enqueue_script( 'customize-controls-js', get_theme_file_uri( '/functions/customizer/customize-controls.js' ), array(), '20210310', true );
+	wp_enqueue_script( 'customize-controls-js', get_theme_file_uri( '/functions/customizer/customize-controls.js' ), array('jquery'), '', true );
 }
 add_action( 'customize_controls_enqueue_scripts', 'customize_controls_js' );
 

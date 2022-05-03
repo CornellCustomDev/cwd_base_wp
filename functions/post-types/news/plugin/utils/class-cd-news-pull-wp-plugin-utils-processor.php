@@ -207,7 +207,7 @@ class Cd_News_Pull_Wp_Plugin_Utils_Processor {
 	 */
 	private function cd_transform_news( $news_response ) {
 		if ( empty( $news_response ) ) {
-			$this->write_log( 'Warning: Transform recieved null data' );
+			$this->write_log( 'Warning: Transform received null data' );
 			return;
 		}
 		$post_type = get_option( 'cd_news_pull_post_type' );
@@ -227,7 +227,7 @@ class Cd_News_Pull_Wp_Plugin_Utils_Processor {
 		$t_news      = [];
 		$this->write_log( 'Notice: Starting filter by tags.' );
 		foreach ( $news_response as $e ) {
-			$is_loadable = ( empty( $filter_tags ) ||  $filter_tags == [""]) ? true : false;
+			$is_loadable = ( empty( $filter_tags ) || $filter_tags == [""]) ? true : false;
 						
 			foreach ( $filter_tags as $tag ) {
 				if ( $this->in_arrayi( trim( $tag ), $e->tags ) ) {
@@ -236,8 +236,6 @@ class Cd_News_Pull_Wp_Plugin_Utils_Processor {
 					break;
 				}
 			}
-			
-
 			
 			if ( $is_loadable ) {
 				$t = (object) [
@@ -320,7 +318,7 @@ class Cd_News_Pull_Wp_Plugin_Utils_Processor {
 	}
 
 	/**
-	 * Helper function checkes case insensitive
+	 * Helper function checks case insensitive
 	 *
 	 * @param string $needle The search string.
 	 * @param array  $haystack The array to be searched.

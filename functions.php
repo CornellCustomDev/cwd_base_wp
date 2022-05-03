@@ -13,6 +13,8 @@ $baseUrl = site_url();
 // Required files
 $cwd_includes = array(
 	'/functions/theme/setup.php',
+	'/functions/customizer/device-previews.php',
+	'/functions/customizer/customize-register.php',
 	'/functions/theme/layout.php',
 	'/functions/theme/body-classes.php',
 	'/functions/theme/pagination.php',
@@ -23,24 +25,16 @@ $cwd_includes = array(
 	'/functions/theme/images.php',
 	'/functions/theme/header-img.php',
 	'/functions/theme/options.php',
-	//'/functions/plugins/og-tags/og-tags.php',
-	'/functions/plugins/widget-context/widget-context.php',
-	//'/functions/plugins/widget-shortcode/init.php',
-	'/functions/plugins/simple-widget-title-links/simple-widget-title-links.php',
-	//'/functions/plugins/simple-banner/simple-banner.php',
-	'/functions/plugins/widget-css-classes/widget-css-classes.php',
 	'/functions/navigation/menus.php',
 	'/functions/navigation/breadcrumbs.php',
 	'/functions/navigation/menu-classes.php',
 	'/functions/navigation/section-nav/section-nav.php',
-	'/functions/customizer/device-previews.php',
-	'/functions/customizer/customize-register.php',
 	'/functions/theme/custom-fields/featured.php',
 	'/functions/theme/custom-fields/image_id.php',
 	'/functions/theme/custom-fields/page_links_to.php',
 	'/functions/theme/custom-fields/acf-search.php',
 	'/functions/tinymce/editor.php',
-	'/functions/post-types/slider/slider.php',
+	'/functions/plugins/simple-widget-title-links/simple-widget-title-links.php',
 );
 
 // Check if include file exists
@@ -70,49 +64,6 @@ if ( ! function_exists ( 'cwd_base_adjust_content_width' ) ) {
 	add_action( 'template_redirect', 'cwd_base_adjust_content_width' );
 }
 
-// Use this to inject code directly after the opening body tag
-if ( ! function_exists ( 'cwd_base_after_body_tag' ) ) {
-	function cwd_base_after_body_tag() {
-		 // Do stuff
-	}
-	add_action( 'wp_body_open', 'cwd_base_after_body_tag' );
-}
-
-// Advanced Custom Fields: add Phone Number Field
-if( !class_exists('acf_plugin_phone') ) {
-	class acf_plugin_phone {
-		function __construct() {
-			$path = get_stylesheet_directory_uri().'/';
-			$this->settings = array(
-				'version'	=> '1.0.0',
-				'url'		=> $path,
-				'path'		=> $path
-			);
-			add_action('acf/include_field_types', 	array($this, 'include_field_types')); // v5
-			add_action('acf/register_fields', 		array($this, 'include_field_types')); // v4
-		}
-		function include_field_types( $version = false ) {
-			if( !$version ) $version = 5;
-			include_once('functions/theme/custom-fields/acf-phone-v5.php');
-		}
-	}
-	new acf_plugin_phone();
-}
-
-// Enable the use of shortcodes in text widgets.
-add_filter( 'widget_text', 'do_shortcode' );
-
-// Add slider.php
-if ( ! function_exists ( 'call_slider_function' ) ) {
-	function call_slider_function() {
-		$add_slider = get_post_meta( get_the_ID(), 'add_slider', true );
-		if(is_front_page() && $add_slider == 'Yes') {
-			require_once get_theme_file_path('/functions/post-types/slider/slider.php');
-		}
-	}
-}
-add_action( 'wp', 'call_slider_function' );
-
 // Enqueue admin assets
 if ( ! function_exists ( 'cwd_base_admin_assets' ) ) {
 	function cwd_base_admin_assets() {
@@ -120,7 +71,6 @@ if ( ! function_exists ( 'cwd_base_admin_assets' ) ) {
 		wp_enqueue_script( 'admin-scripts', get_stylesheet_directory_uri() . '/js/admin.js');
 	}
 	add_action( 'admin_enqueue_scripts', 'cwd_base_admin_assets');
-	add_action( 'acf/input/admin_enqueue_scripts', 'cwd_base_admin_assets');
 }
 
 // Search template redirect
@@ -151,33 +101,34 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 	
 	function cwd_base_scripts_and_styles() {
 		
-		if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
-			
-				// Scripts
-			wp_enqueue_script('cwd-script-js', get_template_directory_uri() . '/js/cwd.js' );
-			wp_enqueue_script('cwd-wp-script-js', get_template_directory_uri() . '/js/cwd_wp.js' );
-			wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js' );		
-			wp_enqueue_script('cwd-formidable-validation-js', get_template_directory_uri() . '/js/formidable_validation.js' );		
-			wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js' );		
-			wp_enqueue_script('cwd-popups-js', get_template_directory_uri() . '/js/cwd_popups.js' );		
-			wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js' );		
-			wp_enqueue_script('cwd-utilities-js', get_template_directory_uri() . '/js/cwd_utilities.js' );		
-			wp_enqueue_script('cwd-twitter-widget-js', get_template_directory_uri() . '/js/twitter-widget.js' );		
-			wp_enqueue_script('contrib-js-swipe-js', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js' );		
-			wp_enqueue_script('contrib-js-debounce-js', get_template_directory_uri() . '/js/contrib/modernizr.js' );		
-			wp_enqueue_script('contrib-js-pep-js', get_template_directory_uri() . '/js/contrib/pep.js' );
-			wp_enqueue_script('contrib-js-fitvids-js', get_template_directory_uri() . '/js/contrib/jquery.fitvids.js' );
-			wp_enqueue_script('cwd-siteimprove-js', get_template_directory_uri() . '/js/siteimprove.js' );		
-			wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
-						
-			// jQuery UI effects
-			wp_enqueue_script('jquery-effects-core'); 
-			
-		}
-		
+		global $compress_scripts, $concatenate_scripts;
+		$compress_scripts = 1;
+		$concatenate_scripts = 1;
+		define('ENFORCE_GZIP', true);
+				
+			// Scripts
+		//wp_enqueue_script('cwd-script-js', get_template_directory_uri() . '/js/cwd.js' ); // Replaced by cwd_wp.js to avoid the jQuery easing function
+		wp_enqueue_script('cwd-wp-script-js', get_template_directory_uri() . '/js/cwd_wp.js','','',true );
+		wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js', '','',true );		
+		wp_enqueue_script('cwd-formidable-validation-js', get_template_directory_uri() . '/js/formidable_validation.js', '','',true );		
+		wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js', '','',true );		
+		wp_enqueue_script('cwd-popups-js', get_template_directory_uri() . '/js/cwd_popups.js', '','',true );		
+		wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js', '','',true );		
+		wp_enqueue_script('cwd-utilities-js', get_template_directory_uri() . '/js/cwd_utilities.js', '','',true );		
+		wp_enqueue_script('cwd-twitter-widget-js', get_template_directory_uri() . '/js/twitter-widget.js', '','',true );		
+		wp_enqueue_script('contrib-js-swipe-js', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js', '','',true );		
+		wp_enqueue_script('contrib-js-debounce-js', get_template_directory_uri() . '/js/contrib/modernizr.js', '','',true );		
+		wp_enqueue_script('contrib-js-pep-js', get_template_directory_uri() . '/js/contrib/pep.js', '','',true );
+		wp_enqueue_script('contrib-js-fitvids-js', get_template_directory_uri() . '/js/contrib/jquery.fitvids.js', '','',true );
+		wp_enqueue_script('cwd-siteimprove-js', get_template_directory_uri() . '/js/siteimprove.js', '','',true );		
+		//wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
+					
+			// jQuery UI effects - contains easing functions
+		wp_enqueue_script('jquery-effects-core'); 
+				
 			// Styles
 		if(get_theme_mod('freight') == true) {
-			wp_enqueue_style('freight-css', 'https://use.typekit.net/nwp2wku.css'); // Freight Text and Sans
+			wp_enqueue_style('freight-css', '//use.typekit.net/nwp2wku.css'); // Freight Text and Sans
 		}
 		wp_enqueue_style('cwd-base-css', get_template_directory_uri() . '/css/base.css');
 		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell.css');
@@ -193,29 +144,21 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		//wp_enqueue_style('cornell-font-service-logos', get_template_directory_uri() . '/fonts/service-logos.css');
 		//wp_enqueue_style('cornell-font-custom', get_template_directory_uri() . '/fonts/cornell-custom.css');
 		//wp_enqueue_style('cornell-font-totally-cornered', get_template_directory_uri() . '/fonts/totally-cornered.css');
-		wp_enqueue_script('jquery-effects-core');
-		
 	}
 	add_action('wp_enqueue_scripts', 'cwd_base_scripts_and_styles');
 	
 }
 
-// Append random version number for scripts and styles
+// Remove WP version number and append random version number for scripts and styles
 if ( ! function_exists ( 'add_random_version_number' ) ) {
-	function add_random_version_number ( $src, $handle ) {                                                           
-		return add_query_arg( 'r', rand(), $src );                                                                 
+	function add_random_version_number ( $src, $handle ) {              
+		if( strpos( $src, '?ver=' ) ) {
+			$src = remove_query_arg( 'ver', $src );
+		}
+		return add_query_arg( 'ver', rand(), $src );                                                                 
 	}
 	add_filter( 'script_loader_src', 'add_random_version_number', 10, 2 );                                       
 	add_filter( 'style_loader_src', 'add_random_version_number', 10, 2 );                                           
-}
-
-// Add admin assets
-if ( ! function_exists ( 'admin_assets' ) ) {
-	function admin_assets() {
-		wp_enqueue_style( 'admin-styles', get_template_directory_uri() . '/css/admin.css' );
-		wp_enqueue_script( 'admin-scripts', get_template_directory_uri() . '/js/admin.js');
-	}
-	add_action( 'admin_enqueue_scripts', 'admin_assets');
 }
 
 // Show/hide slider admin menu
@@ -281,7 +224,6 @@ if ( ! function_exists( 'custom_excerpt' ) ) {
 	}
 }
 
-
 // Target parent pages and their children
 if ( ! function_exists ( 'is_tree' ) ) {
 	function is_tree($pid) {  // $pid = parent id
@@ -293,7 +235,7 @@ if ( ! function_exists ( 'is_tree' ) ) {
 	}
 }
 
-//Modify TinyMCE editor to hide h1 heading
+// Modify TinyMCE editor to hide h1 heading
 if ( ! function_exists ( 'tiny_mce_remove_unused_formats' ) ) {
 	function tiny_mce_remove_unused_formats( $initFormats ) {
 		// Add block format elements you want to show in dropdown
@@ -301,15 +243,6 @@ if ( ! function_exists ( 'tiny_mce_remove_unused_formats' ) ) {
 		return $initFormats;
 	}
 	add_filter( 'tiny_mce_before_init', 'tiny_mce_remove_unused_formats' );
-}
-
-// Disable Quick Press widget on dashboard
-if ( ! function_exists ( 'remove_dashboard_widgets' ) ) {
-	function remove_dashboard_widgets() {
-		global $wp_meta_boxes;
-		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
-	}
-	add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
 }
 
 // Add a meta box to remove header image -- next three functions.
@@ -442,13 +375,10 @@ if ( ! function_exists ( 'add_slider_save_meta_box_data' ) ) {
 
 		global $post;
 
-		//if( $post->ID == get_option( 'page_on_front' ) ) {
-
-			if( isset( $_POST[ 'add_slider' ] ) ) {
-				update_post_meta( $post_id, 'add_slider', $_POST[ 'add_slider' ] );
-			}
-		//}
-
+		if( isset( $_POST[ 'add_slider' ] ) ) {
+			update_post_meta( $post_id, 'add_slider', $_POST[ 'add_slider' ] );
+		}
+		
 	}
 	add_action( 'save_post', 'add_slider_save_meta_box_data' );
 }
@@ -479,8 +409,9 @@ if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
 	function cwd_base_filter_permalink( $url, $post ) {
 
 		$page_links_to = get_field( 'page_links_to', $post->ID );
+		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
 
-		if ( $page_links_to['point_this_content_to'] == 'custom' ) {
+		if ( $link == 'custom' ) {
 
 			$url = $page_links_to['custom_url'];
 			
@@ -500,8 +431,9 @@ if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
 	function cwd_base_filter_page_permalink( $url, $post ) {
 
 		$page_links_to = get_field( 'page_links_to', $post );
+		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
 
-		if ( $page_links_to['point_this_content_to'] == 'custom' ) {
+		if ( $link == 'custom' ) {
 
 			$url = $page_links_to['custom_url'];
 			
@@ -515,145 +447,11 @@ if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
 	add_filter( 'page_link', 'cwd_base_filter_page_permalink', 10, 2 ); // Pages
 }
 
-// Customize and move the Featured Image metabox on all post type edit screens
-function custom_change_featured_image_metabox_title( $post_type, $post ) {
-	remove_meta_box( 'postimagediv', array('post','page','news','events','people','galleries','testimonials','courses','projects','research','announcements'), 'side' );
-	add_meta_box( 'postimagediv', __('Banner image'), 'post_thumbnail_meta_box', array('post','page','news','events','people','galleries','testimonials','courses','projects','research','announcements'), 'normal', 'low' );
-}
-add_action( 'add_meta_boxes', 'custom_change_featured_image_metabox_title', 10, 2 );
-
+// Customize the Featured Image metabox
 function custom_featured_image_text( $content ) {
     return '<p>' . __('Override the default header image for this page or post.') . '</p>' . $content;
 }
 add_filter( 'admin_post_thumbnail_html', 'custom_featured_image_text' );
-
-// Make tags interface look like category checkboxes (next three functions)
-//if ( ! function_exists ( 'cwd_base_post_tags_meta_box_remove' ) ) {
-	//function cwd_base_post_tags_meta_box_remove() {
-		//$id = 'tagsdiv-post_tag';
-		//$post_type = array('post', 'page', 'news', 'people');
-		//$position = 'side';
-		//remove_meta_box( $id, $post_type, $position );
-	//}
-	//add_action( 'admin_menu', 'cwd_base_post_tags_meta_box_remove');
-//}
-
-		// Add meta box
-//if ( ! function_exists ( 'cwd_base_add_new_tags_metabox' ) ) {
-	//function cwd_base_add_new_tags_metabox(){
-		//$id = 'cwd_base_tagsdiv-post_tag'; // it should be unique
-		//$heading = 'Tags'; // meta box heading
-		//$callback = 'cwd_base_metabox_content'; // the name of the callback function
-		//$post_type = array('post', 'page', 'news', 'people');
-		//$position = 'side';
-		//$pri = 'default'; // priority, 'default' is good for us
-		//add_meta_box( $id, $heading, $callback, $post_type, $position, $pri );
-	//}
-	//add_action( 'admin_menu', 'cwd_base_add_new_tags_metabox');
-//}
-
-		// Fill
-//if ( ! function_exists ( 'cwd_base_metabox_content' ) ) {
-	//function cwd_base_metabox_content($post) {  
-
-		// get all blog post tags as an array of objects
-		//$all_tags = get_terms( array('taxonomy' => 'post_tag', 'hide_empty' => 0) ); 
-
-		// get all tags assigned to a post
-		//$all_tags_of_post = get_the_terms( $post->ID, 'post_tag' );  
-
-		// create an array of post tags ids
-		//$ids = array();
-		//if ( $all_tags_of_post ) {
-			//foreach ($all_tags_of_post as $tag ) {
-				//$ids[] = $tag->term_id;
-			//}
-		//}
-
-		// HTML
-		//echo '<div id="taxonomy-post_tag" class="categorydiv">';
-		//echo '<input type="hidden" name="tax_input[post_tag][]" value="0" />';
-		//echo '<ul>';
-		//foreach( $all_tags as $tag ){
-			// unchecked by default
-			//$checked = "";
-			// if an ID of a tag in the loop is in the array of assigned post tags - then check the checkbox
-			//if ( in_array( $tag->term_id, $ids ) ) {
-				//$checked = " checked='checked'";
-			//}
-			//$id = 'post_tag-' . $tag->term_id;
-			//echo "<li id='{$id}'>";
-			//echo "<label><input type='checkbox' name='tax_input[post_tag][]' id='in-$id'". $checked ." value='$tag->slug' /> $tag->name</label><br />";
-			//echo "</li>";
-		//}
-		//echo '</ul></div>'; // end HTML
-	//}
-//}
-
-// Process dates for news and events
-function cwd_base_date_processing() {
-
-	$post_type = get_post_type();   
-
-	if($post_type == 'events') {
-
-		// Custom events query to manipulate date fields
-		$events_args = array( 
-			'post_type' => 'events',
-			'posts_per_page' => -1,
-		);	
-
-		$events_query = new WP_Query($events_args);	
-
-		// Get all events
-		$events_query = $events_query->get_posts();	
-
-		foreach($events_query as $event) {
-
-			// Get the dates
-			$date = get_field( 'date', $event->ID );
-
-			// Convert them
-			$new_date = date( 'Ymd', strtotime( $date ) );
-
-			// Update them in the database
-			update_field('date', $new_date, $event->ID);
-
-		}
-
-		wp_reset_query(); // Nothing to see here. Move along.
-	}
-	
-	if($post_type == 'news') {
-
-		// Custom news query to manipulate date fields
-		$news_args = array( 
-			'post_type' => 'news',
-			'posts_per_page' => -1,
-		);	
-
-		$news_query = new WP_Query($news_args);	
-
-		// Get all news
-		$news_query = $news_query->get_posts();	
-
-		foreach($news_query as $news) {
-
-			// Get the dates
-			$date = get_field( 'publication_date', $news->ID );
-
-			// Convert them
-			$new_date = date( 'Ymd', strtotime( $date ) );
-
-			// Update them in the database
-			update_field('publication_date', $new_date, $news->ID);
-
-		}
-
-		wp_reset_query(); // Nothing to see here. Move along.
-	}
-}
-//add_action( 'pre_get_posts', 'cwd_base_date_processing' );
 
 // Modify news sort order
 function cwd_base_news_query( $query ) {
@@ -681,101 +479,27 @@ function cwd_base_events_query( $query ) {
 }
 add_action( 'pre_get_posts', 'cwd_base_events_query' );
 
-// Change admin menu sort order
-function cwd_base_custom_menu_order() {
-    return array( 'index.php', 'upload.php', 'edit.php', 'edit.php?post_type=page', 'edit.php?post_type=news', 'edit.php?post_type=events', 'edit.php?post_type=people', 'edit.php?post_type=testimonials', 'edit.php?post_type=courses', 'edit.php?post_type=galleries', 'themes.php', 'admin.php?page=theme-options', 'users.php', 'edit-comments.php', 'plugins.php', 'tools.php', 'options-general.php' );
-}
-add_filter( 'custom_menu_order', '__return_true' );
-add_filter( 'menu_order', 'cwd_base_custom_menu_order' );
-
-// Testimonial template for the WYSIWYG
-function cwd_base_default_content( $content, $post ) {
- 
-    switch( $post->post_type ) {
-        case 'testimonials':
-            $content = '<div class="testimonial">This is the default testimonial style. Simply replace this text with your own. To remove this styling, highlight the text and click on the <em>Clear formatting</em> button in the toolbar. Click undo to go back.</div>';
-        break;
-        default:
-            $content = '';
-        break;
-    }
-    return $content;
-}
-add_filter( 'default_content', 'cwd_base_default_content', 10, 2 );
-
-
-if (isset($_GET['debugsidebar'])) {
-	add_action('init', 'debug_sidebar');
-}  
-
-function debug_sidebar() {
-
-    $id = $_GET['debugsidebar'];
-    $sidebarswidgets = get_option('sidebars_widgets');
-
-    if (is_active_sidebar($id)) {
-		$status = " Active";
-	} 
-	else {
-		$status = "Inactive";
-	}
-	
-    echo "Sidebar ID: ".$id." (".$status.")<br>";
-	
-    if (array_key_exists($id, $sidebarswidgets)) {
-		
-        $found = "Sidebar Found";
-		
-        if (is_array($sidebarswidgets[$id])) {
-            $widgets = count($sidebarswidgets[$id])." Widgets Found";
-        } 
-		else {
-			$widgets = "Widget Array not Found!";
-		}
-		
-        echo $found."<br".$widgets."<br>";
-		
-	}
-	else {
-		echo "Sidebar Not Found<br>";
-	}
-
-    echo "<br>All Sidebars Widgets: ".print_r($sidebarswidgets,true)."<br>"; 
-		
-    exit;
-}
-
-// Remove items from the admin menu
-function cwd_base_remove_menu_items(){
-	remove_submenu_page( 'options-general.php', 'options-media.php' ); // Media
-	remove_submenu_page( 'options-general.php', 'widget-css-classes-settings' ); // Widget classes
-	remove_submenu_page( 'options-general.php', 'og-tags-options' ); // OG tags
-	remove_submenu_page( 'themes.php', 'widget_context_settings' ); // Widget context settings
-	remove_submenu_page( 'themes.php', 'pagination.php' ); // Pagination settings
-	remove_action('admin_menu', '_add_themes_utility_last', 101); // Disallow file edit
-}
-add_action( 'admin_menu', 'cwd_base_remove_menu_items', 999 );
-
 if( class_exists('Acf') ) {
 	require_once get_template_directory() . '/functions/post-types/init.php';
 }
 
 // Order people by last word in title
 function posts_orderby_lastname ($orderby_statement, $wp_query) {
-	if ( ($wp_query->get('post_type') === 'people') || ( is_tax('roles') || is_tax('units') || is_tax('research_areas') ) ) {
+	if ( ($wp_query->get('post_type') === 'people') || ( is_tax('people_tags') || is_tax('people_categories') ) ) {
 		return "RIGHT(post_title, LOCATE(' ', REVERSE(post_title)) - 1)";
 	}
 	return $orderby_statement;
 }
 add_filter( 'posts_orderby' , 'posts_orderby_lastname', 10, 2 );
 
-// Always enable close button on simple banner
-update_option('close_button_enabled', 'on');
-
-// Save permalink options
-$cwd_base_build_ver = 1;
-
-if( get_option( 'cwd_base_build_ver' ) < 1 ) {
-	flush_rewrite_rules();
-	update_option( 'cwd_base_build_ver', $cwd_base_build_ver );
-} 
+// Prevent WP using 'Auto Draft' as the post title (wtf?)
+function filter_the_title($title, $id) {
+	
+	$post_type = get_post_type($id);
+	
+	if($post_type == 'news' && $title == 'Auto Draft') {
+		$title = get_field('title', $id);
+	}
+	return $title;
+}
+add_filter( 'the_title', 'filter_the_title', 10, 2 );
