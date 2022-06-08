@@ -11,41 +11,26 @@
 $baseUrl = site_url();
 
 // Required files
-$cwd_includes = array(
-	'/functions/theme/setup.php',
-	'/functions/customizer/device-previews.php',
-	'/functions/customizer/customize-register.php',
-	'/functions/theme/layout.php',
-	'/functions/theme/body-classes.php',
-	'/functions/theme/pagination.php',
-	'/functions/theme/widgets.php',
-	'/functions/theme/gallery.php',
-	'/functions/theme/metadata.php',
-	'/functions/theme/dates.php',
-	'/functions/theme/images.php',
-	'/functions/theme/header-img.php',
-	'/functions/theme/options.php',
-	'/functions/navigation/menus.php',
-	'/functions/navigation/breadcrumbs.php',
-	'/functions/navigation/menu-classes.php',
-	'/functions/navigation/section-nav/section-nav.php',
-	'/functions/theme/custom-fields/featured.php',
-	'/functions/theme/custom-fields/image_id.php',
-	'/functions/theme/custom-fields/page_links_to.php',
-	'/functions/theme/custom-fields/acf-search.php',
-	'/functions/tinymce/editor.php',
-	'/functions/plugins/simple-widget-title-links/simple-widget-title-links.php',
-);
-
-// Check if include file exists
-foreach($cwd_includes as $file){
-	
-	if(!$filepath = locate_template($file)) {
-		trigger_error("Error locating `$file` for inclusion!", E_USER_ERROR);
-	}
-	require_once $filepath;
-}
-unset($file, $filepath);
+require_once 'functions/theme/setup.php';
+require_once 'functions/customizer/customize-register.php';
+require_once 'functions/theme/layout.php';
+require_once 'functions/theme/body-classes.php';
+require_once 'functions/theme/pagination.php';
+require_once 'functions/theme/widgets.php';
+require_once 'functions/theme/metadata.php';
+require_once 'functions/theme/dates.php';
+require_once 'functions/theme/images.php';
+require_once 'functions/theme/header-img.php';
+require_once 'functions/theme/options.php';
+require_once 'functions/navigation/menus.php';
+require_once 'functions/navigation/breadcrumbs.php';
+require_once 'functions/navigation/menu-classes.php';
+require_once 'functions/navigation/section-nav/section-nav.php';
+require_once 'functions/theme/custom-fields/featured.php';
+require_once 'functions/theme/custom-fields/image_id.php';
+require_once 'functions/theme/custom-fields/page_links_to.php';
+require_once 'functions/theme/custom-fields/acf-search.php';
+require_once 'functions/tinymce/editor.php';
 
 // Set width of content
 if ( ! isset( $content_width ) ) {
@@ -101,11 +86,6 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 	
 	function cwd_base_scripts_and_styles() {
 		
-		global $compress_scripts, $concatenate_scripts;
-		$compress_scripts = 1;
-		$concatenate_scripts = 1;
-		define('ENFORCE_GZIP', true);
-				
 			// Scripts
 		//wp_enqueue_script('cwd-script-js', get_template_directory_uri() . '/js/cwd.js' ); // Replaced by cwd_wp.js to avoid the jQuery easing function
 		wp_enqueue_script('cwd-wp-script-js', get_template_directory_uri() . '/js/cwd_wp.js','','',true );
@@ -121,15 +101,14 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		wp_enqueue_script('contrib-js-pep-js', get_template_directory_uri() . '/js/contrib/pep.js', '','',true );
 		wp_enqueue_script('contrib-js-fitvids-js', get_template_directory_uri() . '/js/contrib/jquery.fitvids.js', '','',true );
 		wp_enqueue_script('cwd-siteimprove-js', get_template_directory_uri() . '/js/siteimprove.js', '','',true );		
+		wp_enqueue_script('cwd-project-js', get_template_directory_uri() . '/js/project.js', '','',true );		
 		//wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
 					
 			// jQuery UI effects - contains easing functions
 		wp_enqueue_script('jquery-effects-core'); 
 				
 			// Styles
-		if(get_theme_mod('freight') == true) {
-			wp_enqueue_style('freight-css', '//use.typekit.net/nwp2wku.css'); // Freight Text and Sans
-		}
+		wp_enqueue_style('freight-css', '//use.typekit.net/nwp2wku.css'); // Freight Text and Sans
 		wp_enqueue_style('cwd-base-css', get_template_directory_uri() . '/css/base.css');
 		wp_enqueue_style('cornell-css', get_template_directory_uri() . '/css/cornell.css');
 		wp_enqueue_style('cwd-card-slider-css', get_template_directory_uri() . '/css/cwd_card_slider.css');
@@ -141,6 +120,7 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		wp_enqueue_style('cwd-formidable-validation-css', get_template_directory_uri() . '/css/formidable_validation.css');
 		wp_enqueue_style('cornell-font-fa-css', get_template_directory_uri() . '/fonts/font-awesome.min.css');
 		wp_enqueue_style('cornell-font-zmdi-css', get_template_directory_uri() . '/fonts/material-design-iconic-font.min.css');
+		wp_enqueue_style('cwd-project-css', get_template_directory_uri() . '/css/project.css');
 		//wp_enqueue_style('cornell-font-service-logos', get_template_directory_uri() . '/fonts/service-logos.css');
 		//wp_enqueue_style('cornell-font-custom', get_template_directory_uri() . '/fonts/cornell-custom.css');
 		//wp_enqueue_style('cornell-font-totally-cornered', get_template_directory_uri() . '/fonts/totally-cornered.css');
@@ -159,30 +139,6 @@ if ( ! function_exists ( 'add_random_version_number' ) ) {
 	}
 	add_filter( 'script_loader_src', 'add_random_version_number', 10, 2 );                                       
 	add_filter( 'style_loader_src', 'add_random_version_number', 10, 2 );                                           
-}
-
-// Show/hide slider admin menu
-if ( ! function_exists ( 'add_slider' ) ) {
-	function add_slider() {
-
-		if( !is_admin() ) {
-			return;
-		}
-
-		global $post;
-
-		$front_page_id = get_option('page_on_front');
-
-		$add_slider = get_post_meta( $front_page_id, 'add_slider', true );
-
-		if($add_slider == 'Yes') {
-			echo '<style>#menu-posts-slider { display: block; }</style>';
-		}
-		else {
-			echo '<style>#menu-posts-slider { display: none; }</style>';
-		}
-	}
-	add_action('admin_head', 'add_slider');
 }
 
 // Remove auto p in excerpts
@@ -503,3 +459,20 @@ function filter_the_title($title, $id) {
 	return $title;
 }
 add_filter( 'the_title', 'filter_the_title', 10, 2 );
+
+// Flush rewrite rules when a custom post type post is saved, but only once for each custom post type
+function cwd_flush_rewrite_rules() {
+
+	global $post; 
+	$post_type = $post->post_type;
+					
+	if ( $post_type == 'page' || $post_type == 'post' || $post_type.'_already_flushed' == '1' ) {
+		return;
+	}
+
+	flush_rewrite_rules();
+	
+	add_option($post_type.'_already_flushed', '1', '', 'yes');
+
+}
+add_action('save_post', 'cwd_flush_rewrite_rules', 999);

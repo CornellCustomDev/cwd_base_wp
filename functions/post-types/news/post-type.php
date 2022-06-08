@@ -70,6 +70,7 @@ if ( ! function_exists ( 'cptui_register_my_cpts_news' ) ) {
 		];
 
 		register_post_type( 'news', $args );
+	
 	}
 
 	add_action( 'init', 'cptui_register_my_cpts_news' );

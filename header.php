@@ -53,8 +53,10 @@
 			<div class="container-fluid cu-brand">
 				<h1 class="cu-logo"><a href="//www.cornell.edu"><img class="sr-only" src="<?php echo get_stylesheet_directory_uri(); ?>/images/cornell/bold_cornell_logo_simple_b31b1b.svg" alt="Cornell University" width="245" height="62"></a></h1>
 				<div class="cu-unit">
-					<?php if (get_bloginfo('name')) { ?><h2><a href="<?php echo site_url(); ?>"><?php bloginfo('name'); ?></a></h2><?php } ?>
-					<?php if (get_bloginfo('description')) { ?><h3 class="sans"><?php bloginfo('description'); ?></h3><?php } ?>
+					<?php if (display_header_text()==true) { ?>
+						<h2><a href="<?php echo site_url(); ?>"><?php bloginfo('name'); ?></a></h2>
+						<h3 class="sans"><?php bloginfo('description'); ?></h3>
+					<?php } ?>
 				</div>
 				<div class="buttons">
 					<button class="mobile-button" id="mobile-nav">Main Menu</button>

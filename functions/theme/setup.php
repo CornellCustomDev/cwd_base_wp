@@ -25,13 +25,13 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 		}
 		run_activate_plugin( 'advanced-custom-fields-pro/acf.php' ); 
 		run_activate_plugin( 'custom-post-type-ui/custom-post-type-ui.php' );
-		run_activate_plugin( 'classic-editor/classic-editor.php' );
-		run_activate_plugin( 'classic-widgets/classic-widgets.php' );
 										
 		// Add theme support for needed features
 		add_theme_support('post-thumbnails');
-		
 		add_theme_support( 'title-tag' );
+		add_theme_support( 'automatic-feed-links' );
+		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
+		add_theme_support( 'customize-selective-refresh-widgets' );
 		
 		add_theme_support('custom-header', array(
 			'width'         => 1280,
@@ -99,11 +99,6 @@ if ( ! function_exists ( 'cwd_base_setup' ) ) {
 			//'default-attachment'     => 'scroll',
 			//'video'                  => true,
 		//));
-		
-		add_theme_support( 'automatic-feed-links' );
-		add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script' ) );
-		add_theme_support( 'title-tag' );
-		add_theme_support( 'customize-selective-refresh-widgets' );
 		
 		// Add image sizes
 		add_image_size('thumbnail', 250, 250, true); // Medium Thumbnail

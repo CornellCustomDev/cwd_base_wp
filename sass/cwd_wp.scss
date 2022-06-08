@@ -2167,6 +2167,9 @@ body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-field
 }
 
 // Miscellaneous
+.sub-footer .two-col > div:nth-child(2) ul.inline {
+    float: right;
+}
 p.no-content {
 	margin-left: 20px;
 }

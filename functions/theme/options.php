@@ -114,7 +114,7 @@ acf_add_local_field_group(array(
 			'label' => 'Home Page',
 			'name' => 'home_page_options',
 			'type' => 'group',
-			'instructions' => 'Set the front page on the Reading menu <a href="/wp-admin/options-reading.php">here</a>.',
+			'instructions' => 'Set the front page on the Reading menu <a href="' . site_url() . '/wp-admin/options-reading.php">here</a>.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
@@ -200,7 +200,7 @@ acf_add_local_field_group(array(
 			'label' => 'Blog Page',
 			'name' => 'blog_page_options',
 			'type' => 'group',
-			'instructions' => 'Set the blog page on the Reading menu <a href="https://cd-demo-wp.lndo.site/wp-admin/options-reading.php">here</a>.',
+			'instructions' => 'Set the blog page on the Reading menu <a href="' . site_url() . '/wp-admin/options-reading.php">here</a>.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(

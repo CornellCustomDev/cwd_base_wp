@@ -54,7 +54,7 @@
 								}
 							?>
 
-							<div class="two-col padded footer-links">
+							<div class="three-col padded footer-links">
 								<?php if(has_nav_menu( 'footer-menu-1' )) : ?>
 									<div>
 										<?php $menu_obj = cwd_base_get_menu_by_location('footer-menu-1'); ?>
@@ -69,6 +69,11 @@
 										<?php cwd_base_nav_footer2(); ?>
 									</div>
 								<?php endif; ?>
+								<?php if( ( is_active_sidebar('sidebar-100') ) ) { ?>
+									<div>
+										<?php dynamic_sidebar('sidebar-100'); ?>
+									</div>
+								<?php } ?>
 							</div>
 						</div>
 						<div class="secondary">

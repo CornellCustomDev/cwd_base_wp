@@ -23,6 +23,7 @@ if( $post_type_options && in_array('testimonials', $post_type_choices) ) {
 }
 if( $post_type_options && in_array('galleries', $post_type_choices) ) {
 	require_once locate_template('/functions/post-types/galleries/post-type.php');
+	require_once locate_template('/functions/theme/gallery.php');
 }
 if( $post_type_options && in_array('alerts', $post_type_choices) ) {
 	require_once locate_template('/functions/post-types/alerts/post-type.php');

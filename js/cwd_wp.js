@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 	
 	// 2. Cornell Search ----------------------------------------------------------------------------
 	var mousedown = false;
-	$('#cu-search-button').click(function(e) {
+	$('#cu-search-button').click(function() {
 		mousedown = true;
 		$('#cu-search').toggleClass('open');
 		$(this).toggleClass('open');		

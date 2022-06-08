@@ -70,6 +70,8 @@ if ( ! function_exists ( 'cptui_register_my_cpts_events' ) ) {
 		];
 
 		register_post_type( 'events', $args );
+
+		
 	}
 	add_action( 'init', 'cptui_register_my_cpts_events' );
 }

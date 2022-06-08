@@ -82,6 +82,16 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 			'after_title'   => '</h3>',
 		) );
 		
+		register_sidebar( array(
+			'name'          => __( 'Footer Widget', 'cwd_base' ),
+			'id'            => 'sidebar-100',
+			'description'   => __( 'Appears in the footer between the address block and the menu, if a menu exists.', 'cwd_base' ),
+			'before_widget' => '<div class="col-item">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		) );
+		
 	}
 	add_action( 'widgets_init', 'register_my_sidebars' );
 }
