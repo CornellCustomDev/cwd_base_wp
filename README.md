@@ -64,14 +64,17 @@ Examples:
 </ol>
 The same structure applies for single posts, categories, and tag and taxonomy templates.
 <h2>Post Types (content types)</h2>
-Three post types are included in this theme: News, Events, and People, since these are the most common custom post types requested on Campus Press. Each contains the most common custom fields which can be edited, added or removed. When developing your custom theme, you can toggle these post types on an off in the functions.php file:<br><br>
+Several post types are included in this theme: News, Events, People, Courses, Testimonials, and Photo Galleries. Each contains the most common custom fields which can be added or removed on the Theme Options page.<br><br>
 
-<em> &lt;!-- Content Types: uncomment to activate --&gt;</em><br>
-'/functions/content-types/news/post-type.php',<br>
-'/functions/content-types/events/post-type.php',<br>
-'/functions/content-types/people/post-type.php',<br>
+<h3>How to add, edit, or remove custom fields in WordPress dashboard</h3>
 
-<strong>TO DO:</strong> add these post types (and others) as options on the Theme Options page.
+These instructions will not work on CampusPress. They only apply on our Pantheon development site cd-wpmulti where the Advanced Custom Fields Extended plugin has been installed and activated.
+
+<ul>
+<li>Click on Custom Fields from the WordPress dashboard.</li>
+<li>Custom field groups for each post type are encoded in the theme. These are called "local" field groups.</li>
+<li>Click the "local" tab to see the list of encoded custom field groups.</li>
+</ul>
 
 <strong>Note:</strong> The news and events content types are based on two CD plugins by <a href="https://github.com/CU-CommunityApps/cd-news-pull-wp-plugin/commits?author=philwilliammee">philwilliammee</a> located here:
 
