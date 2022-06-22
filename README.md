@@ -11,16 +11,18 @@ As the <a href="https://github.com/CU-CommunityApps/cwd_base">cwd_base</a> theme
 /sass<br>
 /images<br>
 
-<em>This theme contains three extra SASS files:</em>
+<em>This theme contains four extra SASS files:</em>
 
 cwd_wp.scss<br>
 admin.scss<br>
 editor-style.scss<br>
+project.scss<br>
 
-<em>Four extra JS files:</em>
+<em>Five extra JS files:</em>
 
 cwd_wp.js<br>
 admin.js<br>
+project.js<br>
 siteimprove.js<br>
 formidable_validation.js (a11y helper for Formidable Forms)<br>
 
