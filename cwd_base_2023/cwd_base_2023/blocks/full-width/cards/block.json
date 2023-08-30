@@ -1,0 +1,15 @@
+{
+	"name": "cwd/cards",
+	"title": "Card Grid",
+	"description": "A grid of 3 to 9 informational cards.",
+	"category": "cwd-full-width",
+	"icon": "screenoptions",
+	"supports": {
+		"align" : false,
+		"anchor": true
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "cards.php"
+	}
+}

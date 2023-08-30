@@ -1,0 +1,14 @@
+{
+	"name": "cwd/flex-cards",
+	"title": "Flexible Cards",
+	"description": "Card(s) with flexible layout and content options.",
+	"category": "cwd-general",
+	"icon": "id-alt",
+	"supports": {
+		"align" : false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "flex-cards.php"
+	}
+}

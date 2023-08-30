@@ -1,0 +1,14 @@
+{
+	"name": "cwd/quote",
+	"title": "Quote",
+	"description": "A stylized quote with image and attribution.",
+	"category": "cwd-general",
+	"icon": "format-quote",
+	"supports": {
+		"align" : false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "quote.php"
+	}
+}

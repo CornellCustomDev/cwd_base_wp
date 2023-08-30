@@ -1,0 +1,14 @@
+{
+	"name": "cwd/tabs",
+	"title": "Tabbed Content",
+	"description": "Stacked tabs that show a description and button when hovered over.",
+	"category": "cwd-general",
+	"icon": "table-col-after",
+	"supports": {
+		"align": false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "tabs.php"
+	}
+}

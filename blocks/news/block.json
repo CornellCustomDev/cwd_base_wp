@@ -1,0 +1,14 @@
+{
+	"name": "cwd/news",
+	"title": "News",
+	"description": "Three recent news items formatted as cards. Can be limited by taxonomy.",
+	"category": "cwd-general",
+	"icon": "text",
+	"supports": {
+		"align" : false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "news.php"
+	}
+}

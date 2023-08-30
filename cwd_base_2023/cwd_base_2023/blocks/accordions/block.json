@@ -1,0 +1,14 @@
+{
+	"name": "cwd/accordions",
+	"title": "Accordions",
+	"description": "Expand or collapse blocks of content",
+	"category": "cwd-general",
+	"icon": "plus",
+	"supports": {
+		"align" : false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "accordions.php"
+	}
+}

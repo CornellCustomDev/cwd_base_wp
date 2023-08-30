@@ -1,0 +1,49 @@
+.timeline-Widget .timeline-Tweet-text {
+    font-size: 18px !important;
+    line-height: 28px !important;
+    color: #000;
+}
+.timeline-Widget .timeline-Tweet-media,
+.timeline-Widget .timeline-Tweet-actions,
+.timeline-Widget .timeline-Tweet-brand {
+	display: none;
+}
+.timeline-Widget .timeline-Tweet {
+    margin-bottom: 30px;
+}
+.timeline-Widget .timeline-Tweet:focus,
+.timeline-Widget .timeline-Tweet:hover {
+	background: none !important;
+}
+.timeline-Widget .timeline-Tweet a {
+    text-decoration: underline !important;
+}
+.timeline-Widget .timeline-Tweet a:focus,
+.timeline-Widget .timeline-Tweet a:hover {
+     color: #292F33;
+}
+.timeline-Widget .timeline-LoadMore .timeline-ShowMoreButton {
+    background-color: #b31b1b;
+	border: none;
+	border-radius: 0;
+	color: #fff;
+}
+.timeline-Widget .timeline-LoadMore .timeline-ShowMoreButton:focus,
+.timeline-Widget .timeline-LoadMore .timeline-ShowMoreButton:hover {
+    background-color: #901516;
+}
+.timeline-Widget {
+    max-width: none !important;
+}
+.timeline-Widget .timeline-Tweet .timeline-Tweet-metadata {
+    margin-top: -20px;
+    float: left;
+    width: 100%;
+    margin-left: 43px;
+}
+
+/*.timeline-Viewport {
+	overflow-y: hidden !important;
+	height: auto !important;
+	max-height: 1000px;
+}*/
