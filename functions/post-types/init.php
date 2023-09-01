@@ -12,7 +12,7 @@ $checked_post_types = get_checked_post_types();
 
 // Initialize slider
 if($add_slider == 'Yes') {
-	require_once get_template_directory() . '/functions/post-types/slider/post-type.php');
+	require_once get_template_directory() . '/functions/post-types/slider/post-type.php';
 }
 
 // Initialize built-in post types
