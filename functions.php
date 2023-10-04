@@ -578,7 +578,7 @@ if ( ! function_exists ( 'get_all_custom_post_types' ) ) {
 	}
 }
 
-if ( ! function_exists ( 'get_all_custom_post_types' ) ) {
+if ( ! function_exists ( 'get_all_post_types' ) ) {
 	function get_all_post_types() {
 	
 		$all_custom_post_types = get_all_custom_post_types();
