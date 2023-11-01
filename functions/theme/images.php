@@ -173,7 +173,8 @@ function upload_site_icon() {
 	
 	include_once( ABSPATH . 'wp-admin/includes/admin.php' );
 	
-	$url = site_url('/') . 'wp-content/themes/cwd_base_2023/images/wp/square-old-seal.png';
+	$url = get_template_directory_uri() . '/images/wp/square-old-seal.png';
+
     $image = '';
 	
     if($url != '') {
