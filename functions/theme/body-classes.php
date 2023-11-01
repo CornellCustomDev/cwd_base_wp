@@ -99,3 +99,14 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 	}
 	add_filter( 'body_class', 'custom_body_classes' );
 }
+
+// Remove custom post type from post_class()
+if ( ! function_exists ( 'cwd_remove_postclass' ) ) {
+	function cwd_remove_postclass($classes, $class, $post_id) {
+		$classes = array_diff( $classes, array(
+			get_post_type($post_id),
+		) );
+		return $classes;
+	}
+	add_filter('post_class', 'cwd_remove_postclass', 10, 3);
+}

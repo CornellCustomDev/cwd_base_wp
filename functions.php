@@ -55,17 +55,6 @@ if ( ! function_exists ( 'is_tree' ) ) {
 	}
 }
 
-// Remove custom post type from post_class()
-if ( ! function_exists ( 'cwd_remove_postclass' ) ) {
-	function cwd_remove_postclass($classes, $class, $post_id) {
-		$classes = array_diff( $classes, array(
-			get_post_type($post_id),
-		) );
-		return $classes;
-	}
-	add_filter('post_class', 'cwd_remove_postclass', 10, 3);
-}
-
 // Filter the permalink for post and custom post type URLs (Page links to...)
 if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
 	function cwd_base_filter_permalink( $url, $post ) {
