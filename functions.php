@@ -40,6 +40,8 @@ require_once 'functions/theme/custom-fields/page_links_to.php';
 require_once 'functions/theme/custom-fields/remove-header-image.php';
 require_once 'functions/theme/custom-fields/acf-search.php';
 require_once 'functions/tinymce/editor.php';
+include_once('blocks/block_functions.php');
+include_once('blocks/custom_block_fields.php');
 
 // Initialize post types if ACF plugin is present and activated
 if ( class_exists('Acf') ) {
@@ -76,15 +78,3 @@ if ( class_exists('Acf') ) {
 // 	);
 // }
 // add_filter( 'allowed_block_types', 'cwd_allowed_block_types' );	
-
-include_once('blocks/block_functions.php');
-include_once('blocks/custom_block_fields.php');
-
-// News listing cards (used on homepage and in News block)
-function cwd_news_cards_markup($query, $fallback_override = null) {
-	$theme_fallback_img = get_stylesheet_directory_uri() . '/images/brooks/news_listing_fallback.jpg';
-
-	$fallback_img = $fallback_override ?: $theme_fallback_img;
-
-	include('templates/news/cards.php');
-}
