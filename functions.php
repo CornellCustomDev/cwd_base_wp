@@ -56,19 +56,6 @@ if ( ! function_exists ( 'is_tree' ) ) {
 	}
 }
 
-// Modify events sort order
-function cwd_base_events_query( $query ) {
- 
-	$post_type = get_query_var('post_type');   
-
-    if( $query->is_main_query() && $post_type == 'events' ) { // && ! is_admin() 
-        $query->set( 'meta_key', 'date' );
-        $query->set( 'orderby', 'meta_value' );
-        $query->set( 'order', 'DESC' );
-    }
-}
-add_action( 'pre_get_posts', 'cwd_base_events_query' );
-
 // Pull info from a page with the same slug as custom post type
 function get_page_data($post_type) {
 
@@ -80,27 +67,6 @@ function get_page_data($post_type) {
 	endif;
 
 }
-
-// Fix dates for news and events in the database
-function reformat_dates($query) {
-
-	$post_type = get_query_var('post_type');
-
-	if( $post_type == 'events' ) {
-	
-		// Get the dates
-		$date = get_field( 'date', get_the_ID() );
-
-		// Convert them
-		$new_date = date( 'Ymd', strtotime( $date ) );
-
-		// Update them in the database
-		update_field('date', $new_date, get_the_ID() );
-
-	}
-		
-}
-add_action( 'pre_get_posts', 'reformat_dates' );
 
 // Pass php variables array to JS
 //$cptui_post_types = json_encode(cptui_get_post_type_slugs());
