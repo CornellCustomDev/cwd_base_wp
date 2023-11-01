@@ -56,19 +56,6 @@ if ( ! function_exists ( 'is_tree' ) ) {
 	}
 }
 
-// Modify news sort order
-function cwd_base_news_query( $query ) {
- 
-	$post_type = get_query_var('post_type');   
-
-    if( $query->is_main_query() && $post_type == 'news' ) {
-        $query->set( 'meta_key', 'publication_date' );
-        $query->set( 'orderby', 'meta_value' );
-        $query->set( 'order', 'DESC' );
-    }
-}
-add_action( 'pre_get_posts', 'cwd_base_news_query' );
-
 // Modify events sort order
 function cwd_base_events_query( $query ) {
  
@@ -111,19 +98,6 @@ function reformat_dates($query) {
 		update_field('date', $new_date, get_the_ID() );
 
 	}
-
-	if($post_type == 'news') {
-					
-		// Get the dates
-		$date = get_field( 'publication_date', get_the_ID() );
-
-		// Convert them
-		$new_date = date( 'Ymd', strtotime( $date ) );
-
-		// Update them in the database
-		update_field('publication_date', $new_date, get_the_ID() );
-
-	}
 		
 }
 add_action( 'pre_get_posts', 'reformat_dates' );
@@ -142,18 +116,6 @@ function posts_orderby_lastname ($orderby_statement, $wp_query) {
 	return $orderby_statement;
 }
 add_filter( 'posts_orderby' , 'posts_orderby_lastname', 10, 2 );
-
-// Prevent WP using 'Auto Draft' as the post title (wtf?)
-function filter_the_title($title, $id) {
-	
-	$post_type = get_post_type($id);
-	
-	if($post_type == 'news' && $title == 'Auto Draft') {
-		$title = get_field('title', $id);
-	}
-	return $title;
-}
-add_filter( 'the_title', 'filter_the_title', 10, 2 );
 
 // function cwd_allowed_block_types() {
 // 	return array(
