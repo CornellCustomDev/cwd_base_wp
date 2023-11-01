@@ -106,6 +106,50 @@ if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
 	add_filter( 'page_link', 'cwd_base_filter_page_permalink', 10, 2 ); // Pages
 }
 
+
+// Filter the permalink for post and custom post type URLs (Page links to...)
+if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
+	function cwd_base_filter_permalink( $url, $post ) {
+
+		$page_links_to = get_field( 'page_links_to', $post->ID );
+		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
+
+		if ( $link == 'custom' ) {
+
+			$url = $page_links_to['custom_url'];
+
+			return $url;
+
+		}
+		else {
+			return $url;
+		}
+	}
+	add_filter( 'post_link', 'cwd_base_filter_permalink', 10, 2 ); // Posts
+	add_filter( 'post_type_link', 'cwd_base_filter_permalink', 10, 2 ); // Custom Post Types
+}
+
+// Filter the permalink for page URLs (Page links to...)
+if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
+	function cwd_base_filter_page_permalink( $url, $post ) {
+
+		$page_links_to = get_field( 'page_links_to', $post );
+		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
+
+		if ( $link == 'custom' ) {
+
+			$url = $page_links_to['custom_url'];
+
+			return $url;
+
+		}
+		else {
+			return $url;
+		}
+	}
+	add_filter( 'page_link', 'cwd_base_filter_page_permalink', 10, 2 ); // Pages
+}
+
 // Toggle metatag options for each post type
 /* function metatags_field_visbility ($field) {
 
