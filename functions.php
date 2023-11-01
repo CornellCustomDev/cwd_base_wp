@@ -47,34 +47,3 @@ include_once('blocks/custom_block_fields.php');
 if ( class_exists('Acf') ) {
 	require_once locate_template('/functions/post-types/init.php');
 }
-
-// Pass php variables array to JS
-//$cptui_post_types = json_encode(cptui_get_post_type_slugs());
-//wp_add_inline_script('admin-scripts', $cptui_post_types, 'before');
-
-//wp_add_inline_script( 'admin-scripts', 'console.log("loaded in header");' );
-
-// function cwd_allowed_block_types() {
-// 	return array(
-// 		'core/paragraph',
-// 		'core/heading',
-// 		'core/list',
-// 		'core/code',
-// 		'core/table',
-// 		'core/image',
-// 		'core/gallery',
-// 		'core/audio',
-// 		'core/file',
-// 		'core/media-text',
-// 		'core/video',
-// 		'core/columns',
-// 		'core/group',
-// 		'core/row',
-// 		'core/freeform',
-// 		'core/html',
-// 		'core/shortcode',
-// 		'core/query-loop',
-// 		'core-embed/youtube'
-// 	);
-// }
-// add_filter( 'allowed_block_types', 'cwd_allowed_block_types' );	
