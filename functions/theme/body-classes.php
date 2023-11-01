@@ -29,7 +29,7 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 		
 		// Get layout for archives
 		$archive_options = get_field('archive_options', 'options');
-		$archive_layout = $archive_options[$post_type]['layout_' . $post_type];		
+		$archive_layout = array_key_exists( $post_type, $archive_options ) ? $archive_options[$post_type]['layout_' . $post_type] : '';
 		
 		if($tinting == 1 
 		    && $layout != 'no_sidebar'
