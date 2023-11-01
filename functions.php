@@ -51,15 +51,6 @@ if ( class_exists('Acf') ) {
 
 //wp_add_inline_script( 'admin-scripts', 'console.log("loaded in header");' );
 
-// Order people by last word in title
-function posts_orderby_lastname ($orderby_statement, $wp_query) {
-	if ( ($wp_query->get('post_type') === 'people') || ( is_tax('people_tags') || is_tax('people_categories') ) ) {
-		return "RIGHT(post_title, LOCATE(' ', REVERSE(post_title)) - 1)";
-	}
-	return $orderby_statement;
-}
-add_filter( 'posts_orderby' , 'posts_orderby_lastname', 10, 2 );
-
 // function cwd_allowed_block_types() {
 // 	return array(
 // 		'core/paragraph',
