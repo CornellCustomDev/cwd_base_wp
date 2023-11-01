@@ -32,6 +32,7 @@ require_once 'functions/navigation/breadcrumbs.php';
 require_once 'functions/navigation/menu-classes.php';
 require_once 'functions/navigation/section-nav/section-nav.php';
 //require_once 'functions/theme/custom-fields/featured.php';
+require_once 'functions/theme/custom-fields/featured-image.php';
 require_once 'functions/theme/custom-fields/header-slider.php';
 require_once 'functions/theme/custom-fields/image_id.php';
 require_once 'functions/theme/custom-fields/page_links_to.php';
@@ -54,12 +55,6 @@ if ( ! function_exists ( 'is_tree' ) ) {
 			return false;
 	}
 }
-
-// Customize the Featured Image metabox
-function custom_featured_image_text( $content ) {
-    return '<p>' . __('Override the default header image for this page or post.') . '</p>' . $content;
-}
-add_filter( 'admin_post_thumbnail_html', 'custom_featured_image_text' );
 
 // Modify news sort order
 function cwd_base_news_query( $query ) {
