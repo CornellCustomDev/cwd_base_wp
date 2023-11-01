@@ -45,29 +45,6 @@ if ( class_exists('Acf') ) {
 	require_once locate_template('/functions/post-types/init.php');
 }
 
-// Target parent pages and their children
-if ( ! function_exists ( 'is_tree' ) ) {
-	function is_tree($pid) {  // $pid = parent id
-		global $post;         
-		if(is_page()&&($post->post_parent==$pid||is_page($pid))) 
-			return true;
-		else 
-			return false;
-	}
-}
-
-// Pull info from a page with the same slug as custom post type
-function get_page_data($post_type) {
-
-	// Interrupt the default query to grab some content for custom post type archive pages. 
-	// The page slug MUST be the same as the post type slug for this to work.
-	$new_query = new WP_Query( 'pagename=' . $post_type );
-	if( $new_query->have_posts() ) : $new_query->the_post();
-		return the_content();
-	endif;
-
-}
-
 // Pass php variables array to JS
 //$cptui_post_types = json_encode(cptui_get_post_type_slugs());
 //wp_add_inline_script('admin-scripts', $cptui_post_types, 'before');

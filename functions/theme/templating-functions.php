@@ -82,3 +82,24 @@ if ( ! function_exists( 'custom_excerpt' ) ) {
 		return $excerpt;
 	}
 }
+
+// Target parent pages and their children
+if ( ! function_exists ( 'is_tree' ) ) {
+	function is_tree($pid) {  // $pid = parent id
+		global $post;
+		if(is_page()&&($post->post_parent==$pid||is_page($pid)))
+			return true;
+		else
+			return false;
+	}
+}
+
+// Pull info from a page with the same slug as custom post type
+function get_page_data($post_type) {
+	// Interrupt the default query to grab some content for custom post type archive pages.
+	// The page slug MUST be the same as the post type slug for this to work.
+	$new_query = new WP_Query( 'pagename=' . $post_type );
+	if( $new_query->have_posts() ) : $new_query->the_post();
+		return the_content();
+	endif;
+}
