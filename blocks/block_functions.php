@@ -45,15 +45,19 @@ add_action( 'init', 'cwd_base_register_blocks' );
 
 function cwd_base_register_blocks() {
 	// General-use blocks
+	register_block_type( __DIR__ . '/accordions' );
+	register_block_type( __DIR__ . '/cta-buttons' );
 	register_block_type( __DIR__ . '/flex-cards' );
-	register_block_type( __DIR__ . '/full-width/cards' );
-	register_block_type( __DIR__ . '/full-width/events' );
 	register_block_type( __DIR__ . '/news' );
 	register_block_type( __DIR__ . '/quote' );
 	register_block_type( __DIR__ . '/tabs' );
 	register_block_type( __DIR__ . '/wysiwyg' );
-	register_block_type( __DIR__ . '/accordions' );
 
+	// Full-width blocks
+	register_block_type( __DIR__ . '/full-width/section' );
+	register_block_type( __DIR__ . '/full-width/callout' );
+	register_block_type( __DIR__ . '/full-width/cards' );
+	register_block_type( __DIR__ . '/full-width/events' );
 }
 
 /*
@@ -248,6 +252,18 @@ if ( ! function_exists( 'cwd_base_allowed_block_types' ) ) {
 			//'core/row',
 			'core/query-loop',
 		);
+
+		// Current page information
+		$post = $block_editor_context->post->ID;
+		$page_layout = get_post_meta( $post, 'layout_option' )[0]; // sidebar?
+
+		// Add additional blocks to the disallowed list based on block category
+		foreach ( $all_blocks as $block ) {
+			// If the page is not full-width, disallow full-width blocks
+			if ( $page_layout != 'no_sidebar' && $block->category == 'cwd-full-width' ) {
+				array_push( $disallowed_blocks, $block->name );
+			}
+		}
 
 		// Filter the unwanted blocks out of the array
 		$allowed_blocks = array_filter( $all_blocks, function( $block ) use( $disallowed_blocks ) {
