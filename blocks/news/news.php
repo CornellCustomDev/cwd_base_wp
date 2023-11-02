@@ -1,6 +1,6 @@
 <?php
 $filter = get_field('news_filter');
-$news = cwd_news_block_query( $filter );
+$news = cwd_base_news_block_query( $filter );
 
 // Use fallback image from block field, if present
 $block_fallback_img = get_field('news_fallback_img');

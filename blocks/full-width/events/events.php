@@ -1,6 +1,6 @@
 <?php
 $filter = get_field('events_filter');
-$events = cwd_events_block_query( get_field('events_number'), $filter );
+$events = cwd_base_events_block_query( get_field('events_number'), $filter );
 
 $classes = array(
 	'band padded alignfull complementary',
