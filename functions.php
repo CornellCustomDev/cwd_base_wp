@@ -40,8 +40,8 @@ require_once 'functions/theme/custom-fields/page_links_to.php';
 require_once 'functions/theme/custom-fields/remove-header-image.php';
 require_once 'functions/theme/custom-fields/acf-search.php';
 require_once 'functions/tinymce/editor.php';
-include_once('blocks/block_functions.php');
-include_once('blocks/custom_block_fields.php');
+require_once 'blocks/block_functions.php';
+require_once 'blocks/custom_block_fields.php';
 
 // Initialize post types if ACF plugin is present and activated
 if ( class_exists('Acf') ) {
