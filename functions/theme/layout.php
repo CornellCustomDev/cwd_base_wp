@@ -35,7 +35,7 @@ if ( ! function_exists ( 'custom_layout_meta_box_callback' ) ) {
 		$layout_post_meta = get_post_meta( get_the_ID() );
 		
 		// Set default
-		if ($layout_post_meta['layout_option'][0] == '') {
+		if ( !array_key_exists( 'layout_option', $layout_post_meta ) || $layout_post_meta['layout_option'][0] == '' ) {
 		  $layout_post_meta['layout_option'][0] = 'right_sidebar';
 		}
 		?>
