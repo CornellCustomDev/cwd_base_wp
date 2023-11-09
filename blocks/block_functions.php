@@ -51,7 +51,6 @@ function cwd_base_register_blocks() {
 	register_block_type( __DIR__ . '/news' );
 	register_block_type( __DIR__ . '/quote' );
 	register_block_type( __DIR__ . '/tabs' );
-	register_block_type( __DIR__ . '/wysiwyg' );
 
 	// Full-width blocks
 	register_block_type( __DIR__ . '/full-width/section' );
