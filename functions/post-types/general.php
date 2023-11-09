@@ -4,6 +4,12 @@
 if ( ! function_exists ( 'cwd_flush_rewrite_rules' ) ) {
 	function cwd_flush_rewrite_rules() {
 		global $post;
+
+		// If no post object, do nothing
+		if ( !$post ) {
+			return;
+		}
+
 		$post_type = $post->post_type;
 
 		if ( $post_type == 'page' || $post_type == 'post' || $post_type.'_already_flushed' == '1' ) {

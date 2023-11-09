@@ -4,15 +4,15 @@
 if ( ! function_exists ( 'custom_layout_add_meta_box' ) ) {
 	
 	function custom_layout_add_meta_box() {
-		
-		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
+		global $post;
+
 		$page_for_posts = get_option( 'page_for_posts' );
 		
 		$screens = get_all_post_types();
 
 		foreach ( $screens as $screen ) {
 			
-			if( $post_id != $page_for_posts ) { // Don't show on blog page
+			if( $post->ID != $page_for_posts ) { // Don't show on blog page
 				add_meta_box(
 					'custom_layout_sectionid',
 					__( 'Layout Options', 'cwd_base' ),
