@@ -18,13 +18,13 @@ if ( ! function_exists ( 'cwd_base_reformat_event_dates' ) ) {
 	function cwd_base_reformat_event_dates($query) {
 		if ( get_query_var('post_type') == 'events' ) {
 			// Get the dates
-			$date = get_field( 'date', get_the_ID() );
+			if ( $date = get_field( 'date', get_the_ID() ) ) {
+				// Convert them
+				$new_date = date( 'Ymd', strtotime( $date ) );
 
-			// Convert them
-			$new_date = date( 'Ymd', strtotime( $date ) );
-
-			// Update them in the database
-			update_field('date', $new_date, get_the_ID() );
+				// Update them in the database
+				update_field('date', $new_date, get_the_ID() );
+			}
 		}
 	}
 
