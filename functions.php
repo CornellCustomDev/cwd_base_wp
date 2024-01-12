@@ -1,9 +1,9 @@
 <?php
 
 /******************************************************
- All base theme functions are "pluggable" which means 
- they can be overridden in a child theme. Just copy 
- and paste the function (without the condition) into 
+ All base theme functions are "pluggable" which means
+ they can be overridden in a child theme. Just copy
+ and paste the function (without the condition) into
  your child theme's functions.php file
 *******************************************************/
 
@@ -65,7 +65,7 @@ if ( ! function_exists ( 'cwd_base_admin_assets' ) ) {
 
 // Search template redirect
 if ( ! function_exists ( 'search_template_redirect' ) ) {
-	
+
 	function search_template_redirect() {
 
 		global $wp_query;;
@@ -75,14 +75,14 @@ if ( ! function_exists ( 'search_template_redirect' ) ) {
 			if(isset($_GET['sitesearch'])) {
 				$selected_radio = $_GET['sitesearch'];
 			}
-	
+
 			if (isset($_GET['sitesearch']) && $selected_radio == 'cornell') {
 				$search_terms = urlencode($_GET['s']);
 				$location = "https://www.cornell.edu/search/" . "?q=" . $search_terms;
 				wp_redirect($location);
 				exit();
 			}
-	
+
 		}
 	}
 	add_action( 'template_redirect', 'search_template_redirect' );
@@ -90,30 +90,30 @@ if ( ! function_exists ( 'search_template_redirect' ) ) {
 
 // Load CSS Framework scripts
 if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
-	
+
 	function cwd_base_scripts_and_styles() {
-		
+
 			// Scripts
 		//wp_enqueue_script('cwd-script-js', get_template_directory_uri() . '/js/cwd.js' ); // Replaced by cwd_wp.js to avoid the jQuery easing function
 		wp_enqueue_script('cwd-wp-script-js', get_template_directory_uri() . '/js/wp/cwd_wp.js','','',true );
-		wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js', '','',true );		
-		wp_enqueue_script('cwd-formidable-validation-js', get_template_directory_uri() . '/js/wp/formidable_validation.js', '','',true );		
-		wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js', '','',true );		
-		wp_enqueue_script('cwd-popups-js', get_template_directory_uri() . '/js/cwd_popups.js', '','',true );		
-		wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js', '','',true );		
-		wp_enqueue_script('cwd-utilities-js', get_template_directory_uri() . '/js/cwd_utilities.js', '','',true );		
-		wp_enqueue_script('cwd-twitter-widget-js', get_template_directory_uri() . '/js/wp/twitter-widget.js', '','',true );		
-		wp_enqueue_script('contrib-js-swipe-js', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js', '','',true );		
-		wp_enqueue_script('contrib-js-debounce-js', get_template_directory_uri() . '/js/contrib/modernizr.js', '','',true );		
+		wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js', '','',true );
+		wp_enqueue_script('cwd-formidable-validation-js', get_template_directory_uri() . '/js/wp/formidable_validation.js', '','',true );
+		wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js', '','',true );
+		wp_enqueue_script('cwd-popups-js', get_template_directory_uri() . '/js/cwd_popups.js', '','',true );
+		wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js', '','',true );
+		wp_enqueue_script('cwd-utilities-js', get_template_directory_uri() . '/js/cwd_utilities.js', '','',true );
+		wp_enqueue_script('cwd-twitter-widget-js', get_template_directory_uri() . '/js/wp/twitter-widget.js', '','',true );
+		wp_enqueue_script('contrib-js-swipe-js', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js', '','',true );
+		wp_enqueue_script('contrib-js-debounce-js', get_template_directory_uri() . '/js/contrib/modernizr.js', '','',true );
 		wp_enqueue_script('contrib-js-pep-js', get_template_directory_uri() . '/js/contrib/pep.js', '','',true );
 		wp_enqueue_script('contrib-js-fitvids-js', get_template_directory_uri() . '/js/wp/jquery.fitvids.js', '','',true );
-		wp_enqueue_script('cwd-siteimprove-js', get_template_directory_uri() . '/js/wp/siteimprove.js', '','',true );		
-		wp_enqueue_script('cwd-project-js', get_template_directory_uri() . '/js/wp/project.js', '','',true );		
-		//wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );		
-					
+		wp_enqueue_script('cwd-siteimprove-js', get_template_directory_uri() . '/js/wp/siteimprove.js', '','',true );
+		wp_enqueue_script('cwd-project-js', get_template_directory_uri() . '/js/wp/project.js', '','',true );
+		//wp_enqueue_script('cwd-experimental-js', get_template_directory_uri() . '/js/cwd_experimental.js', array('jquery'),'',true );
+
 			// jQuery UI effects - contains easing functions
-		wp_enqueue_script('jquery-effects-core'); 
-				
+		wp_enqueue_script('jquery-effects-core');
+
 			// Styles
 		wp_enqueue_style('freight-css', '//use.typekit.net/nwp2wku.css'); // Freight Text and Sans
 		wp_enqueue_style('cwd-base-css', get_template_directory_uri() . '/css/base.css');
@@ -133,19 +133,19 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		//wp_enqueue_style('cornell-font-totally-cornered', get_template_directory_uri() . '/fonts/totally-cornered.css');
 	}
 	add_action('wp_enqueue_scripts', 'cwd_base_scripts_and_styles');
-	
+
 }
 
 // Remove WP version number and append random version number for scripts and styles
 if ( ! function_exists ( 'add_random_version_number' ) ) {
-	function add_random_version_number ( $src, $handle ) {              
+	function add_random_version_number ( $src, $handle ) {
 		if( strpos( $src, '?ver=' ) ) {
 			$src = remove_query_arg( 'ver', $src );
 		}
-		return add_query_arg( 'ver', rand(), $src );                                                                 
+		return add_query_arg( 'ver', rand(), $src );
 	}
-	add_filter( 'script_loader_src', 'add_random_version_number', 10, 2 );                                       
-	add_filter( 'style_loader_src', 'add_random_version_number', 10, 2 );                                           
+	add_filter( 'script_loader_src', 'add_random_version_number', 10, 2 );
+	add_filter( 'style_loader_src', 'add_random_version_number', 10, 2 );
 }
 
 // Remove auto p in excerpts
@@ -154,13 +154,13 @@ remove_filter ('the_excerpt', 'wpautop');
 // Limit excerpt length
 if ( ! function_exists( 'custom_excerpt' ) ) {
 	function custom_excerpt($characters){
-		
+
 		$excerpt = get_the_content();
-		
+
 		if($characters == '') {
 			$characters = 0;
 		}
-		
+
 		if( has_excerpt(get_the_ID()) ) {
 			$excerpt = the_excerpt();
 		}
@@ -170,7 +170,7 @@ if ( ! function_exists( 'custom_excerpt' ) ) {
 		if( get_post_type() == 'events' ) {
 			$excerpt = get_field('description');
 		}
-		
+
 		$excerpt = preg_replace(" ([.*?])",'',$excerpt);
 		$excerpt = strip_shortcodes($excerpt);
 		$excerpt = strip_tags($excerpt);
@@ -190,10 +190,10 @@ if ( ! function_exists( 'custom_excerpt' ) ) {
 // Target parent pages and their children
 if ( ! function_exists ( 'is_tree' ) ) {
 	function is_tree($pid) {  // $pid = parent id
-		global $post;         
-		if(is_page()&&($post->post_parent==$pid||is_page($pid))) 
+		global $post;
+		if(is_page()&&($post->post_parent==$pid||is_page($pid)))
 			return true;
-		else 
+		else
 			return false;
 	}
 }
@@ -211,11 +211,11 @@ if ( ! function_exists ( 'tiny_mce_remove_unused_formats' ) ) {
 // Add a meta box to remove header image -- next three functions.
 if ( ! function_exists ( 'remove_this_header_add_meta_box' ) ) {
 	function remove_this_header_add_meta_box() {
-		
+
 		$screens = get_all_post_types();
 
 		foreach ( $screens as $screen ) {
-			
+
 			add_meta_box(
 				'remove_this_header_sectionid',
 				'Remove header image?',
@@ -229,14 +229,14 @@ if ( ! function_exists ( 'remove_this_header_add_meta_box' ) ) {
 
 // Print the box content
 if ( ! function_exists ( 'remove_this_header_meta_box_callback' ) ) {
-	
+
 	function remove_this_header_meta_box_callback( $post ) {
 
 		// Add a nonce field so we can check for it later
 		wp_nonce_field( 'remove_this_header_meta_box', 'remove_this_header_meta_box_nonce' );
 		$remove_this_header_post_meta = get_post_meta( get_the_ID() ); ?>
 
-		<p>			  
+		<p>
 			<div class="layout-row-content">
 				<p style="margin: .6em 0;">
 					<label for="remove_this_header1id">
@@ -248,7 +248,7 @@ if ( ! function_exists ( 'remove_this_header_meta_box_callback' ) ) {
 						<?php _e( 'No', 'cwd_base' )?>
 					</label>
 				</p>
-			</div> 
+			</div>
 		</p>
 
 	<?php
@@ -271,13 +271,13 @@ if ( ! function_exists ( 'remove_this_header_save_meta_box_data' ) ) {
 
 // Add a meta box to replace header image with slider -- next 3 functions
 if ( ! function_exists ( 'add_slider_add_meta_box' ) ) {
-	
+
 	function add_slider_add_meta_box() {
 
 		global $post;
 
 		if( $post->ID == get_option( 'page_on_front' ) ) {
-			
+
 			$screens = get_all_post_types();
 
 			foreach ( $screens as $screen ) {
@@ -297,7 +297,7 @@ if ( ! function_exists ( 'add_slider_add_meta_box' ) ) {
 
 // Print the box content
 if ( ! function_exists ( 'add_slider_meta_box_callback' ) ) {
-	
+
 	function add_slider_meta_box_callback( $post ) {
 
 		global $post;
@@ -309,7 +309,7 @@ if ( ! function_exists ( 'add_slider_meta_box_callback' ) ) {
 
 			<p><?php echo 'Use the slider menu on the left to add slides or click '; ?><a href="<?php echo admin_url('edit.php?post_type=slider'); ?>">here</a>.</p>
 
-			<p>			  
+			<p>
 				<div class="layout-row-content">
 					<p style="margin: .6em 0;">
 						<label for="add_slider1id">
@@ -321,17 +321,17 @@ if ( ! function_exists ( 'add_slider_meta_box_callback' ) ) {
 							<?php _e( 'No', 'cwd_base' )?>
 						</label>
 					</p>
-				</div> 
+				</div>
 			</p>
 
-	<?php } 
-		
+	<?php }
+
 	}
 }
 
 // When the post is saved, saves our custom data
 if ( ! function_exists ( 'add_slider_save_meta_box_data' ) ) {
-	
+
 	function add_slider_save_meta_box_data( $post_id ) {
 
 		global $post;
@@ -339,7 +339,7 @@ if ( ! function_exists ( 'add_slider_save_meta_box_data' ) ) {
 		if( isset( $_POST[ 'add_slider' ] ) ) {
 			update_post_meta( $post_id, 'add_slider', $_POST[ 'add_slider' ] );
 		}
-		
+
 	}
 	add_action( 'save_post', 'add_slider_save_meta_box_data' );
 }
@@ -365,7 +365,7 @@ if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
 		if ( $link == 'custom' ) {
 
 			$url = $page_links_to['custom_url'];
-			
+
 			return $url;
 
 		}
@@ -387,7 +387,7 @@ if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
 		if ( $link == 'custom' ) {
 
 			$url = $page_links_to['custom_url'];
-			
+
 			return $url;
 
 		}
@@ -406,8 +406,8 @@ add_filter( 'admin_post_thumbnail_html', 'custom_featured_image_text' );
 
 // Modify news sort order
 function cwd_base_news_query( $query ) {
- 
-	$post_type = get_query_var('post_type');   
+
+	$post_type = get_query_var('post_type');
 
     if( $query->is_main_query() && $post_type == 'news' ) {
         $query->set( 'meta_key', 'publication_date' );
@@ -419,10 +419,10 @@ add_action( 'pre_get_posts', 'cwd_base_news_query' );
 
 // Modify events sort order
 function cwd_base_events_query( $query ) {
- 
-	$post_type = get_query_var('post_type');   
 
-    if( $query->is_main_query() && $post_type == 'events' ) { // && ! is_admin() 
+	$post_type = get_query_var('post_type');
+
+    if( $query->is_main_query() && $post_type == 'events' ) { // && ! is_admin()
         $query->set( 'meta_key', 'date' );
         $query->set( 'orderby', 'meta_value' );
         $query->set( 'order', 'DESC' );
@@ -433,7 +433,7 @@ add_action( 'pre_get_posts', 'cwd_base_events_query' );
 // Pull info from a page with the same slug as custom post type
 function get_page_data($post_type) {
 
-	// Interrupt the default query to grab some content for custom post type archive pages. 
+	// Interrupt the default query to grab some content for custom post type archive pages.
 	// The page slug MUST be the same as the post type slug for this to work.
 	$new_query = new WP_Query( 'pagename=' . $post_type );
 	if( $new_query->have_posts() ) : $new_query->the_post();
@@ -448,7 +448,7 @@ function reformat_dates($query) {
 	$post_type = get_query_var('post_type');
 
 	if( $post_type == 'events' ) {
-	
+
 		// Get the dates
 		$date = get_field( 'date', get_the_ID() );
 
@@ -461,7 +461,7 @@ function reformat_dates($query) {
 	}
 
 	if($post_type == 'news') {
-					
+
 		// Get the dates
 		$date = get_field( 'publication_date', get_the_ID() );
 
@@ -472,7 +472,7 @@ function reformat_dates($query) {
 		update_field('publication_date', $new_date, get_the_ID() );
 
 	}
-		
+
 }
 add_action( 'pre_get_posts', 'reformat_dates' );
 
@@ -493,9 +493,9 @@ add_filter( 'posts_orderby' , 'posts_orderby_lastname', 10, 2 );
 
 // Prevent WP using 'Auto Draft' as the post title (wtf?)
 function filter_the_title($title, $id) {
-	
+
 	$post_type = get_post_type($id);
-	
+
 	if($post_type == 'news' && $title == 'Auto Draft') {
 		$title = get_field('title', $id);
 	}
@@ -526,14 +526,14 @@ add_filter( 'the_title', 'filter_the_title', 10, 2 );
 // 		'core-embed/youtube'
 // 	);
 // }
-// add_filter( 'allowed_block_types', 'cwd_allowed_block_types' );	
+// add_filter( 'allowed_block_types', 'cwd_allowed_block_types' );
 
 include_once('blocks/block_functions.php');
 include_once('blocks/custom_block_fields.php');
 
 // News listing cards (used on homepage and in News block)
 function cwd_news_cards_markup($query, $fallback_override = null) {
-	$theme_fallback_img = get_stylesheet_directory_uri() . '/images/brooks/news_listing_fallback.jpg';
+	$theme_fallback_img = get_stylesheet_directory_uri() . 'images/wp/cu-seal-large.png';
 
 	$fallback_img = $fallback_override ?: $theme_fallback_img;
 
@@ -550,15 +550,15 @@ function cwd_news_cards_markup($query, $fallback_override = null) {
 if ( ! function_exists ( 'cwd_flush_rewrite_rules' ) ) {
 	function cwd_flush_rewrite_rules() {
 
-		global $post; 
+		global $post;
 		$post_type = $post->post_type;
-						
+
 		if ( $post_type == 'page' || $post_type == 'post' || $post_type.'_already_flushed' == '1' ) {
 			return;
 		}
 
 		flush_rewrite_rules();
-		
+
 		add_option($post_type.'_already_flushed', '1', '', 'yes');
 
 	}
@@ -580,13 +580,13 @@ if ( ! function_exists ( 'get_all_custom_post_types' ) ) {
 
 if ( ! function_exists ( 'get_all_post_types' ) ) {
 	function get_all_post_types() {
-	
+
 		$all_custom_post_types = get_all_custom_post_types();
 		$built_in_post_types = array('post', 'page');
 		$all_post_types = array_merge($all_custom_post_types, $built_in_post_types);
-		
+
 		return $all_post_types;
-		
+
 	}
 }
 
@@ -605,28 +605,28 @@ if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
 	add_action( 'pre_get_posts', 'cwd_base_cpt_archives' );
 }
 
-// Filter post type metadata choices 
+// Filter post type metadata choices
 if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
 	function add_metadata_filter() {
-	
+
 		$checked_post_types = get_checked_post_types();
 
 		foreach($checked_post_types as $post_type) {
 			add_filter('acf/load_field/name=metadata_' . $post_type, 'get_taxonomies_from_post_type');
 		}
-		
+
 	}
 	add_action('cptui_post_register_taxonomies', 'add_metadata_filter');
 }
 
 // Toggle metatag options for each post type
 /* function metatags_field_visbility ($field) {
-	
+
 	$post_type_options = get_field('post_type_options', 'options', true);
 	$post_type_choices = $post_type_options['post_types'];
 
-	if (in_array('news', $post_type_choices)) {     
-		return $field; 
+	if (in_array('news', $post_type_choices)) {
+		return $field;
 	}
 }
  *///add_filter('acf/load_field/key=field_60e83df931bd2', 'metatags_field_visbility');
