@@ -1086,7 +1086,7 @@ function get_post_type_taxonomies_names($post_type) {
 	$taxonomies = get_taxonomies( $args, 'names' );
 
 	foreach ( $taxonomies as $taxonomy ) {
-		$taxonomies[] = $taxonomy->name;
+		$taxonomies[] = $taxonomy;
 	}
 
 	return $taxonomies;
@@ -1102,7 +1102,7 @@ function get_post_type_taxonomies_labels($post_type) {
 		'public'      => true,
 	);
 
-	$taxonomies = get_taxonomies( $args, 'object' );
+	$taxonomies = get_taxonomies( $args, 'objects' );
 
 	foreach ( $taxonomies as $taxonomy ) {
 		$taxonomies[] = $taxonomy->label;

@@ -4,15 +4,15 @@
 if ( ! function_exists ( 'custom_layout_add_meta_box' ) ) {
 	
 	function custom_layout_add_meta_box() {
-		
-		$post_id = $_GET['post'] ? $_GET['post'] : $_POST['post_ID'] ;
+		global $post;
+
 		$page_for_posts = get_option( 'page_for_posts' );
 		
 		$screens = get_all_post_types();
 
 		foreach ( $screens as $screen ) {
 			
-			if( $post_id != $page_for_posts ) { // Don't show on blog page
+			if( $post->ID != $page_for_posts ) { // Don't show on blog page
 				add_meta_box(
 					'custom_layout_sectionid',
 					__( 'Layout Options', 'cwd_base' ),
@@ -35,7 +35,7 @@ if ( ! function_exists ( 'custom_layout_meta_box_callback' ) ) {
 		$layout_post_meta = get_post_meta( get_the_ID() );
 		
 		// Set default
-		if ($layout_post_meta['layout_option'][0] == '') {
+		if ( !array_key_exists( 'layout_option', $layout_post_meta ) || $layout_post_meta['layout_option'][0] == '' ) {
 		  $layout_post_meta['layout_option'][0] = 'right_sidebar';
 		}
 		?>

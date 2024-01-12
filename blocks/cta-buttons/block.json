@@ -1,0 +1,14 @@
+{
+	"name": "cwd/cta-buttons",
+	"title": "Call to Action Buttons",
+	"description": "A grid of 3 to 6 CTA buttons.",
+	"category": "cwd-general",
+	"icon": "share-alt2",
+	"supports": {
+		"align" : false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "cta-buttons.php"
+	}
+}

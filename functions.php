@@ -1,184 +1,49 @@
 <?php
 
-// Flush rewrite rules when a custom post type post is saved, but only once for each custom post type
-if ( ! function_exists ( 'cwd_flush_rewrite_rules' ) ) {
-	function cwd_flush_rewrite_rules() {
-		global $post;
+/******************************************************
+ All base theme functions are "pluggable" which means 
+ they can be overridden in a child theme. Just copy 
+ and paste the function (without the condition) into 
+ your child theme's functions.php file
+*******************************************************/
 
-		// If no post object, do nothing
-		if ( !$post ) {
-			return;
-		}
+// Get site URL
+$baseUrl = site_url();
 
-		$post_type = $post->post_type;
+// Required files
+require_once 'functions/saml_auth.php';
+require_once 'functions/post-types/general.php';
+require_once 'functions/theme/setup.php';
+require_once 'functions/theme/minify.php';
+require_once 'functions/customizer/customize-register.php';
+require_once 'functions/theme/layout.php';
+require_once 'functions/theme/body-classes.php';
+require_once 'functions/theme/pagination.php';
+require_once 'functions/theme/widgets.php';
+require_once 'functions/theme/metadata.php';
+require_once 'functions/theme/dates.php';
+require_once 'functions/theme/images.php';
+require_once 'functions/theme/header-img.php';
+require_once 'functions/theme/options.php';
+require_once 'functions/theme/gallery.php';
+require_once 'functions/theme/styles-and-scripts.php';
+require_once 'functions/theme/templating-functions.php';
+require_once 'functions/navigation/menus.php';
+require_once 'functions/navigation/breadcrumbs.php';
+require_once 'functions/navigation/menu-classes.php';
+require_once 'functions/navigation/section-nav/section-nav.php';
+//require_once 'functions/theme/custom-fields/featured.php';
+require_once 'functions/theme/custom-fields/featured-image.php';
+require_once 'functions/theme/custom-fields/header-slider.php';
+require_once 'functions/theme/custom-fields/image_id.php';
+require_once 'functions/theme/custom-fields/page_links_to.php';
+require_once 'functions/theme/custom-fields/remove-header-image.php';
+require_once 'functions/theme/custom-fields/acf-search.php';
+require_once 'functions/tinymce/editor.php';
+require_once 'blocks/block_functions.php';
+require_once 'blocks/custom_block_fields.php';
 
-		if ( $post_type == 'page' || $post_type == 'post' || $post_type.'_already_flushed' == '1' ) {
-			return;
-		}
-
-		flush_rewrite_rules();
-
-		add_option($post_type.'_already_flushed', '1', '', 'yes');
-	}
-
-	add_action('save_post', 'cwd_flush_rewrite_rules', 999);
+// Initialize post types if ACF plugin is present and activated
+if ( class_exists('Acf') ) {
+	require_once locate_template('/functions/post-types/init.php');
 }
-
-// Get all custom post types
-if ( ! function_exists ( 'get_all_custom_post_types' ) ) {
-	function get_all_custom_post_types() {
-		$cptui_post_types = cptui_get_post_type_slugs();
-		$local_post_types = array('courses', 'events', 'galleries', 'news', 'people', 'spotlights');
-		$all_custom_post_types = array_merge($cptui_post_types, $local_post_types);
-
-		return $all_custom_post_types;
-	}
-}
-
-if ( ! function_exists ( 'get_all_post_types' ) ) {
-	function get_all_post_types() {
-		$all_custom_post_types = get_all_custom_post_types();
-		$built_in_post_types = array('post', 'page');
-		$all_post_types = array_merge($all_custom_post_types, $built_in_post_types);
-
-		return $all_post_types;
-	}
-}
-
-// Include all post types in all archives
-if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
-	function cwd_base_cpt_archives( $query ) {
-		if ( $query->is_tag() || is_category() && $query->is_main_query() && !is_admin() ) {
-			$query->set( 'post_type', get_all_custom_post_types() );
-		}
-	}
-
-	add_action( 'pre_get_posts', 'cwd_base_cpt_archives' );
-}
-
-// Filter post type metadata choices
-if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
-	function add_metadata_filter() {
-		$checked_post_types = get_checked_post_types();
-
-		foreach($checked_post_types as $post_type) {
-			add_filter('acf/load_field/name=metadata_' . $post_type, 'get_taxonomies_from_post_type');
-		}
-	}
-
-	add_action('cptui_post_register_taxonomies', 'add_metadata_filter');
-}
-
-// Filter the permalink for post and custom post type URLs (Page links to...)
-if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
-	function cwd_base_filter_permalink( $url, $post ) {
-		$page_links_to = get_field( 'page_links_to', $post->ID );
-
-		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
-
-		if ( $link == 'custom' ) {
-			$url = $page_links_to['custom_url'];
-
-			return $url;
-		}
-		else {
-			return $url;
-		}
-	}
-
-	add_filter( 'post_link', 'cwd_base_filter_permalink', 10, 2 ); // Posts
-	add_filter( 'post_type_link', 'cwd_base_filter_permalink', 10, 2 ); // Custom Post Types
-}
-
-// Filter the permalink for page URLs (Page links to...)
-if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
-	function cwd_base_filter_page_permalink( $url, $post ) {
-
-		$page_links_to = get_field( 'page_links_to', $post );
-		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
-
-		if ( $link == 'custom' ) {
-
-			$url = $page_links_to['custom_url'];
-
-			return $url;
-
-		}
-		else {
-			return $url;
-		}
-	}
-
-	add_filter( 'page_link', 'cwd_base_filter_page_permalink', 10, 2 ); // Pages
-}
-
-
-// Filter the permalink for post and custom post type URLs (Page links to...)
-if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
-	function cwd_base_filter_permalink( $url, $post ) {
-
-		$page_links_to = get_field( 'page_links_to', $post->ID );
-		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
-
-		if ( $link == 'custom' ) {
-
-			$url = $page_links_to['custom_url'];
-
-			return $url;
-
-		}
-		else {
-			return $url;
-		}
-	}
-	add_filter( 'post_link', 'cwd_base_filter_permalink', 10, 2 ); // Posts
-	add_filter( 'post_type_link', 'cwd_base_filter_permalink', 10, 2 ); // Custom Post Types
-}
-
-// Filter the permalink for page URLs (Page links to...)
-if ( ! function_exists ( 'cwd_base_filter_page_permalink' ) ) {
-	function cwd_base_filter_page_permalink( $url, $post ) {
-
-		$page_links_to = get_field( 'page_links_to', $post );
-		$link = isset($page_links_to['point_this_content_to']) ? $page_links_to['point_this_content_to'] : null;
-
-		if ( $link == 'custom' ) {
-
-			$url = $page_links_to['custom_url'];
-
-			return $url;
-
-		}
-		else {
-			return $url;
-		}
-	}
-	add_filter( 'page_link', 'cwd_base_filter_page_permalink', 10, 2 ); // Pages
-}
-
-// Toggle metatag options for each post type
-/* function metatags_field_visbility ($field) {
-
-	$post_type_options = get_field('post_type_options', 'options', true);
-	$post_type_choices = $post_type_options['post_types'];
-
-	if (in_array('news', $post_type_choices)) {
-		return $field;
-	}
-}
- *///add_filter('acf/load_field/key=field_60e83df931bd2', 'metatags_field_visbility');
-
-/* foreach(get_chosen_post_types() as $chosen_post_type) {
-
-	add_filter('acf/load_field/key=field_6345b945b9d85', function ($field) use ($chosen_post_type) {
-		$field['sub_fields'] = array(
-			array(
-				'label' => ucwords(str_replace('_', ' ', $chosen_post_type)),
-				'name' => $chosen_post_type,
-				'type' => 'group',
-			),
-		);
-		return $field;
-	});
-
-} */

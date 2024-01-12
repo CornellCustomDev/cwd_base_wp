@@ -80,3 +80,4 @@ require_once 'custom-fields.php';
 require_once 'custom-taxonomies.php';
 require_once 'columns.php';
 require_once 'plugin/cd-news-pull-wp-plugin.php';
+require_once 'news-functions.php';

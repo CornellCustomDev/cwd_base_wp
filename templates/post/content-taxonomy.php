@@ -27,6 +27,7 @@
 		<p class="summary">
 									
 			<?php 
+				$post_type = get_post_type();
 			
 				$archive_options = get_field('archive_options', 'options');
 				$excerpt_length = $archive_options[$post_type]['excerpt_length_' . $post_type];

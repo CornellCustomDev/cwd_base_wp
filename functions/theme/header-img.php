@@ -7,7 +7,7 @@ if ( ! function_exists ( 'get_header_img_url' ) ) {
 		global $post;
 
 		$header_img_url = get_header_image(); // Customizer image
-		$ancestor_ids = get_post_ancestors($post->ID); // Section image
+		$ancestor_ids = $post ? get_post_ancestors($post->ID) : null; // Section image
 		$remove_header_on_page = get_post_meta( get_the_ID(), 'remove_this_header', true ); // No image 
 
 		if ( (is_page() || is_single()) && has_post_thumbnail() ) {

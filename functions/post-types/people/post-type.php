@@ -74,3 +74,4 @@ if ( ! function_exists ( 'cptui_register_my_cpts_people' ) ) {
 require_once 'custom-fields.php';
 require_once 'custom-taxonomies.php';
 require_once 'columns.php';
+require_once 'people-functions.php';

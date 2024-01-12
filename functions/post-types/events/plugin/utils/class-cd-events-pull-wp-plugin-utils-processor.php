@@ -118,7 +118,8 @@ class Cd_Events_Pull_Wp_Plugin_Utils_Processor {
 	private function cd_events_pull() {
 		$this->write_log( 'Notice: Starting extract events from API.' );
 		$events_response = $this->cd_extract_events();
-		if ( ! $events_response || array_key_exists( 'error', $events_response ) ) {
+		$is_error = gettype( $events_response ) == 'array' && array_key_exists( 'error', $events_response );
+		if ( ! $events_response || $is_error ) {
 			$this->write_log( 'Warning: no events recieved from API.' );
 			return $events_response;
 		};
