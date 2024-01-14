@@ -63,8 +63,7 @@
 	transition: opacity 0.08s linear 0.24s;
 }
 
-.slider .hidden {
-	/* reinforce the "visually hidden" class used, to allow compatibility with Bootstrap class names */
+.slider .hidden { /* reinforce the "visually hidden" class used, to allow compatibility with Bootstrap class names */
 	position: absolute;
 	left: -10000em;
 	top: auto;
@@ -197,15 +196,12 @@ main .slider-caption h2, #main .slider-caption h2 {
 		min-height: 0;
 		position: static;
 	}
-
 	.slider-caption .caption-inner {
 		left: 3%;
 	}
-
 	.slider-caption .campaign-nav {
 		right: 3%;
 	}
-
 	.slider-caption .campaign-nav.left {
 		right: auto;
 		left: 3%;
@@ -221,18 +217,15 @@ main .slider-caption h2, #main .slider-caption h2 {
 		bottom: 0;
 		z-index: 3;
 	}
-
 	.slider-caption .caption-inner {
 		background: none;
 		top: 5% !important;
 		left: 4% !important;
 		padding: 0;
 	}
-
 	main .slider-caption .caption-inner, #main .slider-caption .caption-inner {
 		top: 4% !important;
 	}
-
 	.slider-caption h2, main .slider-caption h2 {
 		font-size: 22px;
 		margin-bottom: 0.2em;
@@ -377,22 +370,18 @@ main .slider-caption h2, #main .slider-caption h2 {
 	.slider-container .campaign-nav ul {
 		display: none;
 	}
-
 	.slider-container .campaign-nav .next-prev a {
 		background: transparent;
 		background: rgba(0, 0, 0, 0.2);
 		border: 1px solid #fff;
 		border-color: rgba(255, 255, 255, 0.6);
 	}
-
 	.slider-container .campaign-nav .next-prev a:hover {
 		border-color: rgb(255, 255, 255);
 	}
-
 	.slider-container .campaign-nav .next-prev a:active {
 		background: rgba(0, 0, 0, 0.5);
 	}
-
 	.slider-container .campaign-nav .next-prev .prev {
 		margin-right: 1px;
 	}

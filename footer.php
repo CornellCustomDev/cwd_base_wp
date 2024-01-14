@@ -91,7 +91,7 @@
 									<a href="<?php echo esc_url( get_theme_mod( 'facebook' ) )?>"><img alt="Facebook" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_facebook.svg"></a>
 								<?php } ?>
 								<?php if ( get_theme_mod( 'twitter' ) ) { ?>
-									<a href="<?php echo esc_url( get_theme_mod( 'twitter' ) )?>"><img alt="Twitter" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_twitter.svg"></a>
+									<a href="<?php echo esc_url( get_theme_mod( 'twitter' ) )?>"><img alt="X (formerly known as Twitter)" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_x.svg"></a>
 								<?php } ?>
 								<?php if ( get_theme_mod( 'youtube' ) ) { ?>
 									<a href="<?php echo esc_url( get_theme_mod( 'youtube' ) )?>"><img alt="YouTube" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_youtube.svg"></a>

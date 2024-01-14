@@ -353,7 +353,6 @@
 }
 .cwd-basic.tiles .group-image a, .cwd-basic.tiles .group-image .deco, .cwd-basic.tiles .group-image h3, .cwd-basic.tiles .group-image .h3 {
 	color: #fff;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.5);
 	text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 .cwd-basic.tiles .group-image a {
@@ -371,7 +370,6 @@
 }
 .cwd-basic.tiles .group-image a:hover .deco, .cwd-basic.tiles .group-image a:hover h3, .cwd-basic.tiles .group-image a:hover .h3 {
 	color: #fff;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.9);
 	text-decoration-color: rgba(255, 255, 255, 0.9);
 }
 .cwd-basic.tiles .group-image a:active {
@@ -382,7 +380,6 @@
 }
 .cwd-basic.tiles .group-image a:active .deco, .cwd-basic.tiles .group-image a:active h3, .cwd-basic.tiles .group-image a:active .h3 {
 	color: #ccc;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.3);
 	text-decoration-color: rgba(255, 255, 255, 0.3);
 }
 .cwd-basic.tiles .group-image a .overlay {
@@ -581,8 +578,6 @@
 		width: 100% !important;
 		margin: 0;
 	}
-}
-@media (min-width: 992px) {
 	.cwd-basic.tiles.one-plus-max-4 .card:first-of-type .group-fields {
 		width: 47% !important;
 		width: calc(50% - 15px) !important;
@@ -602,7 +597,6 @@
 .cwd-basic.tiles.no-overlay .group-image .deco, .cwd-basic.tiles.no-overlay .group-image h3, .cwd-basic.tiles.no-overlay .group-image .h3 {
 	color: #1176ac;
 	text-decoration: underline;
-	-webkit-text-decoration-color: rgba(17, 118, 172, 0.5);
 	text-decoration-color: rgba(17, 118, 172, 0.5);
 }
 .cwd-basic.tiles.no-overlay .group-image h3.designer, .cwd-basic.tiles.no-overlay .group-image h3.designer .deco, .cwd-basic.tiles.no-overlay .group-image .h3.designer, .cwd-basic.tiles.no-overlay .group-image .h3.designer .deco {
@@ -617,12 +611,10 @@
 }
 .cwd-basic.tiles.no-overlay .group-image a:hover, .cwd-basic.tiles.no-overlay .group-image a:hover .deco, .cwd-basic.tiles.no-overlay .group-image a:hover h3, .cwd-basic.tiles.no-overlay .group-image a:hover .h3 {
 	color: #000;
-	-webkit-text-decoration-color: rgba(0, 0, 0, 0.7);
 	text-decoration-color: rgba(0, 0, 0, 0.7);
 }
 .cwd-basic.tiles.no-overlay .group-image a:active, .cwd-basic.tiles.no-overlay .group-image a:active .deco, .cwd-basic.tiles.no-overlay .group-image a:active h3, .cwd-basic.tiles.no-overlay .group-image a:active .h3 {
 	color: #666;
-	-webkit-text-decoration-color: rgba(0, 0, 0, 0.4);
 	text-decoration-color: rgba(0, 0, 0, 0.4);
 }
 .cwd-basic.tiles.no-overlay .group-image:before {
@@ -630,16 +622,13 @@
 }
 .cwd-basic.tiles:not(.no-overlay) .card a h3:not(.designer), .cwd-basic.tiles:not(.no-overlay) .card a .h3:not(.designer) {
 	color: #fff !important;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.5);
 	text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 .cwd-basic.tiles:not(.no-overlay) .card a:hover h3:not(.designer), .cwd-basic.tiles:not(.no-overlay) .card a:hover .h3:not(.designer) {
-	-webkit-text-decoration-color: rgb(255, 255, 255);
 	text-decoration-color: rgb(255, 255, 255);
 }
 .cwd-basic.tiles:not(.no-overlay) .card a:active h3:not(.designer), .cwd-basic.tiles:not(.no-overlay) .card a:active .h3:not(.designer) {
 	color: #ccc !important;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.5);
 	text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 .cwd-basic.tiles:not(.no-overlay) .card a h4, .cwd-basic.tiles:not(.no-overlay) .card a p, .cwd-basic.tiles:not(.no-overlay) .card a div {
@@ -709,18 +698,15 @@
 }
 .dark .cwd-basic a, .dark .cwd-basic a h3:not(.designer), .dark .cwd-basic a .h3:not(.designer), .cwd-basic.dark a, .cwd-basic.dark a h3:not(.designer), .cwd-basic.dark a .h3:not(.designer) {
 	color: #fff !important;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.5);
 	text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 .dark .cwd-basic a:hover, .dark .cwd-basic a:hover *, .dark .cwd-basic a h3:not(.designer):hover, .dark .cwd-basic a h3:not(.designer):hover *, .dark .cwd-basic a .h3:not(.designer):hover, .dark .cwd-basic a .h3:not(.designer):hover *, .cwd-basic.dark a:hover, .cwd-basic.dark a:hover *, .cwd-basic.dark a h3:not(.designer):hover, .cwd-basic.dark a h3:not(.designer):hover *, .cwd-basic.dark a .h3:not(.designer):hover, .cwd-basic.dark a .h3:not(.designer):hover * {
-	-webkit-text-decoration-color: rgb(255, 255, 255);
 	text-decoration-color: rgb(255, 255, 255);
 	border-color: rgba(255, 255, 255, 0.7) !important;
 }
 .dark .cwd-basic a:active, .dark .cwd-basic a:active *, .dark .cwd-basic a h3:not(.designer):active, .dark .cwd-basic a h3:not(.designer):active *, .dark .cwd-basic a .h3:not(.designer):active, .dark .cwd-basic a .h3:not(.designer):active *, .cwd-basic.dark a:active, .cwd-basic.dark a:active *, .cwd-basic.dark a h3:not(.designer):active, .cwd-basic.dark a h3:not(.designer):active *, .cwd-basic.dark a .h3:not(.designer):active, .cwd-basic.dark a .h3:not(.designer):active * {
 	color: #ccc !important;
 	border-color: rgba(255, 255, 255, 0.5) !important;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.5);
 	text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 .dark .cwd-basic a *, .dark .cwd-basic a h3:not(.designer) *, .dark .cwd-basic a .h3:not(.designer) *, .cwd-basic.dark a *, .cwd-basic.dark a h3:not(.designer) *, .cwd-basic.dark a .h3:not(.designer) * {
@@ -752,15 +738,12 @@
 	        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.08);
 }
 .dark .cwd-basic.tiles.no-overlay .group-image .deco, .dark .cwd-basic.tiles.no-overlay .group-image h3, .dark .cwd-basic.tiles.no-overlay .group-image .h3, .cwd-basic.dark.tiles.no-overlay .group-image .deco, .cwd-basic.dark.tiles.no-overlay .group-image h3, .cwd-basic.dark.tiles.no-overlay .group-image .h3 {
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.5);
 	text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 .dark .cwd-basic.tiles.no-overlay .group-image a:hover, .dark .cwd-basic.tiles.no-overlay .group-image a:hover .deco, .dark .cwd-basic.tiles.no-overlay .group-image a:hover h3, .dark .cwd-basic.tiles.no-overlay .group-image a:hover .h3, .cwd-basic.dark.tiles.no-overlay .group-image a:hover, .cwd-basic.dark.tiles.no-overlay .group-image a:hover .deco, .cwd-basic.dark.tiles.no-overlay .group-image a:hover h3, .cwd-basic.dark.tiles.no-overlay .group-image a:hover .h3 {
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.8);
 	text-decoration-color: rgba(255, 255, 255, 0.8);
 }
 .dark .cwd-basic.tiles.no-overlay .group-image a:active, .dark .cwd-basic.tiles.no-overlay .group-image a:active .deco, .dark .cwd-basic.tiles.no-overlay .group-image a:active h3, .dark .cwd-basic.tiles.no-overlay .group-image a:active .h3, .cwd-basic.dark.tiles.no-overlay .group-image a:active, .cwd-basic.dark.tiles.no-overlay .group-image a:active .deco, .cwd-basic.dark.tiles.no-overlay .group-image a:active h3, .cwd-basic.dark.tiles.no-overlay .group-image a:active .h3 {
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.6);
 	text-decoration-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -825,8 +808,8 @@ table,
 }
 @media (min-width: 992px) {
 	body,
-table,
-#main form label {
+	table,
+	#main form label {
 		font-size: 18px;
 	}
 }
@@ -839,9 +822,9 @@ body > footer, #body-footer,
 }
 @media (min-width: 992px) {
 	body > footer, #body-footer,
-#main .secondary,
-#main form .option-label,
-.content-sidebar {
+	#main .secondary,
+	#main form .option-label,
+	.content-sidebar {
 		font-size: 17px;
 	}
 }
@@ -1026,7 +1009,6 @@ body > footer a.link-block, #body-footer a.link-block {
 		width: 44px;
 		height: 43px;
 	}
-
 	#utility-navigation a {
 		height: 37px;
 		line-height: 36px;
@@ -1059,9 +1041,8 @@ body > footer a.link-block, #body-footer a.link-block {
 	.mobile .breadcrumb + h2 {
 		font-size: 23px !important;
 	}
-
 	.mobile .breadcrumb + h2 + .secondary-navigation li,
-.mobile .breadcrumb + h2 + .secondary-navigation li li {
+	.mobile .breadcrumb + h2 + .secondary-navigation li li {
 		font-size: 16px !important;
 		font-weight: 400;
 	}
@@ -1083,7 +1064,6 @@ samp {
 
 #body-footer .footer-links a, body > footer .footer-links a, .footer-links-mimic a {
 	color: #fff;
-	-webkit-text-decoration-color: rgba(255, 255, 255, 0.4);
 	text-decoration-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -1274,50 +1254,50 @@ a.link-button .fa, a.link-button .zmdi {
 }
 @media (min-width: 480px) {
 	#super-header.has_header_image,
-#slider-caption,
-.slider-container > * {
+	#slider-caption,
+	.slider-container > * {
 		min-height: 290px;
 	}
 }
 @media (min-width: 624px) {
 	#super-header.has_header_image,
-#slider-caption,
-.slider-container > * {
+	#slider-caption,
+	.slider-container > * {
 		min-height: 335px;
 	}
 }
 @media (min-width: 768px) {
 	#super-header.has_header_image,
-#slider-caption,
-.slider-container > * {
+	#slider-caption,
+	.slider-container > * {
 		min-height: 380px;
 	}
 }
 @media (min-width: 992px) {
 	#super-header.has_header_image,
-#slider-caption,
-.slider-container > * {
+	#slider-caption,
+	.slider-container > * {
 		min-height: 425px;
 	}
 }
 @media (min-width: 1080px) {
 	#super-header.has_header_image,
-#slider-caption,
-.slider-container > * {
+	#slider-caption,
+	.slider-container > * {
 		min-height: 470px;
 	}
 }
 @media (min-width: 1200px) {
 	#super-header.has_header_image,
-#slider-caption,
-.slider-container > * {
+	#slider-caption,
+	.slider-container > * {
 		min-height: 515px;
 	}
 }
 @media (min-width: 1480px) {
 	#super-header.has_header_image,
-#slider-caption,
-.slider-container > * {
+	#slider-caption,
+	.slider-container > * {
 		min-height: 560px;
 	}
 }
@@ -1815,16 +1795,14 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 		width: auto;
 		max-width: 40%;
 	}
-
 	.alignright, a > figure.alignright {
 		float: right;
 		margin: 0.3em 0 4px 20px;
 		width: auto;
 		max-width: 40%;
 	}
-
 	.alignleft.small,
-.alignright.small {
+	.alignright.small {
 		width: auto;
 		max-width: 30%;
 	}
@@ -1834,7 +1812,6 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 		margin: 4px 37.5px 12px -75px;
 		padding-left: 0;
 	}
-
 	.one-column-article #main article .alignright {
 		margin: 4px -75px 12px 37.5px;
 	}
@@ -1845,7 +1822,6 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 		width: 45%;
 		max-width: 45%;
 	}
-
 	.one-column-article #main article .alignright {
 		margin: 4px -135px 12px 37.5px;
 		width: 45%;
@@ -1858,7 +1834,6 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 		width: 50%;
 		max-width: 50%;
 	}
-
 	.one-column-article #main article .alignright {
 		margin: 4px -150px 12px 45px;
 		width: 50%;
@@ -1969,12 +1944,12 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 
 @media (max-width: 767px) {
 	.gallery img.alignright,
-.gallery div.alignright,
-.gallery figure.alignright,
-.gallery img.alignleft,
-.gallery div.alignleft,
-.gallery figure.alignleft,
-.gallery img.wp-post-image.attachment-thumb {
+	.gallery div.alignright,
+	.gallery figure.alignright,
+	.gallery img.alignleft,
+	.gallery div.alignleft,
+	.gallery figure.alignleft,
+	.gallery img.wp-post-image.attachment-thumb {
 		display: block;
 		margin: 1em auto;
 		float: none;
@@ -1982,52 +1957,52 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 }
 @media (min-width: 480px) {
 	.gallery.gallery-columns-3 .gallery-item,
-.gallery.gallery-columns-4 .gallery-item,
-.gallery.gallery-columns-5 .gallery-item,
-.gallery.gallery-columns-6 .gallery-item,
-.gallery.gallery-columns-7 .gallery-item,
-.gallery.gallery-columns-8 .gallery-item,
-.gallery.gallery-columns-9 .gallery-item {
+	.gallery.gallery-columns-4 .gallery-item,
+	.gallery.gallery-columns-5 .gallery-item,
+	.gallery.gallery-columns-6 .gallery-item,
+	.gallery.gallery-columns-7 .gallery-item,
+	.gallery.gallery-columns-8 .gallery-item,
+	.gallery.gallery-columns-9 .gallery-item {
 		width: 33%;
 	}
 }
 @media (min-width: 624px) {
 	.gallery.gallery-columns-4 .gallery-item,
-.gallery.gallery-columns-5 .gallery-item,
-.gallery.gallery-columns-6 .gallery-item,
-.gallery.gallery-columns-7 .gallery-item,
-.gallery.gallery-columns-8 .gallery-item,
-.gallery.gallery-columns-9 .gallery-item {
+	.gallery.gallery-columns-5 .gallery-item,
+	.gallery.gallery-columns-6 .gallery-item,
+	.gallery.gallery-columns-7 .gallery-item,
+	.gallery.gallery-columns-8 .gallery-item,
+	.gallery.gallery-columns-9 .gallery-item {
 		width: 25%;
 	}
 }
 @media (min-width: 768px) {
 	.gallery.gallery-columns-5 .gallery-item,
-.gallery.gallery-columns-6 .gallery-item,
-.gallery.gallery-columns-7 .gallery-item,
-.gallery.gallery-columns-8 .gallery-item,
-.gallery.gallery-columns-9 .gallery-item {
+	.gallery.gallery-columns-6 .gallery-item,
+	.gallery.gallery-columns-7 .gallery-item,
+	.gallery.gallery-columns-8 .gallery-item,
+	.gallery.gallery-columns-9 .gallery-item {
 		width: 20%;
 	}
 }
 @media (min-width: 992px) {
 	.gallery.gallery-columns-6 .gallery-item,
-.gallery.gallery-columns-7 .gallery-item,
-.gallery.gallery-columns-8 .gallery-item,
-.gallery.gallery-columns-9 .gallery-item {
+	.gallery.gallery-columns-7 .gallery-item,
+	.gallery.gallery-columns-8 .gallery-item,
+	.gallery.gallery-columns-9 .gallery-item {
 		width: 16%;
 	}
 }
 @media (min-width: 1080px) {
 	.gallery.gallery-columns-7 .gallery-item,
-.gallery.gallery-columns-8 .gallery-item,
-.gallery.gallery-columns-9 .gallery-item {
+	.gallery.gallery-columns-8 .gallery-item,
+	.gallery.gallery-columns-9 .gallery-item {
 		width: 14%;
 	}
 }
 @media (min-width: 1200px) {
 	.gallery.gallery-columns-8 .gallery-item,
-.gallery.gallery-columns-9 .gallery-item {
+	.gallery.gallery-columns-9 .gallery-item {
 		width: 12%;
 	}
 }
@@ -2426,463 +2401,420 @@ body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-field
 
 @media (max-width: 1400px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 310px;
 		width: 310px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 230px;
 		width: 230px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 380px;
 		width: 380px !important;
 	}
 }
 @media (max-width: 1300px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 280px;
 		width: 280px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 210px;
 		width: 210px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 350px;
 		width: 350px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
 		height: 140px;
 		width: 140px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 170px) !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 230px;
 		width: 230px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 260px) !important;
 	}
 }
 @media (max-width: 1200px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 250px;
 		width: 250px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 280px;
 		width: 280px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 470px;
 		width: 470px !important;
 	}
 }
 @media (max-width: 1100px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 200px;
 		width: 200px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 270px;
 		width: 270px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 450px;
 		width: 450px !important;
 	}
-
 	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
 		height: 75px;
 		width: 75px !important;
 	}
-
 	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 87px) !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
 		height: 120px;
 		width: 120px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 150px) !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 185px;
 		width: 185px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 215px) !important;
 	}
 }
 @media (max-width: 992px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 215px;
 		width: 215px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 260px;
 		width: 260px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 420px;
 		width: 420px !important;
 	}
-
 	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
 		height: 275px;
 		width: 275px !important;
 		margin-right: 0;
 		float: none;
 	}
-
 	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: 100% !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
 		height: 110px;
 		width: 110px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 140px) !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 180px;
 		width: 180px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 210px) !important;
 	}
 }
 @media (max-width: 900px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 170px;
 		width: 170px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 240px;
 		width: 240px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 380px;
 		width: 380px !important;
 	}
-
 	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
 		height: 235px;
 		width: 235px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
 		height: 100px;
 		width: 100px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 130px) !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 160px;
 		width: 160px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 190px) !important;
 	}
 }
 @media (max-width: 850px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 150px;
 		width: 150px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 225px;
 		width: 225px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 370px;
 		width: 370px !important;
 	}
-
 	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img {
 		height: 200px;
 		width: 200px !important;
 	}
 }
 @media (max-width: 800px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img {
 		height: 140px;
 		width: 140px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 210px;
 		width: 210px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img {
 		height: 350px;
 		width: 350px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img {
 		height: 90px;
 		width: 90px !important;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 120px) !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 140px;
 		width: 140px !important;
 	}
-
 	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: calc(100% - 170px) !important;
 	}
 }
 @media (max-width: 768px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 480px;
 		width: 480px !important;
 		margin-right: 0;
 	}
-
 	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news .group-fields,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events .group-fields {
 		width: 100% !important;
 	}
 }
 @media (max-width: 500px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 435px;
 		width: 435px !important;
 	}
 }
 @media (max-width: 450px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 390px;
 		width: 390px !important;
 		min-width: 100%;
@@ -2890,75 +2822,75 @@ body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 }
 @media (max-width: 400px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 340px;
 		width: 340px !important;
 	}
 }
 @media (max-width: 360px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 300px;
 		width: 300px !important;
 	}
 }
 @media (max-width: 300px) {
 	body.sidebar .secondary .cwd-basic.tiles .card.type-news img,
-body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
-body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
-body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
-body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
+	body.sidebar .secondary .cwd-basic.tiles .card.type-events img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic.tiles .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic.tiles .card.type-events img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .secondary .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar #main-article .cwd-basic:not(.tiles) .card.type-events img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-news img,
+	body.no-sidebar .colorband .cwd-basic:not(.tiles) .card.type-events img {
 		height: 240px;
 		width: 240px !important;
 	}

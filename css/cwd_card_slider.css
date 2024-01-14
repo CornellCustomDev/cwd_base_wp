@@ -258,7 +258,6 @@
 		width: 50% !important;
 		margin-bottom: 0;
 	}
-
 	.card-slider.max-6 .card {
 		width: 50% !important;
 		margin-bottom: 0;
@@ -269,7 +268,6 @@
 		width: 50% !important;
 		margin-bottom: 0;
 	}
-
 	.card-slider.max-6 .card {
 		width: 33.3333333333% !important;
 	}
@@ -278,25 +276,20 @@
 	.card-slider-padded {
 		padding: 0 60px;
 	}
-
 	.card-slider-padded .card-slider {
 		margin-left: 0;
 		margin-right: 0;
 	}
-
 	.card-slider {
 		padding-top: 30px;
 		background: radial-gradient(ellipse at center top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 60%), radial-gradient(ellipse at center bottom, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0) 40%);
 	}
-
 	.card-slider .prev {
 		left: -60px;
 	}
-
 	.card-slider .next {
 		right: -60px;
 	}
-
 	.card-slider .cards {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
@@ -308,34 +301,27 @@
 		-ms-touch-action: pan-y;
 		    touch-action: pan-y;
 	}
-
 	.card-slider.scripted .cards {
 		overflow-x: hidden !important;
 	}
-
 	.card-slider.scripted.free-scroll .cards {
 		overflow-x: auto !important;
 	}
-
 	.card-slider .card {
 		width: 50% !important;
 		padding-left: 30px;
 		padding-right: 30px;
 		margin-bottom: 0;
 	}
-
 	.card-slider.max-1 .card, .card-slider.max-2 .card {
 		width: 100% !important;
 	}
-
 	.card-slider.max-5 .card {
 		width: 33.3333333333% !important;
 	}
-
 	.card-slider.max-6 .card {
 		width: 25% !important;
 	}
-
 	.card-slider .pips, .card-slider .next-prev {
 		display: block;
 	}
@@ -344,15 +330,12 @@
 	.card-slider.max-2 .card {
 		width: 50% !important;
 	}
-
 	.card-slider.max-4 .card {
 		width: 33.3333333333% !important;
 	}
-
 	.card-slider.max-5 .card {
 		width: 25% !important;
 	}
-
 	.card-slider.max-6 .card {
 		width: 20% !important;
 	}
@@ -366,23 +349,18 @@
 	.card-slider.max-4 .card {
 		width: 25% !important;
 	}
-
 	.card-slider.max-5 .card {
 		width: 20% !important;
 	}
-
 	.card-slider.max-6 .card {
 		width: 16.6666666667% !important;
 	}
-
 	.card-slider.pips-large .pips {
 		top: -15px;
 	}
-
 	.card-slider.pips-large .pips button {
 		padding: 3px;
 	}
-
 	.card-slider.pips-large .pips button:before {
 		width: 11px;
 		height: 11px;

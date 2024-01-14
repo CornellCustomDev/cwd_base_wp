@@ -895,6 +895,7 @@ acf_add_local_field_group(array(
 				'full-width' => 'Stack',
 				'flex-6' => 'Grid of Two',
 				'flex-4' => 'Grid of Three',
+				'flex-3' => 'Grid of Four'
 			),
 			'default_value' => 'stack',
 			'return_format' => 'value',
