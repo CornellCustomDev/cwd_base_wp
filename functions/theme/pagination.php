@@ -319,98 +319,102 @@ if (!function_exists('cwd_pagination_comments')) {
 }
 
 // wp_link_pages() for paginated pages using the <!--nextpage--> tag
-function add_next_and_number($args){
-    if($args['next_or_number'] == 'next_and_number'){
-        global $page, $numpages, $multipage, $more, $pagenow;
-        $args['next_or_number'] = 'number';
-        $prev = '';
-        $next = '';
-        if ( $multipage ) {
-            if ( $more ) {
-                $i = $page - 1;
-                if ( $i && $more ) {
-                    $prev .= _wp_link_page($i);
-                    $prev .= $args['link_before']. $args['previouspagelink'] . $args['link_after'] . '</a>';
+if (!function_exists('add_next_and_number')) {
+    function add_next_and_number($args){
+        if($args['next_or_number'] == 'next_and_number'){
+            global $page, $numpages, $multipage, $more, $pagenow;
+            $args['next_or_number'] = 'number';
+            $prev = '';
+            $next = '';
+            if ( $multipage ) {
+                if ( $more ) {
+                    $i = $page - 1;
+                    if ( $i && $more ) {
+                        $prev .= _wp_link_page($i);
+                        $prev .= $args['link_before']. $args['previouspagelink'] . $args['link_after'] . '</a>';
+                    }
+                    $i = $page + 1;
+                    if ( $i <= $numpages && $more ) {
+                        $next .= _wp_link_page($i);
+                        $next .= $args['link_before']. $args['nextpagelink'] . $args['link_after'] . '</a>';
+                    }
                 }
-                $i = $page + 1;
-                if ( $i <= $numpages && $more ) {
-                    $next .= _wp_link_page($i);
-                    $next .= $args['link_before']. $args['nextpagelink'] . $args['link_after'] . '</a>';
+            }
+            $args['before'] = $args['before'].$prev;
+            $args['after'] = $next.$args['after'];   
+        }
+        return $args;
+    }
+    add_filter('wp_link_pages_args','add_next_and_number');
+}
+
+if (!function_exists('custom_wp_link_pages')) {
+    function custom_wp_link_pages( $args = '' ) {
+        $defaults = array(
+            'before' => '<nav class="navigation"><ol class="cwd-pagination wp_link_pages">',
+            'after' => '</ol></nav>',
+            'text_before' => '',
+            'text_after' => '',
+            //'next_or_number' => 'next_and_number', 
+            'nextpagelink' => __('Next &raquo;', 'cwd_base'),
+            'previouspagelink' => __('&laquo; Previous', 'cwd_base'),
+            'pagelink' => '%',
+            'echo' => 1,
+        );
+
+        $r = wp_parse_args( $args, $defaults );
+        $r = apply_filters( 'wp_link_pages_args', $r );
+        extract( $r, EXTR_SKIP );
+
+        global $page, $numpages, $multipage, $more, $pagenow;
+
+        $output = '';
+        if ( $multipage ) {
+            
+            $min_links = $range * 2 + 1;
+            $block_min = min($page - $range, $pages - $min_links);
+            $block_high = max($page + $range, $min_links);
+            $left_gap =(($block_min - $anchor - $gap) > 0) ? true : false;
+            $right_gap =(($block_high + $anchor + $gap) < $pages) ? true : false;
+            
+            if ( 'number' == $next_or_number ) {
+                $output .= $before;
+                for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
+                    $j = str_replace( '%', $i, $pagelink );
+                    $output .= ' ';
+                    if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
+                        $output .= _wp_link_page( $i );
+                    else
+                        $output .= '<li><span class="page current">';
+
+                    $output .= $text_before . $j . $text_after;
+                    if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
+                        $output .= '</a>';
+                    else
+                        $output .= '</span></li>';
+                }
+                $output .= $after;
+            } else {
+                if ( $more ) {
+                    $output .= $before;
+                    $i = $page - 1;
+                    if ( $i && $more ) {
+                        $output .= _wp_link_page( $i );
+                        $output .= $text_before . $previouspagelink . $text_after . '</a>';
+                    }
+                    $i = $page + 1;
+                    if ( $i <= $numpages && $more ) {
+                        $output .= _wp_link_page( $i );
+                        $output .= $text_before . $nextpagelink . $text_after . '</a>';
+                    }
+                    $output .= $after;
                 }
             }
         }
-        $args['before'] = $args['before'].$prev;
-        $args['after'] = $next.$args['after'];   
+
+        if ( $echo )
+            echo $output;
+
+        return $output;
     }
-    return $args;
-}
-add_filter('wp_link_pages_args','add_next_and_number');
-
-function custom_wp_link_pages( $args = '' ) {
-	$defaults = array(
-		'before' => '<nav class="navigation"><ol class="cwd-pagination wp_link_pages">',
-		'after' => '</ol></nav>',
-		'text_before' => '',
-		'text_after' => '',
-		//'next_or_number' => 'next_and_number', 
-		'nextpagelink' => __('Next &raquo;', 'cwd_base'),
-		'previouspagelink' => __('&laquo; Previous', 'cwd_base'),
-		'pagelink' => '%',
-		'echo' => 1,
-	);
-
-	$r = wp_parse_args( $args, $defaults );
-	$r = apply_filters( 'wp_link_pages_args', $r );
-	extract( $r, EXTR_SKIP );
-
-	global $page, $numpages, $multipage, $more, $pagenow;
-
-	$output = '';
-	if ( $multipage ) {
-		
-		$min_links = $range * 2 + 1;
-		$block_min = min($page - $range, $pages - $min_links);
-		$block_high = max($page + $range, $min_links);
-		$left_gap =(($block_min - $anchor - $gap) > 0) ? true : false;
-		$right_gap =(($block_high + $anchor + $gap) < $pages) ? true : false;
-		
-		if ( 'number' == $next_or_number ) {
-			$output .= $before;
-			for ( $i = 1; $i < ( $numpages + 1 ); $i = $i + 1 ) {
-				$j = str_replace( '%', $i, $pagelink );
-				$output .= ' ';
-				if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
-					$output .= _wp_link_page( $i );
-				else
-					$output .= '<li><span class="page current">';
-
-				$output .= $text_before . $j . $text_after;
-				if ( $i != $page || ( ( ! $more ) && ( $page == 1 ) ) )
-					$output .= '</a>';
-				else
-					$output .= '</span></li>';
-			}
-			$output .= $after;
-		} else {
-			if ( $more ) {
-				$output .= $before;
-				$i = $page - 1;
-				if ( $i && $more ) {
-					$output .= _wp_link_page( $i );
-					$output .= $text_before . $previouspagelink . $text_after . '</a>';
-				}
-				$i = $page + 1;
-				if ( $i <= $numpages && $more ) {
-					$output .= _wp_link_page( $i );
-					$output .= $text_before . $nextpagelink . $text_after . '</a>';
-				}
-				$output .= $after;
-			}
-		}
-	}
-
-	if ( $echo )
-		echo $output;
-
-	return $output;
 }

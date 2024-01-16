@@ -5,7 +5,13 @@ if ( ! function_exists ( 'cwd_base_nav' ) ) {
 	function cwd_base_nav() {
 
 		$menu_options = get_field('menu_options', 'option');
-		$main_menu_depth = $menu_options['menu_depth']['main_menu'];
+		
+		if($menu_options) {
+			$main_menu_depth = $menu_options['menu_depth']['main_menu'];
+		}
+		else {
+			$main_menu_depth = '2'; // Default
+		}
 		
 		wp_nav_menu(
 		array(
@@ -35,7 +41,13 @@ if ( ! function_exists ( 'cwd_base_nav_top' ) ) {
 	function cwd_base_nav_top() {
 
 		$menu_options = get_field('menu_options', 'option');
-		$top_menu_depth = $menu_options['menu_depth']['top_menu'];
+
+		if($menu_options) { 
+			$top_menu_depth = $menu_options['menu_depth']['top_menu'];
+		}
+		else {
+			$top_menu_depth = '1'; // Default
+		}
 
 		wp_nav_menu(
 		array(

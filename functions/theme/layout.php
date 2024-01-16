@@ -121,11 +121,11 @@ if ( ! function_exists ( 'get_layout' ) ) {
 		$post_type = get_post_type();
 
 		$sidebar_options = get_field('sidebar_options', 'options');
-		$layout = $sidebar_options['layout'];
+		if($sidebar_options) { $layout = $sidebar_options['layout']; }
 		
-		if( is_archive() || is_search() || is_tag() || is_tax() || is_category() || is_home() ) {
+		if( is_archive() || is_search() || is_tag() || is_tax() || is_category() || is_home()) {
 			$archive_options = get_field('archive_options', 'options');
-			$layout = $archive_options[$post_type]['layout_' . $post_type];
+			if($archive_options && $post_type != 'page') { $layout = $archive_options[$post_type]['layout_' . $post_type]; }
 		}
 		else {
 			$layout_post_meta = get_post_meta( get_queried_object_id() );

@@ -56,19 +56,6 @@ if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
 	add_action( 'pre_get_posts', 'cwd_base_cpt_archives' );
 }
 
-// Filter post type metadata choices
-if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
-	function add_metadata_filter() {
-		$checked_post_types = get_checked_post_types();
-
-		foreach($checked_post_types as $post_type) {
-			add_filter('acf/load_field/name=metadata_' . $post_type, 'get_taxonomies_from_post_type');
-		}
-	}
-
-	add_action('cptui_post_register_taxonomies', 'add_metadata_filter');
-}
-
 // Filter the permalink for post and custom post type URLs (Page links to...)
 if ( ! function_exists ( 'cwd_base_filter_permalink' ) ) {
 	function cwd_base_filter_permalink( $url, $post ) {

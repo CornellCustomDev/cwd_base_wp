@@ -7,9 +7,6 @@
  your child theme's functions.php file
 *******************************************************/
 
-// Get site URL
-$baseUrl = site_url();
-
 // Required files
 require_once 'functions/saml_auth.php';
 require_once 'functions/post-types/general.php';
@@ -45,5 +42,5 @@ require_once 'blocks/custom_block_fields.php';
 
 // Initialize post types if ACF plugin is present and activated
 if ( class_exists('Acf') ) {
-	require_once locate_template('/functions/post-types/init.php');
+	include_once locate_template('/functions/post-types/init.php');
 }

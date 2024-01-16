@@ -31,9 +31,12 @@ $post_type = get_post_type();
 		<p class="summary">
 									
 			<?php 
-			
+
+
+				$excerpt_length = 180; // Default
 				$archive_options = get_field('archive_options', 'options');
-				$excerpt_length = $archive_options[$post_type]['excerpt_length_' . $post_type];
+				
+				if($archive_options && $post_type != 'page') { $excerpt_length = $archive_options[$post_type]['excerpt_length_' . $post_type]; }
 			
 				echo custom_excerpt($excerpt_length); // Characters
 			

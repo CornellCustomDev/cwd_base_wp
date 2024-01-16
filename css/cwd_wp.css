@@ -2219,6 +2219,10 @@ body > footer a.link-block {
 body > footer .footer-links a {
 	color: #fff;
 }
+body > footer .social img {
+	background: #fff;
+	border-radius: 100%;
+}
 @media (max-width: 768px) {
 	body > footer .social img {
 		width: 30px;

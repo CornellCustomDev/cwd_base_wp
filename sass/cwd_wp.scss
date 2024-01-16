@@ -1460,10 +1460,14 @@ body > {
 		.social {
 			
 			img {
+
+				background: #fff;
+    			border-radius: 100%;
 				
 				@media (max-width: 768px) {
 					width: 30px;
 				}
+				
 			}
 		}
 		.sub-footer {

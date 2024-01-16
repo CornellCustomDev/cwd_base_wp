@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
 		$iframeHead = $("iframe#twitter-widget-0").contents().find('head');
 
 		if( !$('#twitter-widget-styles', $iframeHead).length ){    // If stylesheet does not exist then create it
-			$iframeHead.append('<link rel="stylesheet" href="'+getBaseUrl()+'wp-content/themes/cwd_base_2023/css/twitter-widget.css" id="twitter-widget-styles">');
+			$iframeHead.append('<link rel="stylesheet" href="'+getBaseUrl()+'wp-content/themes/cwd_base_2024/css/twitter-widget.css" id="twitter-widget-styles">');
 		}
 		else if( $('#twitter-widget-styles', $iframeHead).length ){    // If stylesheet exists then quit timer
 			clearInterval(twitterStylesTimer);
@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
 		$iframeHead = $("iframe#twitter-widget-0").contents().find('head');
 
 		if( !$('#twitter-widget-js', $iframeHead).length ){ //If our js does not exist then create it
-			$iframeHead.append('<script src="'+getBaseUrl()+'wp-content/themes/cwd_base_2023/js/twitter-widget.js" id="twitter-widget-js"></script>');
+			$iframeHead.append('<script src="'+getBaseUrl()+'wp-content/themes/cwd_base_2024/js/twitter-widget.js" id="twitter-widget-js"></script>');
 		}else if( $('#twitter-widget-js', $iframeHead).length ){    //If js exists then quit timer
 			clearInterval(twitterJsTimer);
 		}

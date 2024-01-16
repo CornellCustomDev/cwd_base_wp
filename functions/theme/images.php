@@ -109,87 +109,93 @@ if ( ! function_exists( 'cwd_base_get_image_caption') ) {
 }
 
 // Grab first image from content
-function cwd_base_catch_that_image() {
-	
-	global $post;
-	$first_img_url = '';
-	
-	ob_start();
-	ob_end_clean();
+if ( ! function_exists( 'cwd_base_catch_that_image' ) ) {
+	function cwd_base_catch_that_image() {
+		
+		global $post;
+		$first_img_url = '';
+		
+		ob_start();
+		ob_end_clean();
 
-	// Process any shortcodes first (galleries)
-	$transformed_content = apply_filters('the_content', $post->post_content); 
+		// Process any shortcodes first (galleries)
+		$transformed_content = apply_filters('the_content', $post->post_content); 
 
-	$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $transformed_content, $matches);
-	$first_img_url = $matches[1][0];
+		$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $transformed_content, $matches);
+		$first_img_url = $matches[1][0];
 
-	if(empty($first_img_url)){
-		$first_img_url = cwd_base_get_fallback_image();
+		if(empty($first_img_url)){
+			$first_img_url = cwd_base_get_fallback_image();
+		}
+		echo '<img src="' . $first_img_url . '" alt="">'; 
+		
 	}
-	echo '<img src="' . $first_img_url . '" alt="">'; 
-	
 }
 
 // Allow image upscaling
-class ThumbnailUpscaler {
+if( ! class_exists('ThumbnailUpscaler') ) {
+	class ThumbnailUpscaler {
 
-	static function image_resize_dimensions($default, $orig_w, $orig_h, $new_w, $new_h, $crop) {
+		static function image_resize_dimensions($default, $orig_w, $orig_h, $new_w, $new_h, $crop) {
+			
+			if(!$crop)
+				return null;
+
+			$size_ratio = max($new_w / $orig_w, $new_h / $orig_h);
 		
-		if(!$crop)
-			return null;
+			$crop_w = round($new_w / $size_ratio);
+			$crop_h = round($new_h / $size_ratio);
+		
+			$s_x = floor( ($orig_w - $crop_w) / 2 );
+			$s_y = floor( ($orig_h - $crop_h) / 2 );
 
-		$size_ratio = max($new_w / $orig_w, $new_h / $orig_h);
-	
-		$crop_w = round($new_w / $size_ratio);
-		$crop_h = round($new_h / $size_ratio);
-	
-		$s_x = floor( ($orig_w - $crop_w) / 2 );
-		$s_y = floor( ($orig_h - $crop_h) / 2 );
+			if(is_array($crop)) {
 
-		if(is_array($crop)) {
+				if($crop[ 0 ] === 'left') {
+					$s_x = 0;
+				} 
+				else if($crop[ 0 ] === 'right') {
+					$s_x = $orig_w - $crop_w;
+				}
 
-			if($crop[ 0 ] === 'left') {
-				$s_x = 0;
-			} 
-			else if($crop[ 0 ] === 'right') {
-				$s_x = $orig_w - $crop_w;
+				if($crop[ 1 ] === 'top') {
+					$s_y = 0;
+				} 
+				else if($crop[ 1 ] === 'bottom') {
+					$s_y = $orig_h - $crop_h;
+				}
 			}
-
-			if($crop[ 1 ] === 'top') {
-				$s_y = 0;
-			} 
-			else if($crop[ 1 ] === 'bottom') {
-				$s_y = $orig_h - $crop_h;
-			}
+		
+			return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
 		}
-	
-		return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
 	}
+	add_filter('image_resize_dimensions', array('ThumbnailUpscaler', 'image_resize_dimensions'), 10, 6);
 }
-add_filter('image_resize_dimensions', array('ThumbnailUpscaler', 'image_resize_dimensions'), 10, 6);
 
 // Add default site icon
-function upload_site_icon() {
-	
-	include_once( ABSPATH . 'wp-admin/includes/admin.php' );
-	
-	$url = get_template_directory_uri() . '/images/wp/square-old-seal.png';
+if ( ! function_exists( 'upload_site_icon' ) ) {
+	function upload_site_icon() {
+		
+		include_once( ABSPATH . 'wp-admin/includes/admin.php' );
+		
+		$url = get_template_directory_uri() . '/images/wp/square-old-seal.png';
 
-    $image = '';
+		$image = '';
+		
+		if($url != '') {
+			$file = array();
+			$file['name'] = $url;
+			$file['tmp_name'] = download_url($url);
 	
-    if($url != '') {
-        $file = array();
-        $file['name'] = $url;
-        $file['tmp_name'] = download_url($url);
- 
-        if (is_wp_error($file['tmp_name'])) {
-            @unlink($file['tmp_name']);
-            var_dump( $file['tmp_name']->get_error_messages() );
-        } 
-		else {
-            $src = media_sideload_image($url, '', '', 'src');
-            $attachment_id = attachment_url_to_postid($src);
-        }
-    }
-    return $attachment_id;
+			if (is_wp_error($file['tmp_name'])) {
+				@unlink($file['tmp_name']);
+				var_dump( $file['tmp_name']->get_error_messages() );
+			} 
+			else {
+				$src = media_sideload_image($url, '', '', 'src');
+				$attachment_id = attachment_url_to_postid($src);
+			}
+		}
+		return $attachment_id;
+	}
 }

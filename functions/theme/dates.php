@@ -39,9 +39,11 @@ if ( ! function_exists( 'cwd_base_get_the_date' ) ) {
 }
 
 // Make today's date the default date for all new posts (news, events, and custom date field)
-function cwd_base_default_date($field) {
-	$field['default_value'] = date('Ymd');
-	return $field;
+if ( ! function_exists( 'cwd_base_default_date' ) ) {
+	function cwd_base_default_date($field) {
+		$field['default_value'] = date('Ymd');
+		return $field;
+	}
 }
 add_filter('acf/load_field/name=date', 'cwd_base_default_date');
 add_filter('acf/load_field/name=publication_date', 'cwd_base_default_date');

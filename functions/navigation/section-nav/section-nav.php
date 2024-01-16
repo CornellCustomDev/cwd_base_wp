@@ -1,7 +1,9 @@
 <?php
 
 // Option name for exclusion data
-define( 'CDSN_EP_OPTION_NAME', 'cdsn_exclude_pages' );
+if ( ! defined( 'CDSN_EP_OPTION_NAME' ) ) {
+	define( 'CDSN_EP_OPTION_NAME', 'cdsn_exclude_pages' );
+}
 
 /**
  * Create and register the widget.
@@ -24,44 +26,46 @@ add_action( 'widgets_init', function() {
  *                           immediately. Set to false to return HTML instead.
  * @return string HTML content, if not displaying.
  */
-function section_nav( $args = '', $echo = true ) {
+if ( ! function_exists( 'section_nav' ) ) {
+	function section_nav( $args = '', $echo = true ) {
 
-	$args = wp_parse_args( $args, array(
-		'show_all'         => false,
-		'exclude'          => '',
-		'hide_on_excluded' => true,
-		'show_on_home'     => false,
-		'show_empty'       => false,
-		'sort_by'          => 'menu_order',
-		'a_heading'        => false,
-		'before_widget'    => '<div>',
-		'after_widget'     => '</div>',
-		'before_title'     => '<h2 class="widgettitle">',
-		'after_title'      => '</h2>',
-		'title'            => '',
-	) );
+		$args = wp_parse_args( $args, array(
+			'show_all'         => false,
+			'exclude'          => '',
+			'hide_on_excluded' => true,
+			'show_on_home'     => false,
+			'show_empty'       => false,
+			'sort_by'          => 'menu_order',
+			'a_heading'        => false,
+			'before_widget'    => '<div>',
+			'after_widget'     => '</div>',
+			'before_title'     => '<h2 class="widgettitle">',
+			'after_title'      => '</h2>',
+			'title'            => '',
+		) );
 
-	if ( ! $echo ) {
-		ob_start();
+		if ( ! $echo ) {
+			ob_start();
+		}
+
+		the_widget(
+			'Section_Nav',
+			$args,
+			array(
+				'before_widget' => $args['before_widget'],
+				'after_widget'  => $args['after_widget'],
+				'before_title'  => $args['before_title'],
+				'after_title'   => $args['after_title'],
+			)
+		);
+
+		if ( ! $echo ) {
+			return ob_get_clean();
+		}
 	}
 
-	the_widget(
-		'Section_Nav',
-		$args,
-		array(
-			'before_widget' => $args['before_widget'],
-			'after_widget'  => $args['after_widget'],
-			'before_title'  => $args['before_title'],
-			'after_title'   => $args['after_title'],
-		)
-	);
-
-	if ( ! $echo ) {
-		return ob_get_clean();
-	}
+	/**
+	 * Register activation hook
+	 */
+	register_activation_hook( __FILE__, 'cdsn_activate' );
 }
-
-/**
- * Register activation hook
- */
-register_activation_hook( __FILE__, 'cdsn_activate' );

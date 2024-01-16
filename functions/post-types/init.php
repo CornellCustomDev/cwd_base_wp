@@ -10,6 +10,20 @@ $cptui_post_types = cptui_get_post_type_slugs();
 // Get checked post types
 $checked_post_types = get_checked_post_types();
 
+// Get chosen post_types based on theme options checked boxes
+//if ( ! function_exists ( 'get_checked_post_types' ) ) {
+	function get_checked_post_types() {
+
+		$post_type_options = get_field('post_type_options', 'options');
+
+		if($post_type_options) {
+			$checked_post_types = $post_type_options['post_types'];
+			return $checked_post_types;
+		}
+
+	}
+//}
+
 // Initialize slider
 if($add_slider == 'Yes') {
 	require_once get_template_directory() . '/functions/post-types/slider/post-type.php';

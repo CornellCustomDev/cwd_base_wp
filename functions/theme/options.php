@@ -1,5 +1,8 @@
 <?php
 
+// Get site URL
+$baseUrl = site_url();
+
 // Create post type checkboxes on theme options page
 function acf_load_post_types( $field ) {
     
@@ -59,6 +62,89 @@ function check_post_type_box_initially($data) {
 
 }
 add_action( 'cptui_after_update_post_type', 'check_post_type_box_initially' );
+
+// Filter post type metadata choices
+if ( ! function_exists ( 'add_metadata_filter' ) ) {
+	function add_metadata_filter() {
+		
+		$checked_post_types = get_checked_post_types();
+
+		foreach($checked_post_types as $post_type) {
+			add_filter('acf/load_field/name=metadata_' . $post_type, 'get_taxonomies_from_post_type');
+		}
+	}
+	add_action('init', 'add_metadata_filter');
+}
+
+// Load taxonomies for each post type
+function get_taxonomies_from_post_type( $field ) {
+    
+	$field['choices'] = array();
+
+	$post_type = substr($field['name'], 9);
+		
+	$args = array(
+		'object_type' => array( $post_type ),
+		'public'      => true,
+	);
+
+	$taxonomies = get_taxonomies( $args, 'objects' );
+
+	if(empty($taxonomies)) {
+		$field['choices']['message'] = '<em class="no-taxonomies">*This post type has no tags, categories, or taxonomies to display.</em>';
+		return $field;
+	}
+
+	foreach ( $taxonomies as $taxonomy ) {
+		$field['choices'][$taxonomy->name] = $taxonomy->label;
+	}
+
+	$field['choices']['archives'] = 'On archive pages';
+	$field['choices']['single'] = 'On single posts';
+	$field['choices']['labels'] = 'Text labels';
+	$field['choices']['icons'] = 'Icons';
+
+	return $field;
+
+}
+
+function get_post_type_taxonomies_names($post_type) {
+
+	$taxonomies = array();
+
+	$args = array(
+		'object_type' => array( $post_type ),
+		'public'      => true,
+	);
+
+	$taxonomies = get_taxonomies( $args, 'names' );
+
+	foreach ( $taxonomies as $taxonomy ) {
+		$taxonomies[] = $taxonomy;
+	}
+
+	return $taxonomies;
+
+}
+
+function get_post_type_taxonomies_labels($post_type) {
+
+	$taxonomies = array();
+
+	$args = array(
+		'object_type' => array( $post_type ),
+		'public'      => true,
+	);
+
+	$taxonomies = get_taxonomies( $args, 'objects' );
+
+	foreach ( $taxonomies as $taxonomy ) {
+		$taxonomies[] = $taxonomy->label;
+	}
+
+	return $taxonomies;
+
+}
 
 if( function_exists('acf_add_options_page') ):
 
@@ -1042,76 +1128,6 @@ if( function_exists('acf_add_local_field_group') ):
 
 endif;
 
-// Load taxonomies for each post type
-function get_taxonomies_from_post_type( $field ) {
-    
-	$field['choices'] = array();
-
-	$post_type = substr($field['name'], 9);
-		
-	$args = array(
-		'object_type' => array( $post_type ),
-		'public'      => true,
-	);
-
-	$taxonomies = get_taxonomies( $args, 'objects' );
-
-	if(empty($taxonomies)) {
-		$field['choices']['message'] = '<em class="no-taxonomies">*This post type has no tags, categories, or taxonomies to display.</em>';
-		return $field;
-	}
-
-	foreach ( $taxonomies as $taxonomy ) {
-		$field['choices'][$taxonomy->name] = $taxonomy->label;
-	}
-
-	$field['choices']['archives'] = 'On archive pages';
-	$field['choices']['single'] = 'On single posts';
-	$field['choices']['labels'] = 'Text labels';
-	$field['choices']['icons'] = 'Icons';
-
-	return $field;
-
-}
-
-function get_post_type_taxonomies_names($post_type) {
-
-	$taxonomies = array();
-
-	$args = array(
-		'object_type' => array( $post_type ),
-		'public'      => true,
-	);
-
-	$taxonomies = get_taxonomies( $args, 'names' );
-
-	foreach ( $taxonomies as $taxonomy ) {
-		$taxonomies[] = $taxonomy;
-	}
-
-	return $taxonomies;
-
-}
-
-function get_post_type_taxonomies_labels($post_type) {
-
-	$taxonomies = array();
-
-	$args = array(
-		'object_type' => array( $post_type ),
-		'public'      => true,
-	);
-
-	$taxonomies = get_taxonomies( $args, 'objects' );
-
-	foreach ( $taxonomies as $taxonomy ) {
-		$taxonomies[] = $taxonomy->label;
-	}
-
-	return $taxonomies;
-
-}
-
 if ( ! function_exists( 'cwd_base_get_tag_options' ) ) {
 	
 	function cwd_base_get_tag_options() {
@@ -1120,7 +1136,7 @@ if ( ! function_exists( 'cwd_base_get_tag_options' ) ) {
 		$taxonomies_names = get_post_type_taxonomies_names($post_type);
 
 		$archive_options = get_field('archive_options', 'options');
-		$metadata_options = $archive_options[$post_type]['metadata_' . $post_type];
+		if($archive_options && $post_type != 'page') { $metadata_options = $archive_options[$post_type]['metadata_' . $post_type]; }
 
 		if(is_single()) {
 			$template_type = 'single';

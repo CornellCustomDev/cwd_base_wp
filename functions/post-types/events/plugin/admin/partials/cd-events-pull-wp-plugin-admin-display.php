@@ -62,6 +62,9 @@
 				<b>Keywords</b> Filters all events by a keyword tag. *note the Department ids and keyword are combined filters.
 			</li>
 			<li>
+				<b>Tags</b> Filters all events by a tag. *note the Department ids and tag are combined filters.
+			</li>
+			<li>
 				<b>Custom Post Type</b> The Slug name of the WP custom content type to load the events into.
 			</li>
 			<li>
