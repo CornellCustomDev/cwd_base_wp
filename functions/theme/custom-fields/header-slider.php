@@ -1,68 +1,290 @@
 <?php
 
-// Add a meta box to replace header image with slider -- next 3 functions
-if ( ! function_exists ( 'add_slider_add_meta_box' ) ) {
-
-	function add_slider_add_meta_box() {
-		global $post;
-
-		if( $post->ID == get_option( 'page_on_front' ) ) {
-			$screens = get_all_post_types();
-
-			foreach ( $screens as $screen ) {
-				add_meta_box(
-					'add_slider_sectionid',
-					__( 'Replace header image on the home page with a slider?', 'cwd_base_textdomain' ),
-					'add_slider_meta_box_callback',
-					$screen, 'side', 'core'
-				);
-			}
-		}
-	}
-
-	add_action( 'add_meta_boxes', 'add_slider_add_meta_box' );
+// Add custom fields for header slider
+if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+	return;
 }
 
-// Print the box content
-if ( ! function_exists ( 'add_slider_meta_box_callback' ) ) {
-	function add_slider_meta_box_callback( $post ) {
-		global $post;
-
-		if( $post->ID == get_option( 'page_on_front' ) ) {
-			wp_nonce_field( 'add_slider_meta_box', 'add_slider_meta_box_nonce' );
-			$add_slider_post_meta = get_post_meta( get_the_ID() ); ?>
-
-			<p><?php echo 'Use the slider menu on the left to add slides or click '; ?><a href="<?php echo admin_url('edit.php?post_type=slider'); ?>">here</a>.</p>
-
-			<p>
-				<div class="layout-row-content">
-					<p style="margin: .6em 0;">
-						<label for="add_slider1id">
-							<input type="radio" name="add_slider" id="add_slider1id" value="Yes" <?php if ( isset ( $add_slider_post_meta['add_slider'] ) ) checked( $add_slider_post_meta['add_slider'][0], 'Yes' ); ?>>
-							<?php _e( 'Yes', 'cwd_base' )?><br />
-						</label>
-						<label for="add_slider2id">
-							<input type="radio" name="add_slider" id="add_slider2id" value="No" <?php if ( !isset ( $add_slider_post_meta['add_slider'] ) ) echo 'checked="checked"'; ?><?php if ( isset ( $add_slider_post_meta['add_slider'] ) ) checked( $add_slider_post_meta['add_slider'][0], 'No' ); ?>>
-							<?php _e( 'No', 'cwd_base' )?>
-						</label>
-					</p>
-				</div>
-			</p>
-
-	<?php }
-
-	}
-}
-
-// When the post is saved, saves our custom data
-if ( ! function_exists ( 'add_slider_save_meta_box_data' ) ) {
-	function add_slider_save_meta_box_data( $post_id ) {
-		global $post;
-
-		if( isset( $_POST[ 'add_slider' ] ) ) {
-			update_post_meta( $post_id, 'add_slider', $_POST[ 'add_slider' ] );
-		}
-	}
-
-	add_action( 'save_post', 'add_slider_save_meta_box_data' );
-}
+acf_add_local_field_group( array(
+	'key' => 'group_656e16793f155',
+	'title' => 'Header Slider',
+	'fields' => array(
+		array(
+			'key' => 'field_656e167943c01',
+			'label' => '',
+			'name' => 'use_slider_in_header',
+			'aria-label' => '',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'message' => 'Replace header image with slider?',
+			'default_value' => 0,
+			'ui' => 0,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		),
+		array(
+			'key' => 'field_656e4be9df5ef',
+			'label' => 'Caption Alignment',
+			'name' => 'slider_align',
+			'aria-label' => '',
+			'type' => 'button_group',
+			'instructions' => 'On desktop screens, should slide captions display on the left side, right side, or in the center?',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_656e167943c01',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'left' => 'Left',
+				'center' => 'Center',
+				'right' => 'Right',
+			),
+			'default_value' => 'left',
+			'return_format' => 'value',
+			'allow_null' => 0,
+			'layout' => 'horizontal',
+		),
+		array(
+			'key' => 'field_656e188241044',
+			'label' => 'Link Type',
+			'name' => 'slider_link_type',
+			'aria-label' => '',
+			'type' => 'button_group',
+			'instructions' => 'Should each slide have 1-2 call to action buttons in the slide caption, or should the entire slide be linked? Links can also be excluded entirely to create a decorative slider.',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_656e167943c01',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'button' => 'Button(s)',
+				'full' => 'Full Slide',
+				'none' => 'None',
+			),
+			'default_value' => '',
+			'return_format' => 'value',
+			'allow_null' => 0,
+			'layout' => 'horizontal',
+		),
+		array(
+			'key' => 'field_656e169543c02',
+			'label' => 'Slides',
+			'name' => 'header_slides',
+			'aria-label' => '',
+			'type' => 'repeater',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => array(
+				array(
+					array(
+						'field' => 'field_656e167943c01',
+						'operator' => '==',
+						'value' => '1',
+					),
+				),
+			),
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'layout' => 'row',
+			'pagination' => 0,
+			'min' => 1,
+			'max' => 10,
+			'collapsed' => 'field_656e16d743c04',
+			'button_label' => 'Add Slide',
+			'rows_per_page' => 20,
+			'sub_fields' => array(
+				array(
+					'key' => 'field_656e16c343c03',
+					'label' => 'Slide Image',
+					'name' => 'slide_image',
+					'aria-label' => '',
+					'type' => 'image',
+					'instructions' => 'This is the background image of the slide.',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'array',
+					'library' => 'all',
+					'min_width' => '',
+					'min_height' => '',
+					'min_size' => '',
+					'max_width' => '',
+					'max_height' => '',
+					'max_size' => '',
+					'mime_types' => '',
+					'preview_size' => 'medium',
+					'parent_repeater' => 'field_656e169543c02',
+				),
+				array(
+					'key' => 'field_656e16d743c04',
+					'label' => 'Title',
+					'name' => 'slide_title',
+					'aria-label' => '',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'maxlength' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'parent_repeater' => 'field_656e169543c02',
+				),
+				array(
+					'key' => 'field_656e4a6501e40',
+					'label' => 'Body',
+					'name' => 'slide_body',
+					'aria-label' => '',
+					'type' => 'wysiwyg',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'tabs' => 'visual',
+					'toolbar' => 'basic',
+					'media_upload' => 0,
+					'delay' => 0,
+					'parent_repeater' => 'field_656e169543c02',
+				),
+				array(
+					'key' => 'field_656e177243c07',
+					'label' => 'Button One',
+					'name' => 'slide_button_one',
+					'aria-label' => '',
+					'type' => 'link',
+					'instructions' => 'It is strongly recommended to include at least one button.',
+					'required' => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_656e188241044',
+								'operator' => '==',
+								'value' => 'button',
+							),
+						),
+					),
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'array',
+					'parent_repeater' => 'field_656e169543c02',
+				),
+				array(
+					'key' => 'field_656e179d43c08',
+					'label' => 'Button Two',
+					'name' => 'slide_button_two',
+					'aria-label' => '',
+					'type' => 'link',
+					'instructions' => 'A second button can be optionally included.',
+					'required' => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_656e188241044',
+								'operator' => '==',
+								'value' => 'button',
+							),
+						),
+					),
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'array',
+					'parent_repeater' => 'field_656e169543c02',
+				),
+				array(
+					'key' => 'field_656e17b743c09',
+					'label' => 'Slide Link',
+					'name' => 'slide_link',
+					'aria-label' => '',
+					'type' => 'link',
+					'instructions' => 'It is strongly recommended to link all slides. Only the "URL" field is required for this link; the "Link Text" will not be displayed anywhere.',
+					'required' => 0,
+					'conditional_logic' => array(
+						array(
+							array(
+								'field' => 'field_656e188241044',
+								'operator' => '==',
+								'value' => 'full',
+							),
+						),
+					),
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'url',
+					'parent_repeater' => 'field_656e169543c02',
+				),
+			),
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'page',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'acf_after_title',
+	'style' => 'normal',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+	'show_in_rest' => 0,
+) );

@@ -13,12 +13,13 @@ if ( ! function_exists ( 'cwd_base_admin_assets' ) ) {
 // Load CSS Framework scripts
 if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 	function cwd_base_scripts_and_styles() {
+		global $post;
+
 		wp_enqueue_script('cwd-wp-script-js', get_template_directory_uri() . '/js/wp/cwd_wp.js','','',true );
 		wp_enqueue_script('cwd-card-slider-js', get_template_directory_uri() . '/js/cwd_card_slider.js', '','',true );
 		wp_enqueue_script('cwd-formidable-validation-js', get_template_directory_uri() . '/js/wp/formidable_validation.js', '','',true );
 		wp_enqueue_script('cwd-gallery-js', get_template_directory_uri() . '/js/cwd_gallery.js', '','',true );
 		wp_enqueue_script('cwd-popups-js', get_template_directory_uri() . '/js/cwd_popups.js', '','',true );
-		wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js', '','',true );
 		wp_enqueue_script('cwd-utilities-js', get_template_directory_uri() . '/js/cwd_utilities.js', '','',true );
 		wp_enqueue_script('cwd-twitter-widget-js', get_template_directory_uri() . '/js/wp/twitter-widget.js', '','',true );
 		wp_enqueue_script('contrib-js-swipe-js', get_template_directory_uri() . '/js/contrib/jquery.detect_swipe.js', '','',true );
@@ -28,6 +29,22 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 		wp_enqueue_script('cwd-siteimprove-js', get_template_directory_uri() . '/js/wp/siteimprove.js', '','',true );
 		wp_enqueue_script('cwd-project-js', get_template_directory_uri() . '/js/wp/project.js', '','',true );
 		wp_enqueue_script('jquery-effects-core'); // jQuery UI effects - contains easing functions
+
+		// Header slider scripts
+		// Load slider functionality from CSS Framework
+		wp_enqueue_script('cwd-slider-js', get_template_directory_uri() . '/js/cwd_slider.js', '','',true );
+
+		// Register script to initialize header slider
+		wp_register_script('cwd-header-slider-js', get_template_directory_uri() . '/js/cwd_header_slider.js', '','',true );
+
+		// Only localize & enqueue slider init script on pages that use slider
+		if ( get_field( 'use_slider_in_header' ) && have_rows( 'header_slides' ) ) {
+			// Pass php variables to the init script
+			wp_localize_script( 'cwd-header-slider-js', 'image_array1', cwd_base_generate_slide_array() );
+
+			// Finally, enqueue the init script
+			wp_enqueue_script( 'cwd-header-slider-js' );
+		}
 
 		// Styles
 		wp_enqueue_style('freight-css', '//use.typekit.net/nwp2wku.css'); // Freight Text and Sans

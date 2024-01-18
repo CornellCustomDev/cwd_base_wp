@@ -1217,21 +1217,34 @@ a.link-button .fa, a.link-button .zmdi {
 	left: 4%;
 	right: 4%;
 }
+#super-header.has_header_image .slider-container #slider-caption .caption-inner h2 {
+	font-weight: 400;
+}
 @media (min-width: 768px) {
 	#super-header.has_header_image .slider-container #slider-caption .caption-inner {
+		bottom: calc(4% + 80px);
+		width: -webkit-fit-content;
+		width: -moz-fit-content;
+		width: fit-content;
+		max-width: 600px;
+	}
+	#super-header.has_header_image .slider-container #slider-caption.align-caption-left .caption-inner {
 		left: 0;
 		right: auto;
-		bottom: calc(4% + 80px);
-		max-width: 600px;
+	}
+	#super-header.has_header_image .slider-container #slider-caption.align-caption-center .caption-inner {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#super-header.has_header_image .slider-container #slider-caption.align-caption-right .caption-inner {
+		left: auto;
+		right: 0;
 	}
 }
 @media (min-width: 992px) {
 	#super-header.has_header_image .slider-container #slider-caption .caption-inner {
 		max-width: 700px;
 	}
-}
-#super-header.has_header_image .slider-container #slider-caption .caption-inner h2 {
-	font-weight: 400;
 }
 #super-header.has_header_image .slider-container #slider-caption .campaign-nav {
 	top: auto !important;

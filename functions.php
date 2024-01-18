@@ -21,6 +21,7 @@ require_once 'functions/theme/metadata.php';
 require_once 'functions/theme/dates.php';
 require_once 'functions/theme/images.php';
 require_once 'functions/theme/header-img.php';
+require_once 'functions/theme/header-slider.php';
 require_once 'functions/theme/options.php';
 require_once 'functions/theme/gallery.php';
 require_once 'functions/theme/styles-and-scripts.php';
