@@ -821,20 +821,10 @@ var msie = document.documentMode;
 		}); // TODO: focus and mouse event reconciliation for full keyboard support
 
 		// hide empty menus
-		if ( $(this).is('nav') ) {
-			var has_items = false;
-			var min_items = 1;
-			if ( $(this).prev('.menu-block-title').length > 0 ) {
-				min_items = 0
-			}
-			if ( $(this).find('li:visible').length > min_items) {
-				has_items = true;
-			}
-			if (!has_items) {
-				$(this).parent('.mobile').prev('.mobile-expander-heading').remove();
-				$(this).parent('.mobile').remove();
-				emptySidebars();
-			}
+		if ( $(this).is('nav') && $(this).find('li:visible').length == 0 ) {
+			$(this).parent('.mobile').prev('.mobile-expander-heading').remove();
+			$(this).parent('.mobile').remove();
+			emptySidebars();
 		}
 	});
 	
