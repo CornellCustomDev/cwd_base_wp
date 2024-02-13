@@ -8,12 +8,12 @@
    - 7. Content Tabs (turns an ordered or unordered list into a set of slides with tabbed navigation) -- e.g., <ul class="content-tabs">
    - 8. Photo Credit/Information (div.photo-credit is turned into a small camera icon, revealing details on hover (or via keyboard/screen reader focus)
    - 9. Responsive Table (table.table-responsive: generates headings for use in a mobile-friendly table design)
-   
+
    Change Log
    - 8/25/23 Expander accessibility update to add buttons inside of expander headings for better standards compliance
-   - 6/13/23 Megamenu masonry code overhauled for better accuracy and support for multiline menu items 
-   - 3/24/23 Bug fix related to menu focus 
-   - 3/17/23 Escape key behavior within a menu, as well as globally on the page, updated to close any other menus that are open by mouseover 
+   - 6/13/23 Megamenu masonry code overhauled for better accuracy and support for multiline menu items
+   - 3/24/23 Bug fix related to menu focus
+   - 3/17/23 Escape key behavior within a menu, as well as globally on the page, updated to close any other menus that are open by mouseover
    - 3/1/23 Megamenu "masonry" mode (in which items within the megamenu break the grid vertically to fill in empty space)
    - 2/22/23 Dropdown menu code refactored for new hover handling and megamenu "nom-nom" mode (in which the megamenu panel envelops top-level links)
    - 2/14/23 Dropdown menu code adjusted to better support applying to Utility Nav
@@ -77,7 +77,7 @@ var msie = document.documentMode;
 	// 1. Main Navigation -----------------------------------------------------
 
 	var mousedown = false; // extra control variable for precise click and focus event interaction
-	
+
 	// Megamenu settings saved to each menu
 	$('.dropdown-menu').each(function() {
 		$(this).attr('data-megamenu','false'); // "megamenu" mode
@@ -120,7 +120,7 @@ var msie = document.documentMode;
 	$('li.menu-item-has-children').addClass('parent'); // WordPress Support
 	$('li.menu-item--expanded').addClass('parent'); // Drupal 8 Support
 	$('.dropdown-menu li a').wrapInner('<span></span>'); // wrap text in a span
-	
+
 	$('.dropdown-menu li.parent').parent().removeClass('menu').addClass('links list-menu');
 	$('.dropdown-menu li.parent > a').attr('aria-haspopup','true').append('<span class="fa fa-caret-down"></span>'); // add dropdown caret icons
 	$('.dropdown-menu li.parent li.parent > a .fa').removeClass('fa-caret-down').addClass('fa-caret-right'); // change sub-dropdown caret icons
@@ -138,15 +138,15 @@ var msie = document.documentMode;
 			$(this).css('min-width',min_width+'px' ); // smart min-width to prevent dropdown from being narrower than its parent (and no smaller than 150)
 		}
 	});
-	
+
 	$('.dropdown-megamenu > .container-fluid > ul').addClass('megamenu-top'); // used by megamenu "nom nom" mode
 	$('.dropdown-megamenu > .container-fluid > ul > li.parent > ul').each(function(n) {
-		
+
 		// in megamenu mode, catalog the number of standard menu items to allow for column-based tab order
 		if ( $(this).parent().hasClass('mobile-nav-only') ) {
 			return; // skip mobile-only utility nav if present
 		}
-		
+
 		var row_ids = 'abcdefgh';
 		var menu_items = $(this).children(':not(.menu-feature)').length;
 		var max_cols = 3;
@@ -155,7 +155,7 @@ var msie = document.documentMode;
 		}
 		var max_rows = menu_items / max_cols;
 		$(this).attr('data-max-rows',max_rows).attr('data-max-cols',max_cols);
-		
+
 		var col1 = Math.ceil(max_rows);
 		var col2 = Math.round(max_rows);
 		for (let i=0; i<col1; i++) {
@@ -170,21 +170,21 @@ var msie = document.documentMode;
 				$(this).children(':not(.menu-feature)').eq(i+col1+col2).attr('data-row',i+1).attr('data-col','3').attr('data-position','col3'+row_ids.charAt(i)).addClass('col3'+row_ids.charAt(i));
 			}
 		}
-		
+
 		// catalog the number of sub-items for masonry calculation
 		$(this).children(':not(.menu-feature)').each(function() {
 			var children = $(this).children('ul').children('li').length;
 			$(this).attr('data-children',children);
 		});
-		
+
 	});
-	
+
 	$('.dropdown-menu li.parent li.parent > ul').removeAttr('style'); // reset min-width to allow smaller submenus
 	$('.dropdown-menu').each(function() {
 		var this_menu = $(this);
 		var hover_intent_in; // will be a Timeout() below, used for nuanced hover detection
 		var hover_intent_out; // will be a Timeout() below, used for nuanced hover detection
-		
+
 		$(this).find('li.parent').hover(function() {
 			// Delay menu response on hover INTO a top level item (desktop only)
 			if ( $(this).hasClass('top-level-li') && !$('body').hasClass('mobile') ) {
@@ -246,7 +246,7 @@ var msie = document.documentMode;
 		else {
 			$(this).closest('.top-level-li').addClass('focused');
 		}
-		
+
 		if ( !$('body').hasClass('mobile') ) {
 			// horizontal edge-detection
 			var submenu_offset = $(this).closest('.parent').children('ul').offset();
@@ -270,23 +270,23 @@ var msie = document.documentMode;
 			$(this).closest('.mobile-expander').children('.mobile-expander-heading').removeClass('open');
 		}
 	});
-	
+
 	// Keyboard Navigation
 	$('.dropdown-menu').each(function() {
 		var megamenu = eval( $(this).attr('data-megamenu') ); // get megamenu setting
-		
+
 		$(this).find('ul').first().children('li').addClass('top-level-li').children('a').addClass('top-level-link');
 		if ( megamenu ) {
 			$(this).find('.top-level-link').next('ul').children('li').children('a').addClass('megamenu-top-level-link');
 		}
 	});
-	
+
 	$('.dropdown-menu-on-demand').find('ul').find('a').each(function() { // on-demand mode only (includes megamenu mode)
 		var megamenu = eval( $(this).closest('.dropdown-menu').attr('data-megamenu') ); // get megamenu setting
-		
+
 		$(this).attr('data-label',$(this).children('span:first-child').text()); // -> generate initial label text
 		$(this).attr('aria-label',$(this).attr('data-label')); // -> apply initial label
-		
+
 		$(this).focus(function() {
 			if ( !$('body').hasClass('mobile') ) {
 				if ( $(this).hasClass('top-level-link') ) { // top level
@@ -324,15 +324,15 @@ var msie = document.documentMode;
 			$(this).attr('aria-label',$(this).attr('data-label')); // -> reset initial label
 		});
 	});
-	
+
 	$('.dropdown-menu li a').keydown(function(e) {
 		var megamenu = eval( $(this).closest('.dropdown-menu').attr('data-megamenu') ); // get megamenu setting
-		
+
 		// Only accept arrow key input without modifier keys, to avoid interfering with system commands
 		if (!$('body').hasClass('mobile') && e.ctrlKey == false && e.altKey == false && e.shiftKey == false && e.metaKey == false) {
-			
+
 			// RIGHT arrow key -------------------------------------------------------
-			if (e.keyCode == 39) {
+			if (e.code === "ArrowRight") {
 				e.preventDefault();
 				if ( $(this).hasClass('top-level-link') ) { // top level
 					$(this).parent().next().children('a').focus(); // -> next top level item
@@ -397,9 +397,9 @@ var msie = document.documentMode;
 					}
 				}
 			}
-			
+
 			// DOWN arrow key --------------------------------------------------------
-			else if (e.keyCode == 40) {
+			else if (e.code === "ArrowDown") {
 				e.preventDefault();
 				if ( $(this).hasClass('top-level-link') && megamenu ) {
 					$(this).next('ul').children().children('ul').attr('aria-hidden','false').children().children('a').attr('tabindex','0'); // -> unlock all submenus for megamenu
@@ -423,9 +423,9 @@ var msie = document.documentMode;
 					}
 				}
 			}
-			
+
 			// LEFT arrow key --------------------------------------------------------
-			else if (e.keyCode == 37) {
+			else if (e.code === "ArrowLeft") {
 				e.preventDefault();
 				if ( $(this).hasClass('top-level-link') ) { // top level
 					$(this).parent().prev().children('a').focus(); // -> previous top level item
@@ -480,9 +480,9 @@ var msie = document.documentMode;
 					}
 				}
 			}
-			
+
 			// UP arrow key ----------------------------------------------------------
-			else if (e.keyCode == 38) {
+			else if (e.code === "ArrowUp") {
 				e.preventDefault();
 				if ( $(this).hasClass('top-level-link') ) { // top level
 					$(this).parent().removeClass('open'); // -> visually hide submenu
@@ -510,13 +510,13 @@ var msie = document.documentMode;
 					$(this).parent().prev().children('a').focus(); // -> previous menu item
 				}
 			}
-			
+
 			// ESCAPE key ------------------------------------------------------------
-			else if (e.keyCode == 27) {
+			else if (e.code === "Escape") {
 				// Hide any open menus that are outside of current focus
 				$(this).closest('.dropdown-menu').find('.open').removeClass('open');
 				$(this).closest('.dropdown-menu').find('.focused').addClass('open').parent('ul').addClass('open');
-				
+
 				// Back out of current menu or close menu when at the top level
 				if ( $(this).hasClass('top-level-link') ) { // top level
 					$(this).parent().removeClass('open'); // -> visually hide submenu
@@ -528,11 +528,11 @@ var msie = document.documentMode;
 			}
 		}
 	});
-	
-	// Escape key outside of menu scope (when a menu does not currently contain focus, but may be open by mousover) 
+
+	// Escape key outside of menu scope (when a menu does not currently contain focus, but may be open by mousover)
 	$('body').keydown(function(e) {
 		// ESCAPE key ------------------------------------------------------------
-		if (e.keyCode == 27) {
+		if (e.code === "Escape") {
 			$('.dropdown-menu').each(function() {
 				if ( $(this).find('.focused').length == 0 && $(this).find('.focused-top-level').length == 0 ) {
 					$(this).find('.open').removeClass('open');
@@ -540,7 +540,7 @@ var msie = document.documentMode;
 			});
 		}
 	});
-	
+
 	// Additional focus handling (remove errant "focus" classes if needed)
 	var focus_cleanup;
 	$('.dropdown-menu').focusout(function() {
@@ -551,7 +551,7 @@ var msie = document.documentMode;
 	}).focusin(function() {
 		clearTimeout(focus_cleanup);
 	});
-	
+
 	// Mobile Navigation
 	$('.dropdown-menu li.parent > a .fa').addClass('aria-target').attr('tabindex','-1').click(function(e) {
 		e.preventDefault();
@@ -584,7 +584,7 @@ var msie = document.documentMode;
 		$('#mobile-close').trigger('click');
 	});
 	$(document).keyup(function(e) {
-		if (e.keyCode == 27) { // escape key
+		if (e.code === "Escape") { // escape key
 			if ( $('#mobile-nav-dimmer:visible').length > 0 ) {
 				$('#mobile-close').trigger('click');
 			}
@@ -603,10 +603,10 @@ var msie = document.documentMode;
 			}, 50);
 		}
 	});
-	
+
 	// Recalculate Megamenu Masonry
 	function menuUpdateMasonry(menu) {
-		
+
 		// if this is the mobile menu...
 		if ( $('body').hasClass('mobile') ) {
 			menuClearMasonry(); // reset
@@ -616,9 +616,9 @@ var msie = document.documentMode;
 		if ( !$(menu).parent().hasClass('mobile-nav-only') && $(menu).closest('.megamenu-masonry').length == 0 ) {
 			return; // take no action
 		}
-		
+
 		// otherwise, now entering a hardhat area...
-		
+
 		var masonry = [0,0,0]; // a running tally of masonry offset for each column
 		var cols = $(menu).attr('data-max-cols');
 		var rows = $(menu).attr('data-max-rows');
@@ -630,25 +630,25 @@ var msie = document.documentMode;
 			if ( $(this_menu_feature).length > 0 ) {
 				this_menu_feature_extraspace = parseInt( $(this_menu_feature).css('height','').height() - $(this_menu_feature).find('.feature-content').height() );
 			}
-			
+
 			$(this).children(':not(.menu-feature)').each(function() {
 				$(this).removeAttr('style');
 				var this_row = parseInt( $(this).attr('data-row') );
 				var this_col = parseInt( $(this).attr('data-col') );
-			
+
 				if ( this_row > 1 ) {
 					var prev_row = this_row - 1;
 					var masonry_offset = 0;
 					var max_height = 0;
 					var prev_height = 0;
 					var row_query = $(this).parent().find('[data-row='+prev_row+']');
-					
+
 					// calculate height of previous menu item and any children
 					for (let i=0; i<$(this).prev().children().length; i++) {
 						prev_height += $(this).prev().children().eq(i).height();
 					}
 					prev_height = parseInt(prev_height);
-				
+
 					// determine the the tallest menu item of the previous row
 					for (let i=0; i<$(row_query).length; i++) {
 						let this_height = 0;
@@ -660,17 +660,17 @@ var msie = document.documentMode;
 							max_height = this_height;
 						}
 					}
-				
+
 					masonry_offset = max_height - prev_height;
 					masonry[this_col-1] += masonry_offset;
-				
+
 					if (masonry[this_col-1] > 0) {
 						$(this).css('top','-' + masonry[this_col-1] + 'px'); // offset by the amount the previous item is smaller than the max for that row
 						$(this).prev().height( $(this).prev().height() - masonry_offset ); // reduce the height of the previous item by the amount that was added to masonry, so the overall height of the megamenu can be collapsed
 					}
 				}
 			});
-			
+
 			// collapse menu to account for masonry offset (but only if the menu-feature is shorter than the height of the menu items)
 			var menu_collapse = masonry[0];
 			if (masonry[1] < masonry[0]) {
@@ -679,7 +679,7 @@ var msie = document.documentMode;
 			if (menu_collapse > this_menu_feature_extraspace) {
 				menu_collapse = this_menu_feature_extraspace;
 			}
-			
+
 			$(this_menu_feature).css('height','').height( $(this_menu_feature).height() - menu_collapse );
 			$(this_menu).css('height','auto').css('max-height','').css('max-height', ($(this_menu).height() - menu_collapse) + 'px' ).css('height','');
 		});
@@ -689,7 +689,7 @@ var msie = document.documentMode;
 		$('.megamenu-masonry .top-level-li > .children').removeAttr('style');
 		$('.megamenu-masonry .children > li').removeAttr('style');
 	}
-	
+
 	// 2. Empty Sidebar Helper ------------------------------------------------
 	function emptySidebars() {
 		$('.secondary').each(function() {
@@ -701,8 +701,8 @@ var msie = document.documentMode;
 		});
 	}
 	emptySidebars();
-	
-	
+
+
 	// 3. Mobile Table Helper -------------------------------------------------
 	$('.mobile-scroll').each(function() {
 			$(this).wrap('<div class="table-scroller" />');
@@ -713,8 +713,8 @@ var msie = document.documentMode;
 	$('.table-scroller').append('<div class="table-fader" />').bind('scroll touchmove', function() {
 		$(this).find('.table-fader').remove(); // hide fader DIV on user interaction
 	});
-	
-	
+
+
 	// 4. Expander ------------------------------------------------------------
 	$('.expander').addClass('scripted').find('h2, h3, h4, h5, h6').each(function(i) {
 		if ($(this).next('div').length > 0) {
@@ -752,7 +752,7 @@ var msie = document.documentMode;
 		}
 	});
 	$('.expander-button').each(function() {
-		
+
 		/*
 		var this_heading = $(this);
 		$(this).next('div').focus(function() {
@@ -762,7 +762,7 @@ var msie = document.documentMode;
 			$(this_heading).addClass('open');
 		});
 		*/
-		
+
 		/* // No longer needed, since we have a native button tag
 		$(this).keydown(function(e) {
 			if (e.keyCode == 13 || e.keyCode == 32) { // enter or space key
@@ -777,7 +777,7 @@ var msie = document.documentMode;
 			}
 		});
 		*/
-		
+
 		// Handle links in the heading
 		$(this).find('a').each(function() {
 			$(this).click(function(e) {
@@ -788,7 +788,7 @@ var msie = document.documentMode;
 			$(this).parent('button').addClass('has-link').parent('.expander-heading').append($(this));
 		});
 	});
-	
+
 	// 5. Mobile Expander -----------------------------------------------------
 	//$('.drupal #sidebar-top nav, nav.nav-body').addClass('mobile-expander').prepend('<h1 class="sans nav-heading">In this section<span class="punc">:</span></h1>');
 	//$('.drupal.page-search-site #sidebar-top nav .nav-heading').addClass('hidden').html('Filter results<span class="punc">:</span>');
@@ -809,7 +809,7 @@ var msie = document.documentMode;
 			var expand_header = $(this).prevAll('.mobile-expander-heading').first();
 			$(expand_header).nextAll('.mobile-expander').wrapAll('<div class="mobile" />');
 		}
-		
+
 		$(expand_header).click(function(e) {
 			e.preventDefault();
 			if ($(window).width() <= mobile_expander_breakpoint) {
@@ -827,8 +827,8 @@ var msie = document.documentMode;
 			emptySidebars();
 		}
 	});
-	
-	// clone the breadcrumb and prepend to the mobile section nav 
+
+	// clone the breadcrumb and prepend to the mobile section nav
 	if ($('#sidebar-top .secondary-navigation').length > 0) {
 		$('#sidebar-top .secondary-navigation').first().parents('.mobile').first().prepend( $('.breadcrumb').first().addClass('no-mobile').clone().removeClass('no-mobile').addClass('mobile-only') );
 		$('.breadcrumb.mobile-only').removeAttr('aria-labelledby').attr('aria-label','Mobile Breadcrumb').find('#system-breadcrumb').remove();
@@ -836,7 +836,7 @@ var msie = document.documentMode;
 			$(this).parents('.mobile').first().prev('.mobile-expander-heading').addClass('open');
 		});
 	}
-	
+
 	// Activate Mobile Expander for Unit Navigation at 959 instead of 767
 	//$('#unit-navigation .mobile-expander-heading').addClass('unit-nav').off('click').click(function(e) {
 		//e.preventDefault();
@@ -883,16 +883,16 @@ var msie = document.documentMode;
 			$(this).parents('.readmore-expander').first().next('.readmore-excerpt-container').find('.readmore-expander-button').trigger('click');
 		}
 	});
-	
-	
+
+
 	// 7. Content Tabs --------------------------------------------------------
 	$('.content-tabs').each(function() {
-		
+
 		var aria_mode = false;
 		var nav_tag = 'nav';
 		var tab_tag = 'a';
-		
-		// prepare class options to share with tab navigation 
+
+		// prepare class options to share with tab navigation
 		var tab_classes = 'tabs-nav';
 		if ( $(this).hasClass('tabs-classic') ) {
 			tab_classes += ' tabs-classic';
@@ -900,7 +900,7 @@ var msie = document.documentMode;
 		if ( $(this).hasClass('tabs-mobile-expand') ) {
 			tab_classes += ' tabs-mobile-expand';
 		}
-		
+
 		if ( $(this).hasClass('tabs-numbered') ) {
 			tab_classes += ' tabs-numbered';
 		}
@@ -919,7 +919,7 @@ var msie = document.documentMode;
 		if ( $(this).hasClass('tabs-reserve-height') ) {
 			tab_classes += ' tabs-reserve-height'; // NYI
 		}
-		
+
 		// generate navigation
 		$(this).before('<'+nav_tag+' aria-label="Choose a Tab" class="'+tab_classes+'"></'+nav_tag+'>').addClass('scripted').children('li').each(function(i){
 			var tab_title = $(this).find('h1,h2,h3,h4,h5,h6').first().text();
@@ -945,22 +945,33 @@ var msie = document.documentMode;
 			}
 		});
 		$(this).children('li').first().show().addClass('active');
-		
+
 		// tab navigation button events
 		$(this).prev(nav_tag).each(function() {
-			var tabs = $(this).next('.content-tabs');
-			$(this).children(tab_tag).first().addClass('active').attr('aria-selected','true');
+
+			$(this).children(tab_tag).first()
+				.addClass('active')
+				.attr('aria-selected','true');
+
 			$(this).children(tab_tag).click(function(e) {
 				e.preventDefault();
-				$(tabs).children('li').removeClass('active').hide();
-				$(tabs).children('li').eq( $(this).index() ).show().addClass('active').attr('tabindex', '-1');
-				$(tabs).prev(nav_tag).find(tab_tag).removeClass('active').attr('aria-selected','false').attr('tabindex', '0');
-				$(this).addClass('active').attr('aria-selected','true');
+
+				// Modify and focus the selected tab item
+				$(this).attr('tabindex', '0')
+					.addClass('active')
+					.attr('aria-selected', 'true');
+
+				// Modify siblings
+				$(this).siblings()
+					.attr('tabindex', '-1')
+					.removeClass('active')
+					.attr('aria-selected', 'false');
+
 				if (!aria_mode) {
-					$($(this).attr('href')).focus();
+					$(this).attr('href').focus();
 				}
 			});
-			
+
 			// arrow key navigation for ARIA tabs
 			if (aria_mode) {
 				var tab_count = $(this).children(tab_tag).length;
@@ -973,21 +984,21 @@ var msie = document.documentMode;
 					if (next_tab > tab_count - 1) {
 						next_tab = 0;
 					}
-					$(this).keydown(function(e) {
-						if (e.keyCode == 37) { // left arrow key
+					$(this).keyup(function(e) {
+						if (e.code === "ArrowLeft" || e.code === "ArrowUp") { // left arrow key
 							e.preventDefault();
-							$(this).siblings().addBack().eq(prev_tab).trigger('click').focus();
+							$(this).siblings().addBack().eq(prev_tab).click().focus();
 						}
-						else if (e.keyCode == 39) { // right arrow key
+						else if (e.code === "ArrowRight" || e.code === "ArrowDown") { // right or arrow key
 							e.preventDefault();
-							$(this).siblings().addBack().eq(next_tab).trigger('click').focus();
+							$(this).siblings().addBack().eq(next_tab).click().focus();
 						}
 					});
 				});
 			}
 		});
 	});
-	
+
 	// 8. Photo Credit/Information
 	$('.photo-info').each(function() {
 		$(this).attr('tabindex','0').wrapInner('<div class="photo-info-text off"></div>');
@@ -998,19 +1009,19 @@ var msie = document.documentMode;
 			$(this).prev('.photo-info-text').addClass('off');
 		});
 	});
-	
+
 	// 9. Responsive Table
 	var table_regen_timeout;
 	var table_regen_listening = false;
-	
+
 	function responsiveTables() {
-		
+
 		$('.table-responsive').each(function() {
-			
+
 			// Clean up any existing headings before regenerating (just in case)
-			$(this).find('.mobile-header, .mobile-subheader, .mobile-label').remove(); 
+			$(this).find('.mobile-header, .mobile-subheader, .mobile-label').remove();
 			$(this).find('.row-header > *:first-child').unwrap();
-		
+
 			// Heading Levels
 			var table_header_level = 3;
 			var table_subheader_level = 4;
@@ -1033,7 +1044,7 @@ var msie = document.documentMode;
 				var header = $(this).find('caption').text();
 				$(this).find('caption').after('<h'+table_header_level+' class="mobile-header">'+header+'</h'+table_header_level+'>');
 			}
-		
+
 			// Table Cells
 			$(this).find('tbody th').each(function() {
 				var subheader = $(this);
@@ -1057,18 +1068,18 @@ var msie = document.documentMode;
 				}
 				$(this).prepend('<h'+table_label_level+' class="mobile-label">'+label.text()+'</h'+table_label_level+'>');
 			});
-			
+
 			//$(this).removeClass('invisible');
 		});
-		
+
 		table_regen_listening = true;
 	}
-	
+
 	// Watch for AJAX DOM changes (this selector may need to be moved one or more levels up in the DOM hierarchy if the entire table tag is regenerated by AJAX)
-	$('.table-responsive').on('DOMSubtreeModified', function() {			
+	$('.table-responsive').on('DOMSubtreeModified', function() {
 		//$(this).addClass('invisible');
 		clearTimeout(table_regen_timeout);
-		
+
 		if (table_regen_listening == true) {
 			table_regen_timeout = setTimeout(function() {
 				table_regen_listening = false;
@@ -1076,7 +1087,7 @@ var msie = document.documentMode;
 			}, 50);
 		}
 	});
-	
+
 	// First Run
 	responsiveTables();
 
