@@ -33,10 +33,11 @@ if ( ! function_exists ( 'custom_layout_meta_box_callback' ) ) {
 		// Add a nonce field so we can check for it later
 		wp_nonce_field( 'custom_layout_meta_box', 'custom_layout_meta_box_nonce' );
 		$layout_post_meta = get_post_meta( get_the_ID() );
-		
+		$default_sidebar = get_field('sidebar_options', 'options')['layout'];
+
 		// Set default
 		if ( !array_key_exists( 'layout_option', $layout_post_meta ) || $layout_post_meta['layout_option'][0] == '' ) {
-		  $layout_post_meta['layout_option'][0] = 'right_sidebar';
+		  $layout_post_meta['layout_option'][0] = $default_sidebar;
 		}
 		?>
 

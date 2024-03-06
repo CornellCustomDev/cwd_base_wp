@@ -1,6 +1,6 @@
 <?php 
 
-// Get header image? Maybe. Maybe a slider.
+// Get header image
 if ( ! function_exists ( 'get_header_img_url' ) ) {
 	function get_header_img_url() {
 
@@ -31,22 +31,7 @@ if ( ! function_exists ( 'get_header_img_url' ) ) {
 			$header_img_url = ''; // Remove header image
 		}
 
-		$add_slider = get_add_slider();
-
-		if ( is_front_page() && $add_slider == 'Yes') {
-			$header_img_url = ''; // Remove header image
-		}
-
 		return $header_img_url;
 
-	}
-}
-
-if ( ! function_exists ( 'get_add_slider' ) ) {
-	function get_add_slider() {
-
-		$add_slider = get_post_meta( get_the_ID(), 'add_slider', true ); // Replace header image with slider 
-
-		return $add_slider;
 	}
 }
