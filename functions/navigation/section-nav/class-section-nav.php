@@ -133,11 +133,12 @@ if( ! class_exists('Section_Nav') ) {
 				$sect_title = '<a href="' . get_page_link( $top_page ) . '" id="toppage-' . $top_page . '" class="' . $headclass . '">' . $sect_title . '</a>';
 			}
 
+			echo '<nav class="secondary-navigation mobile-expander">';
 			echo $args['before_widget'] . $args['before_title'] . $sect_title . $args['after_title'];	// phpcs:ignore
-			echo '<nav class="secondary-navigation mobile-expander"><ul class="menu">';
+			echo '<ul class="menu">';
 			echo apply_filters( 'section_page_list', $children ); // phpcs:ignore
 			echo '</ul></nav>' . $args['after_widget']; // phpcs:ignore
-		}
+			}
 
 		/**
 		 * Update a widget instance.
