@@ -8162,6 +8162,236 @@ body.sidebar .secondary .cwd-basic .header-with-button h2 {
 	font-size: 28px !important;
 }
 
+.au-boolean .cu-logo {
+	-webkit-box-flex: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+}
+.au-boolean .cu-logo #academic-unit {
+	position: relative;
+	background: url(../images/wp/CHE_logo_1line_black_SimpleSeal_red.svg) 0 0 no-repeat;
+	background-size: 100%;
+	margin-right: 60px;
+	width: 504px;
+	height: 73px;
+}
+@media (max-width: 767px) {
+	.au-boolean .cu-logo #academic-unit {
+		background: none;
+		margin: 0 auto;
+		height: auto;
+	}
+}
+.au-boolean .cu-logo #academic-unit a {
+	background: none;
+	position: absolute;
+	display: block;
+	margin: 0 !important;
+	width: unset;
+	min-width: 0;
+	height: 100% !important;
+	top: 0;
+}
+.au-boolean .cu-logo #academic-unit a:first-child {
+	width: 91px !important;
+	left: 0 !important;
+}
+@media (max-width: 767px) {
+	.au-boolean .cu-logo #academic-unit a:first-child {
+		background: url(../images/wp/cornell-seal-red.svg) 0 0 no-repeat;
+		background-size: 100%;
+		width: 90px !important;
+		height: 90px !important;
+		margin: 0 auto !important;
+		position: relative;
+		display: block;
+	}
+}
+.au-boolean .cu-logo #academic-unit a:last-child {
+	width: 423px !important;
+	right: 0 !important;
+}
+@media (max-width: 767px) {
+	.au-boolean .cu-logo #academic-unit a:last-child {
+		background: url(../images/wp/cuhe-logo-text.svg) 0 0 no-repeat;
+		background-size: 100%;
+		width: 325px !important;
+		height: 60px !important;
+		margin: 0 auto !important;
+		position: relative;
+		display: block;
+	}
+}
+.au-boolean .cu-unit {
+	margin-top: 8px !important;
+	margin-bottom: 12px !important;
+	margin-right: 0 !important;
+	margin-left: 45px !important;
+	-webkit-box-flex: 0.5;
+	    -ms-flex-positive: 0.5;
+	        flex-grow: 0.5;
+}
+@media (max-width: 768px) {
+	.au-boolean .cu-unit {
+		margin-top: -12px !important;
+	}
+}
+
+.au-boolean.cu-red .cu-logo #academic-unit, .au-boolean.cu-black .cu-logo #academic-unit, .au-boolean.cu-gray .cu-logo #academic-unit {
+	background: url(../images/wp/CHE_logo_1line_white_SimpleSeal_white.png) 0 0 no-repeat;
+	background-size: 100%;
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-red .cu-logo #academic-unit, .au-boolean.cu-black .cu-logo #academic-unit, .au-boolean.cu-gray .cu-logo #academic-unit {
+		background: none;
+		margin: 0 auto;
+		width: 100%;
+		height: auto;
+	}
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-red .cu-logo #academic-unit a:first-child, .au-boolean.cu-black .cu-logo #academic-unit a:first-child, .au-boolean.cu-gray .cu-logo #academic-unit a:first-child {
+		background: url(../images/wp/bold_cornell_seal_simple_white.svg) 0 0 no-repeat;
+		background-size: 100%;
+		width: 90px !important;
+		height: 90px !important;
+		margin: 0 auto !important;
+		position: relative;
+		display: block;
+	}
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-red .cu-logo #academic-unit a:last-child, .au-boolean.cu-black .cu-logo #academic-unit a:last-child, .au-boolean.cu-gray .cu-logo #academic-unit a:last-child {
+		background: url(../images/wp/cuhe-logo-text-white.svg) 0 0 no-repeat;
+		background-size: 100%;
+		width: 325px !important;
+		height: 60px !important;
+		margin: 0 auto !important;
+		position: relative;
+		display: block;
+	}
+}
+
+.au-boolean.cu-45-mobile #cu-header .cu-brand .cu-logo #academic-unit {
+	background: url(../images/wp/CHE_logo_1line_black_SimpleSeal_red.svg) 0 0 no-repeat;
+	background-size: 100%;
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-45-mobile #cu-header .cu-brand .cu-logo #academic-unit {
+		background: none;
+		margin: 0 auto;
+		width: 100%;
+		height: auto;
+	}
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-45-mobile #cu-header .cu-brand .cu-logo #academic-unit a:first-child {
+		background: url(../images/wp/bold_cornell_seal_simple_white.svg) 0 0 no-repeat;
+		background-size: 100%;
+		margin: 0 auto !important;
+		position: relative;
+		display: block;
+		width: 100% !important;
+		height: 38px !important;
+	}
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-45-mobile #cu-header .cu-brand .cu-logo #academic-unit a:last-child {
+		background: url(../images/wp/cuhe-logo-text.svg) 0 0 no-repeat !important;
+		background-size: 100% !important;
+		width: 325px !important;
+		height: 60px !important;
+		margin: 20px auto 6px !important;
+		position: relative;
+		display: block;
+	}
+}
+@media (max-width: 768px) {
+	.au-boolean.cu-45-mobile #cu-header .cu-brand .cu-unit h3 {
+		color: #92929f !important;
+		font-size: 18px;
+		margin: 7px 0 12px;
+	}
+}
+
+.au-boolean.cu-45-mobile.cu-red #cu-header .cu-brand .cu-logo #academic-unit,
+.au-boolean.cu-45-mobile.cu-gray #cu-header .cu-brand .cu-logo #academic-unit {
+	background: url(../images/wp/CHE_logo_1line_white_SimpleSeal_white.png) 0 0 no-repeat;
+	background-size: 100%;
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-45-mobile.cu-red #cu-header .cu-brand .cu-logo #academic-unit,
+	.au-boolean.cu-45-mobile.cu-gray #cu-header .cu-brand .cu-logo #academic-unit {
+		background: none;
+		margin: 0 auto;
+		width: 100%;
+		height: auto;
+	}
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-45-mobile.cu-red #cu-header .cu-brand .cu-logo #academic-unit a:first-child,
+	.au-boolean.cu-45-mobile.cu-gray #cu-header .cu-brand .cu-logo #academic-unit a:first-child {
+		background: url(../images/wp/bold_cornell_seal_simple_white.svg) 0 0 no-repeat;
+		background-size: 100%;
+		margin: 0 auto !important;
+		position: relative;
+		display: block;
+		width: 100% !important;
+		height: 38px !important;
+	}
+}
+@media (max-width: 767px) {
+	.au-boolean.cu-45-mobile.cu-red #cu-header .cu-brand .cu-logo #academic-unit a:last-child,
+	.au-boolean.cu-45-mobile.cu-gray #cu-header .cu-brand .cu-logo #academic-unit a:last-child {
+		background: url(../images/wp/cuhe-logo-text.svg) 0 0 no-repeat !important;
+		background-size: 100% !important;
+		width: 325px !important;
+		height: 60px !important;
+		margin: 20px auto 6px !important;
+		position: relative;
+		display: block;
+	}
+}
+@media (max-width: 768px) {
+	.au-boolean.cu-45-mobile.cu-red #cu-header .cu-brand .cu-unit h3,
+	.au-boolean.cu-45-mobile.cu-gray #cu-header .cu-brand .cu-unit h3 {
+		color: #92929f !important;
+		font-size: 18px;
+		margin: 7px 0 12px;
+	}
+}
+
+.au-boolean.cu-red.cu-45-mobile .cu-logo #academic-unit {
+	background: url(../images/wp/CHE_logo_1line_black_SimpleSeal_red.png) 0 0 no-repeat;
+}
+@media (min-width: 960px) and (max-width: 1170px) {
+	.au-boolean .cu-logo #academic-unit {
+		width: 465px;
+		height: 67px;
+		margin-right: 35px;
+	}
+	.au-boolean .cu-logo + .cu-unit {
+		margin-left: 35px !important;
+	}
+}
+@media (min-width: 768px) and (max-width: 960px) {
+	.au-boolean .cu-logo #academic-unit {
+		width: 435px;
+		height: 63px;
+		margin-right: 35px;
+	}
+	.au-boolean .cu-logo + .cu-unit {
+		margin-left: 35px !important;
+	}
+}
+@media (max-width: 768px) {
+	.au-boolean .cu-logo + .cu-unit {
+		margin: -12px auto 12px !important;
+	}
+	.au-boolean .cu-logo #academic-unit {
+		width: 100%;
+	}
+}
 /* Fonts
 ----------------------------------------------------------------- */
 body, .base-font,
