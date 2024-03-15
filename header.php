@@ -69,15 +69,15 @@
 		
 		<header id="site-header" aria-label="Site Header">
 
-		<?php if ( $has_slider ): ?>
-		  <div class="band slider-container">
-		    <div class="container-fluid">
-		      <div id="slider-caption" class="slider-caption align-caption-<?php the_field('slider_align'); ?>"></div>
-		    </div>
-		  </div>
-		<?php elseif ( $header_img_url ): ?>
-			<div id="image-band" class="band" aria-label="Site Banner" style="background-image: url(<?php echo $header_img_url; ?>)"></div>
-		<?php endif; ?>
+			<?php if ( $has_slider ): ?>
+			<div class="band slider-container">
+				<div class="container-fluid">
+				<div id="slider-caption" class="slider-caption align-caption-<?php the_field('slider_align'); ?>"></div>
+				</div>
+			</div>
+			<?php elseif ( $header_img_url ): ?>
+				<div id="image-band" class="band" aria-label="Site Banner" style="background-image: url(<?php echo $header_img_url; ?>)"></div>
+			<?php endif; ?>
 			
 			<nav class="dropdown-menu dropdown-menu-on-demand" id="main-navigation" aria-label="Main Navigation">
 				<div class="container-fluid">

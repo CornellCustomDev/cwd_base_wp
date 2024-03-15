@@ -42,7 +42,7 @@
 	<?php 
 	
 	$header_img_url = get_header_img_url(); 
-	$has_slider = get_add_slider(); 
+	$has_slider = get_field('use_slider_in_header'); 
 	
 	?>
 
@@ -91,18 +91,16 @@
 		
 		<header id="site-header" aria-label="Site Header">
 			
-			<?php if($header_img_url) { ?>
-				<div id="image-band" class="band" aria-label="Site Banner" style="background-image: url(<?php echo $header_img_url; ?>)"></div>
-			<?php } ?>
-			
-			<?php if(is_front_page() && $has_slider == 'Yes') { ?>	
-				<div class="band slider-container">
-					<div class="container-fluid">
-						<div id="slider-caption" class="slider-caption"><?php if( wp_count_posts('slider')->publish < 1 ) { echo '<p id="no-active-slides">Add images to activate the slider. You can add images <a href="' . site_url() . '/wp-admin/edit.php?post_type=slider">here</a>.</p>'; } ?></div>
-					</div>
+			<?php if ( $has_slider ): ?>
+			<div class="band slider-container">
+				<div class="container-fluid">
+				<div id="slider-caption" class="slider-caption align-caption-<?php the_field('slider_align'); ?>"></div>
 				</div>
-			<?php } ?>
-				
+			</div>
+			<?php elseif ( $header_img_url ): ?>
+				<div id="image-band" class="band" aria-label="Site Banner" style="background-image: url(<?php echo $header_img_url; ?>)"></div>
+			<?php endif; ?>
+			
 			<nav class="dropdown-menu dropdown-menu-on-demand" id="main-navigation" aria-label="Main Navigation">
 				<div class="container-fluid">
 					<a id="mobile-home" href="<?php echo site_url(); ?>">
