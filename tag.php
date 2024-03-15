@@ -1,6 +1,13 @@
 <?php 
 
-get_header(); 
+$au_boolean = get_theme_mod('au_boolean');
+
+if(!$au_boolean) { 
+	get_header();
+}
+else {
+	get_header('au');
+} 
 
 $term = get_queried_object()->slug;
 $term_id = get_queried_object()->term_id;

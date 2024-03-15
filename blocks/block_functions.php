@@ -48,6 +48,8 @@ function cwd_base_register_blocks() {
 	register_block_type( __DIR__ . '/accordions' );
 	register_block_type( __DIR__ . '/cta-buttons' );
 	register_block_type( __DIR__ . '/flex-cards' );
+	register_block_type( __DIR__ . '/card-slider' );
+	register_block_type( __DIR__ . '/wysiwyg' );
 	register_block_type( __DIR__ . '/news' );
 	register_block_type( __DIR__ . '/quote' );
 	register_block_type( __DIR__ . '/tabs' );
@@ -174,7 +176,9 @@ if ( ! function_exists( 'cwd_base_allowed_block_types' ) ) {
 			'core/comments-pagination-previous',
 			'core/comments-title',
 			'core/cover',
+			'core/details',
 			'core/file',
+			'core/footnotes',
 			'core/gallery',
 			'core/home-link',
 			//'core/image',
@@ -223,7 +227,7 @@ if ( ! function_exists( 'cwd_base_allowed_block_types' ) ) {
 			//'core/column',
 			//'core/columns',
 			'core/embed',
-			//'core/freeform',
+			'core/freeform',
 			//'core/group',
 			//'core/heading',
 			//'core/html',
@@ -240,7 +244,7 @@ if ( ! function_exists( 'cwd_base_allowed_block_types' ) ) {
 			'core/separator',
 			'core/social-links',
 			'core/spacer',
-			//'core/table',
+			'core/table',
 			//'core/text-columns',
 			'core/verse',
 			'core/video',

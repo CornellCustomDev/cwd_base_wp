@@ -47,45 +47,87 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 			$classes[] = 'sidebar-tint-fade';
 		}
 
+		// Academic unit checkbox
+		$au_boolean = get_theme_mod( 'au_boolean' );
+
 		// Get banner classes
-		$cu_banner = get_theme_mod( 'color' );
-		$logo_size_option = get_theme_mod( 'logo_size' );
-		$logo_position_option = get_theme_mod( 'logo_position' );
-		$logo_mobile_option = get_theme_mod( 'logo_switch_mobile' );
-		$logo_mobile_red_option = get_theme_mod( 'logo_switch_red_mobile' );
-
-		switch($cu_banner) {
-			case 'cu-red':
-				$classes[] ='cu-red';
-				break;
-			case 'cu-black':
-				$classes[] ='cu-black';
-				break;
-			case 'cu-gray':
-				$classes[] ='cu-gray';
-				break;
-			default:
-
-		}
-
-		if($logo_size_option == 'small') {
-			$classes[] = 'cu-45';
+		if($au_boolean === '') {
+			$cu_banner = get_theme_mod( 'color' );
+			$logo_size_option = get_theme_mod( 'logo_size' );
+			$logo_position_option = get_theme_mod( 'logo_position' );
+			$logo_mobile_option = get_theme_mod( 'logo_switch_mobile' );
+			$logo_mobile_red_option = get_theme_mod( 'logo_switch_red_mobile' );
 		} 
-		if($logo_size_option == 'large') {
-			$classes[] = 'cu-seal';
+		else {
+			$classes[] = 'cu-seal au-boolean'; // Make sure logo size is large initially
+			$au_banner = get_theme_mod( 'au_color' );
+			$au_logo_option = get_theme_mod( 'au_logo' );
+			$au_logo_mobile_option = get_theme_mod( 'au_logo_switch_mobile' );
+			$au_logo_mobile_red_option = get_theme_mod( 'au_logo_switch_red_mobile' );
+		}
+
+		if($au_boolean === '') {
+			switch($cu_banner) {
+				case 'cu-red':
+					$classes[] ='cu-red';
+					break;
+				case 'cu-black':
+					$classes[] ='cu-black';
+					break;
+				case 'cu-gray':
+					$classes[] ='cu-gray';
+					break;
+				default:
+			}
+		}
+		else {
+			switch($au_banner) {
+				case 'cu-red':
+					$classes[] ='cu-red';
+					break;
+				case 'cu-black':
+					$classes[] ='cu-black';
+					break;
+				case 'cu-gray':
+					$classes[] ='cu-gray';
+					break;
+				default:
+			}
+		}
+
+		if($au_boolean === '') {
+			if($logo_size_option == 'small') {
+				$classes[] = 'cu-45';
+			} 
+			if($logo_size_option == 'large') {
+				$classes[] = 'cu-seal';
+			}
+			if($logo_position_option == 'right' && $logo_size_option == 'large') {
+				$classes[] = 'cu-seal-right';
+			}
 		}
 		
-		if($logo_position_option == 'right' && $logo_size_option == 'large') {
-			$classes[] = 'cu-seal-right';
+		if($au_boolean === '') {
+			if($logo_mobile_option == 'yes') {
+				$classes[] = 'cu-45-mobile';
+			}
+		}
+		else {
+			if($au_logo_mobile_option == 'yes') {
+				$classes[] = 'cu-45-mobile';
+			}
 		}
 		
-		if($logo_mobile_option == 'yes') {
-			$classes[] = 'cu-45-mobile';
-		}		
-		
-		if($logo_mobile_red_option == 'yes') {
-			$classes[] = 'cu-45-mobile-red';
-		}		
+		if($au_boolean === '') {
+			if($logo_mobile_red_option == 'yes') {
+				$classes[] = 'cu-45-mobile-red';
+			}
+		}
+		else {
+			if($au_logo_mobile_red_option == 'yes') {
+				$classes[] = 'cu-45-mobile-red';
+			}
+		}
 
 		if(has_nav_menu('top-menu')) {
 			$classes[] = 'has-utility-nav';

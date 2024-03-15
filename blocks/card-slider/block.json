@@ -1,0 +1,14 @@
+{
+	"name": "cwd/card-slider",
+	"title": "Card Slider",
+	"description": "Add content slides to a horizontal slide scroller.",
+	"category": "cwd-general",
+	"icon": "slides",
+	"supports": {
+		"align": false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "card-slider.php"
+	}
+}

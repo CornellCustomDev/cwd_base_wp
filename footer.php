@@ -6,17 +6,17 @@
 
 		$locations = get_nav_menu_locations();
 
-		$menu_1_id   = $locations[ $menu_1_name ] ;
-		$menu_2_id   = $locations[ $menu_2_name ] ;
+		$menu_1_id   = isset($locations[ $menu_1_name ]);
+		$menu_2_id   = isset($locations[ $menu_2_name ]);
 
 		$footer_menu_1 = wp_get_nav_menu_object( $menu_1_id );
 		$footer_menu_2 = wp_get_nav_menu_object( $menu_2_id );
 
 		// Check for other footer options
 		$footer_options = get_field('footer_options', 'options');
-		$menu_heading = $footer_options['heading'];
-		$intro_text = $footer_options['intro_text'];
-		$address_block = $footer_options['address_block'];
+		$menu_heading = isset($footer_options['heading']);
+		$intro_text = isset($footer_options['intro_text']);
+		$address_block = isset($footer_options['address_block']);
 
 	?>
 
