@@ -1,6 +1,13 @@
 <?php 
 
-get_header(); 
+$au_boolean = get_theme_mod('au_boolean');
+
+if(!$au_boolean) { 
+	get_header();
+}
+else {
+	get_header('au');
+} 
 
 ?>
 

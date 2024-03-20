@@ -1,0 +1,14 @@
+{
+	"name": "cwd/wysiwyg",
+	"title": "Formatted Text",
+	"description": "A basic text block with a WYSIWYG editor for formatting.",
+	"category": "text",
+	"icon": "admin-customizer",
+	"supports": {
+		"align" : false
+	},
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "wysiwyg.php"
+	}
+}
