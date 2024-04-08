@@ -154,6 +154,138 @@ if ( ! function_exists ( 'cwd_base_custom_styles' ) ) {
 				),
 			),
 			array(  
+				'title' => 'Unordered Lists',				
+				'items' => array(
+					array(  
+						'title' => 'Simple',  
+						'selector' => 'ul',  
+						'classes' => 'custom',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Recursive',  
+						'selector' => 'ul',  
+						'classes' => 'custom recursive',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Chevrons',  
+						'selector' => 'ul',  
+						'classes' => 'custom chevrons',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Success Checkmarks',  
+						'selector' => 'ul',  
+						'classes' => 'custom success',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Failure Xs',  
+						'selector' => 'ul',  
+						'classes' => 'custom failure',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Failure Warnings',  
+						'selector' => 'ul',  
+						'classes' => 'custom warning',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Notifications',  
+						'selector' => 'ul',  
+						'classes' => 'custom notifications',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Status Message',  
+						'selector' => 'ul',  
+						'classes' => 'custom status',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Lists as Menus',  
+						'items' => array(
+							array(
+								'title' => 'Basic',  
+								'items' => array(
+									array(
+										'title' => 'Horizontal',  
+										'selector' => 'ul',  
+										'classes' => 'list-menu',
+										'wrapper' => true,
+									),
+									array(
+										'title' => 'Vertical',  
+										'selector' => 'ul',  
+										'classes' => 'list-menu vertical',
+										'wrapper' => true,
+									)
+								)
+							),
+							array(
+								'title' => 'With Dividers',  
+								'items' => array(
+									array(
+										'title' => 'Horizontal',  
+										'selector' => 'ul',  
+										'classes' => 'list-menu divs',
+										'wrapper' => true,
+									),
+									array(
+										'title' => 'Vertical',  
+										'selector' => 'ul',  
+										'classes' => 'list-menu vertical divs',
+										'wrapper' => true,
+									)
+								)
+									),
+							array(
+								'title' => 'With Button Links',  
+								'items' => array(
+									array(
+										'title' => 'Horizontal',  
+										'selector' => 'ul',  
+										'classes' => 'list-menu links',
+										'wrapper' => true,
+									),
+									array(
+										'title' => 'Vertical',  
+										'selector' => 'ul',  
+										'classes' => 'list-menu vertical links',
+										'wrapper' => true,
+									)
+								)
+							)
+						)
+					),
+				),
+			),
+			array(  
+				'title' => 'Ordered Lists',				
+				'items' => array(
+					array(  
+						'title' => 'Simple',  
+						'selector' => 'ol',  
+						'classes' => 'custom',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Recursive',  
+						'selector' => 'ol',  
+						'classes' => 'custom recursive',
+						'wrapper' => true,
+					),
+					array(  
+						'title' => 'Large',  
+						'selector' => 'ol',  
+						'classes' => 'custom large',
+						'wrapper' => true,
+					),
+				),
+			),
+			array(  
 				'title' => 'Horizontal Rules',				
 				'items' => array(
 					array(  

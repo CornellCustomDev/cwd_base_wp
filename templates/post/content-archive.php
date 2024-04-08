@@ -26,21 +26,18 @@ $post_type = get_post_type();
 
 	<div class="group-fields">
 
-		<?php cwd_base_get_the_date(); ?>
-
-		<p class="summary">
-									
-			<?php 
-
-
-				$excerpt_length = 180; // Default
-				$archive_options = get_field('archive_options', 'options');
-				
-				if($archive_options && $post_type != 'page') { $excerpt_length = $archive_options[$post_type]['excerpt_length_' . $post_type]; }
+		<?php
+			$excerpt_length = 180; // Default
+			$archive_options = get_field('archive_options', 'options');
 			
-				echo custom_excerpt($excerpt_length); // Characters
-			
-			?>
+			if($archive_options && $post_type != 'page') { $excerpt_length = $archive_options[$post_type]['excerpt_length_' . $post_type]; }
+			if($archive_options && $post_type != 'page') { $show_date = $archive_options[$post_type]['show_date_' . $post_type]; }
+		?>
+
+		<?php if($show_date) { cwd_base_get_the_date(); } ?>
+
+		<p class="summary">					
+			<?php echo custom_excerpt($excerpt_length); // Characters ?>
 		</p>
 			
 		<?php cwd_base_get_tag_options(); ?>

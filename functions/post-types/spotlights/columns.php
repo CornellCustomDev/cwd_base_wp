@@ -4,7 +4,7 @@ function spotlights_columns( $columns ) {
     $columns = array(
         'cb'        => '<input type="checkbox" />',
         'title'     => 'Title',
-        'make_sticky'  => 'Feature on front page?',
+        //'make_sticky'  => 'Feature on front page?',
         'spotlights_tags'      =>  'Tags',
         'spotlights_categories'      =>  'Categories',
         'date'      =>  'Date'
@@ -14,11 +14,11 @@ function spotlights_columns( $columns ) {
 add_filter( 'manage_spotlights_posts_columns', 'spotlights_columns' );
 
 function spotlights_column( $column, $post_id ) {
-    if ( $column == 'make_sticky' ) {
-        if(get_post_meta($post_id, 'make_sticky', true) == '1') {
-            echo 'Yes';
-        }
-    }
+    // if ( $column == 'make_sticky' ) {
+    //     if(get_post_meta($post_id, 'make_sticky', true) == '1') {
+    //         echo 'Yes';
+    //     }
+    // }
     if ( $column == 'spotlights_tags' ) {
 		$spotlight_tags = get_the_terms( get_the_ID(), 'spotlights_tags' ); 
 

@@ -45,3 +45,7 @@ require_once 'blocks/custom_block_fields.php';
 if ( class_exists('Acf') ) {
 	include_once locate_template('/functions/post-types/init.php');
 }
+
+add_action( 'enqueue_block_editor_assets', function() {
+    wp_enqueue_style( 'cornell-font-fa-css', get_template_directory_uri() . '/fonts/font-awesome.min.css' );
+} );

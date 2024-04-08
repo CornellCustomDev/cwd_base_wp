@@ -21,12 +21,14 @@ elseif( is_home() ) {
 
 // Regular pages and single posts
 elseif( !is_front_page() && (is_page() || is_single()) ) { 
-	echo  '<h1>' . get_the_title() . '</h1>';
+	echo  '<h1>';
+	echo get_the_title();
 	if('courses' == get_post_type()) {
 		if(get_field('additional_text')) {
-			echo ' - <span>' . get_field("additional_text") . '</span>';
+			echo ' - <span style="font-size: 30px;">' . get_field("additional_text") . '</span>';
 		}
 	}
+	echo '</h1>';
 }
 
 // All post types

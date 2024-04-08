@@ -6318,6 +6318,18 @@ a.link-button .fa, a.link-button .zmdi {
 	        font-feature-settings: "lnum";
 }
 
+#main .frm_forms form fieldset {
+	border: none;
+}
+#main .frm_forms form fieldset .frm_submit button {
+	background: #b31b1b;
+	border: none;
+	border-radius: 0;
+}
+#main .frm_forms form fieldset .frm_submit button:hover {
+	background: #b31b1b;
+}
+
 /* Header image and slider
 -------------------------------------------*/
 #super-header.has_header_image #image-band {

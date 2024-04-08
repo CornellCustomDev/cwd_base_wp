@@ -583,45 +583,6 @@ Icon-driven bullets can be used for higher visual impact. The <code>.custom</cod
  	<li>List item ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam fermentum lacus, ut sagittis dui porttitor vitae.</li>
  	<li>List Item</li>
 </ul>
-<h4 class="low-margin">On/Off (<code>ul.custom.on-off</code>)</h4>
-<p class="smallprint">Use the <code>.on</code> or <code>.off</code> class on</p>
-
-<ul>
- 	<li>tags to mark each item.
-<ul class="custom on-off">
- 	<li class="on">This item is on/enabled/passed.</li>
- 	<li class="off">This item is off/disabled/failed.</li>
- 	<li>This one\'s unknown or not set. Oh no!</li>
-</ul>
-<h4 class="low-margin">On/Off as Steps (<code>ul.custom.on-off-steps</code>)</h4>
-<p class="smallprint">Use the <code>.on</code> or <code>.off</code> class on</p>
-</li>
- 	<li></li>
- 	<li>tags to mark each item.
-<ul class="custom on-off-steps">
- 	<li class="on">This step is complete.</li>
- 	<li class="off">This step is not.</li>
- 	<li>This one\'s unknown or not set. Oh no!</li>
-</ul>
-<h4 class="low-margin">On/Off as Toggle (<code>ul.custom.on-off-toggle</code>)</h4>
-<p class="smallprint">Use the <code>.on</code> or <code>.off</code> class on</p>
-</li>
- 	<li></li>
- 	<li>tags to mark each item. Note: These would typically be made into buttons, to provide the expected user experience.
-<ul class="custom on-off-toggle">
- 	<li class="on">This option is enabled.</li>
- 	<li class="off">This option is disabled.</li>
- 	<li>This one\'s unknown or not set. Oh no!</li>
-</ul>
-<h4>Nerdy List (<code>ul.custom.nerd</code>)</h4>
-<ul class="custom nerd">
- 	<li>A nerdy list item.</li>
- 	<li>A nerdy list item.</li>
- 	<li class="off">Not a nerdy item. (how\'d this get in here?)</li>
- 	<li>A nerdy item once more. (thank goodness!)</li>
-</ul>
-</li>
-</ul>
 <h3>Custom Ordered List</h3>
 Prominent numbered bullets can be used to communicate an emphasized sense of sequence. Custom Ordered Lists follow the same recursion rules as Unordered Lists above. They utilize styled typography and automatic numbering.
 <h4>Simple (<code>ol.custom</code>)</h4>
@@ -1183,20 +1144,6 @@ To minimize incompatibility with other table-based functionality, custom styles 
 </tr>
 </tbody>
 </table>
-<a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>
-<h2 id="columns">Columns and Grid System</h2>
-You can apply a <code>.two-col</code>, <code>.three-col</code>, or <code>.four-col</code> class to most containers, to distribute their direct child nodes evenly in two, three, or four simple columns. This is the easiest way to render columns without the need for special HTML markup. Rows are maintained even when nodes are different heights (as seen in the Four Column example below).
-<h3>Two Even Columns</h3>
-<div class="two-col margined"><img class="alignnone size-medium wp-image-6544" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="" width="300" height="300" /><img class="alignnone wp-image-6529 size-medium" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="" width="300" height="300" /></div>
-<h3>Three Even Columns</h3>
-<div class="three-col margined"><img class="alignnone size-medium wp-image-6497" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="" width="300" height="300" /><img class="alignnone size-medium wp-image-6499" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="" width="300" height="300" /><img class="alignnone size-medium wp-image-6495" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="" width="300" height="300" /></div>
-<h3>Four Even Columns</h3>
-<div class="four-col margined"><img class="alignnone wp-image-770 size-medium" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="Huatulco Coastline" width="300" height="300" /><img class="alignnone wp-image-766 size-medium" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="Big Sur" width="300" height="300" /><img class="alignnone size-medium wp-image-769" src="/wp-content/themes/cwd_base_2024/images/photos/plantations_square.jpg" alt="Brazil Beach" width="300" height="300" /><img class="alignnone wp-image-765 size-medium" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="Sea and Rocks" width="300" height="300" /><img class="alignnone wp-image-770 size-medium" src="/wp-content/themes/cwd_base_2024/images/photos/plantations_square.jpg" alt="Huatulco Coastline" width="300" height="300" /><img class="alignnone wp-image-766 size-medium" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="Big Sur" width="300" height="300" /><img class="alignnone size-medium wp-image-769" src="/wp-content/themes/cwd_base_2024/images/photos/plantations_square.jpg" alt="Brazil Beach" width="300" height="300" /><img class="alignnone wp-image-765 size-medium" src="/wp-content/themes/cwd_base_2024/images/photos/plantations.jpg" alt="Sea and Rocks" width="300" height="300" /></div>
-<h3>Two Columns (Padded)</h3>
-<div class="two-col padded">
-<div>Lorem ipsum dolor sit amet, amet eu hic, arcu at eros, odio sed vel ante morbi at aenean, eget leo donec turpis ligula. Felis vehicula, lacinia sed mauris, fusce accumsan adipiscing in id proin ullamcorper, enim ac arcu sed amet.</div>
-<div>Lorem ipsum dolor sit amet, amet eu hic, arcu at eros, odio sed vel ante morbi at aenean, eget leo donec turpis ligula. Felis vehicula, lacinia sed mauris, fusce accumsan adipiscing in id proin ullamcorper, enim ac arcu sed amet.</div>
-</div>
 <a class="back-to-toc" title="Back to Top" href="#main-article"><span class="sr-only">Back to Top</span></a>';
 			$styleguide_page_template = '';
 

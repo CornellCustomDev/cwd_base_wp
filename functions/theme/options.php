@@ -110,18 +110,7 @@ function get_taxonomies_from_post_type( $field ) {
 
 function get_post_type_taxonomies_names($post_type) {
 
-	$taxonomies = array();
-
-	$args = array(
-		'object_type' => array( $post_type ),
-		'public'      => true,
-	);
-
-	$taxonomies = get_taxonomies( $args, 'names' );
-
-	foreach ( $taxonomies as $taxonomy ) {
-		$taxonomies[] = $taxonomy;
-	}
+	$taxonomies = get_object_taxonomies( $post_type );
 
 	return $taxonomies;
 
@@ -911,6 +900,26 @@ function acf_load_post_type_groups() {
 					'max' => '',
 					'step' => '',
 				),
+				array(
+					'key' => 'field_65f882b287294',
+					'label' => 'Show Date?',
+					'name' => 'show_date_post',
+					'aria-label' => '',
+					'type' => 'true_false',
+					'instructions' => 'Show the post date (applies to single posts as well as archive listings).',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => '',
+					'default_value' => 1,
+					'ui' => 0,
+					'ui_on_text' => '',
+					'ui_off_text' => '',
+				),
 			),
 			'layout' => 'block',
 			'acfe_seamless_style' => 0,
@@ -1045,6 +1054,26 @@ function acf_load_post_type_groups() {
 						'min' => '',
 						'max' => '',
 						'step' => '',
+					),
+					array(
+						'key' => 'field_show_date_' . $post_type,
+						'label' => 'Show Date?',
+						'name' => 'show_date_' . $post_type,
+						'aria-label' => '',
+						'type' => 'true_false',
+						'instructions' => 'Check this box to show the post date.',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'message' => '',
+						'default_value' => 1,
+						'ui' => 0,
+						'ui_on_text' => '',
+						'ui_off_text' => '',
 					),
 				),
 				'layout' => 'block',

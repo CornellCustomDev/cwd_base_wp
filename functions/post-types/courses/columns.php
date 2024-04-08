@@ -4,7 +4,6 @@ function courses_columns( $columns ) {
     $columns = array(
         'cb'        => '<input type="checkbox" />',
         'title'     => 'Title',
-        'make_sticky'  => 'Feature on front page?',
         'course_tags'      =>  'Tags',
         'course_categories'      =>  'Categories',
         'date'      =>  'Date'
@@ -14,11 +13,6 @@ function courses_columns( $columns ) {
 add_filter( 'manage_courses_posts_columns', 'courses_columns' );
 
 function courses_column( $column, $post_id ) {
-    if ( $column == 'make_sticky' ) {
-        if(get_post_meta($post_id, 'make_sticky', true) == '1') {
-            echo 'Yes';
-        }
-    }
     if ( $column == 'course_tags' ) {
 		$course_tags = get_the_terms( get_the_ID(), 'course_tags' ); 
 

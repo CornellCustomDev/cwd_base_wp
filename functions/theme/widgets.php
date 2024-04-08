@@ -225,7 +225,7 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 			array(
 				'label' => 'Taxonomy',                
 				'id' => 'taxonomy_select',
-				'type' => 'checkbox',              
+				'type' => 'taxonomy_select',              
 			),			
 			array(
 				'label' => 'Show only upcoming events',
@@ -304,31 +304,6 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 			$view_all_link_text = $instance['view_all_link_text'];
 					
 			// To sort by date field...
-			if( $post_type_select == 'People' ) {
-				$args1 = array( 
-					'post_type' => 'people',
-					'posts_per_page' => $entries,
-					'meta_query' => array( 
-						array(
-							'key' => 'make_sticky',
-							'value' => '1',
-							'compare' => '=',
-						),
-				) );			
-				$query1 = new WP_Query($args1);	  
-				$query1_post_ids = wp_list_pluck( $query1->posts, 'ID' );
-				$args2 = array( 
-					'post_type' => strtolower($post_type_select),
-					'posts_per_page' => $entries,
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'people',
-							'field' => 'slug',
-							'terms' => $taxonomy_select,
-						)
-					),
-				);			
-			}
 			if( $post_type_select == 'News' ) {
 				$args1 = array( 
 					'post_type' => strtolower($post_type_select),
@@ -341,9 +316,18 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 				) );			
 				$query1 = new WP_Query($args1);	  
 				$query1_post_ids = wp_list_pluck( $query1->posts, 'ID' );
+				$terms = get_terms(strtolower($taxonomy_select));
+				$term_ids = wp_list_pluck($terms, 'term_id');
 				$args2 = array( 
 					'post_type' => strtolower($post_type_select),
 					'posts_per_page' => $entries,
+					'tax_query' => array(
+						array(
+							'taxonomy' => strtolower($taxonomy_select),
+							'field' => 'term_id',
+							'terms' => $term_ids,
+						)
+					),
 					'meta_key' => 'publication_date',
 					'orderby' => 'meta_value',
 					'order' => $order_select,
@@ -362,6 +346,8 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 				$today = current_time('Ymd');
 				$query1 = new WP_Query($args1);	  
 				$query1_post_ids = wp_list_pluck( $query1->posts, 'ID' );
+				$terms = get_terms(strtolower($taxonomy_select));
+				$term_ids = wp_list_pluck($terms, 'term_id');
 				
 				if($show_upcoming_only == 1) { 
 				
@@ -376,6 +362,13 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 								'compare' => '>=',
 							),
 						),
+						'tax_query' => array(
+							array(
+								'taxonomy' => strtolower($taxonomy_select),
+								'field' => 'term_id',
+								'terms' => $term_ids,
+							)
+						),
 						'orderby' => 'date',
 						'order' => $order_select,
 					);
@@ -387,6 +380,13 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 						'post_type' => strtolower($post_type_select),
 						'posts_per_page' => $entries,
 						'post__not_in' => $query1_post_ids,
+						'tax_query' => array(
+							array(
+								'taxonomy' => strtolower($taxonomy_select),
+								'field' => 'term_id',
+								'terms' => $term_ids,
+							)
+						),
 						'meta_key' => 'date',
 						'orderby' => 'meta_value',
 						'order' => $order_select,
@@ -406,9 +406,18 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 				) );			
 				$query1 = new WP_Query($args1);	  
 				$query1_post_ids = wp_list_pluck( $query1->posts, 'ID' );
+				$terms = get_terms(strtolower($taxonomy_select));
+				$term_ids = wp_list_pluck($terms, 'term_id');
 				$args2 = array( 
 					'post_type' => strtolower($post_type_select),
 					'posts_per_page' => $entries,
+					'tax_query' => array(
+						array(
+							'taxonomy' => strtolower($taxonomy_select),
+							'field' => 'term_id',
+							'terms' => $term_ids,
+						)
+					),
 					'orderby' => 'post_date',
 					'order' => $order_select,
 				);			
@@ -420,7 +429,7 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 			$results->posts = array_merge($query1->posts, $query2->posts);
 			$results->post_count = $query1->post_count + $query2->post_count;
 			
-			$archive_options = get_field('archive_options', 'options'); ?>
+			//$archive_options = get_field('archive_options', 'options'); ?>
 
 			<div class="content-block cwd-component cwd-basic no-overlay<?php if( $format == 'Card grid' ) { echo ' tiles'; } ?>">
 				
@@ -636,30 +645,39 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 				break;
 	
 				case 'taxonomy_select':
-					$all_taxonomies = get_taxonomies(array('public' => true), 'names');
-					$output .= '<p>';
-					$output .= '<label for="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'">'.esc_attr( $widget_field['label'], 'cwd_base' ).'</label>';
-					$output .= '<input class="checkbox" type="checkbox" '.checked( $widget_value, true, false ).' id="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'" name="'.esc_attr( $this->get_field_name( $widget_field['id'] ) ).'" value="1">';
-					$output .= '</p>';
-					break;
+				$output .= '<p>';
+				$output .= '<label for="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'">'.esc_attr( $widget_field['label'], 'cwd_base' ).':</label> ';
+				$output .= '<select id="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'" name="'.esc_attr( $this->get_field_name( $widget_field['id'] ) ).'">';
+				$all_taxonomies = get_taxonomies(array('public' => true), 'names');
+				foreach ($all_taxonomies as $taxonomy) {
+					$taxonomy = ucwords($taxonomy);
+					if ($widget_value == $taxonomy) {
+					$output .= '<option value="'.$taxonomy.'" selected>'.$taxonomy.'</option>';
+					} elseif ($taxonomy != 'Slider' && $taxonomy != 'Attachment' && $taxonomy != 'Frm_display') {
+					$output .= '<option value="'.$taxonomy.'">'.$taxonomy.'</option>';
+					}
+				}
+				$output .= '</select>';
+				$output .= '</p>';
+				break;
 		
 				case 'order_select':
 
-					if ($instance['posttype_select'] != 'People') {  
-						$output .= '<p>';
-						$output .= '<label for="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'">'.esc_attr( $widget_field['label'], 'cwd_base' ).':</label> ';
-						$output .= '<select id="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'" name="'.esc_attr( $this->get_field_name( $widget_field['id'] ) ).'">';
-						foreach ($widget_field['options'] as $option) {
-							if ($widget_value == $option) {
-							$output .= '<option value="'.$option.'" selected>'.$option.'</option>';
-							} else {
-							$output .= '<option value="'.$option.'">'.$option.'</option>';
-							}
+				if ($instance['posttype_select'] != 'People') {  
+					$output .= '<p>';
+					$output .= '<label for="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'">'.esc_attr( $widget_field['label'], 'cwd_base' ).':</label> ';
+					$output .= '<select id="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'" name="'.esc_attr( $this->get_field_name( $widget_field['id'] ) ).'">';
+					foreach ($widget_field['options'] as $option) {
+						if ($widget_value == $option) {
+						$output .= '<option value="'.$option.'" selected>'.$option.'</option>';
+						} else {
+						$output .= '<option value="'.$option.'">'.$option.'</option>';
 						}
-						$output .= '</select>';
-						$output .= '</p>';
 					}
-					break;
+					$output .= '</select>';
+					$output .= '</p>';
+				}
+				break;
 
 				case 'upcoming_checkbox':
 				if ($instance['posttype_select'] == 'Events') {  
