@@ -1,0 +1,20 @@
+// Formidable Forms plugin style fixes
+#main {
+    .frm_forms {
+        form {
+            fieldset {
+                border: none;
+                .frm_submit {
+                    button {
+                        background: #b31b1b;
+                        border: none;
+                        border-radius: 0;
+                        &:hover {
+                            background: #b31b1b;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -4,7 +4,6 @@ function galleries_columns( $columns ) {
     $columns = array(
         'cb'        => '<input type="checkbox" />',
         'title'     => 'Title',
-        'make_sticky'  => 'Feature on front page?',
         'gallery_tags'      =>  'Tags',
         'gallery_categories'      =>  'Categories',
         'date'      =>  'Date'
@@ -14,11 +13,6 @@ function galleries_columns( $columns ) {
 add_filter( 'manage_galleries_posts_columns', 'galleries_columns' );
 
 function galleries_column( $column, $post_id ) {
-    if ( $column == 'make_sticky' ) {
-        if(get_post_meta($post_id, 'make_sticky', true) == '1') {
-            echo 'Yes';
-        }
-    }
     if ( $column == 'gallery_tags' ) {
 		$gallery_tags = get_the_terms( get_the_ID(), 'gallery_tags' ); 
 

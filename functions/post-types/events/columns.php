@@ -4,9 +4,6 @@ function events_columns( $columns ) {
     $columns = array(
         'cb'        => '<input type="checkbox" />',
         'title'     => 'Title',
-        'make_sticky'  => 'Feature on front page?',
-		'themes'      => 'Themes',
-        'programs-and-institutes' => 'Programs and Institutes',
         'event_tags'      =>  'Tags',
         'event_groups'      =>  'Groups',
         'event_types'      =>  'Types',
@@ -17,43 +14,6 @@ function events_columns( $columns ) {
 add_filter( 'manage_events_posts_columns', 'events_columns' );
 
 function events_column( $column, $post_id ) {
-    if ( $column == 'make_sticky' ) {
-        if(get_post_meta($post_id, 'make_sticky', true) == '1') {
-            echo 'Yes';
-        }
-    }
-	if ( $column == 'themes' ) {
-		$themes = get_the_terms( get_the_ID(), 'themes' ); 
-
-		if($themes) {
-			$count = count($themes);
-			$i = 1;
-
-			foreach($themes as $theme) { 
-				echo '<a href="' . site_url() . '/themes/' . $theme->slug . '/">' . $theme->name . '</a>';
-				if($i < $count) { 
-					echo ', ';
-				} 
-				$i++;
-			}
-		}
-    }
-    if ( $column == 'programs-and-institutes' ) {
-		$programs_and_institutes = get_the_terms( get_the_ID(), 'programs-and-institutes' ); 
-
-		if($programs_and_institutes) {
-			$count = count($programs_and_institutes);
-			$i = 1;
-
-			foreach($programs_and_institutes as $program_or_institute) { 
-				echo '<a href="' . site_url() . '/programs-and-institutes/' . $program_or_institute->slug . '/">' . $program_or_institute->name . '</a>';
-				if($i < $count) { 
-					echo ', ';
-				} 
-				$i++;
-			}
-		}
-    }
     if ( $column == 'event_tags' ) {
 		$event_tags = get_the_terms( get_the_ID(), 'event_tags' ); 
 

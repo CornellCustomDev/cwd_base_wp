@@ -3,6 +3,7 @@
 @import 'utility';
 @import 'basic';
 @import 'type-freight';
+@import 'forms';
 
 /* Header image and slider
 -------------------------------------------*/
@@ -54,8 +55,8 @@
 
 			#slider-caption {
 
-				position: relative;
-				z-index: 2;
+				//position: relative;
+				//z-index: 2;
 				
 				#no-active-slides {
 					margin: 0 auto;
@@ -113,7 +114,7 @@
 					}
 
 					&.align-caption-left .caption-inner {
-						left: 0;
+						//left: 0;
 						right: auto;
 					}
 
@@ -124,7 +125,7 @@
 
 					&.align-caption-right .caption-inner {
 						left: auto;
-						right: 0;
+						//right: 0;
 					}
 				}
 
@@ -142,7 +143,7 @@
 					right: 4%;
 
 					@media (min-width: $screen-sm-min) {
-						left: 0;
+						//left: 0;
 						right: auto;
 					}
 

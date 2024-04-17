@@ -4,7 +4,7 @@ function people_columns( $columns ) {
     $columns = array(
         'cb'        => '<input type="checkbox" />',
         'title'     => 'Title',
-        'make_sticky'  => 'Feature on front page?',
+        //'make_sticky'  => 'Feature on front page?',
         'people_tags'      =>  'Tags',
         'people_categories'      =>  'Categories',
         'date'      =>  'Date'
@@ -14,11 +14,11 @@ function people_columns( $columns ) {
 add_filter( 'manage_people_posts_columns', 'people_columns' );
 
 function people_column( $column, $post_id ) {
-    if ( $column == 'make_sticky' ) {
-        if(get_post_meta($post_id, 'make_sticky', true) == '1') {
-            echo 'Yes';
-        }
-    }
+    // if ( $column == 'make_sticky' ) {
+    //     if(get_post_meta($post_id, 'make_sticky', true) == '1') {
+    //         echo 'Yes';
+    //     }
+    // }
     if ( $column == 'people_tags' ) {
 		$people_tags = get_the_terms( get_the_ID(), 'people_tags' ); 
 

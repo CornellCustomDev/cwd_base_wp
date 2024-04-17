@@ -22,18 +22,18 @@
 
 	<div class="group-fields">
 
-		<?php cwd_base_get_the_date(); ?>
+		<?php 
+			
+			$archive_options = get_field('archive_options', 'options');
+			$excerpt_length = $archive_options[$post_type]['excerpt_length_' . $post_type];
+			$show_date = $archive_options[$post_type]['show_date_' . $post_type];
+				
+		?>
+
+		<?php if($show_date) { cwd_base_get_the_date(); } ?>
 
 		<p class="summary">
-									
-			<?php 
-			
-				$archive_options = get_field('archive_options', 'options');
-				$excerpt_length = $archive_options[$post_type]['excerpt_length_' . $post_type];
-			
-				echo custom_excerpt($excerpt_length); // Characters
-			
-			?>
+			<?php echo custom_excerpt($excerpt_length); // Characters ?>
 		</p>
 			
 		<?php cwd_base_get_tag_options(); ?>

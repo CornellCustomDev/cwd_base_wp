@@ -1115,6 +1115,18 @@ a.link-button .fa, a.link-button .zmdi {
 	        font-feature-settings: "lnum";
 }
 
+#main .frm_forms form fieldset {
+	border: none;
+}
+#main .frm_forms form fieldset .frm_submit button {
+	background: #b31b1b;
+	border: none;
+	border-radius: 0;
+}
+#main .frm_forms form fieldset .frm_submit button:hover {
+	background: #b31b1b;
+}
+
 /* Header image and slider
 -------------------------------------------*/
 #super-header.has_header_image #image-band {
@@ -1164,10 +1176,6 @@ a.link-button .fa, a.link-button .zmdi {
 		padding-left: 0;
 		padding-right: 0;
 	}
-}
-#super-header.has_header_image .slider-container #slider-caption {
-	position: relative;
-	z-index: 2;
 }
 #super-header.has_header_image .slider-container #slider-caption #no-active-slides {
 	margin: 0 auto;
@@ -1229,7 +1237,6 @@ a.link-button .fa, a.link-button .zmdi {
 		max-width: 600px;
 	}
 	#super-header.has_header_image .slider-container #slider-caption.align-caption-left .caption-inner {
-		left: 0;
 		right: auto;
 	}
 	#super-header.has_header_image .slider-container #slider-caption.align-caption-center .caption-inner {
@@ -1238,7 +1245,6 @@ a.link-button .fa, a.link-button .zmdi {
 	}
 	#super-header.has_header_image .slider-container #slider-caption.align-caption-right .caption-inner {
 		left: auto;
-		right: 0;
 	}
 }
 @media (min-width: 992px) {
@@ -1255,7 +1261,6 @@ a.link-button .fa, a.link-button .zmdi {
 }
 @media (min-width: 768px) {
 	#super-header.has_header_image .slider-container #slider-caption .campaign-nav {
-		left: 0;
 		right: auto;
 	}
 }

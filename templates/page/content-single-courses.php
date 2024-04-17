@@ -7,10 +7,6 @@
 		<?php cwd_base_get_image_caption(); ?>
 	</figure>
 
-	<div class="summary">
-		<?php the_content(); ?>
-	</div>
-			
 	<div class="custom-fields" class="clear">
 
 		<?php if(get_field('semester') || get_field('year')) { ?>
@@ -69,6 +65,10 @@
 
 	</div>
 		
+	<div class="summary">
+		<?php the_content(); ?>
+	</div>
+			
 	<?php cwd_base_get_tag_options(); ?>
 
 	<?php // For paginated pages using the <!--nextpage--> quicktag
