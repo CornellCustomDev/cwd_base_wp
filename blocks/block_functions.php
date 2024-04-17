@@ -46,102 +46,15 @@ add_action( 'init', 'cwd_base_register_blocks' );
 function cwd_base_register_blocks() {
 	// General-use blocks
 	register_block_type( __DIR__ . '/accordions' );
-	register_block_type( __DIR__ . '/cta-buttons' );
 	register_block_type( __DIR__ . '/flex-cards' );
 	register_block_type( __DIR__ . '/card-slider' );
 	register_block_type( __DIR__ . '/wysiwyg' );
-	register_block_type( __DIR__ . '/news' );
-	register_block_type( __DIR__ . '/quote' );
-	register_block_type( __DIR__ . '/tabs' );
-
-	// Full-width blocks
-	register_block_type( __DIR__ . '/full-width/section' );
-	register_block_type( __DIR__ . '/full-width/callout' );
-	register_block_type( __DIR__ . '/full-width/cards' );
-	register_block_type( __DIR__ . '/full-width/events' );
 }
 
 /*
  * Add custom fields to blocks
  */
 include_once( 'custom_block_fields.php' );
-
-/*
- * Events block query
- */
-function cwd_base_events_block_query( $count, $taxonomy_terms ) {
-	$query_args = array(
-		'post_type' => 'events',
-		'posts_per_page' => $count,
-		'meta_query' => array(
-			array(
-				'key' => 'date',
-				'value' => current_time('Ymd'),
-				'compare' => '>=',
-			),
-		),
-		'orderby' => 'meta_value',
-		'meta_key' => 'date',
-		'order' => 'ASC'
-	);
-
-	// If a taxonomy term is set in the filter field
-	if ( $taxonomy_terms ) {
-		$tax_query = _cwd_base_generate_tax_query( $taxonomy_terms );
-
-		// Add taxonomy query to main query args
-		$query_args['tax_query'] = $tax_query;
-	}
-
-	return new WP_Query( $query_args );
-}
-
-/*
- * News block query
- */
-function cwd_base_news_block_query( $taxonomy_terms ) {
-	$query_args = array(
-		'post_type' => 'news',
-		'posts_per_page' => 3,
-		'orderby' => 'meta_value',
-		'meta_key' => 'publication_date',
-		'order' => 'DESC'
-	);
-
-	// If a taxonomy term is set in the filter field
-	if ( $taxonomy_terms ) {
-		$tax_query = _cwd_base_generate_tax_query( $taxonomy_terms );
-
-		// Add taxonomy query to main query args
-		$query_args['tax_query'] = $tax_query;
-	}
-
-	return new WP_Query( $query_args );
-}
-
-/*
- * Create taxonomy query array for both Events & News blocks
- */
-function _cwd_base_generate_tax_query( $taxonomy_terms ) {
-	$tax_query = array();
-
-	// For multiple terms, add relation
-	if ( count( $taxonomy_terms ) > 1 ) {
-		$tax_query['relation'] = 'OR';
-	}
-
-	foreach( $taxonomy_terms as $term ) {
-		// Add query array for each term
-		$term_query = array(
-			'taxonomy' => $term->taxonomy,
-			'terms' => $term->term_id
-		);
-
-		array_push( $tax_query, $term_query );
-	}
-
-	return $tax_query;
-}
 
 /*
  * Limit block types allowed in editor
@@ -231,8 +144,8 @@ if ( ! function_exists( 'cwd_base_allowed_block_types' ) ) {
 			//'core/group',
 			//'core/heading',
 			//'core/html',
-			//'core/list',
-			//'core/list-item',
+			'core/list',
+			'core/list-item',
 			//'core/media-text',
 			'core/missing',
 			'core/more',
@@ -253,7 +166,7 @@ if ( ! function_exists( 'cwd_base_allowed_block_types' ) ) {
 			'core/post-comments',
 			'sbi/sbi-feed-block',
 			//'core/row',
-			'core/query-loop',
+			//'core/query-loop',
 		);
 
 		// Current page information
