@@ -1,8 +1,8 @@
 {
 	"name": "cwd/wysiwyg",
-	"title": "Formatted Text",
+	"title": "WYSIWYG",
 	"description": "A basic text block with a WYSIWYG editor for formatting.",
-	"category": "text",
+	"category": "cwd-general",
 	"icon": "admin-customizer",
 	"supports": {
 		"align" : false
