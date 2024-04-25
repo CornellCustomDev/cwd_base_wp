@@ -191,11 +191,11 @@ The customizer <a href="' . $baseUrl . 'wp-admin/customize.php?return=%2Fwp-admi
 
 Pages with children will share their header image with all child pages, but a child page may override the parent page\'s featured image with one of their own.
 <h3>Image slider</h3>
-Replace the header image on the homepage by choosing that option from the list of options on the homepage edit screen.
+Replace the header image on any page by choosing that option on the edit form for that page.
 
-<img class="aligncenter wp-image-8207 size-full" src="/wp-content/themes/cwd_base_2024/images/wp/replace-header-image.png" alt="The option to replace homepage header image with a slider." width="285" height="214" />
+<img class="aligncenter wp-image-8207 size-full" src="/wp-content/themes/cwd_base_2024/images/wp/replace-header-image.png" alt="The option to replace the header image with a slider." width="330" height="129" />
 
-Add slides and captions to the image slider by using the custom fields provided and the Featured image field on the edit screen.
+If you select the checkbox to use the image slider, you will see additional custom fields to add slides and captions.
 <h2>Widgets</h2>
 There are three widget areas below the main content area and above the footer, a sidebar widget area, and another widget area specifically for the homepage. These can be added and removed on the <a href="' . $baseUrl . 'wp-admin/widgets.php">widgets page</a>.
 <h2>Menus</h2>
