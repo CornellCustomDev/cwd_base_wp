@@ -486,7 +486,7 @@ Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Morbi nec m
  	<li>List Item</li>
  	<li>List Item</li>
 </ol>
-<ol class="decimal-leading-zero"><!-- note: this numbering style can only be done with CSS -->
+<ol class="decimal-leading-zero">
  	<li>List Item</li>
  	<li>List Item</li>
  	<li>List Item</li>
@@ -701,7 +701,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table"><caption>Basic Table (<code>.table</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -731,7 +731,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table bordered"><caption>Bordered Table (<code>.table.bordered</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -761,7 +761,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table flat"><caption>Flat Table (<code>.table.flat</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -791,7 +791,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table striped"><caption>Striped Table (<code>.table.striped</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -833,7 +833,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table flat striped"><caption>Striped Table (<code>.table.flat.striped</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -875,7 +875,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table striped colored"><caption>Colored Table (<code>.table.striped.colored</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -905,7 +905,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table flat striped colored"><caption>Flat + Colored Table (<code>.table.flat.striped.colored</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -995,7 +995,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table flat striped rainbow"><caption>Flat Rainbow Table with Row Headers (<code>.table.flat.striped.rainbow</code>)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
@@ -1095,7 +1095,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 <table class="table flat striped colored sectioned"><caption>Table with a <code>&lt;thead&gt;</code> and Multiple <code>&lt;tbody&gt;</code> Tags (add <code>.sectioned</code> to activate spacing)</caption>
 <thead>
 <tr>
-<th></th>
+<td></td>
 <th scope="col">Col 1</th>
 <th scope="col">Col 2</th>
 <th scope="col">Col 3</th>
