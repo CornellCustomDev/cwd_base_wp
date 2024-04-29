@@ -1357,8 +1357,8 @@ body:not(.mobile) {
 						font-family: 'FontAwesome';
 						font-size: 24px;
 						position: absolute;
-						right: 20px;
-						top: 12px;
+						right: 10px;
+						top: 0;
 						color: #222;
 
 					}
@@ -1368,28 +1368,64 @@ body:not(.mobile) {
 						font-style: italic;
 						color: #888;
 						position: absolute;
-						top: 24px;
-						right: 54px;
+						top: 12px;
+						right: 44px;
+					}
+
+					@media (min-width: $screen-xs-min) {
+						&:before {
+							top: 8px;
+							right: 15px;
+						}
+
+						&:after {
+							top: 20px;
+							right: 50px;
+						}
 					}
 				}
 			}
 			
 			article {
 				background: #f7f7f7;
-				padding: 0 15px 15px 0;
+				padding: 30px 15px 15px;
+
+				@media (min-width: $screen-xs-min) {
+					padding-top: 15px;
+				}
 
 				.comment-content {
-					margin-left: 50px;
-					margin-bottom: 12px;
+					margin: 10px 0;
 				}
 
-				.reply {
-					margin-left: 50px;
+				footer {
+					display: flex;
+					flex-direction: column-reverse;
+					padding: 0;
+
+					.comment-author {
+						display: flex;
+						align-items: center;
+
+						img {
+							width: 48px;
+							height: 48px;
+							margin-right: 10px;
+						}
+
+						.fn {
+							margin-right: 4px;
+						}
+					}
 				}
 				
-				.comment-metadata a {
-					margin: 5px 5px 0 0;
-    				display: inline-block;
+				.comment-metadata {
+					margin-bottom: 10px;
+
+					a {
+						display: inline-block;
+						margin: 5px 5px 0 0;
+					}
 				}
 			}
 		}
