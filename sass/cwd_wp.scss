@@ -96,10 +96,24 @@
 
 				.caption-inner {
 					top: auto !important;
-					bottom: 68px;
-					bottom: calc(4% + 60px);
-					left: 4%;
-					right: 4%;
+					bottom: 60px;
+					left: 0 !important;
+					right: 0;
+					padding: 0;
+
+					.caption-focus {
+						display: block;
+						padding: 4%;
+					}
+
+					a.caption-focus {
+						transition: background-color .4s;
+
+						&:hover {
+							background-color: rgba(black, 0.25);
+							text-decoration: underline;
+						}
+					}
 
 					h2 {
 						font-weight: 400;
@@ -113,8 +127,12 @@
 						max-width: 600px;
 					}
 
+					.caption-focus {
+						padding: 20px;
+					}
+
 					&.align-caption-left .caption-inner {
-						//left: 0;
+						left: 4% !important;
 						right: auto;
 					}
 
@@ -124,8 +142,8 @@
 					}
 
 					&.align-caption-right .caption-inner {
-						left: auto;
-						//right: 0;
+						left: auto !important;
+						right: 4%;
 					}
 				}
 
@@ -143,7 +161,6 @@
 					right: 4%;
 
 					@media (min-width: $screen-sm-min) {
-						//left: 0;
 						right: auto;
 					}
 
