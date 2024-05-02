@@ -37,7 +37,17 @@ $post_type = get_post_type();
 
 				<section>
 
-					<?php $archive_options = get_field('archive_options', 'options'); ?>
+					<?php
+						$archive_options = get_field('archive_options', 'options');
+
+						// Add custom intro text to posts page, if present
+						$blog_page_options = get_field('blog_page_options', 'options');
+						$intro_text = $blog_page_options['add_introductory_text'];
+					?>
+
+					<?php if ( is_home() && $intro_text ): ?>
+						<?php echo $intro_text; ?>
+					<?php endif; ?>
 						
 					<div class="cwd-component cwd-basic no-overlay<?php if( $archive_options[$post_type]['appearance_' . $post_type] == 'grid' ) { echo ' tiles'; } ?>">
 
