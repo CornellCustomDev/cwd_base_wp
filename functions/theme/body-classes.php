@@ -6,7 +6,7 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 		
 		global $post;
 		
-		$post_type = get_post_type();
+		$post_type = get_post_type() ?: '';
 		
 		// Get layout for current page
 		$layout = get_layout();
