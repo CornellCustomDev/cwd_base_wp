@@ -49,7 +49,7 @@ if ( ! function_exists ( 'get_all_post_types' ) ) {
 if ( ! function_exists ( 'cwd_base_cpt_archives' ) ) {
 	function cwd_base_cpt_archives( $query ) {
 		if ( $query->is_tag() || is_category() && $query->is_main_query() && !is_admin() ) {
-			$query->set( 'post_type', get_all_custom_post_types() );
+			$query->set( 'post_type', 'any' );
 		}
 	}
 
