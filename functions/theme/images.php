@@ -122,13 +122,13 @@ if ( ! function_exists( 'cwd_base_catch_that_image' ) ) {
 		$transformed_content = apply_filters('the_content', $post->post_content); 
 
 		$output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $transformed_content, $matches);
-		$first_img_url = $matches[1][0];
+		$first_img_url = $matches[1] ? $matches[1][0] : null;
 
-		if(empty($first_img_url)){
-			$first_img_url = cwd_base_get_fallback_image();
+		if ($first_img_url) {
+			echo '<img src="' . $first_img_url . '" alt="">';
+		} else {
+			cwd_base_get_fallback_image();
 		}
-		echo '<img src="' . $first_img_url . '" alt="">'; 
-		
 	}
 }
 

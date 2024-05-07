@@ -53,7 +53,7 @@ if ( ! function_exists ( 'register_my_sidebars' ) ) {
 		) );
 		
 		register_sidebar( array(
-			'name'          => __( 'Below Conent', 'cwd_base' ),
+			'name'          => __( 'Below Content', 'cwd_base' ),
 			'id'            => 'sidebar-102',
 			'description'   => __( 'Appears below the main content area above the footer. IMPORTANT: use the visiblilty settings to target specific pages or groups of pages, otherwise it will show up everywhere.', 'cwd_base' ),
 			'before_widget' => '<div class="col-item">',

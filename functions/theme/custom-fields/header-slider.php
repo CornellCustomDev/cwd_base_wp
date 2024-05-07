@@ -67,7 +67,7 @@ acf_add_local_field_group( array(
 			'name' => 'slider_link_type',
 			'aria-label' => '',
 			'type' => 'button_group',
-			'instructions' => 'Should each slide have 1-2 call to action buttons in the slide caption, or should the entire slide be linked? Links can also be excluded entirely to create a decorative slider.',
+			'instructions' => 'Should each slide have 1-2 call to action buttons in the slide caption, or should the entire slide caption be linked? Links can also be excluded entirely to create a decorative slider.',
 			'required' => 1,
 			'conditional_logic' => array(
 				array(
@@ -85,7 +85,7 @@ acf_add_local_field_group( array(
 			),
 			'choices' => array(
 				'button' => 'Button(s)',
-				'full' => 'Full Slide',
+				'full' => 'Full Caption',
 				'none' => 'None',
 			),
 			'default_value' => '',
