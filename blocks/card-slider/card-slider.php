@@ -25,7 +25,7 @@ $classes = array(
 								<a href="<?php the_sub_field('title_link_url'); ?>">
 							<?php } ?>
 								<?php if( get_sub_field('image_id') ) { ?>
-									<?php echo wp_get_attachment_image(get_sub_field('image_id'), 'card-slider'); ?>
+									<?php echo wp_get_attachment_image(get_sub_field('image_id'), 'thumbnail'); ?>
 								<?php } ?>
 							<?php if( get_sub_field('title_link_url') ) { ?>
 								</a>

@@ -1102,6 +1102,9 @@ body > footer .list-menu.vertical li, #body-footer .list-menu.vertical li {
 body > footer .main-footer, #body-footer .main-footer {
 	padding: 45px 0;
 }
+body > footer .main-footer .secondary br + a.link-block, #body-footer .main-footer .secondary br + a.link-block {
+	margin-top: 24px;
+}
 
 body > footer .sub-footer, #body-footer .sub-footer {
 	padding: 20px 0;
@@ -6423,10 +6426,22 @@ a.link-button .fa, a.link-button .zmdi {
 }
 #super-header.has_header_image .slider-container #slider-caption .caption-inner {
 	top: auto !important;
-	bottom: 68px;
-	bottom: calc(4% + 60px);
-	left: 4%;
-	right: 4%;
+	bottom: 60px;
+	left: 0 !important;
+	right: 0;
+	padding: 0;
+}
+#super-header.has_header_image .slider-container #slider-caption .caption-inner .caption-focus {
+	display: block;
+	padding: 4%;
+}
+#super-header.has_header_image .slider-container #slider-caption .caption-inner a.caption-focus {
+	-webkit-transition: background-color 0.4s;
+	transition: background-color 0.4s;
+}
+#super-header.has_header_image .slider-container #slider-caption .caption-inner a.caption-focus:hover {
+	background-color: rgba(0, 0, 0, 0.25);
+	text-decoration: underline;
 }
 #super-header.has_header_image .slider-container #slider-caption .caption-inner h2 {
 	font-weight: 400;
@@ -6439,7 +6454,11 @@ a.link-button .fa, a.link-button .zmdi {
 		width: fit-content;
 		max-width: 600px;
 	}
+	#super-header.has_header_image .slider-container #slider-caption .caption-focus {
+		padding: 20px;
+	}
 	#super-header.has_header_image .slider-container #slider-caption.align-caption-left .caption-inner {
+		left: 4% !important;
 		right: auto;
 	}
 	#super-header.has_header_image .slider-container #slider-caption.align-caption-center .caption-inner {
@@ -6447,7 +6466,8 @@ a.link-button .fa, a.link-button .zmdi {
 		margin-right: auto;
 	}
 	#super-header.has_header_image .slider-container #slider-caption.align-caption-right .caption-inner {
-		left: auto;
+		left: auto !important;
+		right: 4%;
 	}
 }
 @media (min-width: 992px) {
@@ -7349,8 +7369,8 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 	font-family: "FontAwesome";
 	font-size: 24px;
 	position: absolute;
-	right: 20px;
-	top: 12px;
+	right: 10px;
+	top: 0;
 	color: #222;
 }
 #comments .comment-list li.bypostauthor article:after {
@@ -7359,23 +7379,63 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 	font-style: italic;
 	color: #888;
 	position: absolute;
-	top: 24px;
-	right: 54px;
+	top: 12px;
+	right: 44px;
+}
+@media (min-width: 480px) {
+	#comments .comment-list li.bypostauthor article:before {
+		top: 8px;
+		right: 15px;
+	}
+	#comments .comment-list li.bypostauthor article:after {
+		top: 20px;
+		right: 50px;
+	}
 }
 #comments .comment-list li article {
 	background: #f7f7f7;
-	padding: 0 15px 15px 0;
+	padding: 30px 15px 15px;
+}
+@media (min-width: 480px) {
+	#comments .comment-list li article {
+		padding-top: 15px;
+	}
 }
 #comments .comment-list li article .comment-content {
-	margin-left: 50px;
-	margin-bottom: 12px;
+	margin: 10px 0;
 }
-#comments .comment-list li article .reply {
-	margin-left: 50px;
+#comments .comment-list li article footer {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: reverse;
+	    -ms-flex-direction: column-reverse;
+	        flex-direction: column-reverse;
+	padding: 0;
+}
+#comments .comment-list li article footer .comment-author {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+#comments .comment-list li article footer .comment-author img {
+	width: 48px;
+	height: 48px;
+	margin-right: 10px;
+}
+#comments .comment-list li article footer .comment-author .fn {
+	margin-right: 4px;
+}
+#comments .comment-list li article .comment-metadata {
+	margin-bottom: 10px;
 }
 #comments .comment-list li article .comment-metadata a {
-	margin: 5px 5px 0 0;
 	display: inline-block;
+	margin: 5px 5px 0 0;
 }
 #comments #respond .logged-in-as,
 #comments #respond .comment-form-comment {

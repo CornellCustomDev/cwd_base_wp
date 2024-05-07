@@ -2,7 +2,7 @@
 $layout = get_field('flex_cards_layout');
 
 $classes = array(
-	'flex-cards',
+	'flex-cards full-width',
 	$layout == 'full-width' ? '' : 'flex-grid',
 	$block['className'] ?? null
 );

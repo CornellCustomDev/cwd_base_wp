@@ -1100,6 +1100,9 @@ body > footer .list-menu.vertical li, #body-footer .list-menu.vertical li {
 body > footer .main-footer, #body-footer .main-footer {
 	padding: 45px 0;
 }
+body > footer .main-footer .secondary br + a.link-block, #body-footer .main-footer .secondary br + a.link-block {
+	margin-top: 24px;
+}
 
 body > footer .sub-footer, #body-footer .sub-footer {
 	padding: 20px 0;

@@ -150,7 +150,7 @@
 					<span class="label">Zoom Link: </span>
 
 					<span class="field">
-						<?php the_field('zoom_link'); ?>
+						<a href="<?php the_field('zoom_link'); ?>"><?php the_field('zoom_link'); ?></a>
 					</span>
 
 				</div>

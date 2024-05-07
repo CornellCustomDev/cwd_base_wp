@@ -864,8 +864,8 @@ function acf_load_post_type_groups() {
 					'acfe_seamless_style' => 1,
 					'acfe_group_modal' => 0,
 					'choices' => array(
-						'tags' => 'Tags',
-						'categories' => 'Categories',
+						'post_tag' => 'Tags',
+						'category' => 'Categories',
 						'archives' => 'On archive pages',
 						'single' => 'On single posts',
 						'labels' => 'Text labels',
