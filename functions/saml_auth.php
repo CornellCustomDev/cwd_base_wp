@@ -59,11 +59,11 @@ if ( ! function_exists ( 'cwd_base_default_saml_auth' ) ) {
 	        'auto_provision' => false,
 
 	        // Role assigned to created users (if auto_provision is set to true)
-	        'default_role' => get_option( 'subscriber' ),
+	        'default_role' => 'subscriber',
 
 	        // Match authenticated user to existing WP user by email address
 	        // Can also set to 'login' to use netid/wp username
-	        'get_user_by' => 'email',
+	        'get_user_by' => 'login',
 
 	        // Map SAML response to WP user attributes
 	        'user_login_attribute'   => 'urn:oid:0.9.2342.19200300.100.1.1',
@@ -89,8 +89,8 @@ if ( ! function_exists ( 'cwd_base_default_saml_auth' ) ) {
 */
 if ( ! function_exists ( 'cwd_base_live_saml_auth' ) ) {
 	function cwd_base_live_saml_auth( $value, $option_name ) {
-		// Replace $is_live with env check below once SP certs are uploaded
-		// (NetID login will break after this until site is registered with IDM)
+		// Replace $is_live with env check below once site is registered with IDM
+		// (Certs need to be in place before site can be registered)
 		$is_live = false;
 		// $is_live = isset($_ENV['PANTHEON_ENVIRONMENT']) && $_ENV['PANTHEON_ENVIRONMENT'] === 'live';
 
@@ -129,7 +129,7 @@ C8N6DXggDWPtPRdpk96UW45huvXudpZenrcd7A==';
 
 			/*
 			 * Un-comment to restrict login to NetID only
-			 * (Should only be done after site is registered with IDM)
+			 * (Strongly recommended after launch to increase security of live site)
 			 */
 			// if ( $option_name === 'permit_wp_login' ) {
 			// 	return false;
