@@ -60,7 +60,7 @@
 				<div class="buttons">
 					<button class="mobile-button" id="mobile-nav">Main Menu</button>
 					<button class="mobile-button" id="cu-search-button">Toggle Search Form</button>
-					<nav id="utility-navigation" aria-label="Supplementary Navigation">
+					<nav id="utility-navigation" aria-label="Supplementary Navigation" class="dropdown-menu dropdown-menu-on-demand">
 						<?php cwd_base_nav_top(); ?>
 					</nav>
 				</div>
