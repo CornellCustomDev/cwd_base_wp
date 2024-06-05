@@ -417,53 +417,38 @@ body:not(.mobile) {
 ----------------------------------------*/
 .has-utility-nav {
 	
-	&.cu-45 {
-		
-		&:not(.cu-red):not(.cu-black):not(.cu-gray) {
-			
-			#utility-navigation {
-				
-				ul {
-					li {
-						a {
-							
-						}
-					}
+	&.cu-45 #utility-navigation li a {
+		height: 46px;
+		line-height: 46px;
+	}
+
+	&.cu-red #utility-navigation {
+		li {
+			a {
+				color: #fdd8d8;
+
+				&:hover, &:focus {
+					color: #fff;
 				}
-				
 			}
-			
-		}
-		
-		#utility-navigation {
-			
-			li {
-				a {
-					height: 46px;
-					line-height: 46px;
-				}
+
+			&.current_page_item a {
+				background: rgba(0,0,0,0.1);
 			}
 		}
 	}
-	&.cu-red {
-		
-		#utility-navigation {
-			li {
-				a {
-					color: #fdd8d8;
-					
-					&:hover, &:focus {
-						color: #fff;
-					}
-				}
-				
-				&.current_page_item a {
-					background: rgba(0,0,0,0.1);
-				}
+
+	#utility-navigation .sub-menu {
+		background: rgba(0, 0, 0, 0.7);
+
+		li a {
+			color: white;
+
+			&:hover {
+				background: rgba(0, 0, 0, .2);
 			}
 		}
 	}
-	
 }
 
 /* Section nav
