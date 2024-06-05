@@ -58,22 +58,11 @@ if ( ! function_exists ( 'cwd_base_customize_register' ) ) {
 		$wp_customize->add_section( 'layout_section', array( 'title' => 'Layout', 'description' => 'Change the layout of the page. This will be applied to all new pages on the site but can be overidden on per page basis.', 'priority' => 40, ) );
 
 		// Layout settings
-		$wp_customize->add_setting( 'layout' , array( 'type' => 'option', 'default' => 'sidebar_right' ) );
 		$wp_customize->add_setting( 'blog_layout', array( 'type' => 'option', 'default' => 'multicolumnblog',
 			'transport'  => 'postMessage',
 		) );
 
 		//cornell layout controls
-		$wp_customize->add_control( 'layout', array(
-			'label'      => __( 'Choose a layout:', 'cornell_base' ),
-			'section'    => 'layout_section',
-			'type'       => 'radio',
-			'choices'    => array(
-				'onecolumn'     => 'No sidebar',
-				'sidebar_left'  => 'Left Sidebar',
-				'sidebar_right' => 'Right Sidebar',
-				),
-		) );
 		$wp_customize->add_control( 'blog_layout', array(
 			'label'      => __( 'Layout for main blog page:', 'cornell_base' ),
 			'section'    => 'layout_section',

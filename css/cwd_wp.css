@@ -1477,6 +1477,15 @@ body:not(.mobile) #main-navigation > .container-fluid ul > li.current-page-ances
 .has-utility-nav.cu-red #utility-navigation li.current_page_item a {
 	background: rgba(0, 0, 0, 0.1);
 }
+.has-utility-nav #utility-navigation .sub-menu {
+	background: rgba(0, 0, 0, 0.7);
+}
+.has-utility-nav #utility-navigation .sub-menu li a {
+	color: white;
+}
+.has-utility-nav #utility-navigation .sub-menu li a:hover {
+	background: rgba(0, 0, 0, 0.2);
+}
 
 /* Section nav
 ----------------------------------------*/
