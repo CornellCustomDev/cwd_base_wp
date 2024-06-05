@@ -8,6 +8,26 @@ acf_add_local_field_group(array(
 	'title' => 'People',
 	'fields' => array(
 		array(
+			'key' => 'field_6660626e48181',
+			'label' => 'Post-nominals',
+			'name' => 'post-nominals',
+			'aria-label' => '',
+			'type' => 'text',
+			'instructions' => 'Example: MD, PhD, RN, etc. These will appear directly after the person\'s name on the front end.',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '10',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'maxlength' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+		),
+		array(
 			'key' => 'field_60a25066ced9d',
 			'label' => 'Professional Title',
 			'name' => 'professional_title',
