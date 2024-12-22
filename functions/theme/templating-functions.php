@@ -67,7 +67,7 @@ if ( ! function_exists( 'custom_excerpt' ) ) {
 			$excerpt = get_field('description');
 		}
 
-		$excerpt = preg_replace(" ([.*?])",'',$excerpt);
+		$excerpt = preg_replace("`[[^]]*]`",'',$excerpt);
 		$excerpt = strip_shortcodes($excerpt);
 		$excerpt = strip_tags($excerpt);
 		$excerpt = substr($excerpt, 0, $characters);
