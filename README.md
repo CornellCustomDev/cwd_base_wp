@@ -1,6 +1,8 @@
 <h1>Cornell Branded Theme 2024</h1>
 A WordPress theme based on <a href="https://github.com/CU-CommunityApps/cwd_framework">cwd_framework</a>.<br><br>
 
+<strong>THIS IS AN OLD README FILE. NEEDS TO BE UPDATED FOR LATEST CHANGES.</strong>
+
 <strong>Tags:</strong> accessibility-ready, blog, custom-background, custom-colors, custom-<span class="glossary-item-container tippy-active" tabindex="0" aria-describedby="tippy-11">header, </span>custom-menu, editor-style, featured-image-header, featured-images, footer-widgets, full-width-template, grid-layout, left-sidebar, one-column, right-sidebar, sticky-post, theme-options, threaded-comments, two-columns, wide-blocks
 <h2>Updating</h2>
 As the <a href="https://github.com/CU-CommunityApps/cwd_base">cwd_base</a> theme is updated, the goal here is to apply those updates to this theme without overwriting any WordPress-specific files or code. This is easily done. Just five portable folders are required for framework updates:<br><br>
@@ -69,7 +71,7 @@ Three post types are included in this theme: News, Events, and People, since the
 '/functions/content-types/events/post-type.php',<br>
 '/functions/content-types/people/post-type.php',<br>
 
-<strong>TO DO:</strong> add these post types (and others) as options on the Theme Options page.
+<strong>TO DO:</strong> add these post types (and others) as options on the Theme Options page. <strong>DONE</strong>
 
 <strong>Note:</strong> The news and events content types are based on two CD plugins by <a href="https://github.com/CU-CommunityApps/cd-news-pull-wp-plugin/commits?author=philwilliammee">philwilliammee</a> located here:
 
@@ -96,7 +98,6 @@ event_groups<br>
 
 <strong>Important!</strong> This theme does not use pages for custom post type archives. It uses the default slug that is programmed when the content type is created. This slug can be anything, but it does <em>not</em> require or use an actual page with the same name. This can be confusing, because if a page with the same name <em>does</em> exist (such as a news page for news archives), then none of the in-page options will apply to the archive listings and keeping such a page in the page hierarchy is essentially meaningless. <em>However</em>, this theme makes use of the hitherto useless and meaningless page by inserting the editor content from that page above the archive listings, if such content exists.
 
-<strong>TO DO:</strong> make use of the other in-page options of meaningless pages, not just the editor content, such as sidebar and header image options.
 <h2>Theme Options</h2>
 <em>Customizer</em><br><br>
 
