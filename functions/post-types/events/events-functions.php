@@ -6,7 +6,7 @@ if ( ! function_exists ( 'cwd_base_events_query' ) ) {
 		if ( $query->is_main_query() && get_query_var('post_type') == 'events' ) {
 			$query->set( 'meta_key', 'date' );
 			$query->set( 'orderby', 'meta_value' );
-			$query->set( 'order', 'DESC' );
+			$query->set( 'order', 'ASC' );
 		}
 	}
 
