@@ -48,10 +48,10 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 		}
 
 		// Academic unit checkbox
-		$au_boolean = get_theme_mod( 'au_boolean' );
+		$au_boolean = get_theme_mod( 'au_boolean' ) ?: '';
 
 		// Get banner classes
-		if($au_boolean === '') {
+		if(!$au_boolean) {
 			$cu_banner = get_theme_mod( 'color' );
 			$logo_size_option = get_theme_mod( 'logo_size' );
 			$logo_position_option = get_theme_mod( 'logo_position' );
