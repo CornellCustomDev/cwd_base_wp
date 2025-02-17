@@ -85,24 +85,34 @@
 								}
 							?>
 
-							<div class="social">
-								<h3 class="sr-only">Follow us on:</h3>
-								<?php if ( get_theme_mod( 'facebook' ) ) { ?>
-									<a href="<?php echo esc_url( get_theme_mod( 'facebook' ) )?>"><img alt="Facebook" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_facebook.svg"></a>
-								<?php } ?>
-								<?php if ( get_theme_mod( 'twitter' ) ) { ?>
-									<a href="<?php echo esc_url( get_theme_mod( 'twitter' ) )?>"><img alt="X (formerly known as Twitter)" src="<?php echo get_template_directory_uri(); ?>/images/wp/icon_x.svg"></a>
-								<?php } ?>
-								<?php if ( get_theme_mod( 'youtube' ) ) { ?>
-									<a href="<?php echo esc_url( get_theme_mod( 'youtube' ) )?>"><img alt="YouTube" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_youtube.svg"></a>
-								<?php } ?>
-								<?php if ( get_theme_mod( 'instagram' ) ) { ?>
-									<a href="<?php echo esc_url( get_theme_mod( 'instagram' ) )?>"><img alt="Instagram" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_instagram.svg"></a>
-								<?php } ?>
-								<?php if ( get_theme_mod( 'linkedin' ) ) { ?>
-									<a href="<?php echo esc_url( get_theme_mod( 'linkedin' ) )?>"><img alt="LinkedIn" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_linkedin.svg"></a>
-								<?php } ?>
-							</div>
+							<?php 
+							
+							if ( get_theme_mod( 'facebook' )
+								|| get_theme_mod( 'twitter' )
+								|| get_theme_mod( 'youtube' )
+								|| get_theme_mod( 'instagram' )
+								|| get_theme_mod( 'linkedin' ) ) { ?>
+
+								<div class="social">
+									<h3 class="sr-only">Follow us on:</h3>
+									<?php if ( get_theme_mod( 'facebook' ) ) { ?>
+										<a href="<?php echo esc_url( get_theme_mod( 'facebook' ) )?>"><img alt="Facebook" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_facebook.svg"></a>
+									<?php } ?>
+									<?php if ( get_theme_mod( 'twitter' ) ) { ?>
+										<a href="<?php echo esc_url( get_theme_mod( 'twitter' ) )?>"><img alt="X (formerly known as Twitter)" src="<?php echo get_template_directory_uri(); ?>/images/wp/icon_x.svg"></a>
+									<?php } ?>
+									<?php if ( get_theme_mod( 'youtube' ) ) { ?>
+										<a href="<?php echo esc_url( get_theme_mod( 'youtube' ) )?>"><img alt="YouTube" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_youtube.svg"></a>
+									<?php } ?>
+									<?php if ( get_theme_mod( 'instagram' ) ) { ?>
+										<a href="<?php echo esc_url( get_theme_mod( 'instagram' ) )?>"><img alt="Instagram" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_instagram.svg"></a>
+									<?php } ?>
+									<?php if ( get_theme_mod( 'linkedin' ) ) { ?>
+										<a href="<?php echo esc_url( get_theme_mod( 'linkedin' ) )?>"><img alt="LinkedIn" src="<?php echo get_template_directory_uri(); ?>/images/layout/icon_linkedin.svg"></a>
+									<?php } ?>
+								</div>
+
+							<?php } ?>
 
 						</div>
 					</div>

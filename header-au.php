@@ -75,7 +75,9 @@
 				<div class="cu-unit">
 					<?php if (display_header_text()==true) { ?>
 						<h2><a href="<?php echo site_url(); ?>"><?php bloginfo('name'); ?></a></h2>
-						<h3 class="sans"><?php bloginfo('description'); ?></h3>
+						<?php if(get_bloginfo('description')) { ?>
+							<h3 class="sans"><?php bloginfo('description'); ?></h3>
+						<?php } ?>
 					<?php } ?>
 				</div>
 
