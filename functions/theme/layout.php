@@ -135,7 +135,7 @@ if ( ! function_exists ( 'get_layout' ) ) {
 		
 		// Set default layout if...
 		if ($layout == '') {
-			$layout = 'right_sidebar';
+			$layout = 'left_sidebar';
 		}
 		
 		return $layout;

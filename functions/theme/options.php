@@ -69,8 +69,10 @@ if ( ! function_exists ( 'add_metadata_filter' ) ) {
 		
 		$checked_post_types = get_checked_post_types();
 
-		foreach($checked_post_types as $post_type) {
-			add_filter('acf/load_field/name=metadata_' . $post_type, 'get_taxonomies_from_post_type');
+		if(is_array($checked_post_types)) {
+			foreach($checked_post_types as $post_type) {
+				add_filter('acf/load_field/name=metadata_' . $post_type, 'get_taxonomies_from_post_type');
+			}
 		}
 	}
 	add_action('init', 'add_metadata_filter');
@@ -451,7 +453,7 @@ acf_add_local_field_group(array(
 						'right_sidebar' => 'Right sidebar',
 						'no_sidebar' => 'No sidebar (full-width)',
 					),
-					'default_value' => 'right_sidebar',
+					'default_value' => 'left_sidebar',
 					'return_format' => 'value',
 					'allow_null' => 0,
 					'other_choice' => 0,
@@ -813,7 +815,7 @@ function acf_load_post_type_groups() {
 					),
 					'allow_null' => 0,
 					'other_choice' => 0,
-					'default_value' => 'right_sidebar',
+					'default_value' => 'left_sidebar',
 					'layout' => 'vertical',
 					'return_format' => 'value',
 					'save_other_choice' => 0,
@@ -973,7 +975,7 @@ function acf_load_post_type_groups() {
 						),
 						'allow_null' => 0,
 						'other_choice' => 0,
-						'default_value' => 'right_sidebar',
+						'default_value' => 'left_sidebar',
 						'layout' => 'vertical',
 						'return_format' => 'value',
 						'save_other_choice' => 0,
