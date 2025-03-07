@@ -49,3 +49,6 @@ if ( class_exists('Acf') ) {
 add_action( 'enqueue_block_editor_assets', function() {
     wp_enqueue_style( 'cornell-font-fa-css', get_template_directory_uri() . '/fonts/font-awesome.min.css' );
 } );
+
+// Disable ACF error notices regarding get_field() and the_field() 
+add_filter( 'acf/admin/prevent_escaped_html_notice', '__return_true' );
