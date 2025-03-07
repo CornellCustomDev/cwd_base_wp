@@ -1356,7 +1356,7 @@ To minimize incompatibility with other table-based functionality, custom styles 
 			add_option('_options_blog_page_options', 'field_60898f4dbe6d3');
 			
 				// Archive options
-			add_option('options_archive_options_layout', 'right_sidebar');
+			add_option('options_archive_options_layout', 'left_sidebar');
 			add_option('_options_archive_options_layout', 'field_604de7333ffc7');
 			add_option('options_archive_options_appearance', 'list');
 			add_option('_options_archive_options_appearance', 'field_604de7853ffc8');
