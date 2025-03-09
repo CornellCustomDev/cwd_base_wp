@@ -137,9 +137,11 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 			$classes[] = 'styleguide';
 		}
 
+		$classes[] = 'page-slug-' . $post->post_name;
+
 		// On multisites, add the blog id body class
 		if(is_multisite()) {
-			$classes[] = 'blog_' . get_current_blog_id();
+			$classes[] = 'blog-' . get_current_blog_id();
 		}
 		
 		return $classes;
