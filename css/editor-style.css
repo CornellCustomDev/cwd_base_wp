@@ -6574,21 +6574,6 @@ a.link-button .fa, a.link-button .zmdi {
 	font-size: 13px;
 }
 @media (min-width: 992px) {
-	#main-navigation {
-		background: #333;
-	}
-	.has_header_image #main-navigation {
-		background: rgba(0, 0, 0, 0.55) !important;
-		position: absolute;
-		z-index: 4;
-		width: 100%;
-	}
-	.has_header_image #main-navigation li ul {
-		background: rgba(34, 34, 34, 0.9) !important;
-	}
-	#main-navigation li ul {
-		background: #333;
-	}
 	.cu-red #main-navigation {
 		background: #333;
 	}
