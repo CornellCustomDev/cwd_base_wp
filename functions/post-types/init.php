@@ -6,6 +6,11 @@ $cptui_post_types = cptui_get_post_type_slugs();
 // Get checked post types
 $checked_post_types = get_checked_post_types();
 
+// Ensure $checked_post_types is an array
+if (!is_array($checked_post_types)) {
+    $checked_post_types = [];
+}
+
 // Initialize built-in post types
 if($checked_post_types) :
 	foreach($checked_post_types as $checked_post_type) {
