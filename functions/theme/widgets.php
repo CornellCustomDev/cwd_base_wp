@@ -680,7 +680,7 @@ if ( ! class_exists ( 'Postswidget_Widget' ) ) {
 				break;
 
 				case 'upcoming_checkbox':
-				if ($instance['posttype_select'] == 'Events') {  
+					if (isset($instance['posttype_select']) && $instance['posttype_select'] == 'Events') {  
 					$output .= '<p>';
 					$output .= '<input class="checkbox" type="checkbox" '.checked( $widget_value, true, false ).' id="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'" name="'.esc_attr( $this->get_field_name( $widget_field['id'] ) ).'" value="1">';
 					$output .= '<label for="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'">'.esc_attr( $widget_field['label'], 'cwd_base' ).'</label>';
