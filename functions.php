@@ -8,7 +8,6 @@
 *******************************************************/
 
 // Required files
-require_once 'functions/saml_auth.php';
 require_once 'functions/post-types/general.php';
 require_once 'functions/theme/setup.php';
 require_once 'functions/theme/minify.php';
