@@ -134,7 +134,7 @@
 							</div>
 							<div>
 								<ul class="custom inline no-bullet">
-									<li><a href="https://www.cornell.edu/accessibility-assistance.cfm">Web Accessibility Assistance</a></li>
+									<li><a href="https://tdx.cornell.edu/TDClient/39/Portal/Requests/ServiceDet?ID=373">Web Accessibility Assistance</a></li>
 								</ul>
 							</div>
 						</div>
