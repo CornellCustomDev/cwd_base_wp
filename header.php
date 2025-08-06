@@ -50,7 +50,7 @@
 		<header id="cu-header" aria-label="Cornell Header">
 			<div class="cu45-helper"></div>
 			<div class="container-fluid cu-brand">
-				<h1 class="cu-logo"><a href="//www.cornell.edu"><img class="sr-only" src="<?php echo get_template_directory_uri(); ?>/images/cornell/bold_cornell_logo_simple_b31b1b.svg" alt="Cornell University" width="245" height="62"></a></h1>
+				<h1 class="cu-logo"><a href="//www.cornell.edu"><img class="sr-only" src="<?php echo get_template_directory_uri(); ?>/images/cornell/cornell_logo_simple_b31b1b.svg" alt="Cornell University" width="245" height="62"></a></h1>
 				<div class="cu-unit">
 					<?php if (display_header_text()==true) { ?>
 						<h2><a href="<?php echo site_url(); ?>"><?php bloginfo('name'); ?></a></h2>
