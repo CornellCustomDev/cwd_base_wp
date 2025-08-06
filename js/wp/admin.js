@@ -39,18 +39,31 @@ jQuery(document).ready(function($) {
 		$(this).prev('input').css('display', 'none');
 	});
 
-	wp.domReady(function () {
-		const allowedEmbedBlocks = [
-		  'vimeo',
-		  'youtube',
-		];
-		wp.blocks.getBlockVariations('core/embed').forEach(function (blockVariation) {
-		  if (-1 === allowedEmbedBlocks.indexOf(blockVariation.name)) {
-			wp.blocks.unregisterBlockVariation('core/embed', blockVariation.name);
-		  }
-		});
+	// Get the logo size from the customizer setting
+	const themeMod = LogoSize.SizeValue;
+	function logoSizeFunction() {
+		if (themeMod === 'large') {
+			$('#_customize-description-logo_size').hide();
+		}
+		else {
+			$('#_customize-description-logo_size').show();
+			$('#customize-control-logo_switch_red_mobile').hide();
+		}
+	}
+	logoSizeFunction();
+
+	$('#_customize-input-logo_size-radio-small').on('click', function () {
+		$('#_customize-description-logo_size').show();
+		$('#customize-control-logo_switch_red_mobile').hide();
 	});
 
+	$('#_customize-input-logo_size-radio-large').on('click', function () {
+		$('#_customize-description-logo_size').hide();
+		if ($('#_customize-input-logo_switch_mobile-radio-yes').is(':checked')) {
+			$('#customize-control-logo_switch_red_mobile').show();
+		} else {
+			$('#customize-control-logo_switch_red_mobile').hide();
+		}
+	});
 
-	
 });
