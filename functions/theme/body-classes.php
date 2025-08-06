@@ -27,9 +27,13 @@ if ( ! function_exists ( 'custom_body_classes' ) ) {
 		$tinting = $sidebar_options['tinting'];
 		$tinting_options = $sidebar_options['tinting_options'];
 		
-		// Get layout for archives
+		// Get layout for archives - set as default if no layout is set
 		$archive_options = get_field('archive_options', 'options');
-		$archive_layout = array_key_exists( $post_type, $archive_options ) ? $archive_options[$post_type]['layout_' . $post_type] : '';
+		if (is_array($archive_options)) {
+			$archive_layout = array_key_exists($post_type, $archive_options) ? $archive_options[$post_type]['layout_' . $post_type] : '';
+		} else {
+			$archive_layout = '';
+		}
 		
 		if($tinting == 1 
 		    && $layout != 'no_sidebar'
