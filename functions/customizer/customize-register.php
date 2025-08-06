@@ -15,7 +15,8 @@ if ( ! function_exists ( 'cwd_base_customize_register' ) ) {
 		
 				// Banner settings
 		$wp_customize->add_setting( 'color', array('default' => '', 'sanitize_callback'  => 'esc_attr') );
-		$wp_customize->add_setting( 'logo_size', array('default' => 'small', 'sanitize_callback'  => 'esc_attr') );
+		$wp_customize->add_setting( 'logo_size', array('default' => 'large', 'sanitize_callback'  => 'esc_attr') );
+		$wp_customize->add_setting( 'change_to_large', array('default' => 0, 'sanitize_callback'  => 'esc_attr') );
 		$wp_customize->add_setting( 'logo_position', array('default' => 'left', 'sanitize_callback'  => 'esc_attr') );
 		$wp_customize->add_setting( 'logo_switch_mobile', array('default' => 'no', 'sanitize_callback'  => 'esc_attr') );
 		$wp_customize->add_setting( 'logo_switch_red_mobile', array('default' => 'no', 'sanitize_callback'  => 'esc_attr') );
@@ -23,7 +24,7 @@ if ( ! function_exists ( 'cwd_base_customize_register' ) ) {
 				// Banner controls
 		$wp_customize->add_control( 'color', array( 'label' => 'Banner color', 'section' => 'cu_banner', 'type' => 'radio', 'choices' => array( 'cu-red' => 'Red', 'cu-black' => 'Black', '' => 'Light Gray', 'cu-gray' => 'Dark Gray', ), ) );
 		
-		$wp_customize->add_control( 'logo_size', array( 'label' => 'Logo size', 'section' => 'cu_banner', 'type' => 'radio', 'choices' => array( 'small' => 'Small (45px)', 'large' => 'Large insignia (120px)' ), ) );
+		$wp_customize->add_control( 'logo_size', array( 'label' => 'Logo size', 'section' => 'cu_banner', 'type' => 'radio', 'choices' => array( 'small' => 'Small (45px)', 'large' => 'Large insignia (120px)' ), 'description' => '<br><span style="font-weight: bold;">Note: </span>Cornell\'s branding guidelines have been updated. The small logo (45px) is now intended for mobile screens only. To comply with the new standards, please select "Large insignia" below to use the full-size logo.<br><br>' ) );
 		
 		$wp_customize->add_control( 'logo_position', array( 'label' => 'Logo position', 'section' => 'cu_banner', 'type' => 'radio', 'choices' => array( 'left' => 'Left', 'right' => 'Right' ), ) );
 		

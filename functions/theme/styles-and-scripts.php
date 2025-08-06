@@ -4,10 +4,15 @@
 if ( ! function_exists ( 'cwd_base_admin_assets' ) ) {
 	function cwd_base_admin_assets() {
 		wp_enqueue_style( 'admin-styles', get_template_directory_uri() . '/css/admin.css' );
-		wp_enqueue_script( 'admin-scripts', get_template_directory_uri() . '/js/wp/admin.js');
+		wp_enqueue_script( 'admin-scripts', get_template_directory_uri() . '/js/wp/admin.js', array( 'jquery' ), null, true );
+		$logo_size = get_theme_mod( 'logo_size', 'large' );
+		wp_localize_script( 'admin-scripts', 'LogoSize', array(
+            'SizeValue' => $logo_size
+        ) );
 	}
 
 	add_action( 'admin_enqueue_scripts', 'cwd_base_admin_assets');
+	add_action( 'customize_controls_enqueue_scripts', 'cwd_base_admin_assets');
 }
 
 // Load CSS Framework scripts
@@ -63,6 +68,14 @@ if ( ! function_exists ( 'cwd_base_scripts_and_styles' ) ) {
 	}
 
 	add_action('wp_enqueue_scripts', 'cwd_base_scripts_and_styles');
+}
+
+// Customizer styles and scripts
+if ( ! function_exists ( 'cwd_base_customizer_styles' ) ) {
+	function cwd_base_customizer_styles() {
+		wp_enqueue_style('customizer-css', get_template_directory_uri() . '/css/customizer.css');
+	}
+	add_action( 'customize_controls_enqueue_scripts', 'cwd_base_customizer_styles' );
 }
 
 // Remove WP version number and append random version number for scripts and styles
